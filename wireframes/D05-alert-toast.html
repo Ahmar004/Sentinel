@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D05 Alert toast - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .statehead{margin:36px 24px 4px;font-size:17px;font-weight:650}
+  .statesub{margin:0 24px 18px;font-size:13px;color:var(--ink-2);max-width:80ch}
+  .miniplan{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font:600 11px var(--mono);color:var(--ink-2);text-align:center;padding:0 24px}
+  .toast{position:absolute;z-index:35;box-shadow:0 8px 22px rgba(0,0,0,.16)}
+  .prog{height:3px;background:var(--g3);border-radius:2px;overflow:hidden;margin-top:8px}
+  .prog i{display:block;height:100%;background:var(--g6)}
+  .mute-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:99px;
+    border:1px solid var(--g5);background:var(--g2);font:700 10px/1.6 var(--mono);color:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">D05</span>
+  <h1>D05 Alert toast - transient, three variants</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>D05</b></li>
+    <li>viewport <b>390 x 844 and 1440 x 900</b></li>
+    <li>role <b>Coordinator, Administrator</b></li>
+    <li>state <b>elevated auto-dismiss / critical persistent / muted</b></li>
+    <li>requirement <b>FR5.1, FR5.3, FR5.5</b></li>
+    <li>batch <b>2</b></li>
+  </ul>
+</header>
+
+<!-- ================= STATE 1: ELEVATED, AUTO-DISMISSES ================= -->
+<h2 class="statehead">1. ELEVATED - auto-dismisses, stays in the rail</h2>
+<p class="statesub">The toast for A-1042 exactly as it fired: the same zone, cell, score and top
+  contributing feature as the rail card and D02. It closes itself after a few seconds; the
+  alert itself does not - it stays open in the rail until acknowledged and cleared.</p>
+
+<div class="wf-stage">
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900</span>
+    <span class="cx" style="left:1090px;top:60px">1</span>
+    <span class="cx" style="left:1090px;top:250px">2</span>
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#" aria-current="page"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <div class="rail-note">Signed in as <b>a.rahman</b><br><span class="st st-neutral">COORDINATOR</span></div>
+      </nav>
+      <div class="col grow">
+        <div class="top"><span class="b">Riverside Arena</span><span class="grow"></span>
+          <span class="mono tiny">14:02:52</span></div>
+        <div class="row grow" style="position:relative">
+          <div class="map">
+            <img class="plan" src="_assets/site-plan.svg" alt="">
+            <div class="miniplan">Parent screen, simplified - the live map keeps working
+              underneath. No scrim: a toast never blocks the map it is reporting on.</div>
+          </div>
+          <div class="toast card" style="top:16px;right:16px;width:340px;
+            border-left:4px solid var(--band-elevated)">
+            <div class="row between center">
+              <span class="mono tiny b">A-1042</span>
+              <span class="st st-elevated">ELEVATED</span>
+            </div>
+            <div class="tiny muted mono" style="margin-top:3px">Zone B North Gate - C-031-022</div>
+            <div class="row between center" style="margin-top:6px">
+              <span class="mono b" style="font-size:20px">0.78</span>
+              <span class="tiny muted mono">threshold 0.70</span>
+            </div>
+            <div class="attr" style="margin-top:7px">
+              <span>flowConvergence</span><span class="b">+0.19</span>
+              <i class="attrbar" style="width:100%"></i><span></span>
+            </div>
+            <div class="tiny muted" style="margin-top:7px">Auto-dismisses in <b>6s</b> - remains
+              open in the alert rail.</div>
+            <div class="prog"><i style="width:60%"></i></div>
+            <div class="row gap-s" style="margin-top:9px">
+              <button class="btn btn--sm grow" type="button">View</button>
+              <button class="btn btn--sm btn--primary grow" type="button">Acknowledge</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="device device--mobile">
+    <span class="device-tag">390 x 844</span>
+    <span class="cx" style="left:196px;top:110px">3</span>
+    <div class="top"><span class="b" style="font-size:13px">Riverside Arena</span><span class="grow"></span>
+      <span class="mono tiny">14:02:52</span></div>
+    <div style="position:relative;flex:1;min-height:0">
+      <div class="map" style="position:absolute;inset:0">
+        <img class="plan" src="_assets/site-plan.svg" alt="">
+        <div class="miniplan" style="font-size:10px">Live map continues underneath</div>
+      </div>
+      <div class="toast card" style="top:10px;left:10px;right:10px;
+        border-left:4px solid var(--band-elevated)">
+        <div class="row between center">
+          <span class="mono tiny b">A-1042</span>
+          <span class="st st-elevated">ELEVATED</span>
+        </div>
+        <div class="tiny muted mono" style="margin-top:3px">Zone B - C-031-022 - 0.78 / 0.70</div>
+        <div class="tiny" style="margin-top:5px"><b class="mono">flowConvergence +0.19</b> - top
+          contributing feature</div>
+        <div class="row gap-s" style="margin-top:8px">
+          <button class="btn btn--sm btn--tap grow" type="button">View</button>
+          <button class="btn btn--sm btn--tap btn--primary grow" type="button">Acknowledge</button>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar">
+      <a href="#" aria-current="page"><i class="icon"></i>Live</a>
+      <a href="#"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+</div>
+
+<!-- ================= STATE 2: CRITICAL, DOES NOT AUTO-DISMISS ================= -->
+<h2 class="statehead">2. CRITICAL - stays on screen until viewed or acknowledged</h2>
+<p class="statesub">A second, hypothetical alert A-1043 reaching the critical band. The escalated
+  presentation from `W00-conventions` carries through: no countdown, no progress bar, and the
+  toast persists so a critical condition cannot be missed by looking away for a few seconds.</p>
+
+<div class="wf-stage">
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900</span>
+    <span class="cx" style="left:1090px;top:60px">4</span>
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#" aria-current="page"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <div class="rail-note">Signed in as <b>a.rahman</b><br><span class="st st-neutral">COORDINATOR</span></div>
+      </nav>
+      <div class="col grow">
+        <div class="top"><span class="b">Riverside Arena</span><span class="grow"></span>
+          <span class="mono tiny">14:07:03</span></div>
+        <div class="row grow" style="position:relative">
+          <div class="map">
+            <img class="plan" src="_assets/site-plan.svg" alt="">
+            <div class="miniplan">Scenario: a second cell in zone B crosses into CRITICAL</div>
+          </div>
+          <div class="toast card" style="top:16px;right:16px;width:340px;
+            border-left:4px solid var(--band-critical)">
+            <div class="row between center">
+              <span class="mono tiny b">A-1043</span>
+              <span class="st st-critical">CRITICAL</span>
+            </div>
+            <div class="tiny muted mono" style="margin-top:3px">Zone B North Gate - C-032-021</div>
+            <div class="row between center" style="margin-top:6px">
+              <span class="mono b" style="font-size:20px">0.91</span>
+              <span class="tiny muted mono">threshold 0.70</span>
+            </div>
+            <div class="attr" style="margin-top:7px">
+              <span>stopStartPulses</span><span class="b">+0.21</span>
+              <i class="attrbar" style="width:100%"></i><span></span>
+            </div>
+            <div class="tiny muted" style="margin-top:7px">Does not auto-dismiss. Stays until
+              viewed or acknowledged.</div>
+            <div class="row gap-s" style="margin-top:9px">
+              <button class="btn btn--sm grow" type="button">View</button>
+              <button class="btn btn--sm btn--primary grow" type="button">Acknowledge</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="device device--mobile">
+    <span class="device-tag">390 x 844</span>
+    <span class="cx" style="left:196px;top:110px">5</span>
+    <div class="top"><span class="b" style="font-size:13px">Riverside Arena</span><span class="grow"></span>
+      <span class="mono tiny">14:07:03</span></div>
+    <div style="position:relative;flex:1;min-height:0">
+      <div class="map" style="position:absolute;inset:0">
+        <img class="plan" src="_assets/site-plan.svg" alt="">
+        <div class="miniplan" style="font-size:10px">Live map continues underneath</div>
+      </div>
+      <div class="toast card" style="top:10px;left:10px;right:10px;
+        border-left:4px solid var(--band-critical)">
+        <div class="row between center">
+          <span class="mono tiny b">A-1043</span>
+          <span class="st st-critical">CRITICAL</span>
+        </div>
+        <div class="tiny muted mono" style="margin-top:3px">Zone B - C-032-021 - 0.91 / 0.70</div>
+        <div class="tiny" style="margin-top:5px"><b class="mono">stopStartPulses +0.21</b> - top
+          contributing feature</div>
+        <div class="tiny muted" style="margin-top:5px">Does not auto-dismiss.</div>
+        <div class="row gap-s" style="margin-top:8px">
+          <button class="btn btn--sm btn--tap grow" type="button">View</button>
+          <button class="btn btn--sm btn--tap btn--primary grow" type="button">Acknowledge</button>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar">
+      <a href="#" aria-current="page"><i class="icon"></i>Live</a>
+      <a href="#"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+</div>
+
+<!-- ================= STATE 3: MUTED ================= -->
+<h2 class="statehead">3. Muted - visual toast unchanged, tone suppressed</h2>
+<p class="statesub">The same A-1042 toast as state 1, delivered while the coordinator has muted
+  audible tones from the user menu. Muting silences sound only; it never hides or shortens the
+  toast, and it never suppresses the rail card behind it.</p>
+
+<div class="wf-stage">
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900</span>
+    <span class="cx" style="left:1090px;top:60px">6</span>
+    <span class="cx" style="left:1090px;top:305px">7</span>
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#" aria-current="page"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <div class="rail-note">Signed in as <b>a.rahman</b><br><span class="st st-neutral">COORDINATOR</span></div>
+      </nav>
+      <div class="col grow">
+        <div class="top"><span class="b">Riverside Arena</span><span class="grow"></span>
+          <span class="mono tiny">14:02:52</span></div>
+        <div class="row grow" style="position:relative">
+          <div class="map">
+            <img class="plan" src="_assets/site-plan.svg" alt="">
+            <div class="miniplan">Same alert, same moment as state 1 - audible tone setting is
+              the only difference</div>
+          </div>
+          <div class="toast card" style="top:16px;right:16px;width:340px;
+            border-left:4px solid var(--band-elevated)">
+            <div class="row between center">
+              <span class="mono tiny b">A-1042</span>
+              <span class="row gap-s center">
+                <span class="mute-chip">TONE OFF</span>
+                <span class="st st-elevated">ELEVATED</span>
+              </span>
+            </div>
+            <div class="tiny muted mono" style="margin-top:3px">Zone B North Gate - C-031-022</div>
+            <div class="row between center" style="margin-top:6px">
+              <span class="mono b" style="font-size:20px">0.78</span>
+              <span class="tiny muted mono">threshold 0.70</span>
+            </div>
+            <div class="attr" style="margin-top:7px">
+              <span>flowConvergence</span><span class="b">+0.19</span>
+              <i class="attrbar" style="width:100%"></i><span></span>
+            </div>
+            <div class="honest" style="margin-top:8px">
+              No tone played - audible alerts are muted. Nothing else about this toast changes.
+            </div>
+            <div class="row gap-s" style="margin-top:9px">
+              <button class="btn btn--sm grow" type="button">View</button>
+              <button class="btn btn--sm btn--primary grow" type="button">Acknowledge</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="device device--mobile">
+    <span class="device-tag">390 x 844</span>
+    <span class="cx" style="left:196px;top:110px">8</span>
+    <span class="cx" style="left:196px;top:250px">9</span>
+    <div class="top"><span class="b" style="font-size:13px">Riverside Arena</span><span class="grow"></span>
+      <span class="mono tiny">14:02:52</span></div>
+    <div style="position:relative;flex:1;min-height:0">
+      <div class="map" style="position:absolute;inset:0">
+        <img class="plan" src="_assets/site-plan.svg" alt="">
+        <div class="miniplan" style="font-size:10px">Live map continues underneath</div>
+      </div>
+      <div class="toast card" style="top:10px;left:10px;right:10px;
+        border-left:4px solid var(--band-elevated)">
+        <div class="row between center">
+          <span class="mono tiny b">A-1042</span>
+          <span class="row gap-s center">
+            <span class="mute-chip">TONE OFF</span>
+            <span class="st st-elevated">ELEVATED</span>
+          </span>
+        </div>
+        <div class="tiny muted mono" style="margin-top:3px">Zone B - C-031-022 - 0.78 / 0.70</div>
+        <div class="tiny" style="margin-top:5px"><b class="mono">flowConvergence +0.19</b></div>
+        <div class="row gap-s" style="margin-top:8px">
+          <button class="btn btn--sm btn--tap grow" type="button">View</button>
+          <button class="btn btn--sm btn--tap btn--primary grow" type="button">Acknowledge</button>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar">
+      <a href="#" aria-current="page"><i class="icon"></i>Live</a>
+      <a href="#"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+</div>
+
+<div style="padding:8px 24px 64px">
+<ol class="wf-notes" style="max-width:920px">
+  <li><b>The toast carries exactly five facts: band, zone, cell, score against threshold, and
+    the single highest contributing feature.</b> "flowConvergence +0.19" is the same number the
+    rail card and `D02` show for A-1042, because the toast is a preview of the alert, not a
+    second measurement of it. <span class="req">FR5.1</span> <span class="req">FR5.3</span></li>
+
+  <li><b>No scrim, no focus trap.</b> Unlike `D02` and `D03`, a toast never blocks the surface it
+    is reporting on - the map keeps ticking and stays reachable behind it. Tab reaches View then
+    Acknowledge in order; Esc dismisses the toast without acknowledging and returns focus to
+    wherever it was; Enter activates whichever button has focus. <span class="req">FR5.1</span></li>
+
+  <li><b>Mobile pins the toast to the top of the screen, full width, below the top bar,</b>
+    rather than a corner, because a handheld display has no spare corner to reserve.
+    <span class="req">FR5.1</span></li>
+
+  <li><b>CRITICAL never auto-dismisses.</b> No countdown, no progress bar - the coordinator must
+    act on it (View or Acknowledge) or it stays exactly where it is, because a condition serious
+    enough for the escalated critical treatment must not be able to disappear on its own.
+    <span class="req">FR5.1</span></li>
+
+  <li><b>The critical toast's contributing feature can differ from the elevated one.</b>
+    stopStartPulses here versus flowConvergence in state 1 - the "single highest" is computed
+    per alert, not a fixed field the interface always shows. <span class="req">FR5.2</span></li>
+
+  <li><b>View selects the corresponding card in the alert rail; Acknowledge sets the alert's
+    status to ACKNOWLEDGED and records who and when.</b> Neither button leaves the map - the
+    whole point of a toast over a page navigation is that investigating an alert costs no
+    context. <span class="req">FR5.3</span> <span class="req">FR5.6</span></li>
+
+  <li><b>Muting suppresses the audible tone only.</b> The toast, its content, its persistence
+    rule and the rail card underneath are all unchanged - a TONE OFF chip states plainly why no
+    sound played, so a coordinator who expected to hear something is not left wondering if the
+    alert fired at all. <span class="req">FR5.5</span></li>
+
+  <li><b>No SMS, no email, no third channel is offered anywhere in this dialog or in the user
+    menu it is configured from.</b> In-app toast plus an optional browser push (`D04`) plus an
+    audible tone is the entire delivery surface FR5.5 defines, and every one of them runs with no
+    paid gateway. Offering a channel the system cannot actually send through would be exactly
+    the kind of number Sentinel cannot justify. <span class="req">FR5.5</span></li>
+
+  <li><b>One toast per alert.</b> A-1042 produces exactly one toast when it first crosses 0.70,
+    matching FR5.1's acceptance criterion; it is not re-issued while the alert stays open, and
+    the mute setting changes only whether that single toast carries sound.
+    <span class="req">FR5.1</span></li>
+</ol>
+</div>
+
+</body>
+</html>

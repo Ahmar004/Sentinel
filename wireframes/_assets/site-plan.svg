@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" preserveAspectRatio="none"
+     role="img" aria-label="Riverside Arena site plan, 300 by 200 metres">
+  <!-- The uploaded venue plan. Leaflet renders this image; there is no tile
+       provider and no API key anywhere (NFR8). -->
+  <rect width="300" height="200" fill="#e8e7e3"/>
+  <rect x="6" y="6" width="288" height="188" fill="#f2f1ee" stroke="#b9b8b2" stroke-width="1"/>
+
+  <!-- arena bowl -->
+  <ellipse cx="150" cy="112" rx="78" ry="52" fill="#dedcd6" stroke="#a9a8a2" stroke-width="1.5"/>
+  <ellipse cx="150" cy="112" rx="46" ry="28" fill="#cfcdc6" stroke="#a9a8a2" stroke-width="1"/>
+  <text x="150" y="115" font-family="monospace" font-size="8" fill="#78776f"
+        text-anchor="middle">ARENA FLOOR</text>
+
+  <!-- concourse ring -->
+  <path d="M22 42 H278 V182 H22 Z" fill="none" stroke="#b9b8b2" stroke-width="1"
+        stroke-dasharray="4 3"/>
+  <text x="30" y="54" font-family="monospace" font-size="7" fill="#8a8981">CONCOURSE</text>
+
+  <!-- north gate approach -->
+  <rect x="96" y="10" width="108" height="30" fill="#e2e0da" stroke="#b9b8b2" stroke-width="1"/>
+  <text x="150" y="29" font-family="monospace" font-size="8" fill="#78776f"
+        text-anchor="middle">NORTH GATE</text>
+
+  <!-- exits -->
+  <rect x="132" y="184" width="36" height="10" fill="#c9c7c0" stroke="#8f8e87" stroke-width="1"/>
+  <text x="150" y="192" font-family="monospace" font-size="6" fill="#43423d"
+        text-anchor="middle">E1 SOUTH</text>
+  <rect x="132" y="6" width="36" height="10" fill="#c9c7c0" stroke="#8f8e87" stroke-width="1"/>
+  <text x="150" y="14" font-family="monospace" font-size="6" fill="#43423d"
+        text-anchor="middle">E2 NORTH</text>
+
+  <!-- structures and barriers -->
+  <rect x="20" y="60" width="26" height="80" fill="#d6d4cd" stroke="#a9a8a2" stroke-width="1"/>
+  <rect x="254" y="60" width="26" height="80" fill="#d6d4cd" stroke="#a9a8a2" stroke-width="1"/>
+  <line x1="96" y1="44" x2="204" y2="44" stroke="#8f8e87" stroke-width="2"/>
+  <line x1="60" y1="150" x2="112" y2="150" stroke="#8f8e87" stroke-width="2"/>
+
+  <!-- scale bar -->
+  <line x1="20" y1="196" x2="70" y2="196" stroke="#43423d" stroke-width="1"/>
+  <text x="74" y="198" font-family="monospace" font-size="6" fill="#43423d">50 m</text>
+</svg>

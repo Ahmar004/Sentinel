@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sentinel wireframes - contact sheet</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .wrapmain{padding:24px;max-width:1180px}
+  .lede{max-width:80ch;color:var(--ink-2);font-size:13px;margin:0 0 20px}
+  .sheetgrid span.pending{display:block;padding:10px 12px;background:var(--g1);
+    border:1px dashed var(--g4);border-radius:5px;opacity:.62}
+  .sheetgrid .k{font:700 11px/1.4 var(--mono);color:var(--focus)}
+  .sheetgrid span.pending .k{color:var(--ink-2)}
+  .sheetgrid .t{font-weight:600;font-size:13px;margin:2px 0}
+  .sheetgrid .m{font:500 10px/1.4 var(--mono);color:var(--ink-2)}
+  .tally{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+  .tally .chip b{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <span class="wf-id">INDEX</span>
+  <h1>Sentinel wireframes - contact sheet</h1>
+  <ul class="wf-meta">
+    <li>implements <b>design.md</b></li>
+    <li>written half <b>wireframes.md</b></li>
+    <li>viewports <b>390 x 844 and 1440 x 900</b></li>
+    <li>roadmap <b>Step-5</b></li>
+  </ul>
+</header>
+
+<div class="wrapmain">
+
+<p class="lede">
+  Every frame opens on its own by double-click. Nothing is fetched, no font or script comes from
+  a network, and there is no build step, which is the same no-paid-service constraint the product
+  itself is built under. Greybox throughout, except the four observation states and the four risk
+  bands, which render in their real colour, pattern and label because those eight treatments are
+  the requirement itself. Start at <b>W00 Conventions</b>: it is the contract every other frame
+  inherits from.
+</p>
+
+<div class="tally">
+  <span class="chip">built <b>14</b></span>
+  <span class="chip">pending <b>dashed cards below</b></span>
+  <span class="chip">canonical dataset <b>wireframes.md section 5</b></span>
+</div>
+
+<h2 class="batch">Batch 1 - foundations</h2>
+<p class="lede">These set every convention the rest inherit, so they carry the strictest review.</p>
+<div class="sheetgrid">
+  <a href="W00-conventions.html"><span class="k">W00</span>
+    <div class="t">Conventions</div>
+    <div class="m">tokens - eight treatments - callouts</div></a>
+  <a href="S02-live-map-mobile.html"><span class="k">S02</span>
+    <div class="t">Live site map</div>
+    <div class="m">mobile 390 - coordinator - LIVE</div></a>
+  <a href="S02-live-map-desktop.html"><span class="k">S02</span>
+    <div class="t">Live site map</div>
+    <div class="m">desktop 1440 - coordinator - LIVE</div></a>
+  <a href="S02-live-map-disconnected.html"><span class="k">S02</span>
+    <div class="t">Live site map, disconnected</div>
+    <div class="m">both - map aged into gaps - F11</div></a>
+  <span class="pending"><span class="k">S02</span>
+    <div class="t">Live site map, drone operator</div>
+    <div class="m">pending - role variant</div></span>
+  <span class="pending"><span class="k">S02</span>
+    <div class="t">Live site map, connecting</div>
+    <div class="m">pending - skeletons, no site configured</div></span>
+  <span class="pending"><span class="k">D01</span>
+    <div class="t">Cell inspector</div>
+    <div class="m">pending - desktop, four states</div></span>
+  <span class="pending"><span class="k">D01</span>
+    <div class="t">Cell inspector</div>
+    <div class="m">pending - mobile, four states</div></span>
+</div>
+
+<h2 class="batch">Batch 2 - alerts and suggestions</h2>
+<div class="sheetgrid">
+  <a href="S03-zone-detail-desktop.html"><span class="k">S03</span>
+    <div class="t">Zone detail</div>
+    <div class="m">desktop - zone B - risk over coverage</div></a>
+  <a href="S03-zone-detail-mobile.html"><span class="k">S03</span>
+    <div class="t">Zone detail</div>
+    <div class="m">mobile - zone B</div></a>
+  <a href="S04-alert-detail-desktop.html"><span class="k">S04</span>
+    <div class="t">Alert detail</div>
+    <div class="m">desktop - A-1042 - full attribution</div></a>
+  <a href="S04-alert-detail-mobile.html"><span class="k">S04</span>
+    <div class="t">Alert detail</div>
+    <div class="m">mobile - A-1042</div></a>
+  <a href="C05-suggestions.html"><span class="k">C05</span>
+    <div class="t">Suggestion list</div>
+    <div class="m">both - ranked, no-safe-option, template, confirmed</div></a>
+  <span class="pending"><span class="k">D02</span>
+    <div class="t">Confirm suggestion</div>
+    <div class="m">pending - the mandatory human step</div></span>
+  <span class="pending"><span class="k">D03</span>
+    <div class="t">Dismiss suggestion</div>
+    <div class="m">pending</div></span>
+  <span class="pending"><span class="k">D05</span>
+    <div class="t">Alert toast</div>
+    <div class="m">pending</div></span>
+</div>
+
+<h2 class="batch">Batch 3 - timeline, history and replay</h2>
+<div class="sheetgrid">
+  <a href="S05-risk-timeline-desktop.html"><span class="k">S05</span>
+    <div class="t">Risk timeline</div>
+    <div class="m">desktop - all zones with coverage beneath</div></a>
+  <span class="pending"><span class="k">S05</span>
+    <div class="t">Risk timeline</div>
+    <div class="m">pending - mobile</div></span>
+  <span class="pending"><span class="k">S08</span>
+    <div class="t">History</div>
+    <div class="m">pending - desktop, four tabs</div></span>
+  <span class="pending"><span class="k">S08</span>
+    <div class="t">History</div>
+    <div class="m">pending - mobile</div></span>
+  <span class="pending"><span class="k">S08</span>
+    <div class="t">History, empty</div>
+    <div class="m">pending - no results, retention exceeded</div></span>
+  <span class="pending"><span class="k">S09</span>
+    <div class="t">Event detail</div>
+    <div class="m">pending - desktop, four event types</div></span>
+  <span class="pending"><span class="k">S09</span>
+    <div class="t">Event detail</div>
+    <div class="m">pending - mobile, four event types</div></span>
+  <span class="pending"><span class="k">S10</span>
+    <div class="t">Replay</div>
+    <div class="m">pending - desktop</div></span>
+  <span class="pending"><span class="k">S10</span>
+    <div class="t">Replay</div>
+    <div class="m">pending - mobile</div></span>
+</div>
+
+<h2 class="batch">Batch 4 - fleet and per-drone</h2>
+<div class="sheetgrid">
+  <a href="S06-fleet-desktop.html"><span class="k">S06</span>
+    <div class="t">Drone fleet</div>
+    <div class="m">desktop - fleet list, combined feeds</div></a>
+  <span class="pending"><span class="k">S06</span>
+    <div class="t">Drone fleet</div>
+    <div class="m">pending - mobile</div></span>
+  <span class="pending"><span class="k">S07</span>
+    <div class="t">Per-drone view</div>
+    <div class="m">pending - desktop, observe and transit</div></span>
+  <span class="pending"><span class="k">S07</span>
+    <div class="t">Per-drone view</div>
+    <div class="m">pending - mobile</div></span>
+  <span class="pending"><span class="k">D07</span>
+    <div class="t">Assign drone</div>
+    <div class="m">pending - sets up flow F06</div></span>
+</div>
+
+<h2 class="batch">Batch 5 - venue setup and configuration</h2>
+<div class="sheetgrid">
+  <a href="S11-setup-step1-plan-desktop.html"><span class="k">S11.1</span>
+    <div class="t">Setup - site plan</div>
+    <div class="m">desktop - upload, extent, scale</div></a>
+  <a href="S11-setup-step1-plan-mobile.html"><span class="k">S11.1</span>
+    <div class="t">Setup - site plan</div>
+    <div class="m">mobile</div></a>
+  <a href="S11-setup-step2-grid-desktop.html"><span class="k">S11.2</span>
+    <div class="t">Setup - grid</div>
+    <div class="m">desktop - 5 m, 60 x 40, 2400 cells</div></a>
+  <span class="pending"><span class="k">S11.2</span>
+    <div class="t">Setup - grid</div>
+    <div class="m">pending - mobile</div></span>
+  <a href="S11-setup-step3-proposals-desktop.html"><span class="k">S11.3</span>
+    <div class="t">Setup - proposals</div>
+    <div class="m">desktop - accept or reject, skippable</div></a>
+  <span class="pending"><span class="k">S11.3</span>
+    <div class="t">Setup - proposals</div>
+    <div class="m">pending - mobile</div></span>
+  <span class="pending"><span class="k">S11.4</span>
+    <div class="t">Setup - attributes</div>
+    <div class="m">pending - both</div></span>
+  <span class="pending"><span class="k">S11.5</span>
+    <div class="t">Setup - exits</div>
+    <div class="m">pending - both</div></span>
+  <span class="pending"><span class="k">S11.6</span>
+    <div class="t">Setup - zones</div>
+    <div class="m">pending - both, fifth zone refused</div></span>
+  <span class="pending"><span class="k">S11.7</span>
+    <div class="t">Setup - thresholds</div>
+    <div class="m">pending - both</div></span>
+  <span class="pending"><span class="k">S11.8</span>
+    <div class="t">Setup - drones</div>
+    <div class="m">pending - both</div></span>
+  <span class="pending"><span class="k">S11.R</span>
+    <div class="t">Setup - review and save</div>
+    <div class="m">pending - both</div></span>
+  <span class="pending"><span class="k">S12</span>
+    <div class="t">Site configuration</div>
+    <div class="m">pending - both, eight tabs</div></span>
+  <span class="pending"><span class="k">D06</span>
+    <div class="t">Edit thresholds</div>
+    <div class="m">pending</div></span>
+  <span class="pending"><span class="k">D10</span>
+    <div class="t">Unsaved changes</div>
+    <div class="m">pending</div></span>
+  <span class="pending"><span class="k">D11</span>
+    <div class="t">Regenerate grid</div>
+    <div class="m">pending</div></span>
+</div>
+
+<h2 class="batch">Batch 6 - authentication, administration and system</h2>
+<div class="sheetgrid">
+  <span class="pending"><span class="k">S01</span>
+    <div class="t">Login</div>
+    <div class="m">pending - both, five states</div></span>
+  <span class="pending"><span class="k">S13</span>
+    <div class="t">Accounts</div>
+    <div class="m">pending - both</div></span>
+  <span class="pending"><span class="k">S14</span>
+    <div class="t">Audit log</div>
+    <div class="m">pending - both</div></span>
+  <span class="pending"><span class="k">S15</span>
+    <div class="t">System health</div>
+    <div class="m">pending - both, three tabs, IT landing</div></span>
+  <span class="pending"><span class="k">S16</span>
+    <div class="t">Not permitted</div>
+    <div class="m">pending - both</div></span>
+  <span class="pending"><span class="k">S17</span>
+    <div class="t">Roles reference</div>
+    <div class="m">pending - both</div></span>
+  <span class="pending"><span class="k">D04</span>
+    <div class="t">Notification permission</div>
+    <div class="m">pending</div></span>
+  <span class="pending"><span class="k">D08</span>
+    <div class="t">Create or edit user</div>
+    <div class="m">pending</div></span>
+  <span class="pending"><span class="k">D09</span>
+    <div class="t">Deactivate user</div>
+    <div class="m">pending</div></span>
+  <span class="pending"><span class="k">D12</span>
+    <div class="t">Session expired</div>
+    <div class="m">pending</div></span>
+  <span class="pending"><span class="k">D13</span>
+    <div class="t">Install app</div>
+    <div class="m">pending</div></span>
+  <span class="pending"><span class="k">D14</span>
+    <div class="t">Demo harness</div>
+    <div class="m">pending - administrator only</div></span>
+</div>
+
+</div>
+</body>
+</html>

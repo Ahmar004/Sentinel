@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S11 Setup step 4 - Attributes, desktop - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .wiz-steps{padding:10px 0;overflow-y:auto}
+  .wiz-step{display:flex;align-items:center;gap:10px;padding:8px 14px;min-height:44px;
+    text-decoration:none;color:var(--ink-2);border-left:3px solid transparent}
+  .wiz-num{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--g5);
+    display:flex;align-items:center;justify-content:center;font:700 11px var(--mono);
+    flex:0 0 auto;color:var(--ink-2);background:var(--g0)}
+  .wiz-step.done .wiz-num{background:var(--band-normal);border-color:var(--band-normal);color:#fff}
+  .wiz-step.current{color:var(--ink);background:var(--g0);border-left-color:var(--g7)}
+  .wiz-step.current .wiz-num{background:var(--g7);border-color:var(--g7);color:#fff}
+  .wiz-step .wiz-txt{display:flex;flex-direction:column;gap:1px}
+  .wiz-step .wiz-lbl{font:600 12px var(--font)}
+  .wiz-step .wiz-meta{font:600 9px var(--mono);color:var(--ink-2);letter-spacing:.03em}
+  .wizfoot-row{display:flex;justify-content:space-between;align-items:center;
+    padding:12px 18px;border-top:1px solid var(--line);background:var(--g1)}
+
+  /* Brush palette - setup-only classes, never the obs-* / band-* live treatments,
+     so a setup screen can never be mistaken for a live one. */
+  .brush{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+  .brush button{display:flex;align-items:center;gap:9px;min-height:40px;padding:0 10px;
+    border:1px solid var(--g5);border-radius:5px;background:var(--g0);
+    font:600 12px var(--font);color:var(--ink);text-align:left}
+  .brush button[aria-pressed="true"]{outline:2px solid var(--g7);outline-offset:-2px;background:var(--g1)}
+  .brush .sw{width:22px;height:22px;flex:0 0 auto;border:1px solid var(--g6);border-radius:3px}
+  .attr-walkable{background:var(--g0)}
+  .attr-exit{background:repeating-linear-gradient(45deg,var(--g6) 0 3px,var(--g1) 3px 7px);border-color:var(--g6)}
+  .attr-barrier{background:var(--g7)}
+  .attr-obstruction{background:
+    repeating-linear-gradient(45deg,var(--g5) 0 2px,transparent 2px 6px),
+    repeating-linear-gradient(-45deg,var(--g5) 0 2px,transparent 2px 6px);background-color:var(--g2)}
+
+  .countrow{display:grid;grid-template-columns:20px 1fr auto;gap:8px;align-items:center;
+    font:600 12px var(--mono);padding:5px 0}
+  .countrow .sw{width:16px;height:16px;border:1px solid var(--g6);border-radius:2px}
+
+  .paintcanvas{position:relative;flex:1;min-height:0;background:var(--g2);overflow:hidden}
+  .paintcanvas img{position:absolute;inset:6%;width:88%;height:88%;object-fit:fill;opacity:.4}
+  .paintgrid{position:absolute;inset:6% 6% 20% 6%;display:grid;gap:1px;background:var(--g5)}
+  .paintgrid i{display:block}
+  .cropcaption{position:absolute;left:6%;bottom:5%;font:600 11px var(--mono);
+    color:var(--ink-2);background:rgba(255,255,255,.85);padding:3px 7px;border-radius:3px;
+    border:1px solid var(--g4)}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">S11.4</span>
+  <h1>S11 Venue setup - Step 4 of 8, Attributes</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S11</b></li>
+    <li>viewport <b>1440 x 900</b></li>
+    <li>role <b>Administrator</b></li>
+    <li>state <b>painting, 1 proposal still unreviewed</b></li>
+    <li>requirement <b>FR9.3, FR9.4</b></li>
+    <li>batch <b>2</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900</span>
+
+    <span class="cx" style="left:1110px;top:150px">1</span>
+    <span class="cx" style="left:1110px;top:420px">2</span>
+    <span class="cx" style="left:660px;top:130px">3</span>
+    <span class="cx" style="left:900px;top:80px">4</span>
+    <span class="cx" style="left:900px;top:780px">5</span>
+    <span class="cx" style="left:1110px;top:700px">6</span>
+
+    <div class="row grow">
+
+      <nav class="navrail wiz-steps" style="flex:0 0 240px">
+        <a href="S11-setup-step1-plan-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Site plan</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step2-grid-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Grid</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step3-proposals-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Proposals</span>
+            <span class="wiz-meta">SAVED, 1 UNREVIEWED</span></span></a>
+        <a href="S11-setup-step4-attributes-desktop.html" class="wiz-step current" aria-current="step">
+          <span class="wiz-num">4</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Attributes</span>
+            <span class="wiz-meta">IN PROGRESS</span></span></a>
+        <a href="S11-setup-step5-exits-desktop.html" class="wiz-step">
+          <span class="wiz-num">5</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Exits</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-step6-zones-desktop.html" class="wiz-step">
+          <span class="wiz-num">6</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Zones</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-step7-thresholds-desktop.html" class="wiz-step">
+          <span class="wiz-num">7</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Thresholds</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-step8-drones-desktop.html" class="wiz-step">
+          <span class="wiz-num">8</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Drones</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-review-desktop.html" class="wiz-step">
+          <span class="wiz-num">R</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Review</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <div class="rail-note">Steps are non-linear once visited and progress
+          is saved per step.</div>
+      </nav>
+
+      <div class="col grow">
+        <div class="top">
+          <span class="b">Venue setup - Riverside Arena</span>
+          <span class="tiny muted">Step 4 of 8 - Attributes</span>
+          <span class="grow"></span>
+          <span class="chip">s.iqbal</span>
+          <span class="st st-neutral">ADMINISTRATOR</span>
+        </div>
+
+        <form class="col grow" style="min-height:0">
+          <div class="row grow" style="min-height:0">
+
+            <div class="col" style="flex:0 0 320px;border-right:1px solid var(--line);
+              background:var(--g1);padding:16px;overflow-y:auto">
+
+              <div class="mono tiny b" style="margin-bottom:8px">BRUSH</div>
+              <div class="brush" role="radiogroup" aria-label="Cell attribute brush">
+                <button type="button" aria-pressed="true"><i class="sw attr-walkable"></i>Walkable</button>
+                <button type="button" aria-pressed="false"><i class="sw attr-exit"></i>Exit</button>
+                <button type="button" aria-pressed="false"><i class="sw attr-barrier"></i>Barrier</button>
+                <button type="button" aria-pressed="false"><i class="sw attr-obstruction"></i>Obstruction</button>
+              </div>
+              <p class="tiny muted" style="margin:0 0 14px">
+                Click a cell to paint it with the selected attribute. Drag paints a run.
+                Every cell defaults to walkable.</p>
+
+              <div class="hr" style="margin-bottom:12px"></div>
+
+              <div class="mono tiny b" style="margin-bottom:4px">RUNNING COUNTS - 2400 cells</div>
+              <div class="countrow"><i class="sw attr-walkable"></i><span>Walkable</span><span>2104</span></div>
+              <div class="countrow"><i class="sw attr-exit"></i><span>Exit</span><span>14</span></div>
+              <div class="countrow"><i class="sw attr-barrier"></i><span>Barrier</span><span>118</span></div>
+              <div class="countrow"><i class="sw attr-obstruction"></i><span>Obstruction</span><span>164</span></div>
+              <div class="row between" style="margin-top:6px;padding-top:6px;border-top:1px solid var(--g4)">
+                <span class="tiny muted mono">TOTAL</span><span class="mono b">2400 / 2400</span>
+              </div>
+            </div>
+
+            <div class="col grow" style="min-height:0">
+
+              <div class="honest" style="margin:14px 18px 0;border-left-color:var(--focus)">
+                Manual annotation is the guaranteed path; the setup pass in Step 3 only
+                pre-fills it. A venue with no proposals at all still reaches a fully
+                configured site through this screen alone.
+              </div>
+
+              <div class="row between center" style="padding:12px 18px 4px">
+                <span class="mono tiny b">1 PROPOSAL STILL UNREVIEWED FROM STEP 3</span>
+              </div>
+              <div class="pad-s" style="padding:0 18px 10px">
+                <table class="wt">
+                  <tr><th>#</th><th>Type</th><th>Cells</th><th>Decision</th></tr>
+                  <tr style="background:rgba(37,99,235,.06)">
+                    <td class="mono">9</td><td>Obstruction</td>
+                    <td class="mono">C-029-019 to C-031-020</td>
+                    <td>
+                      <div class="row gap-s">
+                        <button type="button" class="btn btn--sm">Reject</button>
+                        <button type="button" class="btn btn--sm btn--primary">Accept</button>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                <p class="tiny muted" style="margin:6px 0 0">
+                  This is the same proposal left unreviewed on Step 3. There is no separate
+                  Proposals tab on the Site configuration screen later - an unreviewed
+                  proposal always surfaces here, on Attributes, because the setup pass runs
+                  once per venue.</p>
+              </div>
+
+              <div class="col grow paintcanvas">
+                <img src="_assets/site-plan.svg" alt="Site plan, cropped near North Gate">
+                <div class="paintgrid" id="attr-grid" data-cols="24" data-rows="14"></div>
+                <span class="cropcaption">showing 24 x 14 of the full 60 x 40 grid, near North Gate</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="wizfoot-row">
+            <button type="button" class="btn">Back</button>
+            <div class="row gap-s">
+              <button type="button" class="btn">Save and exit</button>
+              <button type="submit" class="btn btn--primary">Continue</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>The brush is one control with four states, never four separate tools.</b> Walkable,
+      Exit, Barrier and Obstruction are the only static cell attributes the SRS glossary
+      defines, so the palette offers exactly these four and nothing invented.
+      <span class="req">FR9.4</span></li>
+
+    <li><b>Running counts match the canonical dataset exactly</b> - walkable 2104, exit 14,
+      barrier 118, obstruction 164, summing to the full 2400-cell grid - so a reviewer can
+      check this screen's arithmetic against srs.md without opening a second document.
+      <span class="req">FR9.4</span></li>
+
+    <li><b>Manual annotation is stated as the guaranteed path, in words, above the fold.</b>
+      This is the acceptance test for FR9.4 made explicit: with the proposal list empty an
+      administrator can still mark every cell by hand and save a complete configuration.
+      <span class="req">FR9.4</span></li>
+
+    <li><b>The one proposal left unreviewed in Step 3 surfaces here, not on a page of its
+      own.</b> Design.md is explicit that Proposals has no tab on the Site configuration
+      screen later, so this is also the pattern that screen's Attributes tab reuses.
+      <span class="req">FR9.3</span></li>
+
+    <li><b>The painted grid shows a crop, not all 2400 cells.</b> A legible crop near North
+      Gate proves the mechanism; the running counts on the left, not the crop, are the
+      source of truth for the whole site. <span class="req">FR9.4</span></li>
+
+    <li><b>Attribute colours are grey shades and patterns scoped to this screen</b>
+      (<code>attr-walkable</code>, <code>attr-exit</code>, <code>attr-barrier</code>,
+      <code>attr-obstruction</code>), never the <code>obs-*</code> or <code>band-*</code>
+      classes that render live observation and risk, so a setup screen can never be misread
+      as a live one.</li>
+  </ol>
+
+</div>
+<script src="_assets/wireframe.js"></script>
+<script>
+  /* Decorative only, matching the precedent in S06's small-multiple grid: renders a fixed,
+     hand-specified pattern of attribute cells so the crop looks painted without hundreds of
+     hand-written elements. No interactivity, no data, no timers. */
+  (function () {
+    var host = document.getElementById('attr-grid');
+    if (!host) { return; }
+    var cols = 24, rows = 14;
+    host.style.gridTemplateColumns = 'repeat(' + cols + ',1fr)';
+    host.style.gridTemplateRows = 'repeat(' + rows + ',1fr)';
+    var cls = [];
+    for (var r = 0; r < rows; r++) {
+      for (var c = 0; c < cols; c++) {
+        var k = 'attr-walkable';
+        if (r === 3 && c >= 2 && c <= 9) { k = 'attr-barrier'; }
+        if (r >= 8 && r <= 10 && c >= 14 && c <= 18) { k = 'attr-obstruction'; }
+        if (r === 6 && c >= 20 && c <= 22) { k = 'attr-exit'; }
+        cls.push(k);
+      }
+    }
+    host.innerHTML = cls.map(function (k) { return '<i class="' + k + '"></i>'; }).join('');
+  })();
+</script>
+</body>
+</html>

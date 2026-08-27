@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S11 step 3 Proposals, mobile - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .wzform{display:flex;flex-direction:column;min-height:0;flex:1}
+  .wz-progress{flex:0 0 auto;padding:9px 12px 11px;border-bottom:1px solid var(--line);background:var(--g0)}
+  .wz-stepbtn{display:flex;align-items:center;gap:9px;width:100%;min-height:40px;
+    border:1px solid var(--g4);border-radius:6px;background:var(--g1);padding:0 10px;
+    font:600 12px var(--font);color:var(--ink)}
+  .wz-stepbtn .cur{font:700 11px/1 var(--mono);color:var(--ink-2);flex:0 0 auto}
+  .wz-stepbtn .name{flex:1;text-align:left}
+  .wz-caret{width:7px;height:7px;border-right:2px solid var(--ink-2);
+    border-bottom:2px solid var(--ink-2);transform:rotate(45deg);flex:0 0 auto}
+  .wz-bar{height:4px;background:var(--g3);border-radius:2px;margin-top:8px;overflow:hidden}
+  .wz-bar i{display:block;height:100%;background:var(--g7)}
+  .wz-body{overflow-y:auto;padding:14px 14px 20px}
+  .wz-actions{flex:0 0 auto;display:flex;gap:8px;padding:10px 12px;
+    border-top:1px solid var(--line);background:var(--g0)}
+
+  /* Setup-only proposal markers - grey shapes, never a risk-band colour, so a
+     proposal is never mistaken for a live alert. */
+  .tallyrow{display:flex;gap:6px;margin-bottom:12px}
+  .tallychip{flex:1;text-align:center;border:1px solid var(--g4);border-radius:5px;
+    padding:6px 4px;background:var(--g1)}
+  .tallychip b{display:block;font:700 16px var(--mono)}
+  .tallychip.pend{border-color:var(--focus);color:var(--focus)}
+  .tallychip.pend b{color:var(--focus)}
+
+  .stackwrap{position:relative;height:300px;margin-bottom:12px}
+  .stackcard{position:absolute;left:0;right:0;top:0;background:var(--g0);
+    border:1px solid var(--g4);border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,.06)}
+  .stackcard.b2{top:14px;left:10px;right:10px;height:270px;background:var(--g2);z-index:1}
+  .stackcard.b1{top:7px;left:5px;right:5px;height:280px;background:var(--g1);z-index:2}
+  .stackcard.top{height:300px;z-index:3;padding:12px}
+
+  .propcrop{position:relative;height:120px;border:1px solid var(--g5);border-radius:5px;
+    overflow:hidden;background:var(--g2);margin-bottom:10px}
+  .propcrop img{position:absolute;inset:-30%;width:160%;height:160%;object-fit:fill;opacity:.55}
+  .propcrop .zone{position:absolute;left:38%;top:32%;width:26%;height:26%;
+    border:2px dashed var(--focus);border-radius:3px;background:rgba(37,99,235,.10)}
+
+  .listrow{display:flex;align-items:center;gap:9px;padding:9px 4px;
+    border-bottom:1px solid var(--g3);font-size:12px}
+  .listrow .n{width:20px;height:20px;border-radius:50%;flex:0 0 auto;
+    display:flex;align-items:center;justify-content:center;font:700 10px var(--mono);
+    background:var(--g6);color:#fff}
+  .listrow.rej .n{background:var(--g2);color:var(--g5);border:1px dashed var(--g5)}
+  .listrow.pend .n{background:var(--g0);color:var(--focus);border:2px solid var(--focus)}
+  .listrow .cells{flex:1;font-family:var(--mono);font-size:11px;color:var(--ink-2)}
+  .decided{font:700 10px var(--mono)}
+  .decided.acc{color:var(--g6)}
+  .decided.rej{color:var(--g5)}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">S11.3</span>
+  <h1>S11 venue setup, step 3 of 8 - Proposals, mobile</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S11</b></li>
+    <li>viewport <b>390 x 844</b></li>
+    <li>role <b>Administrator</b></li>
+    <li>state <b>6 accepted, 2 rejected, 1 unreviewed</b></li>
+    <li>requirement <b>FR9.3, FR9.4</b></li>
+    <li>batch <b>2</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <!-- ============ card stack, current card = proposal 9 ============ -->
+  <div class="device device--mobile">
+    <span class="device-tag">card stack</span>
+
+    <span class="cx" style="left:214px;top:24px">1</span>
+    <span class="cx" style="left:340px;top:100px">2</span>
+    <span class="cx" style="left:80px;top:150px">3</span>
+    <span class="cx" style="left:340px;top:340px">4</span>
+    <span class="cx" style="left:80px;top:470px">5</span>
+    <span class="cx" style="left:340px;top:812px">6</span>
+
+    <form class="wzform" onsubmit="event.preventDefault()">
+      <div class="top">
+        <span class="b">Venue setup</span>
+        <span class="grow"></span>
+        <button class="btn btn--sm" type="button">Exit</button>
+      </div>
+
+      <div class="wz-progress">
+        <button class="wz-stepbtn" type="button" aria-haspopup="true">
+          <span class="cur">STEP 3 OF 8</span>
+          <span class="name">Proposals</span>
+          <i class="wz-caret"></i>
+        </button>
+        <div class="wz-bar"><i style="width:31%"></i></div>
+      </div>
+
+      <div class="wz-body grow">
+        <div class="honest" style="margin-bottom:12px">
+          This step can be skipped entirely. Step 4, Attributes, still completes the
+          configuration by hand - manual annotation is the guaranteed path and the setup
+          pass only pre-fills it. A venue with no proposals at all reaches a fully
+          configured site the same way.
+        </div>
+
+        <div class="tallyrow">
+          <div class="tallychip"><b>6</b>accepted</div>
+          <div class="tallychip"><b>2</b>rejected</div>
+          <div class="tallychip pend"><b>1</b>unreviewed</div>
+        </div>
+
+        <div class="mono tiny muted" style="margin-bottom:6px">9 of 9 - 2 exits, 4 barriers, 3 obstructions</div>
+
+        <div class="stackwrap">
+          <div class="stackcard b2"></div>
+          <div class="stackcard b1"></div>
+          <div class="stackcard top">
+            <div class="row between center" style="margin-bottom:8px">
+              <span class="mono b">Proposal 9</span>
+              <span class="chip" style="border-color:var(--focus);color:var(--focus)">UNREVIEWED</span>
+            </div>
+            <div class="propcrop">
+              <img src="_assets/site-plan.svg" alt="">
+              <div class="zone"></div>
+            </div>
+            <div class="row between center">
+              <span class="mono tiny b">Obstruction</span>
+              <span class="mono tiny muted">C-029-019 to C-031-020</span>
+            </div>
+            <p class="tiny muted" style="margin:6px 0 0">
+              Detected as a fixed structure from the setup pass over the plan image. Confirm
+              or correct against what is actually on the ground.
+            </p>
+            <div class="row gap-s" style="margin-top:12px">
+              <button class="btn btn--tap grow" type="button">Reject</button>
+              <button class="btn btn--tap btn--primary grow" type="button">Accept</button>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn" type="button" style="width:100%;margin-bottom:12px">
+          View all 9 as a list
+        </button>
+
+        <div class="tiny muted">
+          Accepted and rejected proposals can still be changed here or corrected later in
+          Step 4 - a decision on this card is not final until Save on the Review step.
+        </div>
+      </div>
+
+      <div class="wz-actions">
+        <button class="btn btn--tap" type="button">Back</button>
+        <button class="btn btn--tap grow" type="button">Skip this step</button>
+        <button class="btn btn--tap btn--primary grow" type="submit">Continue</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ============ same step, list view of all 9 ============ -->
+  <div class="device device--mobile">
+    <span class="device-tag">list view</span>
+    <span class="cx" style="left:340px;top:120px">7</span>
+    <span class="cx" style="left:80px;top:600px">8</span>
+
+    <div class="top">
+      <span class="b">Venue setup</span>
+      <span class="grow"></span>
+      <button class="btn btn--sm" type="button">Exit</button>
+    </div>
+    <div class="wz-progress">
+      <button class="wz-stepbtn" type="button" aria-haspopup="true">
+        <span class="cur">STEP 3 OF 8</span><span class="name">Proposals</span>
+        <i class="wz-caret"></i>
+      </button>
+      <div class="wz-bar"><i style="width:31%"></i></div>
+    </div>
+
+    <div class="wz-body grow">
+      <div class="row between center" style="margin-bottom:8px">
+        <span class="mono tiny b">All 9 proposals</span>
+        <button class="btn btn--sm" type="button">Back to card</button>
+      </div>
+
+      <div class="listrow"><span class="n">1</span>
+        <span class="cells">Exit - E1 South Gate, 8 cells</span>
+        <span class="decided acc">ACCEPTED</span></div>
+      <div class="listrow"><span class="n">2</span>
+        <span class="cells">Exit - E2 North Gate, 6 cells</span>
+        <span class="decided acc">ACCEPTED</span></div>
+      <div class="listrow"><span class="n">3</span>
+        <span class="cells">Barrier - C-018-006 to C-018-014</span>
+        <span class="decided acc">ACCEPTED</span></div>
+      <div class="listrow"><span class="n">4</span>
+        <span class="cells">Barrier - C-012-030 to C-012-036</span>
+        <span class="decided acc">ACCEPTED</span></div>
+      <div class="listrow"><span class="n">5</span>
+        <span class="cells">Barrier - C-041-030 to C-041-036</span>
+        <span class="decided acc">ACCEPTED</span></div>
+      <div class="listrow rej"><span class="n">6</span>
+        <span class="cells">Barrier - C-040-004 to C-045-004</span>
+        <span class="decided rej">REJECTED</span></div>
+      <div class="listrow"><span class="n">7</span>
+        <span class="cells">Obstruction - C-004-018 to C-004-021</span>
+        <span class="decided acc">ACCEPTED</span></div>
+      <div class="listrow rej"><span class="n">8</span>
+        <span class="cells">Obstruction - C-056-018 to C-056-021</span>
+        <span class="decided rej">REJECTED</span></div>
+      <div class="listrow pend" style="background:rgba(37,99,235,.06)"><span class="n">9</span>
+        <span class="cells">Obstruction - C-029-019 to C-031-020</span>
+        <span class="row gap-s">
+          <button class="btn btn--sm" type="button">Reject</button>
+          <button class="btn btn--sm btn--primary" type="button">Accept</button>
+        </span></div>
+    </div>
+
+    <div class="wz-actions">
+      <button class="btn btn--tap" type="button">Back</button>
+      <button class="btn btn--tap grow" type="button">Skip this step</button>
+      <button class="btn btn--tap btn--primary grow" type="submit">Continue</button>
+    </div>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>The skip path is stated before the stack, not discovered by accident.</b> The
+      honest note and the "Skip this step" action in the footer say the same thing twice
+      because a demo administrator with no setup pass to review must reach step 4 with no
+      doubt that the site will still be fully configured. <span class="req">FR9.4</span></li>
+
+    <li><b>One proposal at a time, as a physical card stack.</b> Two cards peek out behind
+      the active one so the remaining count is felt, not just read from a number - here the
+      stack is nearly exhausted because 8 of 9 are already decided.
+      <span class="req">FR9.3</span></li>
+
+    <li><b>The tally states the exact split.</b> 6 accepted, 2 rejected, 1 unreviewed,
+      matching the canonical setup-pass result for Riverside Arena, so progress is legible
+      without counting cards.</li>
+
+    <li><b>The active card is the one unreviewed proposal.</b> Its crop highlights the
+      affected cells on the plan in the blue affordance colour, never a risk-band colour,
+      because this is a proposed attribute, not observed risk.
+      <span class="req">FR9.3</span></li>
+
+    <li><b>Accept and Reject are per proposal and reversible.</b> Nothing here is final
+      until Save on the Review step, stated directly under the card so a correction later
+      in Step 4 is expected, not a surprise. <span class="req">FR9.3</span></li>
+
+    <li><b>Continue works even mid-stack.</b> The primary action is not blocked on
+      reviewing every card, consistent with the skip note above - a step this optional
+      cannot also be a gate.</li>
+
+    <li><b>"View all as a list" is the overview the stack deliberately hides.</b> The
+      second device is that list: all 9 rows with the same three outcomes, so a reviewer
+      can jump straight to the one unreviewed row instead of swiping through eight
+      decided cards to reach it. <span class="req">FR9.3</span></li>
+
+    <li><b>List rows use the same grey and dashed shapes as the stack</b>, never
+      <span class="req">obs-*</span> or <span class="req">band-*</span>, so this setup
+      screen cannot be mistaken for the live map.</li>
+  </ol>
+
+</div>
+</body>
+</html>

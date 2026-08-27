@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D06 Edit thresholds - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  /* Scoped additions - wireframe.css is not edited. */
+  .fld{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+  .fld label{font:600 11px var(--mono);color:var(--ink-2)}
+  .fld input{height:34px;border:1px solid var(--g5);border-radius:4px;background:var(--g0);
+    padding:0 9px;font:600 13px var(--mono);color:var(--ink)}
+  .fld input[disabled]{background:var(--g2);color:var(--ink-2)}
+  .fld .unit{position:relative}
+  .fld .unit input{padding-right:30px}
+  .fld .unit span{position:absolute;right:9px;top:50%;transform:translateY(-50%);
+    font:600 11px var(--mono);color:var(--ink-2)}
+  .nline{position:relative;height:34px;background:var(--g2);border:1px solid var(--g4);
+    border-radius:4px;margin:6px 0 4px}
+  .nline .old{position:absolute;top:0;bottom:0;background:rgba(154,154,147,.55)}
+  .nline .between{position:absolute;top:0;bottom:0;background:rgba(168,118,10,.30);
+    border-left:2px solid var(--band-watch);border-right:2px dashed var(--band-normal)}
+  .nline .tick{position:absolute;top:-16px;font:700 10px var(--mono);color:var(--ink-2);
+    transform:translateX(-50%)}
+  .nline .tick i{display:block;width:1px;height:40px;background:var(--g5);margin:0 auto}
+  .simple-row{display:flex;justify-content:space-between;align-items:center;
+    padding:9px 12px;border:1px solid var(--g4);border-radius:5px;background:var(--g0);
+    margin-bottom:8px}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">D06</span>
+  <h1>Edit thresholds - impact shown before saving</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>D06</b></li>
+    <li>viewport <b>390 x 844 and 1440 x 900</b></li>
+    <li>role <b>Administrator</b></li>
+    <li>state <b>editing zone B, dirty</b></li>
+    <li>requirement <b>FR9.7 FR9.9</b></li>
+    <li>batch <b>5</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <!-- ============ desktop: D06 over a simplified S12 Thresholds tab ============ -->
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900</span>
+
+    <span class="cx" style="left:610px;top:250px">1</span>
+    <span class="cx" style="left:610px;top:300px">2</span>
+    <span class="cx" style="left:610px;top:400px">3</span>
+    <span class="cx" style="left:610px;top:520px">4</span>
+    <span class="cx" style="left:610px;top:610px">7</span>
+    <span class="cx" style="left:610px;top:660px">5</span>
+    <span class="cx" style="left:1060px;top:330px">6</span>
+
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <a href="#" aria-current="page"><i class="icon"></i>Configuration</a>
+        <a href="#"><i class="icon"></i>Accounts</a>
+        <a href="#"><i class="icon"></i>Audit log</a>
+        <a href="#"><i class="icon"></i>System health</a>
+        <a href="#"><i class="icon"></i>Roles ref</a>
+        <div class="rail-note">Signed in as <b>s.iqbal</b><br>
+          <span class="st st-neutral" style="margin-top:4px">ADMINISTRATOR</span></div>
+      </nav>
+
+      <div class="col grow" style="filter:saturate(.9)">
+        <div class="top">
+          <span class="b">Site configuration - Riverside Arena</span>
+          <span class="grow"></span>
+          <span class="chip">s.iqbal</span>
+        </div>
+        <div class="tabs" role="tablist" aria-hidden="true">
+          <button role="tab" aria-selected="false" tabindex="-1">Plan</button>
+          <button role="tab" aria-selected="false" tabindex="-1">Grid</button>
+          <button role="tab" aria-selected="false" tabindex="-1">Attributes</button>
+          <button role="tab" aria-selected="false" tabindex="-1">Exits</button>
+          <button role="tab" aria-selected="false" tabindex="-1">Zones</button>
+          <button role="tab" aria-selected="true" tabindex="0">Thresholds</button>
+          <button role="tab" aria-selected="false" tabindex="-1">Drones</button>
+        </div>
+        <div class="pad-l">
+          <p class="tiny muted" style="margin:0 0 10px;max-width:60ch">
+            Every zone defaults to a risk threshold of 0.70 and a density threshold of
+            4.0 /m2. Editing opens the impact preview before anything is saved.</p>
+          <div class="simple-row"><span class="mono">Zone A - Concourse</span>
+            <span class="row gap-s center"><span class="mono tiny">risk 0.70 / density 4.0</span>
+              <button class="btn btn--sm" type="button">Edit</button></span></div>
+          <div class="simple-row" style="outline:2px solid var(--band-elevated);outline-offset:-2px">
+            <span class="mono">Zone B - North Gate</span>
+            <span class="row gap-s center"><span class="mono tiny">risk 0.70 / density 4.0</span>
+              <button class="btn btn--sm btn--primary" type="button">Edit</button></span></div>
+          <div class="simple-row"><span class="mono">Zone C - Arena Floor</span>
+            <span class="row gap-s center"><span class="mono tiny">risk 0.70 / density 4.0</span>
+              <button class="btn btn--sm" type="button">Edit</button></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scrim">
+      <div class="modal" style="max-width:460px">
+        <div class="modal-head row between center">
+          <span>Edit thresholds - Zone B North Gate</span>
+        </div>
+        <form>
+          <div class="pad-l">
+            <div class="row gap">
+              <div class="fld grow">
+                <label for="d-risk-cur">CURRENT RISK THRESHOLD</label>
+                <div class="unit"><input id="d-risk-cur" value="0.70" disabled></div>
+              </div>
+              <div class="fld grow">
+                <label for="d-risk-new">NEW RISK THRESHOLD</label>
+                <div class="unit"><input id="d-risk-new" value="0.65" inputmode="decimal" autofocus></div>
+              </div>
+            </div>
+
+            <div class="fld">
+              <label for="d-dens">DENSITY THRESHOLD, UNCHANGED</label>
+              <div class="unit"><input id="d-dens" value="4.0" disabled><span>/m2</span></div>
+            </div>
+
+            <div class="hr" style="margin:14px 0"></div>
+
+            <div class="mono tiny b">IMPACT PREVIEW</div>
+            <div class="nline">
+              <div class="tick" style="left:0%">0.00</div>
+              <div class="old" style="left:0%;width:70%"></div>
+              <div class="between" style="left:65%;width:5%"></div>
+              <div class="tick" style="left:65%">0.65</div>
+              <div class="tick" style="left:70%">0.70</div>
+              <div class="tick" style="left:100%;transform:translateX(-100%)">1.00</div>
+            </div>
+            <p class="tiny" style="margin:14px 0 0">
+              <b>23 cells</b> in Zone B currently score between 0.65 and 0.70. Saving moves
+              every one of them into scope for an elevated alert on the next tick - none of
+              them are alerting today.
+            </p>
+
+            <div class="honest" style="margin-top:12px">
+              The change takes effect on the next tick, not retroactively, and is written to
+              the audit log with its previous value 0.70 and new value 0.65.
+            </div>
+          </div>
+          <div class="modal-foot">
+            <button type="button" class="btn">Cancel</button>
+            <button type="submit" class="btn btn--primary">Save threshold</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ mobile: D06 as a sheet over a simplified S12 Thresholds tab ============ -->
+  <div class="device device--mobile">
+    <span class="device-tag">390 x 844</span>
+
+    <span class="cx" style="left:195px;top:270px">1</span>
+    <span class="cx" style="left:195px;top:320px">2</span>
+    <span class="cx" style="left:195px;top:430px">3</span>
+    <span class="cx" style="left:195px;top:560px">4</span>
+    <span class="cx" style="left:195px;top:660px">7</span>
+    <span class="cx" style="left:195px;top:760px">5</span>
+
+    <div class="top" style="filter:saturate(.9)">
+      <span class="b">Configuration</span>
+      <span class="grow"></span>
+      <span class="icon icon--r"></span>
+    </div>
+    <div class="pad" style="filter:saturate(.9)">
+      <div class="mono tiny b" style="margin-bottom:8px">THRESHOLDS</div>
+      <div class="simple-row" style="outline:2px solid var(--band-elevated);outline-offset:-2px">
+        <span class="mono tiny">Zone B</span>
+        <span class="row gap-s center"><span class="mono tiny">0.70</span>
+          <button class="btn btn--sm btn--primary" type="button">Edit</button></span></div>
+      <div class="simple-row"><span class="mono tiny">Zone A</span>
+        <span class="row gap-s center"><span class="mono tiny">0.70</span>
+          <button class="btn btn--sm" type="button">Edit</button></span></div>
+    </div>
+
+    <div class="sheet" style="position:absolute;left:0;right:0;bottom:0">
+      <div class="sheet-handle" style="position:relative;border-bottom:1px solid var(--line)">
+        <span class="b" style="font-size:13px">Edit thresholds - Zone B</span>
+      </div>
+      <form>
+        <div class="pad">
+          <div class="fld">
+            <label for="m-risk-cur">CURRENT RISK THRESHOLD</label>
+            <div class="unit"><input id="m-risk-cur" value="0.70" disabled></div>
+          </div>
+          <div class="fld">
+            <label for="m-risk-new">NEW RISK THRESHOLD</label>
+            <div class="unit"><input id="m-risk-new" value="0.65" inputmode="decimal" autofocus></div>
+          </div>
+          <div class="fld">
+            <label for="m-dens">DENSITY THRESHOLD, UNCHANGED</label>
+            <div class="unit"><input id="m-dens" value="4.0" disabled><span>/m2</span></div>
+          </div>
+
+          <div class="nline">
+            <div class="old" style="left:0%;width:70%"></div>
+            <div class="between" style="left:65%;width:5%"></div>
+          </div>
+          <p class="tiny" style="margin:6px 0 0">
+            <b>23 cells</b> currently score between 0.65 and 0.70 - saving brings all of them
+            into scope for an elevated alert next tick.</p>
+
+          <div class="honest" style="margin-top:10px">
+            Takes effect on the next tick and is logged with its previous and new value.
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button type="button" class="btn btn--tap">Cancel</button>
+          <button type="submit" class="btn btn--tap btn--primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>Current and new value sit side by side, never one replacing the other.</b> An
+      administrator reads 0.70 and 0.65 at once instead of having to remember the old value
+      after typing the new one. <span class="req">FR9.7</span></li>
+
+    <li><b>The new value is a real input, not a slider alone</b> - an administrator can type
+      an exact number, which matters when the number is what an examiner will ask about.
+      <span class="req">FR9.7</span></li>
+
+    <li><b>The number line shows the shrinking band directly.</b> The zone between 0.65 and
+      0.70, shaded and outlined in the watch and normal colours, is exactly the range that
+      changes classification if this save goes through. <span class="req">FR9.7</span></li>
+
+    <li><b>23 cells is stated as a count, not implied by the shading alone.</b> This is the
+      requirement itself: an administrator sees what lowering a threshold will do before
+      saving, in a number that can be checked against the map. <span class="req">FR9.7</span></li>
+
+    <li><b>Save and Cancel are a real form.</b> Save is <code>type="submit"</code>, Cancel is
+      <code>type="button"</code>; Enter submits, Esc cancels, and focus is trapped on the
+      dialog while open and returned to the triggering Edit button on close.</li>
+
+    <li><b>Density threshold is shown but disabled.</b> This dialog is editing the risk
+      threshold; the density threshold stays visible for context because the two are read
+      together everywhere else in the product, but changing it is a separate action.
+      <span class="req">FR9.7</span></li>
+
+    <li><b>The audit consequence is stated in the dialog itself, not only in a toast
+      afterwards.</b> An administrator commits to "this becomes an audit entry with 0.70 and
+      0.65" before clicking Save, not after. <span class="req">FR9.9</span></li>
+  </ol>
+
+</div>
+<script src="_assets/wireframe.js"></script>
+</body>
+</html>

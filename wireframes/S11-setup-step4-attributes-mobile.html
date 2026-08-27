@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S11 step 4 Attributes, mobile - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .wzform{display:flex;flex-direction:column;min-height:0;flex:1}
+  .wz-progress{flex:0 0 auto;padding:9px 12px 11px;border-bottom:1px solid var(--line);background:var(--g0)}
+  .wz-stepbtn{display:flex;align-items:center;gap:9px;width:100%;min-height:40px;
+    border:1px solid var(--g4);border-radius:6px;background:var(--g1);padding:0 10px;
+    font:600 12px var(--font);color:var(--ink)}
+  .wz-stepbtn .cur{font:700 11px/1 var(--mono);color:var(--ink-2);flex:0 0 auto}
+  .wz-stepbtn .name{flex:1;text-align:left}
+  .wz-caret{width:7px;height:7px;border-right:2px solid var(--ink-2);
+    border-bottom:2px solid var(--ink-2);transform:rotate(45deg);flex:0 0 auto}
+  .wz-bar{height:4px;background:var(--g3);border-radius:2px;margin-top:8px;overflow:hidden}
+  .wz-bar i{display:block;height:100%;background:var(--g7)}
+  .wz-actions{flex:0 0 auto;display:flex;gap:8px;padding:10px 12px;
+    border-top:1px solid var(--line);background:var(--g0)}
+
+  /* Attribute paint - greybox only, four patterns on the g-scale, never the
+     eight live treatment classes, so a setup screen never reads as a live one. */
+  .countstrip{display:flex;gap:6px;padding:8px 10px;border-bottom:1px solid var(--line);
+    background:var(--g1);overflow-x:auto;flex:0 0 auto}
+  .countchip{flex:0 0 auto;display:flex;align-items:center;gap:6px;padding:5px 9px;
+    border:1px solid var(--g4);border-radius:99px;background:var(--g0);font:700 11px var(--mono)}
+  .countchip i{width:10px;height:10px;border-radius:2px;flex:0 0 auto}
+  .sw-walk{background:var(--g1);border:1px solid var(--g4)}
+  .sw-exit{background:var(--g4)}
+  .sw-barrier{background:var(--g6)}
+  .sw-obs{background:var(--g7)}
+
+  .propmap{position:relative;flex:1;min-height:0;background:var(--g1)}
+  .propmap .plan{position:absolute;inset:0;opacity:.35}
+  .paintgrid{position:absolute;inset:10% 6%;display:grid;grid-template-columns:repeat(10,1fr);
+    grid-template-rows:repeat(8,1fr);gap:1px;background:var(--g5)}
+  .pc{position:relative;display:flex;align-items:center;justify-content:center;
+    font:700 9px var(--mono)}
+  .pc-walkable{background:var(--g1);color:transparent}
+  .pc-exit{background:var(--g4);color:var(--g0)}
+  .pc-barrier{background:var(--g6);color:var(--g0)}
+  .pc-obstruction{background:var(--g7);color:var(--g0)}
+  .pc-pending{outline:2px dashed var(--focus);outline-offset:-2px;z-index:2}
+
+  .banner-review{position:absolute;left:8px;right:8px;top:8px;z-index:5;
+    background:var(--g0);border:1px solid var(--focus);border-radius:6px;padding:9px 10px}
+
+  .brushfab{position:absolute;right:10px;bottom:10px;z-index:6;min-height:44px;
+    border-radius:99px;padding:0 16px}
+
+  .sheet-pal{padding:4px 12px 14px}
+  .brushrow{display:flex;flex-direction:column;gap:6px}
+  .brushopt{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 10px;
+    border:1px solid var(--g4);border-radius:6px;background:var(--g0);
+    font:600 13px var(--font);color:var(--ink);width:100%}
+  .brushopt[aria-pressed="true"]{border-color:var(--g7);background:var(--g1);
+    box-shadow:inset 0 0 0 1px var(--g7)}
+  .brushopt i{width:20px;height:20px;border-radius:4px;flex:0 0 auto}
+  .brushopt .cnt{margin-left:auto;font:700 12px var(--mono);color:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">S11.4</span>
+  <h1>S11 venue setup, step 4 of 8 - Attributes, mobile</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S11</b></li>
+    <li>viewport <b>390 x 844</b></li>
+    <li>role <b>Administrator</b></li>
+    <li>state <b>walkable 2104, exit 14, barrier 118, obstruction 164</b></li>
+    <li>requirement <b>FR9.4</b></li>
+    <li>batch <b>2</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <!-- ============ palette collapsed ============ -->
+  <div class="device device--mobile">
+    <span class="device-tag">brush sheet collapsed</span>
+
+    <span class="cx" style="left:214px;top:24px">1</span>
+    <span class="cx" style="left:80px;top:106px">2</span>
+    <span class="cx" style="left:340px;top:150px">3</span>
+    <span class="cx" style="left:200px;top:400px">4</span>
+    <span class="cx" style="left:355px;top:760px">5</span>
+    <span class="cx" style="left:355px;top:812px">6</span>
+
+    <form class="wzform" onsubmit="event.preventDefault()">
+      <div class="top">
+        <span class="b">Venue setup</span>
+        <span class="grow"></span>
+        <button class="btn btn--sm" type="button">Exit</button>
+      </div>
+
+      <div class="wz-progress">
+        <button class="wz-stepbtn" type="button" aria-haspopup="true">
+          <span class="cur">STEP 4 OF 8</span>
+          <span class="name">Attributes</span>
+          <i class="wz-caret"></i>
+        </button>
+        <div class="wz-bar"><i style="width:44%"></i></div>
+      </div>
+
+      <div class="countstrip">
+        <span class="countchip"><i class="sw-walk"></i>2104 walkable</span>
+        <span class="countchip"><i class="sw-exit"></i>14 exit</span>
+        <span class="countchip"><i class="sw-barrier"></i>118 barrier</span>
+        <span class="countchip"><i class="sw-obs"></i>164 obstruction</span>
+      </div>
+
+      <div class="propmap grow">
+        <img class="plan" src="_assets/site-plan.svg" alt="">
+
+        <div class="banner-review">
+          <div class="row between center">
+            <span class="mono tiny b">1 proposal still needs a decision</span>
+            <span class="chip" style="border-color:var(--focus);color:var(--focus)">UNREVIEWED</span>
+          </div>
+          <div class="tiny muted" style="margin:4px 0 8px">
+            Obstruction - C-029-019 to C-031-020, carried over from Step 3.
+          </div>
+          <div class="row gap-s">
+            <button class="btn btn--sm grow" type="button">Reject</button>
+            <button class="btn btn--sm btn--primary grow" type="button">Accept</button>
+          </div>
+        </div>
+
+        <div class="paintgrid" style="top:44%">
+          <i class="pc pc-barrier">B</i><i class="pc pc-barrier">B</i><i class="pc pc-barrier">B</i>
+          <i class="pc pc-barrier">B</i><i class="pc pc-barrier">B</i><i class="pc pc-barrier">B</i>
+          <i class="pc pc-barrier">B</i><i class="pc pc-barrier">B</i><i class="pc pc-barrier">B</i>
+          <i class="pc pc-barrier">B</i>
+
+          <i class="pc pc-walkable"></i><i class="pc pc-walkable"></i><i class="pc pc-walkable"></i>
+          <i class="pc pc-walkable"></i><i class="pc pc-walkable"></i><i class="pc pc-obstruction">O</i>
+          <i class="pc pc-obstruction">O</i><i class="pc pc-walkable"></i><i class="pc pc-walkable"></i>
+          <i class="pc pc-walkable"></i>
+
+          <i class="pc pc-walkable"></i><i class="pc pc-walkable"></i><i class="pc pc-walkable"></i>
+          <i class="pc pc-walkable"></i><i class="pc pc-walkable"></i><i class="pc pc-obstruction">O</i>
+          <i class="pc pc-obstruction">O</i><i class="pc pc-walkable"></i><i class="pc pc-walkable"></i>
+          <i class="pc pc-walkable"></i>
+
+          <i class="pc pc-walkable"></i><i class="pc pc-walkable"></i><i class="pc pc-walkable"></i>
+          <i class="pc pc-walkable"></i><i class="pc pc-walkable"></i><i class="pc pc-walkable"></i>
+          <i class="pc pc-walkable"></i><i class="pc pc-walkable"></i><i class="pc pc-walkable"></i>
+          <i class="pc pc-walkable"></i>
+
+          <i class="pc pc-walkable"></i><i class="pc pc-walkable"></i><i class="pc pc-walkable"></i>
+          <i class="pc pc-walkable pc-pending"></i><i class="pc pc-walkable pc-pending"></i>
+          <i class="pc pc-walkable pc-pending"></i><i class="pc pc-walkable"></i>
+          <i class="pc pc-walkable"></i><i class="pc pc-walkable"></i><i class="pc pc-walkable"></i>
+
+          <i class="pc pc-walkable"></i><i class="pc pc-walkable"></i><i class="pc pc-walkable"></i>
+          <i class="pc pc-walkable"></i><i class="pc pc-walkable"></i><i class="pc pc-walkable"></i>
+          <i class="pc pc-walkable"></i><i class="pc pc-walkable"></i><i class="pc pc-walkable"></i>
+          <i class="pc pc-walkable"></i>
+
+          <i class="pc pc-exit">E</i><i class="pc pc-exit">E</i><i class="pc pc-walkable"></i>
+          <i class="pc pc-walkable"></i><i class="pc pc-walkable"></i><i class="pc pc-walkable"></i>
+          <i class="pc pc-walkable"></i><i class="pc pc-walkable"></i><i class="pc pc-exit">E</i>
+          <i class="pc pc-exit">E</i>
+
+          <i class="pc pc-barrier">B</i><i class="pc pc-barrier">B</i><i class="pc pc-barrier">B</i>
+          <i class="pc pc-barrier">B</i><i class="pc pc-barrier">B</i><i class="pc pc-barrier">B</i>
+          <i class="pc pc-barrier">B</i><i class="pc pc-barrier">B</i><i class="pc pc-barrier">B</i>
+          <i class="pc pc-barrier">B</i>
+        </div>
+
+        <button class="btn btn--tap btn--primary brushfab" type="button">Brush: Obstruction</button>
+      </div>
+
+      <div class="wz-actions">
+        <button class="btn btn--tap" type="button">Back</button>
+        <button class="btn btn--tap btn--primary grow" type="submit">Continue</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ============ palette expanded as bottom sheet ============ -->
+  <div class="device device--mobile">
+    <span class="device-tag">brush sheet expanded</span>
+    <span class="cx" style="left:340px;top:620px">7</span>
+    <span class="cx" style="left:80px;top:700px">8</span>
+
+    <div class="top">
+      <span class="b">Venue setup</span>
+      <span class="grow"></span>
+      <button class="btn btn--sm" type="button">Exit</button>
+    </div>
+    <div class="wz-progress">
+      <button class="wz-stepbtn" type="button" aria-haspopup="true">
+        <span class="cur">STEP 4 OF 8</span><span class="name">Attributes</span>
+        <i class="wz-caret"></i>
+      </button>
+      <div class="wz-bar"><i style="width:44%"></i></div>
+    </div>
+
+    <div class="propmap grow" style="flex:1 1 auto">
+      <img class="plan" src="_assets/site-plan.svg" alt="">
+      <div class="paintgrid" style="top:6%;bottom:6%"></div>
+    </div>
+
+    <div class="sheet">
+      <div class="sheet-handle" style="position:relative">
+        <span class="b" style="font-size:13px">Brush</span>
+        <span class="grow"></span>
+        <span class="tiny muted mono">drag down to paint</span>
+      </div>
+      <div class="sheet-pal">
+        <div class="brushrow">
+          <button class="brushopt" type="button" aria-pressed="false">
+            <i class="sw-walk"></i>Walkable<span class="cnt">2104</span></button>
+          <button class="brushopt" type="button" aria-pressed="false">
+            <i class="sw-exit"></i>Exit<span class="cnt">14</span></button>
+          <button class="brushopt" type="button" aria-pressed="false">
+            <i class="sw-barrier"></i>Barrier<span class="cnt">118</span></button>
+          <button class="brushopt" type="button" aria-pressed="true">
+            <i class="sw-obs"></i>Obstruction<span class="cnt">164</span></button>
+        </div>
+        <p class="tiny muted" style="margin:10px 0 0">
+          Tap a cell to paint it with the selected brush. Counts update as cells change
+          attribute; every cell holds exactly one of the four.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>Running counts sum to exactly 2400.</b> 2104 walkable, 14 exit, 118 barrier, 164
+      obstruction - every one of Riverside Arena's cells carries exactly one static
+      attribute, matching the canonical dataset. <span class="req">FR9.4</span></li>
+
+    <li><b>Painting uses greybox shapes, never the live cell treatments.</b> The four
+      attributes are shades on the grey scale with a one-letter label - no
+      <span class="req">obs-*</span>, <span class="req">band-*</span> or
+      <span class="req">d-*</span> class appears here, so this screen can never be
+      mistaken for the live map it will later drive. <span class="req">FR9.4</span></li>
+
+    <li><b>The unreviewed proposal from Step 3 surfaces here, not only there.</b> Its
+      Accept and Reject controls appear directly over the map at the cell it concerns,
+      because the proposal step can be skipped entirely and this is where any attribute -
+      proposed or not - is finally confirmed. <span class="req">FR9.3</span>
+      <span class="req">FR9.4</span></li>
+
+    <li><b>The brush palette is a bottom sheet, not a floating panel.</b> Collapsed it is a
+      44px pill naming the active brush over the map; dragged up it lists all four brushes
+      with their live counts, so switching brushes never covers more of the map than
+      necessary. <span class="req">FR9.4</span></li>
+
+    <li><b>Manual annotation needs no proposal to work.</b> Every cell shown here, including
+      the walkable concourse that no proposal ever touched, was reachable with the same
+      brush and the same tap - painting does not depend on the setup pass having run.
+      <span class="req">FR9.4</span></li>
+
+    <li><b>Continue completes the configuration on its own.</b> Nothing about reaching
+      Step 5 depends on Step 3 having been visited, which is the acceptance test for
+      FR9.4 made visible rather than asserted in prose.</li>
+
+    <li><b>The selected brush is a pressed toggle, not a colour alone.</b> Obstruction
+      shows <span class="mono">aria-pressed="true"</span> and a distinct border, so the
+      active brush is legible without relying on hue. <span class="req">NFR5</span></li>
+
+    <li><b>The sheet never blocks the primary action.</b> Back and Continue stay in the
+      fixed bottom bar under the sheet, consistent with every other step in this wizard.</li>
+  </ol>
+
+</div>
+</body>
+</html>

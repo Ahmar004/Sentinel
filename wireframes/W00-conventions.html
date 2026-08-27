@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>W00 Conventions - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .sec{background:#fff;border:1px solid var(--g4);border-radius:6px;padding:18px;margin-bottom:20px}
+  .sec h2{margin:0 0 4px;font-size:16px}
+  .sec p.lead{margin:0 0 14px;color:var(--ink-2);font-size:13px;max-width:78ch}
+  .matrix{display:grid;grid-template-columns:repeat(5,auto);gap:10px;align-items:center;
+    justify-content:start}
+  .matrix .hd{font:700 10px/1.3 var(--mono);color:var(--ink-2);text-align:center}
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:12px}
+  .sw-card{border:1px solid var(--g4);border-radius:5px;padding:10px;background:var(--g1)}
+  .sw-card .cell{margin:0 auto 8px}
+  .sw-card h3{margin:0 0 3px;font:700 11px/1.3 var(--mono)}
+  .sw-card p{margin:0;font-size:11px;color:var(--ink-2)}
+  .tok{display:flex;align-items:center;gap:8px;font:600 11px var(--mono);margin-bottom:5px}
+  .tok i{width:26px;height:18px;border:1px solid var(--g5);border-radius:3px;display:block}
+  .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:20px}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">W00</span>
+  <h1>Conventions - tokens, the eight treatments, callouts</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>Section 2, C02, C07, C10</b></li>
+    <li>srs.md <b>2.3, 2.7, Appendix A</b></li>
+    <li>requirement <b>NFR5, FR3.4, FR3.5, FR4.4, FR6.3</b></li>
+    <li>batch <b>1</b></li>
+  </ul>
+</header>
+
+<div style="padding:24px 24px 64px;max-width:1180px">
+
+<section class="sec">
+  <h2>1. What is greybox and what is not</h2>
+  <p class="lead">
+    Everything in these wireframes is grey: layout, type, controls, charts. One thing is not.
+    The four observation states and the four risk bands render in their real colour, fill
+    pattern and label, because those eight treatments are the requirement itself (NFR5) and
+    the honesty invariant cannot be reviewed if they are greyed out with everything else.
+    A reviewer should be able to argue about the eight treatments here and about nothing else.
+  </p>
+  <div class="cols">
+    <div>
+      <div class="tok"><i style="background:var(--g1)"></i>--g1 surface</div>
+      <div class="tok"><i style="background:var(--g2)"></i>--g2 control</div>
+      <div class="tok"><i style="background:var(--g3)"></i>--g3 placeholder</div>
+      <div class="tok"><i style="background:var(--g5)"></i>--g5 border strong</div>
+      <div class="tok"><i style="background:var(--g7)"></i>--g7 primary</div>
+      <div class="tok"><i style="background:var(--focus)"></i>--focus, affordance only</div>
+    </div>
+    <div>
+      <div class="tok"><i style="background:var(--d0)"></i>--d0 density 0.0 to 0.8 /m2</div>
+      <div class="tok"><i style="background:var(--d1)"></i>--d1 density 0.8 to 1.6</div>
+      <div class="tok"><i style="background:var(--d2)"></i>--d2 density 1.6 to 2.6</div>
+      <div class="tok"><i style="background:var(--d3)"></i>--d3 density 2.6 to 3.8</div>
+      <div class="tok"><i style="background:var(--d4)"></i>--d4 density above 3.8</div>
+    </div>
+    <div>
+      <p style="margin:0;font-size:12px;color:var(--ink-2)">
+        Type is the system UI stack. No web font is loaded, no CDN is contacted and no
+        request leaves the machine, which is the same no-paid-service rule the product
+        itself is built under. Touch targets are 44px. Spacing is a 4px scale.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>2. Three channels, three dimensions</h2>
+  <p class="lead">
+    A cell carries three independent facts at once and each gets its own visual channel, so
+    none overwrites another. This resolves the ambiguity in design.md, which said risk band
+    draws as "cell outline or fill" while density shading also fills. Both cannot own the fill.
+  </p>
+  <table class="wt" style="max-width:840px">
+    <tr><th>Channel</th><th>Carries</th><th>Encoding</th><th>Survives greyscale by</th></tr>
+    <tr><td class="mono">fill lightness</td><td class="mono">densityPerSqM</td>
+        <td>Five-step monochrome ramp, dark equals dense</td><td>lightness</td></tr>
+    <tr><td class="mono">fill pattern</td><td class="mono">observationState</td>
+        <td>Solid, diagonal hatch, cross-hatch, dense crosshatch</td><td>pattern</td></tr>
+    <tr><td class="mono">outline</td><td class="mono">riskBand</td>
+        <td>Colour plus weight plus line style, drawn only when OBSERVED</td>
+        <td>weight and style</td></tr>
+  </table>
+  <p class="lead" style="margin-top:12px">
+    Because the three channels are independent, a cell can read as "dense, observed, and only
+    in the watch band" in one glance. A viewer who cannot see colour still separates all eight,
+    because pattern and outline weight carry the distinction on their own, and every cell also
+    carries a text label (NFR5).
+  </p>
+</section>
+
+<section class="sec">
+  <h2>3. The four observation states</h2>
+  <p class="lead">
+    A cell carries an observation state always. It carries a risk band only when observed.
+    These are two separate fields and this set never collapses them (SRS 2.3).
+  </p>
+  <div class="swatches">
+    <div class="sw-card">
+      <div class="cell d-2 obs-observed band-normal">
+        <span class="v">1.9</span><span class="lbl">NORMAL</span>
+        <i class="arrow" style="width:17px;transform:rotate(28deg)"></i>
+      </div>
+      <h3>OBSERVED</h3>
+      <p>Solid fill. Density, flow arrow and risk band all render. The only state that
+         carries a score.</p>
+    </div>
+    <div class="sw-card">
+      <div class="cell d-2 obs-dwell">
+        <span class="v">2.1</span><span class="lbl">18/30 s</span>
+        <i class="arrow" style="width:15px;transform:rotate(-40deg)"></i>
+      </div>
+      <h3>NOT_ENOUGH_DWELL</h3>
+      <p>Diagonal hatch. Density and flow render, no outline and no score anywhere. The label
+         names the reason and the progress, never a number (FR4.2).</p>
+    </div>
+    <div class="sw-card">
+      <div class="cell d-2 obs-stale">
+        <span class="age">4.2s</span>
+        <span class="v">1.4</span><span class="lbl">LAST SEEN</span>
+      </div>
+      <h3>STALE</h3>
+      <p>Desaturated with a cross-hatch and a mandatory age badge. No arrow, no band. Never
+         presented as a current value (FR3.4).</p>
+    </div>
+    <div class="sw-card">
+      <div class="cell obs-gap">
+        <span class="lbl" style="font-size:9px">NO OBS</span>
+      </div>
+      <h3>GAP</h3>
+      <p>Flat grey, dense crosshatch, no numbers at all. Never interpolated, never last-known-good,
+         never smoothed away (FR6.3).</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>4. The four risk bands, drawn only on an observed cell</h2>
+  <p class="lead">
+    Outline colour, weight and line style together. Thresholds from srs.md Section 2.7.
+  </p>
+  <div class="swatches">
+    <div class="sw-card">
+      <div class="cell d-1 obs-observed band-normal"><span class="v">0.31</span><span class="lbl">NORMAL</span></div>
+      <h3>NORMAL 0.00 to 0.40</h3><p>1px solid. No action.</p>
+    </div>
+    <div class="sw-card">
+      <div class="cell d-2 obs-observed band-watch"><span class="v">0.55</span><span class="lbl">WATCH</span></div>
+      <h3>WATCH 0.40 to 0.70</h3><p>2px dashed. Visible, raises no alert.</p>
+    </div>
+    <div class="sw-card">
+      <div class="cell d-3 obs-observed band-elevated"><span class="v">0.78</span><span class="lbl">ELEVATED</span></div>
+      <h3>ELEVATED 0.70 to 0.85</h3><p>3px solid. Raises an alert, triggers suggestions.</p>
+    </div>
+    <div class="sw-card">
+      <div class="cell d-4 obs-observed band-critical"><span class="v">0.91</span><span class="lbl">CRITICAL</span></div>
+      <h3>CRITICAL 0.85 to 1.00</h3><p>4px double plus an inner ring. Escalated presentation.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>5. The eight together, over the density ramp</h2>
+  <p class="lead">
+    The proof that the channels are independent: density varies down the rows, state and band
+    vary across the columns, and every combination stays readable.
+  </p>
+  <div class="matrix">
+    <div class="hd">density</div>
+    <div class="hd">OBSERVED<br>NORMAL</div>
+    <div class="hd">OBSERVED<br>ELEVATED</div>
+    <div class="hd">NOT_ENOUGH<br>_DWELL</div>
+    <div class="hd">STALE</div>
+
+    <div class="hd">0.4 /m2</div>
+    <div class="cell d-0 obs-observed band-normal"><span class="v">0.22</span></div>
+    <div class="cell d-0 obs-observed band-elevated"><span class="v">0.71</span></div>
+    <div class="cell d-0 obs-dwell"><span class="lbl">8/30s</span></div>
+    <div class="cell d-0 obs-stale"><span class="age">3s</span><span class="v">0.4</span></div>
+
+    <div class="hd">2.1 /m2</div>
+    <div class="cell d-2 obs-observed band-normal"><span class="v">0.34</span></div>
+    <div class="cell d-2 obs-observed band-elevated"><span class="v">0.78</span></div>
+    <div class="cell d-2 obs-dwell"><span class="lbl">18/30s</span></div>
+    <div class="cell d-2 obs-stale"><span class="age">6s</span><span class="v">2.1</span></div>
+
+    <div class="hd">4.3 /m2</div>
+    <div class="cell d-4 obs-observed band-normal"><span class="v">0.38</span></div>
+    <div class="cell d-4 obs-observed band-critical"><span class="v">0.91</span></div>
+    <div class="cell d-4 obs-dwell"><span class="lbl">24/30s</span></div>
+    <div class="cell d-4 obs-stale"><span class="age">9s</span><span class="v">4.3</span></div>
+
+    <div class="hd">unknown</div>
+    <div class="cell obs-gap" style="grid-column:span 4;width:auto">
+      <span class="lbl" style="font-size:10px">GAP - NO OBSERVATION, NO DENSITY, NO FLOW, NO RISK</span>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>6. Flow arrows</h2>
+  <p class="lead">
+    One arrow per cell. Direction is <span class="mono">flow.dirDeg</span>, length is
+    <span class="mono">flow.speedMps</span>. Where flow is null no arrow is drawn at all -
+    a zero-length arrow or a default-direction arrow is never drawn, because either would
+    invent a measurement (FR3.5).
+  </p>
+  <div class="row gap center" style="flex-wrap:wrap">
+    <div class="cell d-2 obs-observed band-normal"><i class="arrow" style="width:8px"></i><span class="lbl" style="margin-top:22px">0.4 m/s</span></div>
+    <div class="cell d-2 obs-observed band-normal"><i class="arrow" style="width:16px;transform:rotate(45deg)"></i><span class="lbl" style="margin-top:22px">1.1 m/s</span></div>
+    <div class="cell d-3 obs-observed band-watch"><i class="arrow" style="width:24px;transform:rotate(200deg)"></i><span class="lbl" style="margin-top:22px">1.8 m/s</span></div>
+    <div class="cell d-2 obs-observed band-normal"><span class="lbl">flow null<br>NO ARROW</span></div>
+    <div class="cell obs-gap"><span class="lbl">GAP<br>NO ARROW</span></div>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>7. Coverage bar - C06, never rendered apart from a risk value</h2>
+  <p class="lead">
+    Four segments in the fixed order observed, not-enough-dwell, stale, gap. A risk score with
+    no coverage beside it is not permitted anywhere in this set, because a zone can only look
+    calm by being unobserved (FR4.6).
+  </p>
+  <div style="max-width:280px">
+    <div class="row between tiny mono"><span>ZONE B North Gate</span><span class="b">0.78</span></div>
+    <div class="cov"><i class="c-obs" style="width:24%"></i><i class="c-dwl" style="width:9%"></i>
+      <i class="c-stl" style="width:7%"></i><i class="c-gap" style="width:60%"></i></div>
+    <div class="tiny muted mono" style="margin-top:4px">192 obs / 72 dwell / 56 stale / 480 gap</div>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>8. Frame chrome and callouts</h2>
+  <p class="lead">
+    Every frame carries a header strip outside the wireframe naming its ID, its design.md ID,
+    its viewport, its role and its state. Numbered blue markers sit on the wireframe and match
+    a numbered note in the right margin, and each note names the requirement it satisfies. A
+    wireframe that cannot name its requirement is decoration.
+  </p>
+  <div class="row gap center">
+    <span class="cx" style="position:relative;transform:none"></span>
+    <span class="tiny muted">marker on the frame</span>
+    <span class="chip">FR5.3</span>
+    <span class="tiny muted">requirement named in the note</span>
+    <span class="chip">390 x 844</span>
+    <span class="chip">1440 x 900</span>
+    <span class="tiny muted">the only two viewports</span>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>9. Domain strings - C10 renders these, nothing else does</h2>
+  <p class="lead">
+    Exactly the identifiers in srs.md Appendix A. No synonym appears anywhere in this set:
+    cell not tile, zone not area, wind-map overlay not heatmap, Stampede not Crush.
+  </p>
+  <div class="wrap gap-s">
+    <span class="st st-observed">OBSERVED</span><span class="st st-dwell">NOT_ENOUGH_DWELL</span>
+    <span class="st st-stale">STALE</span><span class="st st-gap">GAP</span>
+    <span class="st st-normal">NORMAL</span><span class="st st-watch">WATCH</span>
+    <span class="st st-elevated">ELEVATED</span><span class="st st-critical">CRITICAL</span>
+    <span class="st st-neutral">OBSERVE</span><span class="st st-neutral">TRANSIT</span>
+    <span class="st st-neutral">ONLINE</span><span class="st st-neutral">DEGRADED</span>
+    <span class="st st-neutral">OFFLINE</span><span class="st st-neutral">OPEN</span>
+    <span class="st st-neutral">ACKNOWLEDGED</span><span class="st st-neutral">CLEARED</span>
+    <span class="st st-neutral">PROPOSED</span><span class="st st-neutral">CONFIRMED</span>
+    <span class="st st-neutral">DISMISSED</span><span class="st st-neutral">REJECTED</span>
+    <span class="st st-neutral">EXPIRED</span><span class="st st-neutral">MODEL</span>
+    <span class="st st-neutral">TEMPLATE</span><span class="st st-neutral">PENDING</span>
+    <span class="st st-neutral">IMPROVED</span><span class="st st-neutral">UNCHANGED</span>
+    <span class="st st-neutral">WORSENED</span>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

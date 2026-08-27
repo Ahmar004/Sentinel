@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D01 Cell inspector, desktop - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  /* Scoped to this file only. wireframe.css is not edited.
+     D01 is a drawer over a map, not a full application screen, so it does not use the
+     device--mobile or device--desktop shells - it reuses the shared .device chrome at the
+     drawer-plus-map-strip size design.md actually calls for. */
+  .device--inspector{width:460px;height:760px;flex-direction:row}
+  .insp-map{flex:0 0 150px;background:var(--g1);border-right:1px solid var(--line);
+    display:flex;flex-direction:column}
+  .insp-map .map{height:210px;flex:0 0 210px}
+  .cellhi{position:absolute;z-index:6;border:3px solid var(--focus);border-radius:2px;
+    box-shadow:0 0 0 2px #fff;pointer-events:none}
+  .insp-drawer{flex:1;overflow-y:auto;padding:12px}
+  .statehead{margin:40px 24px 4px;font-size:16px;font-weight:650}
+  .statesub{margin:0 24px 16px;font-size:12px;color:var(--ink-2);max-width:70ch}
+  .tl{width:100%;height:120px;display:block}
+  .tl .ref{stroke:var(--g4);stroke-width:1;stroke-dasharray:3 3}
+  .tl .line{fill:none;stroke:var(--g7);stroke-width:2}
+  .tl .lbl{font:600 8px var(--mono);fill:var(--ink-2)}
+  .tl .marker{stroke:var(--band-elevated);stroke-width:1.5}
+  .nochart{border:1px dashed var(--g4);border-radius:4px;height:110px;display:flex;
+    align-items:center;justify-content:center;text-align:center;padding:10px;
+    font:600 11px var(--mono);color:var(--ink-2);background:var(--g1)}
+  .dwellbar{height:8px;background:var(--g2);border-radius:4px;overflow:hidden;position:relative}
+  .dwellbar i{position:absolute;inset:0;background:var(--obs-dwell);width:60%}
+  table.wt td{font-size:11px}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">F-009</span>
+  <h1>D01 Cell inspector - desktop, the honesty invariant across all four states</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>D01</b></li>
+    <li>viewport <b>1440 x 900 host, drawer 460 x 760</b></li>
+    <li>role <b>Coordinator</b></li>
+    <li>state <b>OBSERVED / NOT_ENOUGH_DWELL / STALE / GAP</b></li>
+    <li>requirement <b>FR1.2 FR1.3 FR2.2 FR2.4 FR3.4 FR4.1 FR4.2 FR4.3 FR6.1 FR6.3</b></li>
+    <li>batch <b>1</b></li>
+  </ul>
+</header>
+
+<p class="statesub" style="margin:20px 24px 0;max-width:100ch">
+  Four side drawers, one per observation state, each shown as a narrow map strip with the
+  selected cell highlighted beside the drawer content. Only the <b>OBSERVED</b> drawer carries
+  the three tabs; the other three states have nothing to tab between, because a field either
+  has a value for that state or the drawer says why it does not (SRS 2.3).
+</p>
+
+<div class="wf-stage" style="align-items:flex-start">
+
+  <!-- ============ OBSERVED ============ -->
+  <div class="device device--inspector">
+    <span class="device-tag">OBSERVED</span>
+    <span class="cx" style="left:75px;top:70px">1</span>
+    <span class="cx" style="left:300px;top:20px">2</span>
+    <span class="cx" style="left:300px;top:250px">3</span>
+    <span class="cx" style="left:300px;top:420px">4</span>
+
+    <div class="insp-map">
+      <div class="map">
+        <img class="plan" src="_assets/site-plan.svg" alt="">
+        <div class="gridwrap" data-cols="6" data-map="
+          s2o1o2w3e3w3
+          o2w3e4e4c4e4
+          o2w3e4e4e4w3
+          o1o2w3w3w2o2
+          g0o1o1o2o1o1
+          g0g0g0d2d2d2"></div>
+        <div class="cellhi" style="left:50px;top:35px;width:25px;height:35px"></div>
+      </div>
+      <div class="tiny muted mono" style="padding:8px">
+        Map continues beyond the strip. C-031-022 stays highlighted while the drawer is open.</div>
+    </div>
+
+    <div class="insp-drawer">
+      <div class="row between center">
+        <span class="mono b" style="font-size:14px">C-031-022</span>
+        <button class="btn btn--sm" type="button">Close</button>
+      </div>
+      <div class="row between center" style="margin-top:4px">
+        <span class="tiny muted mono">Zone B - North Gate</span>
+        <span class="st st-elevated">ELEVATED</span>
+      </div>
+
+      <div class="tabs" role="tablist" style="margin-top:12px">
+        <button role="tab" aria-selected="true" aria-controls="p-cur" id="t-cur">Current</button>
+        <button role="tab" aria-selected="false" aria-controls="p-feat" id="t-feat">Features</button>
+        <button role="tab" aria-selected="false" aria-controls="p-hist" id="t-hist">History</button>
+      </div>
+
+      <div class="panel pad-s" id="p-cur" role="tabpanel" aria-labelledby="t-cur">
+        <table class="wt">
+          <tr><td>Density</td><td class="mono">3.9 /m2</td></tr>
+          <tr><td>Flow</td><td class="mono">46&deg; at 0.9 m/s</td></tr>
+          <tr><td>Risk score</td><td class="mono b">0.78</td></tr>
+          <tr><td>Risk band</td><td><span class="st st-elevated">ELEVATED</span></td></tr>
+          <tr><td>Age</td><td class="mono">0.6s old, within 2.0s budget</td></tr>
+          <tr><td>Dwell</td><td class="mono">30s of 30s - complete</td></tr>
+          <tr><td>Observing drone</td><td class="mono">D-01, OBSERVE, ONLINE</td></tr>
+        </table>
+        <div class="honest" style="margin-top:10px">
+          Fusion writes one record per cell regardless of how many drones cover it. This cell has
+          one observer; C-020-030 to C-022-030 currently have two, D-02 and D-04, and both are
+          named there when that cell is opened.
+        </div>
+      </div>
+
+      <div class="panel pad-s" id="p-feat" role="tabpanel" aria-labelledby="t-feat" hidden>
+        <div class="tiny muted mono" style="margin-bottom:8px">
+          The nine window features (FR4.1), each smoothed by a short EMA before extraction
+          (FR1.3), with lag samples carried at t-5s, t-10s and t-20s.</div>
+        <table class="wt">
+          <tr><td>density</td><td class="mono">3.9 /m2</td></tr>
+          <tr><td>densityGradient</td><td class="mono">0.14</td></tr>
+          <tr><td>densityRateOfChange</td><td class="mono">0.42 /m2/s</td></tr>
+          <tr><td>flowConvergence</td><td class="mono">0.71</td></tr>
+          <tr><td>counterFlow</td><td class="mono">118 deg</td></tr>
+          <tr><td>speedMean</td><td class="mono">0.38 m/s</td></tr>
+          <tr><td>speedVariance</td><td class="mono">0.61</td></tr>
+          <tr><td>stopStartPulses</td><td class="mono">0.33</td></tr>
+          <tr><td>exitOccupancy</td><td class="mono">0.27</td></tr>
+        </table>
+        <div class="honest" style="margin-top:8px">
+          Raw feature values, not the classifier's signed contributions - the attribution for
+          why this cell's alert fired is on the alert itself in S04, not repeated here.
+        </div>
+      </div>
+
+      <div class="panel pad-s" id="p-hist" role="tabpanel" aria-labelledby="t-hist" hidden>
+        <div class="tiny muted mono" style="margin-bottom:6px">CELL RISK TIMELINE - C03, last 60s</div>
+        <svg class="tl" viewBox="0 0 280 120" preserveAspectRatio="none">
+          <line class="ref" x1="0" y1="72" x2="280" y2="72"/><text class="lbl" x="2" y="69">0.40</text>
+          <line class="ref" x1="0" y1="36" x2="280" y2="36"/><text class="lbl" x="2" y="33">0.70</text>
+          <line class="ref" x1="0" y1="18" x2="280" y2="18"/><text class="lbl" x="2" y="15">0.85</text>
+          <polyline class="line" points="0,90 40,84 80,74 120,52 160,36 190,26 220,24 260,25"/>
+          <line class="marker" x1="190" y1="0" x2="190" y2="120"/>
+          <text class="lbl" x="193" y="10">raised 14:02:51</text>
+        </svg>
+        <div class="row between tiny muted mono"><span>-60s</span><span>now</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ NOT_ENOUGH_DWELL ============ -->
+  <div class="device device--inspector">
+    <span class="device-tag">NOT_ENOUGH_DWELL</span>
+    <span class="cx" style="left:75px;top:60px">5</span>
+    <span class="cx" style="left:300px;top:200px">6</span>
+    <span class="cx" style="left:300px;top:420px">7</span>
+
+    <div class="insp-map">
+      <div class="map">
+        <img class="plan" src="_assets/site-plan.svg" alt="">
+        <div class="gridwrap" data-cols="6" data-map="
+          g0d1d2d2d3d2
+          g0d1d2d2d3d3
+          g0g0d1d2d2d2
+          g0g0g0d1d1d2"></div>
+        <div class="cellhi" style="left:50px;top:0;width:25px;height:35px"></div>
+      </div>
+      <div class="tiny muted mono" style="padding:8px">
+        Every cell here carries the same hatch: Zone C has 372 cells still filling their window
+        and 0 that have finished it.</div>
+    </div>
+
+    <div class="insp-drawer">
+      <div class="row between center">
+        <span class="mono b" style="font-size:14px">C-018-026</span>
+        <button class="btn btn--sm" type="button">Close</button>
+      </div>
+      <div class="row between center" style="margin-top:4px">
+        <span class="tiny muted mono">Zone C - Arena Floor</span>
+        <span class="st st-dwell">NOT_ENOUGH_DWELL</span>
+      </div>
+
+      <div class="pad-s">
+        <table class="wt">
+          <tr><td>Density</td><td class="mono">2.1 /m2</td></tr>
+          <tr><td>Flow</td><td class="mono">210&deg; at 0.6 m/s</td></tr>
+          <tr><td>Risk</td><td class="mono muted b">not enough dwell - no score</td></tr>
+          <tr><td>Age</td><td class="mono">0.9s old</td></tr>
+          <tr><td>Observing drone</td><td class="mono">D-04, OBSERVE, ONLINE</td></tr>
+        </table>
+
+        <div class="tiny b mono" style="margin-top:10px">DWELL - 18 s of 30 s</div>
+        <div class="dwellbar" style="margin-top:4px"><i></i></div>
+        <div class="honest" style="margin-top:8px">
+          Cell dwell counts this cell's own continuous history, not the drone's time on station:
+          D-04 has held its footprint 2m41s overall, but this specific cell entered continuous
+          coverage only 18s ago. No score renders anywhere on this drawer until it reaches 30s.
+        </div>
+
+        <div class="tiny b mono" style="margin-top:12px">WINDOW FEATURES - computed so far</div>
+        <table class="wt" style="margin-top:4px">
+          <tr><td>density</td><td class="mono">2.1 /m2</td></tr>
+          <tr><td>densityGradient</td><td class="mono">0.09</td></tr>
+          <tr><td>densityRateOfChange</td><td class="mono">0.11 /m2/s</td></tr>
+          <tr><td>flowConvergence</td><td class="mono">0.22</td></tr>
+          <tr><td>counterFlow</td><td class="mono">34 deg</td></tr>
+          <tr><td>speedMean</td><td class="mono">0.52 m/s</td></tr>
+          <tr><td>speedVariance</td><td class="mono">0.18</td></tr>
+          <tr><td>stopStartPulses</td><td class="mono">0.07</td></tr>
+          <tr><td>exitOccupancy</td><td class="mono">0.31</td></tr>
+        </table>
+
+        <div class="tiny b mono" style="margin-top:12px">CELL RISK TIMELINE</div>
+        <div class="nochart" style="margin-top:4px">
+          No risk points yet.<br>The series begins once dwell reaches 30 s - nothing is plotted
+          for an ungated cell, not even a flat line at zero.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ STALE ============ -->
+  <div class="device device--inspector">
+    <span class="device-tag">STALE</span>
+    <span class="cx" style="left:75px;top:60px">8</span>
+    <span class="cx" style="left:300px;top:200px">9</span>
+
+    <div class="insp-map">
+      <div class="map">
+        <img class="plan" src="_assets/site-plan.svg" alt="">
+        <div class="gridwrap" data-cols="6" data-map="
+          s1s2o1o1o2o2
+          s1o1o2o2o3o2
+          g0o1o2o2o2o1
+          g0g0o1o1o1o1"></div>
+        <div class="cellhi" style="left:25px;top:0;width:25px;height:35px"></div>
+      </div>
+      <div class="tiny muted mono" style="padding:8px">
+        This cell sits at the edge of D-02's last footprint, ageing left toward gap.</div>
+    </div>
+
+    <div class="insp-drawer">
+      <div class="row between center">
+        <span class="mono b" style="font-size:14px">C-004-011</span>
+        <button class="btn btn--sm" type="button">Close</button>
+      </div>
+      <div class="row between center" style="margin-top:4px">
+        <span class="tiny muted mono">Zone A - Concourse</span>
+        <span class="st st-stale">STALE</span>
+      </div>
+
+      <div class="pad-s">
+        <table class="wt">
+          <tr><td>Last density</td>
+            <td class="mono">1.4 /m2
+              <span class="chip" style="background:var(--obs-stale);color:#fff;font-weight:700;margin-left:6px">6.4s old</span></td></tr>
+          <tr><td>Flow</td><td class="mono muted">not produced - a stale value carries no vector</td></tr>
+          <tr><td>Risk</td><td class="mono muted b">no current observation</td></tr>
+        </table>
+
+        <div class="honest" style="margin-top:10px">
+          Last observed by <b>D-02</b> at <b>14:03:06</b>, 6s before the current clock.
+        </div>
+        <div class="honest" style="margin-top:8px">
+          1.4 /m2 is real, but it is 6.4 seconds old against a 2.0s freshness budget, so it is
+          shown only beside its age and never inside a risk band. Past 10s this cell becomes a
+          gap and even the density value is withdrawn.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ GAP ============ -->
+  <div class="device device--inspector">
+    <span class="device-tag">GAP</span>
+    <span class="cx" style="left:75px;top:60px">10</span>
+    <span class="cx" style="left:300px;top:200px">11</span>
+
+    <div class="insp-map">
+      <div class="map">
+        <img class="plan" src="_assets/site-plan.svg" alt="">
+        <div class="gridwrap" data-cols="6" data-map="
+          g0g0g0g0g0g0
+          g0g0g0g0g0s1
+          g0g0g0g0g0g0
+          g0g0g0g0g0g0"></div>
+        <div class="cellhi" style="left:50px;top:70px;width:25px;height:35px"></div>
+      </div>
+      <div class="tiny muted mono" style="padding:8px">
+        480 of Zone B's cells are gap right now. This is one of them, not an edge case.</div>
+    </div>
+
+    <div class="insp-drawer">
+      <div class="row between center">
+        <span class="mono b" style="font-size:14px">C-052-008</span>
+        <button class="btn btn--sm" type="button">Close</button>
+      </div>
+      <div class="row between center" style="margin-top:4px">
+        <span class="tiny muted mono">Zone B - North Gate</span>
+        <span class="st st-gap">GAP</span>
+      </div>
+
+      <div class="pad-s">
+        <table class="wt">
+          <tr><td>Static attribute</td><td><span class="chip">walkable</span></td></tr>
+          <tr><td>Last seen</td><td class="mono">41 min ago</td></tr>
+        </table>
+
+        <div class="honest" style="margin-top:10px">
+          No observation. No density. No flow. No risk. No chart. A drone has not covered this
+          cell inside the 10s gap horizon, so nothing on this drawer is invented to fill the
+          silence - the attribute row is the only thing that survives, because it is configured
+          at venue setup, not measured live.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>The highlighted cell stays visible under the drawer, because this is a drawer, not a
+      modal.</b> A coordinator opening C-031-022 never loses sight of where it sits on the map,
+      or of the alert marker and neighbouring cells around it. <span class="req">FR6.1</span></li>
+
+    <li><b>Only the OBSERVED state earns three tabs.</b> Current, Features and History all have
+      real content to show for a gated cell; the other three states have nothing behind a
+      Features or History tab that is not either invented or already stated in one line, so they
+      render as a single panel instead of tabs with empty panels behind them.
+      <span class="req">FR4.2</span> <span class="req">FR4.3</span></li>
+
+    <li><b>The Features tab lists raw values, not signed contributions.</b> D01 and S04 answer
+      different questions: this tab shows what the nine window features currently measure for
+      this cell (FR4.1), while S04's attribution shows how each one pushed the risk score at the
+      moment an alert fired. Conflating them would make one of the two screens redundant.
+      <span class="req">FR2.4</span> <span class="req">FR1.3</span></li>
+
+    <li><b>History plots the cell's own risk series with band reference lines and the alert
+      marker.</b> C03 is the same component S04 and S05 use, so a coordinator reads one chart
+      language everywhere in the product. <span class="req">FR4.3</span></li>
+
+    <li><b>NOT_ENOUGH_DWELL keeps density and flow, because FR2.3 only requires the drone to be
+      observing, not the window to be complete.</b> What disappears is the score, not the
+      measurements feeding it. <span class="req">FR2.2</span> <span class="req">FR4.2</span></li>
+
+    <li><b>The dwell progress bar states the exact fraction, "18 s of 30 s", never a percentage
+      dressed up as a score.</b> A reader could otherwise mistake 60% dwell for a risk value of
+      0.60. <span class="req">FR4.2</span></li>
+
+    <li><b>The empty History panel says why it is empty in words, instead of drawing a flat line
+      at zero.</b> A flat line would be indistinguishable from a real, low-risk history - exactly
+      the failure Section 2.3 rules out. <span class="req">FR4.3</span> <span class="req">SRS 2.3</span></li>
+
+    <li><b>STALE keeps one number, the density, and nothing else - and that number never appears
+      without its age sitting directly beside it.</b> The age badge reuses the same visual weight
+      as the map's own stale treatment, so the drawer and the map never disagree about how much
+      to trust this value. <span class="req">FR3.4</span></li>
+
+    <li><b>The last-observed line names a drone and a clock time, not a vague "a while ago".</b>
+      A coordinator deciding whether to trust 1.4 /m2 needs to know it came from D-02 six seconds
+      before now, not from an unspecified earlier moment. <span class="req">FR3.4</span></li>
+
+    <li><b>GAP keeps exactly one fact: the attribute set at venue setup.</b> Walkable, exit,
+      barrier and obstruction are configuration, not observation, so they survive a total loss of
+      live coverage without contradicting the honesty invariant. <span class="req">FR6.3</span></li>
+
+    <li><b>The GAP drawer states its four absences explicitly rather than leaving four blank
+      rows.</b> "No density. No flow. No risk. No chart." is the whole of Section 2.3's third
+      consequence, spelled out on the one screen built specifically to prove it.
+      <span class="req">FR6.3</span> <span class="req">SRS 2.3</span></li>
+  </ol>
+
+</div>
+<script src="_assets/wireframe.js"></script>
+</body>
+</html>

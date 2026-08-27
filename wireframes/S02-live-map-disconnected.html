@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S02 Live site map, disconnected - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  /* Scoped to this file only. wireframe.css is not edited. */
+  .disabled-note{font:600 10px/1.3 var(--mono);color:var(--band-critical);margin-top:4px}
+  .btn[disabled]{opacity:.45;cursor:not-allowed}
+  .lastknown{border-left:3px solid var(--g5)!important;background:var(--g1)}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">F-004</span>
+  <h1>S02 Live site map - connection lost, 10 seconds in</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>F11, Section 10</b></li>
+    <li>viewport <b>390 x 844 and 1440 x 900</b></li>
+    <li>role <b>Coordinator</b></li>
+    <li>state <b>DISCONNECTED</b></li>
+    <li>requirement <b>NFR6</b> <b>FR3.4</b> <b>FR6.3</b></li>
+    <li>batch <b>1</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <!-- ============ mobile ============ -->
+  <div class="device device--mobile">
+    <span class="device-tag">t+10s, no frame held</span>
+
+    <span class="cx" style="left:120px;top:26px">1</span>
+    <span class="cx" style="left:250px;top:26px">2</span>
+    <span class="cx" style="left:195px;top:112px">3</span>
+    <span class="cx" style="left:200px;top:290px">4</span>
+    <span class="cx" style="left:60px;top:200px">5</span>
+    <span class="cx" style="left:200px;top:560px">6</span>
+
+    <div class="top">
+      <span class="b">Riverside Arena</span>
+      <span class="st st-neutral">DISCONNECTED</span>
+      <span class="grow"></span>
+      <span class="mono tiny">14:03:22</span>
+      <span class="icon icon--r" aria-label="user menu"></span>
+    </div>
+
+    <div class="banner banner--down">
+      Connection lost 10s ago. Reconnecting. Nothing shown below is current.
+    </div>
+
+    <!-- zone strip: every tile a dash, every coverage bar 100% gap -->
+    <div class="zstrip">
+      <div class="ztile">
+        <div class="row between center"><span class="mono tiny b">A Concourse</span>
+          <span class="st st-gap">GAP</span></div>
+        <div class="row between center" style="margin-top:3px">
+          <span class="mono b" style="font-size:17px">-</span>
+          <span class="tiny muted mono">no estimate</span></div>
+        <div class="cov"><i class="c-gap" style="width:100%"></i></div>
+        <div class="tiny muted mono" style="margin-top:3px">0% observed</div>
+      </div>
+      <div class="ztile">
+        <div class="row between center"><span class="mono tiny b">B North Gate</span>
+          <span class="st st-gap">GAP</span></div>
+        <div class="row between center" style="margin-top:3px">
+          <span class="mono b" style="font-size:17px">-</span>
+          <span class="tiny muted mono">no estimate</span></div>
+        <div class="cov"><i class="c-gap" style="width:100%"></i></div>
+        <div class="tiny muted mono" style="margin-top:3px">0% observed</div>
+      </div>
+      <div class="ztile" style="min-width:80px;flex:0 0 80px">
+        <div class="mono tiny b">C Arena</div>
+        <div class="mono b" style="font-size:15px">-</div>
+        <div class="tiny muted mono">0%</div>
+      </div>
+    </div>
+
+    <!-- map: entire grid aged to gap, a handful of cells still fading through stale -->
+    <div class="map" style="flex:0 0 300px">
+      <img class="plan" src="_assets/site-plan.svg" alt="">
+      <div class="gridwrap" data-cols="15" data-map="
+        g0g0g0s2s2g0g0g0g0g0g0s2g0g0g0
+        g0g0s2g0g0g0g0g0g0g0g0s2g0g0g0
+        g0g0s2g0g0g0g0g0g0g0g0g0g0g0g0
+        g0g0g0g0g0g0g0g0g0g0g0g0g0g0g0
+        g0g0g0g0g0g0g0g0g0g0g0g0g0g0g0
+        g0g0g0g0g0g0g0g0g0g0g0g0g0g0g0
+        g0g0g0g0g0g0g0g0g0g0g0g0g0g0g0
+        g0g0g0g0g0g0g0g0g0g0g0g0g0g0g0
+        g0g0g0g0g0g0g0g0g0g0g0g0g0g0g0
+        g0g0g0g0g0g0g0g0g0g0g0g0g0g0g0
+        g0g0g0g0g0g0g0g0g0g0g0g0g0g0g0
+        g0g0g0g0g0g0g0g0g0g0g0g0g0g0g0
+        g0g0g0g0g0g0g0g0g0g0g0g0g0g0g0
+        g0g0g0g0g0g0g0g0g0g0g0g0s2g0g0
+        g0g0g0g0g0g0g0g0g0g0g0s2g0g0g0"></div>
+      <!-- no zone boundaries drawn as a data layer here: shown greyed as config only, not a live claim -->
+      <!-- no footprints, no pin: telemetry is unknown too and is withheld rather than shown last-known -->
+    </div>
+
+    <!-- alert sheet, expanded: the one open alert is shown as last known, actions disabled -->
+    <div class="sheet grow" style="overflow:hidden">
+      <div class="sheet-handle" style="position:relative;border-bottom:1px solid var(--line)">
+        <span class="b" style="font-size:13px">Alerts</span>
+        <span class="st st-neutral">unconfirmed</span>
+        <span class="grow"></span>
+        <span class="tiny muted mono">drag down</span>
+      </div>
+      <div class="pad">
+        <div class="card lastknown">
+          <div class="row between center">
+            <span class="mono tiny b">A-1042 - Zone B - C-031-022</span>
+            <span class="st st-neutral">last known ELEVATED</span>
+          </div>
+          <div class="row between center" style="margin-top:5px">
+            <span class="mono b muted" style="font-size:19px">0.78</span>
+            <span class="tiny muted mono">as of 14:03:12, before drop</span>
+          </div>
+          <div class="honest" style="margin-top:8px">
+            Connection lost 10s ago. This card is frozen. Its current state is unknown, not ELEVATED.
+          </div>
+          <div class="row gap-s" style="margin-top:9px">
+            <button class="btn btn--tap grow" type="button" disabled>Acknowledge</button>
+            <button class="btn btn--tap btn--primary grow" type="button" disabled>Suggestions</button>
+          </div>
+          <div class="disabled-note">Both actions need a live connection to the server.</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar">
+      <a href="#" aria-current="page"><i class="icon"></i>Live</a>
+      <a href="#"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+
+  <!-- ============ desktop ============ -->
+  <div class="device device--desktop">
+    <span class="device-tag">t+10s, no frame held</span>
+
+    <span class="cx" style="left:660px;top:26px">7</span>
+    <span class="cx" style="left:900px;top:26px">8</span>
+    <span class="cx" style="left:560px;top:90px">9</span>
+    <span class="cx" style="left:500px;top:300px">10</span>
+    <span class="cx" style="left:130px;top:140px">11</span>
+    <span class="cx" style="left:1258px;top:200px">12</span>
+
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#" aria-current="page"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <div class="rail-note">
+          Signed in as <b>a.rahman</b><br>
+          <span class="st st-neutral" style="margin-top:4px">COORDINATOR</span>
+        </div>
+      </nav>
+
+      <div class="col grow">
+        <div class="top">
+          <span class="b">Riverside Arena</span>
+          <span class="tiny muted">300 x 200 m - 60 x 40 grid - 2400 cells</span>
+          <span class="st st-neutral">DISCONNECTED</span>
+          <span class="mono tiny muted">latency n/a</span>
+          <span class="grow"></span>
+          <span class="mono tiny">14:03:22</span>
+          <span class="chip">a.rahman</span>
+        </div>
+
+        <div class="banner banner--down">
+          Connection to the server was lost 10 seconds ago. Reconnecting automatically.
+          Every cell below has aged past the 10 second gap horizon and is shown as unknown,
+          not as its last known value.
+        </div>
+
+        <div class="zstrip">
+          <div class="ztile">
+            <div class="row between center"><span class="mono tiny b">ZONE A - Concourse</span>
+              <span class="st st-gap">GAP</span></div>
+            <div class="row between center" style="margin-top:4px">
+              <span class="mono b" style="font-size:22px">-</span>
+              <span class="tiny muted mono">no estimate, connection lost</span></div>
+            <div class="cov"><i class="c-gap" style="width:100%"></i></div>
+            <div class="tiny muted mono" style="margin-top:4px">0 obs / 0 dwell / 0 stale / 2400 gap</div>
+          </div>
+          <div class="ztile">
+            <div class="row between center"><span class="mono tiny b">ZONE B - North Gate</span>
+              <span class="st st-gap">GAP</span></div>
+            <div class="row between center" style="margin-top:4px">
+              <span class="mono b" style="font-size:22px">-</span>
+              <span class="tiny muted mono">no estimate, connection lost</span></div>
+            <div class="cov"><i class="c-gap" style="width:100%"></i></div>
+            <div class="tiny muted mono" style="margin-top:4px">0 obs / 0 dwell / 0 stale / 800 gap</div>
+          </div>
+          <div class="ztile">
+            <div class="row between center"><span class="mono tiny b">ZONE C - Arena Floor</span>
+              <span class="st st-gap">GAP</span></div>
+            <div class="row between center" style="margin-top:4px">
+              <span class="mono b" style="font-size:22px">-</span>
+              <span class="tiny muted mono">no estimate, connection lost</span></div>
+            <div class="cov"><i class="c-gap" style="width:100%"></i></div>
+            <div class="tiny muted mono" style="margin-top:4px">0 obs / 0 dwell / 0 stale / 600 gap</div>
+          </div>
+        </div>
+
+        <div class="row grow">
+          <div class="map">
+            <img class="plan" src="_assets/site-plan.svg" alt="">
+            <div class="gridwrap" data-cols="15" data-map="
+              g0g0g0s2s2g0g0g0g0g0g0s2g0g0g0
+              g0g0s2g0g0g0g0g0g0g0g0s2g0g0g0
+              g0g0s2g0g0g0g0g0g0g0g0g0g0g0g0
+              g0g0g0g0g0g0g0g0g0g0g0g0g0g0g0
+              g0g0g0g0g0g0g0g0g0g0g0g0g0g0g0
+              g0g0g0g0g0g0g0g0g0g0g0g0g0g0g0
+              g0g0g0g0g0g0g0g0g0g0g0g0g0g0g0
+              g0g0g0g0g0g0g0g0g0g0g0g0g0g0g0
+              g0g0g0g0g0g0g0g0g0g0g0g0g0g0g0
+              g0g0g0g0g0g0g0g0g0g0g0g0g0g0g0
+              g0g0g0g0g0g0g0g0g0g0g0g0g0g0g0
+              g0g0g0g0g0g0g0g0g0g0g0g0g0g0g0
+              g0g0g0g0g0g0g0g0g0g0g0g0g0g0g0
+              g0g0g0g0g0g0g0g0g0g0g0g0s2g0g0
+              g0g0g0g0g0g0g0g0g0g0g0s2g0g0g0"></div>
+
+            <!-- zone boundaries: static, administrator-configured layout, not a live claim -->
+            <div class="zoneline" style="left:110px;top:4px;width:340px;height:160px">
+              <span>ZONE B - North Gate</span></div>
+            <div class="zoneline" style="left:50px;top:210px;width:450px;height:190px;
+              border-style:dashed"><span>ZONE C - Arena Floor</span></div>
+            <div class="zoneline" style="left:4px;top:420px;width:490px;height:130px">
+              <span>ZONE A - Concourse</span></div>
+
+            <div class="card" style="position:absolute;left:10px;top:10px;width:186px">
+              <div class="mono tiny b" style="margin-bottom:6px">LAYERS</div>
+              <div class="col gap-s tiny mono">
+                <label><input type="checkbox" checked> Site plan</label>
+                <label><input type="checkbox" checked> Cell grid</label>
+                <label><input type="checkbox" checked> Density shading</label>
+                <label><input type="checkbox" checked> Flow arrows</label>
+                <label><input type="checkbox" checked> Risk band</label>
+                <label><input type="checkbox" checked> Zone boundaries</label>
+                <label><input type="checkbox"> Drone footprints</label>
+                <label><input type="checkbox"> Alert markers</label>
+                <label><input type="checkbox"> Static attributes</label>
+              </div>
+            </div>
+
+            <div class="card" style="position:absolute;left:10px;bottom:10px;width:390px">
+              <div class="row between center" style="margin-bottom:7px">
+                <span class="mono tiny b">LEGEND - unchanged, not live data</span>
+              </div>
+              <div class="legend">
+                <div class="lg"><span class="sw cell obs-gap"></span>GAP - the only state on screen</div>
+                <div class="lg"><span class="sw cell d-2 obs-stale"><u class="age">6s</u></span>STALE - still fading, mid-age</div>
+              </div>
+              <div class="honest" style="margin-top:8px">
+                A frozen last frame would be the single most dangerous thing this screen could show.
+                A coordinator who trusts a stale map can walk a crowd into a risk that has already changed.
+              </div>
+            </div>
+          </div>
+
+          <aside class="rail">
+            <div class="row between center pad-s" style="border-bottom:1px solid var(--line)">
+              <span class="mono tiny b">ALERTS</span>
+              <span class="st st-neutral">unconfirmed since drop</span>
+            </div>
+            <div class="pad-s scroll grow">
+              <div class="card lastknown">
+                <div class="row between center">
+                  <span class="mono tiny b">A-1042</span>
+                  <span class="st st-neutral">last known ELEVATED</span>
+                </div>
+                <div class="mono tiny muted" style="margin-top:3px">
+                  Zone B North Gate - cell C-031-022</div>
+                <div class="row between center" style="margin-top:6px">
+                  <span class="mono b muted" style="font-size:24px">0.78</span>
+                  <span class="tiny muted mono" style="text-align:right">
+                    as of 14:03:12<br>10s before drop<br>
+                    <span class="st st-neutral">frozen</span></span>
+                </div>
+                <div class="honest" style="margin:9px 0 7px">
+                  This is the last value received. Whether the cell is still ELEVATED, has cleared,
+                  or has worsened is unknown until the connection returns.
+                </div>
+                <div class="row gap-s" style="margin-top:10px">
+                  <button class="btn grow" type="button" disabled>Acknowledge</button>
+                  <button class="btn btn--primary grow" type="button" disabled>Suggestions</button>
+                </div>
+                <div class="disabled-note">Needs a live connection to the server.</div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>The banner names the failure, not a euphemism.</b> "Connection lost", not "updating" or
+      a spinner with no words, because a coordinator under time pressure must know in one glance
+      that nothing on screen is being refreshed. <span class="req">NFR6</span>
+      <span class="req">SRS 3.4</span></li>
+
+    <li><b>The connection chip carries no invented number.</b> Latency has no meaning without a
+      server to measure it against, so it reads "n/a" rather than the last measured value, which
+      would misrepresent a dead link as a slow one. <span class="req">NFR6</span></li>
+
+    <li><b>Every zone tile reads a dash over 100% gap.</b> Not one risk band remains anywhere on
+      this screen. A zone tile that kept showing 0.31 NORMAL after the feed died would be the
+      exact failure this frame exists to rule out: an unknown state rendered as a safe one.
+      <span class="req">FR3.4</span> <span class="req">FR6.3</span> <span class="req">SRS 2.3</span></li>
+
+    <li><b>The whole 2400-cell grid is gap.</b> The client keeps its own clock and ages every cell
+      forward every second regardless of whether new data arrives, so ten seconds of silence is
+      ten seconds of cells crossing the gap horizon on their own, with no server needed to tell it
+      to do so. <span class="req">FR6.3</span> <span class="req">SRS 2.7</span></li>
+
+    <li><b>A handful of cells are still mid-age.</b> These were mid-flight through the stale window
+      at the instant the socket dropped, so they have not yet crossed the 10 s gap horizon. In a
+      few more seconds every one of them joins the rest as gap too - this frame is a snapshot of a
+      state that is still actively decaying, not a new steady state.
+      <span class="req">FR3.4</span> <span class="req">SRS 2.7</span></li>
+
+    <li><b>The disabled buttons state why, not just that.</b> Acknowledge and Suggestions both
+      require a round trip to a server that is not there, so each carries its own reason rather
+      than going quietly grey with no explanation. <span class="req">NFR6</span></li>
+
+    <li><b>Same argument, desktop scale.</b> The banner and the connection chip repeat the failure
+      in the same words as mobile, because the two layouts must never disagree about whether the
+      system is live. <span class="req">NFR6</span></li>
+
+    <li><b>Zone strip states the count that is missing, not just a dash.</b> "0 obs / 0 dwell /
+      0 stale / 2400 gap" for zone A makes the honesty invariant auditable rather than merely
+      asserted: every one of the zone's cells is accounted for as unknown.
+      <span class="req">FR4.6</span> <span class="req">SRS 2.3</span></li>
+
+    <li><b>Drone footprints and the alert pin are withheld, not frozen in place.</b> Telemetry
+      comes over the same dead socket as everything else, so drawing a footprint where a drone was
+      ten seconds ago would assert a position Sentinel no longer knows. The map says less rather
+      than saying something false. <span class="req">FR6.3</span> <span class="req">SRS 2.5</span></li>
+
+    <li><b>The legend and layer toggles keep working.</b> They describe the visual language, not a
+      live measurement, so they are unaffected by the drop - only what they are legending against
+      has gone to gap. <span class="req">NFR5</span></li>
+
+    <li><b>The alert card is explicitly labelled frozen.</b> It keeps its last known band in words
+      rather than its coloured outline, and states in the card itself that the current state is
+      unknown - the honesty invariant applied to an alert, not only to a cell.
+      <span class="req">FR5.1</span> <span class="req">SRS 2.3</span></li>
+
+    <li><b>Zone boundaries remain drawn.</b> They are an administrator-configured layout, not a
+      live measurement, so keeping them on screen during a drop does not claim anything about the
+      current crowd. <span class="req">FR6.2</span></li>
+  </ol>
+
+</div>
+<script src="_assets/wireframe.js"></script>
+</body>
+</html>

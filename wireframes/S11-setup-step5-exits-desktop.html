@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S11 Setup step 5 - Exits, desktop - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .wiz-steps{padding:10px 0;overflow-y:auto}
+  .wiz-step{display:flex;align-items:center;gap:10px;padding:8px 14px;min-height:44px;
+    text-decoration:none;color:var(--ink-2);border-left:3px solid transparent}
+  .wiz-num{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--g5);
+    display:flex;align-items:center;justify-content:center;font:700 11px var(--mono);
+    flex:0 0 auto;color:var(--ink-2);background:var(--g0)}
+  .wiz-step.done .wiz-num{background:var(--band-normal);border-color:var(--band-normal);color:#fff}
+  .wiz-step.current{color:var(--ink);background:var(--g0);border-left-color:var(--g7)}
+  .wiz-step.current .wiz-num{background:var(--g7);border-color:var(--g7);color:#fff}
+  .wiz-step .wiz-txt{display:flex;flex-direction:column;gap:1px}
+  .wiz-step .wiz-lbl{font:600 12px var(--font)}
+  .wiz-step .wiz-meta{font:600 9px var(--mono);color:var(--ink-2);letter-spacing:.03em}
+  .wizfoot-row{display:flex;justify-content:space-between;align-items:center;
+    padding:12px 18px;border-top:1px solid var(--line);background:var(--g1)}
+  .fld{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+  .fld label{font:600 11px var(--mono);color:var(--ink-2)}
+  .fld input{height:34px;border:1px solid var(--g5);border-radius:4px;background:var(--g0);
+    padding:0 9px;font:600 13px var(--mono);color:var(--ink)}
+  .fld .unit{position:relative}
+  .fld .unit input{padding-right:66px}
+  .fld .unit span{position:absolute;right:9px;top:50%;transform:translateY(-50%);
+    font:600 11px var(--mono);color:var(--ink-2)}
+
+  .attr-exit{background:repeating-linear-gradient(45deg,var(--g6) 0 3px,var(--g1) 3px 7px);
+    border:1px solid var(--g6)}
+  .exitplan{position:relative;flex:1;min-height:0;background:var(--g2);overflow:hidden}
+  .exitplan img{position:absolute;inset:6%;width:88%;height:88%;object-fit:fill;opacity:.4}
+  .exitcells{position:absolute;display:flex;gap:2px}
+  .exitcells i{width:16px;height:16px;display:block}
+  .exitgroup{position:absolute;border:2px solid var(--g7);border-radius:3px;
+    padding:2px;display:flex;gap:2px}
+  .exitgroup span{position:absolute;top:-18px;left:0;font:700 10px var(--mono);
+    background:var(--g7);color:#fff;padding:1px 5px;border-radius:2px;white-space:nowrap}
+
+  .exitcard{background:var(--g0);border:1px solid var(--g4);border-radius:5px;
+    padding:12px;margin-bottom:12px}
+  .exitcard h3{margin:0;font:700 13px var(--mono)}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">S11.5</span>
+  <h1>S11 Venue setup - Step 5 of 8, Exits</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S11</b></li>
+    <li>viewport <b>1440 x 900</b></li>
+    <li>role <b>Administrator</b></li>
+    <li>state <b>2 exits grouped, all 14 exit cells assigned</b></li>
+    <li>requirement <b>FR9.5</b></li>
+    <li>batch <b>2</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900</span>
+
+    <span class="cx" style="left:1110px;top:150px">1</span>
+    <span class="cx" style="left:660px;top:110px">2</span>
+    <span class="cx" style="left:1110px;top:330px">3</span>
+    <span class="cx" style="left:1110px;top:600px">4</span>
+    <span class="cx" style="left:700px;top:750px">5</span>
+
+    <div class="row grow">
+
+      <nav class="navrail wiz-steps" style="flex:0 0 240px">
+        <a href="S11-setup-step1-plan-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Site plan</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step2-grid-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Grid</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step3-proposals-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Proposals</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step4-attributes-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Attributes</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step5-exits-desktop.html" class="wiz-step current" aria-current="step">
+          <span class="wiz-num">5</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Exits</span>
+            <span class="wiz-meta">IN PROGRESS</span></span></a>
+        <a href="S11-setup-step6-zones-desktop.html" class="wiz-step">
+          <span class="wiz-num">6</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Zones</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-step7-thresholds-desktop.html" class="wiz-step">
+          <span class="wiz-num">7</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Thresholds</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-step8-drones-desktop.html" class="wiz-step">
+          <span class="wiz-num">8</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Drones</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-review-desktop.html" class="wiz-step">
+          <span class="wiz-num">R</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Review</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <div class="rail-note">Steps are non-linear once visited and progress
+          is saved per step.</div>
+      </nav>
+
+      <div class="col grow">
+        <div class="top">
+          <span class="b">Venue setup - Riverside Arena</span>
+          <span class="tiny muted">Step 5 of 8 - Exits</span>
+          <span class="grow"></span>
+          <span class="chip">s.iqbal</span>
+          <span class="st st-neutral">ADMINISTRATOR</span>
+        </div>
+
+        <form class="col grow" style="min-height:0">
+          <div class="row grow" style="min-height:0">
+
+            <div class="col" style="flex:0 0 340px;border-right:1px solid var(--line);
+              background:var(--g1);padding:16px;overflow-y:auto">
+
+              <div class="row between center" style="margin-bottom:10px">
+                <span class="mono tiny b">EXITS - 14 of 14 exit cells grouped</span>
+              </div>
+
+              <div class="exitcard">
+                <div class="row between center">
+                  <h3>E1 - South Gate</h3>
+                  <span class="chip">8 cells</span>
+                </div>
+                <div class="fld" style="margin-top:10px"><label for="e1-cap">CAPACITY</label>
+                  <div class="unit"><input id="e1-cap" value="1200" inputmode="decimal">
+                    <span>ppl/min</span></div></div>
+                <button type="button" class="btn btn--sm">Edit cell group</button>
+              </div>
+
+              <div class="exitcard">
+                <div class="row between center">
+                  <h3>E2 - North Gate</h3>
+                  <span class="chip">6 cells</span>
+                </div>
+                <div class="fld" style="margin-top:10px"><label for="e2-cap">CAPACITY</label>
+                  <div class="unit"><input id="e2-cap" value="900" inputmode="decimal">
+                    <span>ppl/min</span></div></div>
+                <button type="button" class="btn btn--sm">Edit cell group</button>
+              </div>
+
+              <button type="button" class="btn" style="width:100%;margin-top:4px" disabled>
+                Group ungrouped exit cells</button>
+              <p class="tiny muted" style="margin:6px 0 0">
+                Disabled - every cell marked exit in Step 4 already belongs to E1 or E2.
+                No ungrouped exit cell remains.</p>
+
+              <div class="honest" style="margin-top:14px">
+                Capacity is the denominator for exit occupancy, one of the nine risk
+                features - it is not a scheduling or planning tool, and Sentinel never uses
+                it to redesign entrances or exits.
+              </div>
+            </div>
+
+            <div class="col grow exitplan">
+              <img src="_assets/site-plan.svg" alt="Site plan with exit cell groups marked">
+
+              <div class="exitgroup" style="left:20%;top:74%;width:120px;height:20px">
+                <span>E1 South Gate - 8 cells</span>
+                <i class="attr-exit" style="width:13px;height:13px"></i>
+                <i class="attr-exit" style="width:13px;height:13px"></i>
+                <i class="attr-exit" style="width:13px;height:13px"></i>
+                <i class="attr-exit" style="width:13px;height:13px"></i>
+                <i class="attr-exit" style="width:13px;height:13px"></i>
+                <i class="attr-exit" style="width:13px;height:13px"></i>
+                <i class="attr-exit" style="width:13px;height:13px"></i>
+                <i class="attr-exit" style="width:13px;height:13px"></i>
+              </div>
+
+              <div class="exitgroup" style="left:62%;top:9%;width:92px;height:20px">
+                <span>E2 North Gate - 6 cells</span>
+                <i class="attr-exit" style="width:13px;height:13px"></i>
+                <i class="attr-exit" style="width:13px;height:13px"></i>
+                <i class="attr-exit" style="width:13px;height:13px"></i>
+                <i class="attr-exit" style="width:13px;height:13px"></i>
+                <i class="attr-exit" style="width:13px;height:13px"></i>
+                <i class="attr-exit" style="width:13px;height:13px"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="wizfoot-row">
+            <button type="button" class="btn">Back</button>
+            <div class="row gap-s">
+              <button type="button" class="btn">Save and exit</button>
+              <button type="submit" class="btn btn--primary">Continue</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>Exits group exit cells; they do not create new ones.</b> The 14 exit cells
+      painted in Step 4 are exactly the cells available to group here - 8 into E1, 6 into
+      E2 - so a screen for naming exits can never invent an exit cell the attribute pass
+      did not mark. <span class="req">FR9.5</span></li>
+
+    <li><b>Capacity is entered once per named exit, in people per minute</b> - E1 South Gate
+      at 1200, E2 North Gate at 900, matching the canonical dataset - because exit
+      occupancy needs one denominator per exit, not per cell. <span class="req">FR9.5</span></li>
+
+    <li><b>"Group ungrouped exit cells" is disabled and says why.</b> With 14 of 14 exit
+      cells already assigned, there is nothing left to group; the control reappears active
+      the moment Step 4 is revisited and a new exit cell is painted.
+      <span class="req">FR9.5</span></li>
+
+    <li><b>The honesty boundary is stated in words on the same screen.</b> Capacity feeds
+      one risk feature, exit occupancy - Sentinel never uses it to plan, size or redesign
+      an exit, which is the scope boundary CLAUDE.md and srs.md both hold.</li>
+
+    <li><b>No "current" occupancy column appears on this screen.</b> Occupancy is a live
+      measurement produced once drones are observing; showing a number for it during setup,
+      before any observation exists, would be exactly the invented value the honesty
+      invariant forbids.</li>
+  </ol>
+
+</div>
+</body>
+</html>

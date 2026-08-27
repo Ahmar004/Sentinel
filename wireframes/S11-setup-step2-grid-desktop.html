@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S11 Setup step 2 - Grid, desktop - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .wiz-steps{padding:10px 0;overflow-y:auto}
+  .wiz-step{display:flex;align-items:center;gap:10px;padding:8px 14px;min-height:44px;
+    text-decoration:none;color:var(--ink-2);border-left:3px solid transparent}
+  .wiz-num{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--g5);
+    display:flex;align-items:center;justify-content:center;font:700 11px var(--mono);
+    flex:0 0 auto;color:var(--ink-2);background:var(--g0)}
+  .wiz-step.done .wiz-num{background:var(--band-normal);border-color:var(--band-normal);color:#fff}
+  .wiz-step.current{color:var(--ink);background:var(--g0);border-left-color:var(--g7)}
+  .wiz-step.current .wiz-num{background:var(--g7);border-color:var(--g7);color:#fff}
+  .wiz-step .wiz-txt{display:flex;flex-direction:column;gap:1px}
+  .wiz-step .wiz-lbl{font:600 12px var(--font)}
+  .wiz-step .wiz-meta{font:600 9px var(--mono);color:var(--ink-2);letter-spacing:.03em}
+  .wizfoot-row{display:flex;justify-content:space-between;align-items:center;
+    padding:12px 18px;border-top:1px solid var(--line);background:var(--g1)}
+  .fld{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+  .fld label{font:600 11px var(--mono);color:var(--ink-2)}
+  .fld input{height:34px;border:1px solid var(--g5);border-radius:4px;background:var(--g0);
+    padding:0 9px;font:600 13px var(--mono);color:var(--ink)}
+  .fld .unit{position:relative}
+  .fld .unit input{padding-right:34px}
+  .fld .unit span{position:absolute;right:9px;top:50%;transform:translateY(-50%);
+    font:600 11px var(--mono);color:var(--ink-2)}
+  .chipset{display:flex;gap:6px;margin-bottom:12px}
+  .chipset button{flex:1;min-height:34px;border:1px solid var(--g5);border-radius:4px;
+    background:var(--g0);font:700 12px var(--mono);color:var(--ink-2)}
+  .chipset button[aria-pressed="true"]{background:var(--g7);border-color:var(--g7);color:#fff}
+  .gridprev{position:relative;border:1px solid var(--g5);background:var(--g2);overflow:hidden}
+  .gridprev img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;opacity:.55}
+  .gridprev .lines{position:absolute;inset:0;
+    background-image:
+      linear-gradient(to right, rgba(61,61,56,.55) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(61,61,56,.55) 1px, transparent 1px);
+  }
+  .gridprev .origin{position:absolute;left:0;bottom:0;width:12px;height:12px;
+    background:var(--focus);border:2px solid #fff;border-radius:50%;transform:translate(-50%,50%)}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">S11.2</span>
+  <h1>S11 Venue setup - Step 2 of 8, Grid</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S11</b></li>
+    <li>viewport <b>1440 x 900</b></li>
+    <li>role <b>Administrator</b></li>
+    <li>state <b>editing cell size, live preview reacts</b></li>
+    <li>requirement <b>FR9.2</b></li>
+    <li>batch <b>2</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900</span>
+
+    <span class="cx" style="left:1110px;top:160px">1</span>
+    <span class="cx" style="left:660px;top:180px">2</span>
+    <span class="cx" style="left:900px;top:640px">3</span>
+    <span class="cx" style="left:1300px;top:640px">4</span>
+    <span class="cx" style="left:1110px;top:450px">5</span>
+
+    <div class="row grow">
+
+      <nav class="navrail wiz-steps" style="flex:0 0 240px">
+        <a href="S11-setup-step1-plan-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Site plan</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step2-grid-desktop.html" class="wiz-step current" aria-current="step">
+          <span class="wiz-num">2</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Grid</span>
+            <span class="wiz-meta">IN PROGRESS</span></span></a>
+        <a href="S11-setup-step3-proposals-desktop.html" class="wiz-step">
+          <span class="wiz-num">3</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Proposals</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-step4-attributes-desktop.html" class="wiz-step">
+          <span class="wiz-num">4</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Attributes</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-step5-exits-desktop.html" class="wiz-step">
+          <span class="wiz-num">5</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Exits</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-step6-zones-desktop.html" class="wiz-step">
+          <span class="wiz-num">6</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Zones</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-step7-thresholds-desktop.html" class="wiz-step">
+          <span class="wiz-num">7</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Thresholds</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-step8-drones-desktop.html" class="wiz-step">
+          <span class="wiz-num">8</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Drones</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-review-desktop.html" class="wiz-step">
+          <span class="wiz-num">R</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Review</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <div class="rail-note">Steps are non-linear once visited and progress
+          is saved per step.</div>
+      </nav>
+
+      <div class="col grow">
+        <div class="top">
+          <span class="b">Venue setup - Riverside Arena</span>
+          <span class="tiny muted">Step 2 of 8 - Grid</span>
+          <span class="grow"></span>
+          <span class="chip">s.iqbal</span>
+          <span class="st st-neutral">ADMINISTRATOR</span>
+        </div>
+
+        <form class="col grow" style="min-height:0">
+          <div class="row grow" style="min-height:0">
+
+            <div class="col" style="flex:0 0 320px;border-right:1px solid var(--line);
+              background:var(--g1);padding:16px;overflow-y:auto">
+
+              <div class="mono tiny b" style="margin-bottom:8px">CELL SIZE</div>
+              <div class="chipset">
+                <button type="button" aria-pressed="false">2 m</button>
+                <button type="button" aria-pressed="true">5 m</button>
+                <button type="button" aria-pressed="false">10 m</button>
+              </div>
+              <div class="fld"><label for="cellsize">EXACT VALUE</label>
+                <div class="unit"><input id="cellsize" value="5.0" inputmode="decimal"><span>m</span></div></div>
+
+              <div class="hr" style="margin:14px 0"></div>
+
+              <div class="mono tiny b" style="margin-bottom:8px">ORIGIN OFFSET</div>
+              <p class="tiny muted" style="margin:0 0 8px">
+                Origin is the south-west corner of the plan by convention.</p>
+              <div class="row gap">
+                <div class="fld grow"><label for="off-e">EAST</label>
+                  <div class="unit"><input id="off-e" value="0" inputmode="decimal"><span>m</span></div></div>
+                <div class="fld grow"><label for="off-n">NORTH</label>
+                  <div class="unit"><input id="off-n" value="0" inputmode="decimal"><span>m</span></div></div>
+              </div>
+
+              <div class="honest" style="margin-top:8px">
+                Changing cell size after later steps depend on it detaches zones,
+                exits and attributes from cells that no longer exist - the
+                Site configuration screen guards this with a confirmation
+                dialog. This wizard step has no such history yet, so it applies
+                directly.
+              </div>
+            </div>
+
+            <div class="col grow pad-l" style="overflow-y:auto">
+              <div class="mono tiny b" style="margin-bottom:4px">LIVE PREVIEW</div>
+              <p class="tiny muted" style="margin:0 0 12px">
+                The grid below regenerates as cell size changes. Currently 5 m.</p>
+
+              <div class="row gap" style="align-items:flex-start">
+                <div class="col" style="flex:1 1 0">
+                  <div class="gridprev" style="height:300px">
+                    <img src="_assets/site-plan.svg" alt="">
+                    <div class="lines" style="background-size:7.5px 7.5px"></div>
+                    <div class="origin"></div>
+                  </div>
+                  <div class="row between" style="margin-top:8px">
+                    <span class="mono b" style="font-size:20px">5.0 m cells</span>
+                    <span class="chip">CURRENT</span>
+                  </div>
+                  <div class="tiny muted mono" style="margin-top:3px">
+                    60 columns x 40 rows = <b>2400 cells</b></div>
+                </div>
+
+                <div class="col" style="flex:1 1 0">
+                  <div class="gridprev" style="height:300px">
+                    <img src="_assets/site-plan.svg" alt="">
+                    <div class="lines" style="background-size:15px 15px"></div>
+                    <div class="origin"></div>
+                  </div>
+                  <div class="row between" style="margin-top:8px">
+                    <span class="mono b" style="font-size:20px">10.0 m cells</span>
+                    <span class="chip">IF CHANGED</span>
+                  </div>
+                  <div class="tiny muted mono" style="margin-top:3px">
+                    30 columns x 20 rows = <b>600 cells</b> - coarser, fewer cells</div>
+                </div>
+              </div>
+
+              <div class="bx" style="padding:10px;margin-top:16px;max-width:520px">
+                <div class="row between"><span class="tiny muted">Cell identifier form</span>
+                  <span class="mono tiny">C-&lt;col&gt;-&lt;row&gt;, zero padded</span></div>
+                <div class="row between" style="margin-top:4px"><span class="tiny muted">Example</span>
+                  <span class="mono tiny">C-042-017</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wizfoot-row">
+            <button type="button" class="btn">Back</button>
+            <div class="row gap-s">
+              <button type="button" class="btn">Save and exit</button>
+              <button type="submit" class="btn btn--primary">Continue</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>Two previews, side by side, prove the grid is reactive.</b> The current 5 m
+      setting produces 60 x 40 = 2400 cells; the comparison panel shows what 10 m would
+      produce, 30 x 20 = 600 cells, with visibly coarser lines. This is the acceptance
+      test for FR9.2 made visible rather than asserted in prose.
+      <span class="req">FR9.2</span></li>
+
+    <li><b>The right-hand preview updates from the same value the left-hand form edits</b> -
+      there is one source of truth for cell size, never a separate "apply" step that could
+      let the two disagree.</li>
+
+    <li><b>Origin is the south-west corner, offset in metres, matching the canonical
+      dataset</b> (0 m east, 0 m north for Riverside Arena). The origin marker is drawn on
+      the preview so a non-zero offset would be visible, not just numeric.
+      <span class="req">FR9.2</span></li>
+
+    <li><b>Cell identifiers are shown in their exact form</b>, <code>C-&lt;col&gt;-&lt;row&gt;</code>
+      zero padded to three digits, because every later screen in the product references
+      cells by this identifier and it is decided here. <span class="req">FR9.2</span></li>
+
+    <li><b>The regenerate-and-detach warning is stated here even though nothing can yet be
+      detached</b> on a first-run wizard, so the same language an administrator will see
+      later on <code>S12</code> and <code>D11</code> is introduced once, not invented twice.</li>
+  </ol>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D03 Dismiss suggestion - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .modal-body{padding:16px 18px;max-height:560px;overflow-y:auto}
+  .kicker{font:700 10px/1.4 var(--mono);letter-spacing:.04em;color:var(--ink-2)}
+  .ta{width:100%;min-height:64px;border:1px solid var(--g5);border-radius:5px;
+    background:var(--g0);font:13px var(--font);padding:8px;resize:vertical}
+  .audit{background:var(--g8);color:#e8e8e4;border-radius:5px;padding:11px 12px;
+    font:12px/1.75 var(--mono);overflow-x:auto}
+  .audit .k{color:#9a9a93;display:inline-block;min-width:96px}
+  .audit .new{color:#8fd19e}
+  .miniplan{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font:600 11px var(--mono);color:var(--ink-2);text-align:center;padding:0 24px}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">D03</span>
+  <h1>D03 Dismiss suggestion - records the decision not to act</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>D03</b></li>
+    <li>viewport <b>390 x 844 and 1440 x 900</b></li>
+    <li>role <b>Coordinator, Administrator</b></li>
+    <li>state <b>rank 2 HOLD_AND_METER, optional reason entered</b></li>
+    <li>requirement <b>FR7.8</b></li>
+    <li>batch <b>2</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <!-- ================= DESKTOP - modal over the live map ================= -->
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900 - modal</span>
+
+    <span class="cx" style="left:1000px;top:224px">1</span>
+    <span class="cx" style="left:1000px;top:340px">2</span>
+    <span class="cx" style="left:1000px;top:470px">3</span>
+    <span class="cx" style="left:1000px;top:620px">4</span>
+    <span class="cx" style="left:1000px;top:720px">5</span>
+    <span class="cx" style="left:80px;top:760px">7</span>
+
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#" aria-current="page"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <div class="rail-note">Signed in as <b>a.rahman</b><br><span class="st st-neutral">COORDINATOR</span></div>
+      </nav>
+      <div class="col grow">
+        <div class="top"><span class="b">Riverside Arena</span><span class="grow"></span>
+          <span class="mono tiny">14:03:41</span></div>
+        <div class="row grow" style="position:relative">
+          <div class="map">
+            <img class="plan" src="_assets/site-plan.svg" alt="">
+            <div class="miniplan">Parent screen, simplified. Rank 1 (DIVERT) was just confirmed
+              via `D02`; the coordinator now dismisses rank 2 as no longer needed.</div>
+          </div>
+          <aside class="rail" style="opacity:.5">
+            <div class="pad-s"><span class="mono tiny b">A-1042 - SUGGESTIONS</span></div>
+          </aside>
+
+          <div class="scrim">
+            <div class="modal" style="max-width:560px">
+              <div class="modal-head row between center">
+                <span>Dismiss suggestion - rank 2</span>
+                <span class="chip">A-1042</span>
+              </div>
+              <form onsubmit="event.preventDefault()">
+                <div class="modal-body">
+                  <div class="row between center">
+                    <span class="row gap-s center">
+                      <span class="chip">rank 2</span>
+                      <span class="mono b" style="font-size:15px">HOLD_AND_METER</span>
+                    </span>
+                    <span class="row gap-s center">
+                      <span class="st st-neutral">PROPOSED</span><span class="chip">MODEL</span>
+                    </span>
+                  </div>
+                  <div class="tiny muted" style="margin-top:8px">
+                    Zone B North Gate - hold arrivals at the north approach - route
+                    <span class="mono">C-029-018 &rarr; C-030-018 &rarr; C-031-018</span>
+                  </div>
+
+                  <hr class="hr" style="margin:12px 0">
+
+                  <label class="kicker" for="reason-d">REASON (OPTIONAL)</label>
+                  <textarea id="reason-d" class="ta" style="margin-top:5px"
+                    >Superseded - option 1 (DIVERT) already confirmed for this alert.</textarea>
+                  <div class="tiny muted" style="margin-top:4px">
+                    Left blank, the audit entry records no reason. A reason is never required to
+                    dismiss.
+                  </div>
+
+                  <div class="kicker" style="margin-top:14px">AUDIT ENTRY WRITTEN ON DISMISS</div>
+                  <div class="audit" style="margin-top:5px">
+                    <span class="k">entryId</span>AUD-2381 <span style="color:#9a9a93">(assigned on save)</span><br>
+                    <span class="k">ts</span>2026-08-27T14:03:41Z<br>
+                    <span class="k">actorId</span>a.rahman<br>
+                    <span class="k">action</span><span class="new">SUGGESTION_DISMISSED</span><br>
+                    <span class="k">targetType</span>SUGGESTION<br>
+                    <span class="k">targetId</span>SG-1044<br>
+                    <span class="k">previousValue</span>{ status: PROPOSED }<br>
+                    <span class="k">newValue</span>{ status: <span class="new">DISMISSED</span>,
+                    reason: "Superseded - option 1 already confirmed." }
+                  </div>
+
+                  <div class="honest" style="margin-top:12px">
+                    An advisory system is only auditable if the decision not to act is recorded
+                    as deliberately as the decision to act. This entry is permanent for 30 days
+                    and is never edited or removed.
+                  </div>
+                </div>
+                <div class="modal-foot">
+                  <button class="btn" type="button">Cancel</button>
+                  <button class="btn btn--primary" type="submit">Dismiss</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MOBILE - bottom sheet over the live map ================= -->
+  <div class="device device--mobile">
+    <span class="device-tag">390 x 844 - sheet</span>
+
+    <span class="cx" style="left:196px;top:400px">6</span>
+    <span class="cx" style="left:196px;top:800px">8</span>
+
+    <div class="top"><span class="b" style="font-size:13px">Riverside Arena</span><span class="grow"></span>
+      <span class="mono tiny">14:03:41</span></div>
+    <div class="map" style="flex:0 0 90px">
+      <img class="plan" src="_assets/site-plan.svg" alt="">
+      <div class="miniplan" style="font-size:10px">Parent screen behind the sheet</div>
+    </div>
+
+    <div class="scrim" style="align-items:flex-end;padding:0">
+      <form onsubmit="event.preventDefault()" style="width:100%">
+        <div class="sheet" style="width:100%;max-height:700px;overflow-y:auto">
+          <div class="sheet-handle" style="position:relative;border-bottom:1px solid var(--line)">
+            <span class="b" style="font-size:13px">Dismiss suggestion</span>
+            <span class="grow"></span><span class="chip">A-1042</span>
+          </div>
+          <div class="pad">
+            <div class="row between center">
+              <span class="row gap-s center">
+                <span class="chip">rank 2</span>
+                <span class="mono b" style="font-size:13px">HOLD_AND_METER</span>
+              </span>
+              <span class="st st-neutral">PROPOSED</span>
+            </div>
+            <div class="tiny muted" style="margin-top:6px">
+              Zone B North Gate - hold at north approach - 3 route cells
+            </div>
+
+            <label class="kicker" style="margin-top:10px;display:block" for="reason-m">REASON (OPTIONAL)</label>
+            <textarea id="reason-m" class="ta" style="margin-top:5px"
+              >Superseded - option 1 already confirmed.</textarea>
+
+            <div class="kicker" style="margin-top:12px">AUDIT ENTRY WRITTEN ON DISMISS</div>
+            <div class="audit" style="margin-top:5px;font-size:11px">
+              <span class="k">actorId</span>a.rahman<br>
+              <span class="k">action</span><span class="new">SUGGESTION_DISMISSED</span><br>
+              <span class="k">targetId</span>SG-1044<br>
+              <span class="k">newValue</span>{ status: <span class="new">DISMISSED</span>,
+              reason: "..." }
+            </div>
+
+            <div class="honest" style="margin-top:10px">
+              The decision not to act is logged as deliberately as a confirmed one.
+            </div>
+
+            <div class="row gap-s" style="margin-top:12px">
+              <button class="btn btn--tap grow" type="button">Cancel</button>
+              <button class="btn btn--tap btn--primary grow" type="submit">Dismiss</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <nav class="navbar">
+      <a href="#" aria-current="page"><i class="icon"></i>Live</a>
+      <a href="#"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+
+</div>
+
+<div style="padding:8px 24px 64px">
+<ol class="wf-notes" style="max-width:920px">
+  <li><b>The header names the exact suggestion being dismissed: rank, action and its alert.</b>
+    "Dismiss suggestion - rank 2", HOLD_AND_METER, A-1042 - a dismissal is still a decision about
+    a specific option, not a generic "close". <span class="req">FR7.8</span></li>
+
+  <li><b>The reason field is a plain textarea, labelled optional, and pre-empty by default.</b>
+    Nothing about the form implies a reason is required to proceed - the acceptance criterion
+    only requires the actor, action, target and timestamp, so a reason is a courtesy to future
+    review, not a gate on the action. <span class="req">FR7.8</span></li>
+
+  <li><b>The dialog shows the exact audit entry before it is written,</b> using the seven fields
+    `srs.md` defines for `AuditEntry`: entryId, ts, actorId, action, targetType, targetId,
+    previousValue and newValue. A coordinator dismissing an option can see precisely what will
+    be recorded, not trust that something happens behind the button.
+    <span class="req">FR7.8</span></li>
+
+  <li><b>Why a dismissal is logged at all:</b> an advisory system is only auditable if the
+    decision not to act is recorded as deliberately as the decision to act. If dismissals left
+    no trace, an examiner reviewing the audit log later would see confirmed suggestions but no
+    record of the ones a coordinator judged unnecessary, which understates how much human
+    judgement the system actually relies on. <span class="req">FR7.8</span></li>
+
+  <li><b>Dismiss is <code>type="submit"</code> on a real <code>&lt;form onsubmit&gt;</code>
+    calling <code>event.preventDefault()</code>; Cancel is <code>type="button"</code>.</b> Enter
+    in the textarea or anywhere else in the form submits and dismisses with whatever reason is
+    currently typed; Esc cancels and types nothing. Focus is trapped in the modal while open and
+    returns to the card's Dismiss button on close. <span class="req">FR7.8</span></li>
+
+  <li><b>Mobile carries the same seven-field audit preview, only set smaller,</b> because what
+    gets written to a 30-day record is exactly the kind of detail that must not be the first
+    thing trimmed for a small screen. <span class="req">FR7.8</span></li>
+
+  <li><b>The parent screen behind the scrim shows rank 1 already confirmed,</b> which is why
+    rank 2 is being dismissed here - the two dialogs in this file set tell one continuous story
+    for A-1042: confirm the option that helps, dismiss the one that no longer applies.
+    <span class="req">FR7.7</span> <span class="req">FR7.8</span></li>
+
+  <li><b>Dismissed does not mean deleted.</b> The suggestion keeps its identity (`SG-1044`) and
+    moves to status DISMISSED rather than being removed from the record, matching how a
+    superseded option reads EXPIRED rather than gone in `C05-suggestions` state 4.
+    <span class="req">FR7.8</span></li>
+</ol>
+</div>
+
+</body>
+</html>

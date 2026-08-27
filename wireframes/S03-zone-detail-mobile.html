@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S03 Zone detail, mobile - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .tl{width:100%;height:110px;display:block}
+  .tl .ref{stroke:var(--g4);stroke-width:1;stroke-dasharray:3 3}
+  .tl .refc{stroke:var(--band-critical);stroke-width:1;stroke-dasharray:2 2}
+  .tl .line{fill:none;stroke:var(--g7);stroke-width:2}
+  .tl .gapline{fill:none;stroke:var(--g5);stroke-width:2;stroke-dasharray:1 4}
+  .tl .lbl{font:600 8px var(--mono);fill:var(--ink-2)}
+  .covtl{width:100%;height:46px;display:block}
+  .covtl .bar{fill:var(--obs-observed)}
+  .covtl .bargap{fill:var(--g4)}
+  .celllist{width:100%;border-collapse:collapse;font-size:11px}
+  .celllist th{text-align:left;font:600 9px var(--mono);color:var(--ink-2);
+    padding:5px 6px;border-bottom:1px solid var(--line);background:var(--g1)}
+  .celllist td{padding:5px 6px;border-bottom:1px solid var(--g3);font-family:var(--mono);font-size:10px}
+  .filterrow{display:flex;gap:5px;padding:7px 8px;border-bottom:1px solid var(--line);
+    background:var(--g1);overflow-x:auto}
+  .fchip{font:600 9px var(--mono);padding:3px 7px;border-radius:99px;border:1px solid var(--g4);
+    background:var(--g0);white-space:nowrap;flex:0 0 auto}
+  .fchip[aria-pressed="true"]{background:var(--g7);color:#fff;border-color:var(--g7)}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">F-005</span>
+  <h1>S03 Zone detail - mobile, Zone B North Gate</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S03</b></li>
+    <li>viewport <b>390 x 844</b></li>
+    <li>role <b>Coordinator</b></li>
+    <li>state <b>LIVE, opened from the zone strip</b></li>
+    <li>requirement <b>FR4.5 FR4.6 FR5 FR9.7</b></li>
+    <li>batch <b>2</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <div class="device device--mobile">
+    <span class="device-tag">390 x 844</span>
+
+    <span class="cx" style="left:200px;top:90px">1</span>
+    <span class="cx" style="left:60px;top:250px">2</span>
+    <span class="cx" style="left:60px;top:400px">3</span>
+    <span class="cx" style="left:340px;top:480px">4</span>
+    <span class="cx" style="left:200px;top:620px">5</span>
+    <span class="cx" style="left:340px;top:790px">6</span>
+
+    <div class="top">
+      <a href="S02-live-map-mobile.html" class="mono tiny" style="text-decoration:none;color:var(--focus)">&larr;</a>
+      <span class="b" style="font-size:13px">Zone B</span>
+      <span class="grow"></span>
+      <span class="mono tiny">14:03:12</span>
+    </div>
+
+    <div class="col scroll grow" style="overflow-y:auto">
+      <div class="pad col gap">
+
+        <div class="card">
+          <div class="row between center">
+            <span class="mono b" style="font-size:14px">B - North Gate</span>
+            <span class="st st-elevated">ELEVATED</span>
+          </div>
+          <div class="row between center" style="margin-top:6px">
+            <span class="mono b" style="font-size:26px">0.78</span>
+            <span class="tiny muted mono" style="text-align:right">peak <b>C-031-022</b><br>~410 ppl / 192 obs cells</span>
+          </div>
+          <div class="cov" style="margin-top:8px">
+            <i class="c-obs" style="width:24%"></i><i class="c-dwl" style="width:9%"></i>
+            <i class="c-stl" style="width:7%"></i><i class="c-gap" style="width:60%"></i>
+          </div>
+          <div class="tiny muted mono" style="margin-top:4px">192 obs / 72 dwell / 56 stale / 480 gap</div>
+        </div>
+
+        <div class="card">
+          <div class="mono tiny b" style="margin-bottom:5px">RISK TIMELINE - last hour</div>
+          <svg class="tl" viewBox="0 0 340 110" preserveAspectRatio="none">
+            <line class="ref" x1="0" y1="66" x2="340" y2="66"/><text class="lbl" x="2" y="63">0.40</text>
+            <line class="ref" x1="0" y1="33" x2="340" y2="33"/><text class="lbl" x="2" y="30">0.70</text>
+            <line class="refc" x1="0" y1="16.5" x2="340" y2="16.5"/><text class="lbl" x="2" y="13">0.85</text>
+            <polyline class="line" points="0,80 40,76 80,70 120,72 160,58 175,34" />
+            <polyline class="gapline" points="175,34 195,34" />
+            <polyline class="line" points="195,34 230,31 260,32 300,35 340,42" />
+          </svg>
+          <div class="tiny muted" style="margin-top:4px">Dashed break = coverage gap, never interpolated.</div>
+        </div>
+
+        <div class="card">
+          <div class="mono tiny b" style="margin-bottom:5px">COVERAGE TIMELINE - same period</div>
+          <svg class="covtl" viewBox="0 0 340 46" preserveAspectRatio="none">
+            <rect class="bar" x="0" y="20" width="30" height="26"/>
+            <rect class="bar" x="32" y="24" width="30" height="22"/>
+            <rect class="bargap" x="64" y="6" width="30" height="40"/>
+            <rect class="bargap" x="96" y="4" width="30" height="42"/>
+            <rect class="bar" x="128" y="16" width="18" height="30"/>
+            <rect class="bargap" x="148" y="2" width="18" height="44"/>
+            <rect class="bar" x="168" y="14" width="55" height="32"/>
+            <rect class="bar" x="225" y="18" width="115" height="28"/>
+          </svg>
+          <div class="honest" style="margin-top:7px">
+            The risk gap above lines up with the drop in observed cells here - a coverage loss,
+            not the crowd thinning.
+          </div>
+        </div>
+
+        <div class="card" style="padding:0">
+          <div class="row between center pad-s" style="border-bottom:1px solid var(--line)">
+            <span class="mono tiny b">MEMBER CELLS</span>
+          </div>
+          <div class="filterrow">
+            <button type="button" class="fchip" aria-pressed="true">ALL 744</button>
+            <button type="button" class="fchip">OBSERVED 192</button>
+            <button type="button" class="fchip">DWELL 72</button>
+            <button type="button" class="fchip">STALE 56</button>
+            <button type="button" class="fchip">GAP 480</button>
+          </div>
+          <table class="celllist">
+            <thead><tr><th>Cell</th><th>State</th><th>Risk</th></tr></thead>
+            <tbody>
+              <tr><td>C-031-022</td><td><span class="st st-observed">OBS</span></td>
+                <td><span class="st st-critical">0.91</span></td></tr>
+              <tr><td>C-032-021</td><td><span class="st st-observed">OBS</span></td>
+                <td><span class="st st-elevated">0.78</span></td></tr>
+              <tr><td>C-028-018</td><td><span class="st st-dwell">DWELL</span></td>
+                <td class="muted">18/30s</td></tr>
+              <tr><td>C-027-017</td><td><span class="st st-stale">STALE</span></td>
+                <td class="muted">6.2s ago</td></tr>
+              <tr><td>C-020-010</td><td><span class="st st-gap">GAP</span></td>
+                <td class="muted">no obs</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="mono tiny b" style="margin-bottom:6px">OPEN AND RECENT ALERTS</div>
+          <div class="card" style="border-left:3px solid var(--band-elevated)">
+            <div class="row between center">
+              <span class="mono tiny b">A-1042</span><span class="st st-elevated">ELEVATED</span>
+            </div>
+            <div class="tiny muted mono" style="margin-top:3px">C-031-022 - raised 14:02:51</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="row between center" style="margin-bottom:6px">
+            <span class="mono tiny b">THRESHOLDS</span>
+            <span class="chip">read-only</span>
+          </div>
+          <table class="wt">
+            <tr><td>Risk threshold</td><td class="mono">0.70</td></tr>
+            <tr><td>Density threshold</td><td class="mono">3.6 /m2</td></tr>
+            <tr><td>Clear hysteresis</td><td class="mono">0.65 / 30s</td></tr>
+          </table>
+          <div class="tiny muted" style="margin-top:6px">Administrator opens <b class="mono">D06</b> to edit.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <nav class="navbar">
+      <a href="#"><i class="icon"></i>Live</a>
+      <a href="#" aria-current="page"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>Header carries the same four facts as desktop, stacked instead of side by side.</b>
+      Risk, band, peak cell and the people estimate stated over its observed count, because
+      shrinking the viewport is never a reason to drop the coverage qualifier.
+      <span class="req">FR1.5</span> <span class="req">FR4.5</span></li>
+
+    <li><b>Coverage bar sits directly under the score on every card in this screen.</b> There is
+      no path through this frame that shows 0.78 without also showing 24% observed.
+      <span class="req">FR4.6</span></li>
+
+    <li><b>The coverage timeline is not cut for space.</b> It is the second most important chart
+      on this screen after the risk line itself, so it survives the mobile layout at full width
+      rather than being demoted to a detail link. <span class="req">FR4.6</span></li>
+
+    <li><b>Filter chips scroll horizontally rather than wrap,</b> keeping the touch targets at
+      the 44px row height defined for the sheet handle pattern while all four states stay one
+      tap away. <span class="req">FR5</span></li>
+
+    <li><b>Cell list keeps all four states visible in a five-row sample.</b> A coordinator does
+      not have to filter to confirm that STALE and GAP rows exist and carry no invented number.
+      <span class="req">FR5</span></li>
+
+    <li><b>Thresholds stay read-only here too.</b> No edit control renders for this role on any
+      viewport; the affordance is absent, not disabled. <span class="req">FR9.7</span></li>
+  </ol>
+
+</div>
+</body>
+</html>

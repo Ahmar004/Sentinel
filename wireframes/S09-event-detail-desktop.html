@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S09 Event detail, desktop - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .statehead{margin:36px 24px 4px;font-size:17px;font-weight:650}
+  .statesub{margin:0 24px 18px;font-size:13px;color:var(--ink-2);max-width:86ch}
+  .attrtrack{position:relative;height:10px;background:var(--g2);border-radius:2px;overflow:visible}
+  .attrtrack .zero{position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--g5)}
+  .attrrow{display:grid;grid-template-columns:132px 200px 56px 90px;gap:8px;align-items:center;
+    font:600 11px var(--mono);padding:4px 0}
+  .attrrow .raw{color:var(--ink-2);font-weight:500;text-align:right}
+  .attrrow .val{text-align:right}
+  .attrrow .valneg{color:var(--obs-dwell)}
+  .tl{width:100%;height:130px;display:block}
+  .tl .ref{stroke:var(--g4);stroke-width:1;stroke-dasharray:3 3}
+  .tl .refc{stroke:var(--band-critical);stroke-width:1;stroke-dasharray:2 2}
+  .tl .line{fill:none;stroke:var(--g7);stroke-width:2}
+  .tl .dwellline{fill:none;stroke:var(--obs-dwell);stroke-width:2;stroke-dasharray:2 3}
+  .tl .lbl{font:600 9px var(--mono);fill:var(--ink-2)}
+  .tl .marker{stroke:var(--band-elevated);stroke-width:1.5}
+  .outc{width:100%;height:220px;display:block}
+  .outc .ref{stroke:var(--g4);stroke-width:1;stroke-dasharray:3 3}
+  .outc .lbl{font:600 9px var(--mono);fill:var(--ink-2)}
+  .outc .c1{fill:none;stroke:var(--g8);stroke-width:2.2}
+  .outc .c2{fill:none;stroke:var(--g6);stroke-width:2;stroke-dasharray:5 3}
+  .outc .c3{fill:none;stroke:var(--g5);stroke-width:2;stroke-dasharray:1.5 3}
+  .outc .confirm{stroke:var(--band-elevated);stroke-width:1.5}
+  .outc .peak{fill:var(--band-normal)}
+  .cfgrow{display:grid;grid-template-columns:1fr auto 24px auto;align-items:center;gap:10px}
+  .cfgval{font:700 20px var(--mono)}
+  .cfgarrow{color:var(--ink-2);font-size:16px;text-align:center}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">F-020</span>
+  <h1>S09 Event detail - desktop, one file per event type</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S09</b></li>
+    <li>viewport <b>1440 x 900</b></li>
+    <li>role <b>Coordinator, Administrator</b></li>
+    <li>state <b>alert / suggestion / outcome / configuration change</b></li>
+    <li>requirement <b>FR5.6 FR7.3 FR7.4 FR7.8 FR8.6 FR8.7 FR9.9</b></li>
+    <li>batch <b>3</b></li>
+  </ul>
+</header>
+
+<!-- ================= TYPE 1: ALERT ================= -->
+<h2 class="statehead" id="evt-alert">1. Alert - A-1039, opened from History</h2>
+<p class="statesub">S09 reuses the S04 layout read-only for an alert event (FR5.2, FR5.6). A-1039 is the
+  alert that produced suggestion SG-0771 yesterday at 19:42:10, so the attribution below is the
+  historical record, not the currently open A-1042. Its score, band and nine-feature attribution are
+  the same values S04 shows for A-1042 because both fired from cell C-031-022 in Zone B under an
+  identical 0.70 threshold, and SG-0771's own record confirms it: risk at confirm time 0.78, the same
+  score this alert carries.</p>
+
+<div class="wf-stage">
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900</span>
+
+    <span class="cx" style="left:280px;top:118px">1</span>
+    <span class="cx" style="left:280px;top:200px">2</span>
+    <span class="cx" style="left:280px;top:430px">3</span>
+    <span class="cx" style="left:900px;top:150px">4</span>
+    <span class="cx" style="left:900px;top:560px">5</span>
+
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#" aria-current="page"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <div class="rail-note">Signed in as <b>a.rahman</b><br>
+          <span class="st st-neutral" style="margin-top:4px">COORDINATOR</span></div>
+      </nav>
+
+      <div class="col grow">
+        <div class="top">
+          <a href="S08-history-desktop.html" class="mono tiny" style="text-decoration:none;color:var(--focus)">&larr; history</a>
+          <span class="b">Event A-1039 - alert</span>
+          <span class="grow"></span>
+          <span class="mono tiny">viewing yesterday 19:42:10</span>
+          <span class="chip">a.rahman</span>
+        </div>
+
+        <div class="honest" style="margin:10px 14px 0;border-left-color:var(--g6)">
+          This attribution is the one recorded when A-1039 fired at 19:42:10 yesterday. It is
+          never recomputed against current data - opening this event today, next week, or during
+          an audit in 29 days shows exactly these nine numbers. <span class="req">FR8.7</span>
+        </div>
+
+        <div class="scroll grow" style="overflow-y:auto">
+        <div class="pad" style="display:grid;grid-template-columns:1.2fr 1fr;gap:16px">
+
+          <div class="col gap">
+            <div class="card">
+              <div class="row between center">
+                <span class="mono b" style="font-size:15px">A-1039</span>
+                <span class="st st-elevated">ELEVATED</span>
+              </div>
+              <table class="wt" style="margin-top:8px">
+                <tr><td>Zone</td><td class="mono">B - North Gate</td></tr>
+                <tr><td>Cell</td><td class="mono">C-031-022</td></tr>
+                <tr><td>Score vs threshold</td><td class="mono">0.78 vs 0.70</td></tr>
+                <tr><td>Raised at</td><td class="mono">yesterday 19:42:10</td></tr>
+                <tr><td>Status</td><td><span class="st st-neutral">CLEARED</span></td></tr>
+                <tr><td>Acknowledged</td><td class="mono">a.rahman, before the suggestion below
+                  was confirmed at 19:42:38</td></tr>
+              </table>
+              <div class="honest" style="margin-top:10px">
+                Cleared when risk stayed below 0.65 for 30 seconds - the same rule that governs
+                the open A-1042 today.
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="row between center" style="margin-bottom:8px">
+                <span class="mono tiny b">FULL FEATURE ATTRIBUTION - all nine, as recorded at 19:42:10</span>
+                <span class="tiny muted mono">C04</span>
+              </div>
+              <div class="attrrow" style="color:var(--ink-2);font-weight:700">
+                <span>feature</span><span></span><span class="raw">raw</span><span class="val">contribution</span>
+              </div>
+              <div class="attrrow"><span>flowConvergence</span>
+                <div class="attrtrack"><span class="zero"></span>
+                  <i class="attrbar" style="position:absolute;left:50%;top:0;height:100%;width:50%"></i></div>
+                <span class="raw">0.71</span><span class="val">+0.19</span></div>
+              <div class="attrrow"><span>densityRateOfChange</span>
+                <div class="attrtrack"><span class="zero"></span>
+                  <i class="attrbar" style="position:absolute;left:50%;top:0;height:100%;width:36.8%"></i></div>
+                <span class="raw">0.42 /m2/s</span><span class="val">+0.14</span></div>
+              <div class="attrrow"><span>stopStartPulses</span>
+                <div class="attrtrack"><span class="zero"></span>
+                  <i class="attrbar" style="position:absolute;left:50%;top:0;height:100%;width:23.7%"></i></div>
+                <span class="raw">0.33</span><span class="val">+0.09</span></div>
+              <div class="attrrow"><span>exitOccupancy</span>
+                <div class="attrtrack"><span class="zero"></span>
+                  <i class="attrbar" style="position:absolute;left:50%;top:0;height:100%;width:15.8%"></i></div>
+                <span class="raw">0.27</span><span class="val">+0.06</span></div>
+              <div class="attrrow"><span>counterFlow</span>
+                <div class="attrtrack"><span class="zero"></span>
+                  <i class="attrbar" style="position:absolute;left:50%;top:0;height:100%;width:13.2%"></i></div>
+                <span class="raw">118 deg</span><span class="val">+0.05</span></div>
+              <div class="attrrow"><span>speedVariance</span>
+                <div class="attrtrack"><span class="zero"></span>
+                  <i class="attrbar" style="position:absolute;left:50%;top:0;height:100%;width:7.9%"></i></div>
+                <span class="raw">0.61</span><span class="val">+0.03</span></div>
+              <div class="attrrow"><span>density</span>
+                <div class="attrtrack"><span class="zero"></span>
+                  <i class="attrbar" style="position:absolute;left:50%;top:0;height:100%;width:5.3%"></i></div>
+                <span class="raw">3.9 /m2</span><span class="val">+0.02</span></div>
+              <div class="attrrow"><span>densityGradient</span>
+                <div class="attrtrack"><span class="zero"></span>
+                  <i class="attrbar--neg" style="position:absolute;right:50%;top:0;height:100%;width:5.3%"></i></div>
+                <span class="raw">0.14</span><span class="val valneg">-0.02</span></div>
+              <div class="attrrow"><span>speedMean</span>
+                <div class="attrtrack"><span class="zero"></span>
+                  <i class="attrbar--neg" style="position:absolute;right:50%;top:0;height:100%;width:10.5%"></i></div>
+                <span class="raw">0.38 m/s</span><span class="val valneg">-0.04</span></div>
+
+              <div class="honest" style="margin-top:10px">
+                Bars grow from a zero centre line, same as the live alert view. Frozen numbers,
+                frozen layout - History changes nothing about how an alert is read.
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="row between center" style="margin-bottom:6px">
+                <span class="mono tiny b">CELL RISK TIMELINE - 30 s window before the alert, as recorded</span>
+              </div>
+              <svg class="tl" viewBox="0 0 640 130" preserveAspectRatio="none">
+                <line class="ref" x1="0" y1="78" x2="640" y2="78"/><text class="lbl" x="4" y="75">0.40</text>
+                <line class="ref" x1="0" y1="39" x2="640" y2="39"/><text class="lbl" x="4" y="36">0.70</text>
+                <line class="refc" x1="0" y1="20" x2="640" y2="20"/><text class="lbl" x="4" y="17">0.85</text>
+                <polyline class="dwellline" points="0,102 20,96"/>
+                <polyline class="line" points="20,96 90,88 160,80 230,72 300,54 360,39 380,28"/>
+                <line class="marker" x1="380" y1="0" x2="380" y2="130"/>
+                <text class="lbl" x="384" y="12">raised 19:42:10</text>
+                <polyline class="line" points="380,28 460,24 520,20 580,24 640,22"/>
+              </svg>
+              <div class="row between tiny muted mono"><span>-30s (window start)</span>
+                <span>raised</span><span>cleared shortly after</span></div>
+            </div>
+          </div>
+
+          <div class="col gap">
+            <div class="card" style="padding:8px">
+              <div class="row between center" style="padding:0 4px;margin-bottom:6px">
+                <span class="mono tiny b">MAP - cropped to the alerting cell and neighbourhood</span>
+                <span class="tiny muted mono">same layers as S02</span>
+              </div>
+              <div class="map" style="height:230px;border-radius:4px">
+                <img class="plan" src="_assets/site-plan.svg" alt="">
+                <div class="gridwrap" data-cols="9" data-map="
+                  s2s2o1o2w3e3w3o2s2
+                  o2w3e4e4c4e4w3o2s1
+                  o2w3e4e4e4w3o2o1g0
+                  o1o2w3w3w2o2o1g0g0"></div>
+                <div class="zoneline" style="left:2px;top:2px;width:280px;height:90px">
+                  <span>ZONE B</span></div>
+                <div class="pin" style="left:174px;top:50px"></div>
+              </div>
+              <div class="tiny muted mono" style="margin-top:6px;padding:0 4px">
+                Pin marks C-031-022 as it was drawn at the time. The map crop is illustrative of
+                the layout, not a stored image - only the cell values are historical record.</div>
+            </div>
+
+            <div class="card">
+              <div class="row between center" style="margin-bottom:6px">
+                <span class="mono tiny b">RESULTING SUGGESTION</span>
+              </div>
+              <div class="row between center">
+                <span class="mono b">SG-0771</span><span class="chip">DIVERT</span>
+                <span class="st st-observed">CONFIRMED</span>
+              </div>
+              <div class="tiny muted mono" style="margin-top:6px">
+                Confirmed by a.rahman at 19:42:38, 28s after this alert raised</div>
+              <div class="tiny muted mono" style="margin-top:3px">
+                Affected cells: C-031-022, C-032-022, C-033-021</div>
+              <div class="row" style="margin-top:9px">
+                <a href="#evt-outcome" class="btn grow" style="text-decoration:none">
+                  See the outcome, SG-0771 &darr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= TYPE 2: SUGGESTION ================= -->
+<h2 class="statehead" id="evt-suggestion">2. Suggestion - SG-0772, the full option set as issued</h2>
+<p class="statesub">All three ranked options for A-1042, as the decision-support agent issued them, with
+  the option that was confirmed, the one superseded, and the one a safeguard rejected before a human
+  ever saw it as offerable. This is the audit record FR7.8 requires: not just the outcome, but every
+  option that was on the table.</p>
+
+<div class="wf-stage">
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900</span>
+
+    <span class="cx" style="left:280px;top:118px">6</span>
+    <span class="cx" style="left:280px;top:280px">7</span>
+    <span class="cx" style="left:280px;top:560px">8</span>
+    <span class="cx" style="left:900px;top:280px">9</span>
+
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#" aria-current="page"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <div class="rail-note">Signed in as <b>a.rahman</b><br>
+          <span class="st st-neutral" style="margin-top:4px">COORDINATOR</span></div>
+      </nav>
+
+      <div class="col grow">
+        <div class="top">
+          <a href="S08-history-desktop.html" class="mono tiny" style="text-decoration:none;color:var(--focus)">&larr; history</a>
+          <span class="b">Event SG-0772 - suggestion, issued on A-1042</span>
+          <span class="grow"></span>
+          <span class="mono tiny">14:03:12</span>
+          <span class="chip">a.rahman</span>
+        </div>
+
+        <div class="scroll grow" style="overflow-y:auto">
+        <div class="pad" style="display:grid;grid-template-columns:1fr 420px;gap:16px">
+
+          <div class="col gap">
+            <div class="card">
+              <div class="row between center" style="margin-bottom:6px">
+                <span class="mono tiny b">ALL THREE OPTIONS, RANK ORDER, AS ISSUED AT 14:02:53</span>
+              </div>
+              <table class="wt">
+                <tr><th>Rank</th><th>Action</th><th>Status</th><th>Confirmed / dismissed by</th><th>When</th><th>Source</th></tr>
+                <tr><td class="mono">1</td><td class="mono">DIVERT</td>
+                  <td><span class="st st-observed">CONFIRMED</span></td>
+                  <td class="mono">a.rahman</td><td class="mono">14:03:05</td><td class="mono">MODEL</td></tr>
+                <tr><td class="mono">2</td><td class="mono">HOLD_AND_METER</td>
+                  <td><span class="st st-neutral">EXPIRED</span></td>
+                  <td class="mono muted">superseded, not dismissed by a person</td>
+                  <td class="mono">14:03:05</td><td class="mono">MODEL</td></tr>
+                <tr><td class="mono">3</td><td class="mono">OPEN_ALTERNATE_ROUTE</td>
+                  <td><span class="st st-critical">REJECTED</span></td>
+                  <td class="mono muted">rejected by safeguard, never offered</td>
+                  <td class="mono">-</td><td class="mono">MODEL</td></tr>
+              </table>
+              <div class="honest" style="margin-top:9px">
+                Rank 2 reads EXPIRED, not deleted or dismissed. Once rank 1 was confirmed, the
+                other proposed option stopped being offerable, but the record of what was
+                proposed is kept, which is what makes this table possible. <span class="req">FR7.8</span>
+              </div>
+            </div>
+
+            <div class="card" style="border-left:3px solid var(--band-normal)">
+              <div class="row between center">
+                <span class="chip">rank 1</span><span class="mono b">DIVERT</span>
+                <span class="st st-observed">CONFIRMED</span><span class="chip">MODEL</span>
+              </div>
+              <div class="tiny" style="margin-top:6px">
+                Divert arriving flow north-east to Exit E2. E2 is running at 240 of 900 people
+                per minute, so it has headroom; E1 is at 780 of 1200.</div>
+              <div class="tiny muted mono" style="margin-top:5px">
+                Route: C-031-022 &rarr; C-032-022 &rarr; C-033-021 &rarr; C-034-020 &rarr; C-035-019</div>
+              <div class="tiny mono" style="margin-top:6px;line-height:1.7">
+                <span class="st st-normal">PASS</span> OVER_THRESHOLD_CELL<br>
+                <span class="st st-normal">PASS</span> WOULD_PUSH_NEIGHBOUR_OVER<br>
+                <span class="st st-normal">PASS</span> STALE_CELL_ON_ROUTE<br>
+                <span class="st st-normal">PASS</span> UNKNOWN_CELL_ON_ROUTE<br>
+                <span class="st st-normal">PASS</span> EXIT_OVER_CAPACITY</div>
+              <div class="tiny mono" style="margin-top:8px">Confirmed by <b>a.rahman</b> at 14:03:05</div>
+              <div class="tiny muted" style="margin-top:6px">
+                Sentinel does not control barriers, signage or gates. This records the decision
+                and notifies the team; nothing was actuated.</div>
+            </div>
+
+            <div class="card" style="opacity:.75">
+              <div class="row between center">
+                <span class="chip">rank 2</span><span class="mono b">HOLD_AND_METER</span>
+                <span class="st st-neutral">EXPIRED</span><span class="chip">MODEL</span>
+              </div>
+              <div class="tiny" style="margin-top:6px">
+                Hold arrivals at the north approach and meter entry while convergence falls.</div>
+              <div class="tiny muted mono" style="margin-top:5px">
+                Route: C-029-018 &rarr; C-030-018 &rarr; C-031-018</div>
+              <div class="tiny mono" style="margin-top:6px">four safeguards <span class="st st-normal">PASS</span> -
+                WOULD_PUSH_NEIGHBOUR_OVER <span class="st st-normal">PASS</span>, noting neighbour
+                C-030-019 rises to 0.61, still below its 0.70 threshold</div>
+              <div class="honest" style="margin-top:7px">
+                Superseded at 14:03:05 when rank 1 was confirmed. No safeguard failed here - this
+                option was never offered a chance to be confirmed or dismissed.</div>
+            </div>
+
+            <div class="card" style="opacity:.75">
+              <div class="row between center">
+                <span class="chip">rank 3</span><span class="mono b">OPEN_ALTERNATE_ROUTE</span>
+                <span class="st st-critical">REJECTED</span><span class="chip">MODEL</span>
+              </div>
+              <div class="tiny" style="margin-top:6px">Open the west service route toward Exit E1.</div>
+              <div class="tiny muted mono" style="margin-top:5px">
+                Route: C-026-024 &rarr; C-025-025 &rarr; C-024-026 &rarr; C-023-027</div>
+              <div class="tiny mono" style="margin-top:6px">
+                <span class="st st-critical">FAILED</span> STALE_CELL_ON_ROUTE - cell C-024-026
+                was last observed 7 s ago</div>
+              <div class="honest" style="margin-top:7px">
+                Rejected before issue. Not offerable, so there is no confirm-or-dismiss decision
+                to record for it. <span class="req">FR7.4</span></div>
+            </div>
+          </div>
+
+          <div class="col gap">
+            <div class="card" style="padding:8px">
+              <div class="row between center" style="padding:0 4px;margin-bottom:6px">
+                <span class="mono tiny b">MAP - the confirmed route, E2 divert</span>
+              </div>
+              <div class="map" style="height:230px;border-radius:4px">
+                <img class="plan" src="_assets/site-plan.svg" alt="">
+                <div class="gridwrap" data-cols="9" data-map="
+                  s2s2o1o2w3e3w3o2s2
+                  o2w3e4e4c4e4w3o2s1
+                  o2w3e4e4e4w3o2o1g0
+                  o1o2w3w3w2o2o1g0g0"></div>
+                <div class="pin" style="left:174px;top:50px"></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="mono tiny b" style="margin-bottom:6px">PHRASING SOURCE</div>
+              <div class="tiny">
+                All three options were phrased by the local <span class="chip">MODEL</span>. The
+                phrasing model was still available when SG-0772 was issued at 14:02:53; it went
+                unavailable at 13:51 on a separate occasion, unrelated to this alert.
+                <span class="req">FR7.6</span></div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= TYPE 3: OUTCOME ================= -->
+<h2 class="statehead" id="evt-outcome">3. Outcome - SG-0771 settled IMPROVED, SG-0772 still PENDING</h2>
+<p class="statesub">This is where outcome tracking closes the loop: the actual risk trajectory of the
+  cells a confirmed suggestion touched, checked against the rule that decides the verdict, in plain
+  words (FR8.6). Below the settled example is the compact form of the same card while its own 10
+  minute window is still counting down.</p>
+
+<div class="wf-stage">
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900</span>
+
+    <span class="cx" style="left:280px;top:118px">10</span>
+    <span class="cx" style="left:280px;top:230px">11</span>
+    <span class="cx" style="left:900px;top:230px">12</span>
+    <span class="cx" style="left:280px;top:700px">13</span>
+
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#" aria-current="page"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <div class="rail-note">Signed in as <b>a.rahman</b><br>
+          <span class="st st-neutral" style="margin-top:4px">COORDINATOR</span></div>
+      </nav>
+
+      <div class="col grow">
+        <div class="top">
+          <a href="S08-history-desktop.html" class="mono tiny" style="text-decoration:none;color:var(--focus)">&larr; history</a>
+          <span class="b">Event SG-0771 - outcome</span>
+          <span class="grow"></span>
+          <span class="mono tiny">14:03:12</span>
+          <span class="chip">a.rahman</span>
+        </div>
+
+        <div class="scroll grow" style="overflow-y:auto">
+        <div class="pad" style="display:grid;grid-template-columns:1fr 420px;gap:16px">
+
+          <div class="col gap">
+            <div class="card">
+              <div class="row between center">
+                <span class="mono b" style="font-size:15px">SG-0771 - DIVERT, confirmed 19:42:38 yesterday</span>
+                <span class="st st-normal">IMPROVED</span>
+              </div>
+              <table class="wt" style="margin-top:8px">
+                <tr><td>Affected cells</td><td class="mono">C-031-022, C-032-022, C-033-021</td></tr>
+                <tr><td>Follow-up window</td><td class="mono">19:42:38 to 19:52:38 (10 minutes)</td></tr>
+                <tr><td>Risk at confirm time</td><td class="mono">0.78</td></tr>
+                <tr><td>Peak risk in window</td><td class="mono">0.61</td></tr>
+                <tr><td>Change</td><td class="mono">-0.17</td></tr>
+              </table>
+            </div>
+
+            <div class="card">
+              <div class="row between center" style="margin-bottom:6px">
+                <span class="mono tiny b">RISK TRAJECTORY - the three affected cells across the window</span>
+              </div>
+              <svg class="outc" viewBox="0 0 640 200" preserveAspectRatio="none">
+                <line class="ref" x1="0" y1="180" x2="640" y2="180"/><text class="lbl" x="4" y="177">0.00</text>
+                <line class="ref" x1="0" y1="108" x2="640" y2="108"/><text class="lbl" x="4" y="105">0.40</text>
+                <line class="ref" x1="0" y1="54" x2="640" y2="54"/><text class="lbl" x="4" y="51">0.70</text>
+                <line class="ref" x1="0" y1="27" x2="640" y2="27"/><text class="lbl" x="4" y="24">0.85</text>
+                <line class="confirm" x1="30" y1="0" x2="30" y2="200"/>
+                <text class="lbl" x="34" y="12">confirmed, 0.78</text>
+                <circle class="peak" cx="70" cy="66" r="3.5"/>
+                <text class="lbl" x="78" y="60">peak in window, 0.61</text>
+                <polyline class="c1" points="30,42 70,66 140,92 220,120 300,140 380,152 460,160 540,166 600,170 640,172"/>
+                <polyline class="c2" points="30,48 70,70 140,96 220,124 300,142 380,150 460,156 540,162 600,166 640,168"/>
+                <polyline class="c3" points="30,52 70,72 140,98 220,122 300,138 380,148 460,154 540,158 600,162 640,164"/>
+                <text class="lbl" x="600" y="196">+10 min</text>
+              </svg>
+              <div class="row gap" style="margin-top:2px">
+                <span class="tiny muted mono"><i style="display:inline-block;width:14px;height:2px;background:var(--g8);vertical-align:middle;margin-right:4px"></i>C-031-022</span>
+                <span class="tiny muted mono"><i style="display:inline-block;width:14px;height:2px;background:var(--g6);vertical-align:middle;margin-right:4px"></i>C-032-022</span>
+                <span class="tiny muted mono"><i style="display:inline-block;width:14px;height:2px;background:var(--g5);vertical-align:middle;margin-right:4px"></i>C-033-021</span>
+              </div>
+              <div class="honest" style="margin-top:10px">
+                Improved when peak risk in the window falls more than 0.10 below the risk at
+                confirm time. Here the peak, 0.61, is 0.17 below 0.78, so the verdict is
+                <span class="st st-normal" style="margin:0 4px">IMPROVED</span>. All three lines
+                are continuous because these cells stayed observed for the full window - a break
+                here would mean a gap, not a smoothed value. <span class="req">FR8.6</span></div>
+            </div>
+          </div>
+
+          <div class="col gap">
+            <div class="card" style="padding:8px">
+              <div class="row between center" style="padding:0 4px;margin-bottom:6px">
+                <span class="mono tiny b">MAP - the diverted route, cropped</span>
+              </div>
+              <div class="map" style="height:200px;border-radius:4px">
+                <img class="plan" src="_assets/site-plan.svg" alt="">
+                <div class="gridwrap" data-cols="9" data-map="
+                  s2s2o1o2w3e3w3o2s2
+                  o2w3e4e4c4e4w3o2s1
+                  o2w3e4e4e4w3o2o1g0"></div>
+                <div class="pin" style="left:174px;top:44px"></div>
+              </div>
+            </div>
+
+            <div class="card" style="border-left:3px solid var(--obs-dwell)">
+              <div class="row between center" style="margin-bottom:6px">
+                <span class="mono tiny b">WHAT PENDING LOOKS LIKE</span>
+                <span class="tiny muted mono">SG-0772, still open</span>
+              </div>
+              <div class="row between center">
+                <span class="mono b">SG-0772 - DIVERT</span>
+                <span class="st st-observed">CONFIRMED</span>
+              </div>
+              <div class="tiny mono" style="margin-top:5px">Confirmed by a.rahman at 14:03:05</div>
+              <div class="honest" style="margin-top:8px;border-left-color:var(--obs-dwell)">
+                Outcome tracking window open. Verdict
+                <span class="st st-dwell" style="margin:0 4px">PENDING</span> - 9m 53s remaining.
+              </div>
+              <div class="tiny muted" style="margin-top:6px">
+                The window closes at 14:13:05. Until then no peak is final, so no verdict is
+                shown - a countdown, not a guess.</div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= TYPE 4: CONFIGURATION CHANGE ================= -->
+<h2 class="statehead" id="evt-config">4. Configuration change - CFG-0210</h2>
+<p class="statesub">The smallest event type and the plainest: one field, its two values and who
+  changed it, when (FR9.9). No chart, no attribution - a configuration change has nothing to explain
+  beyond what changed.</p>
+
+<div class="wf-stage">
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900</span>
+
+    <span class="cx" style="left:280px;top:118px">14</span>
+    <span class="cx" style="left:280px;top:260px">15</span>
+
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#" aria-current="page"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <div class="rail-note">Signed in as <b>a.rahman</b><br>
+          <span class="st st-neutral" style="margin-top:4px">COORDINATOR</span></div>
+      </nav>
+
+      <div class="col grow">
+        <div class="top">
+          <a href="S08-history-desktop.html" class="mono tiny" style="text-decoration:none;color:var(--focus)">&larr; history</a>
+          <span class="b">Event CFG-0210 - configuration change</span>
+          <span class="grow"></span>
+          <span class="mono tiny">14:03:12</span>
+          <span class="chip">a.rahman</span>
+        </div>
+
+        <div class="pad" style="max-width:640px">
+          <div class="card">
+            <div class="row between center">
+              <span class="mono b" style="font-size:15px">CFG-0210</span>
+              <span class="chip">threshold edit</span>
+            </div>
+            <table class="wt" style="margin-top:8px">
+              <tr><td>Field</td><td class="mono">Zone B North Gate - risk threshold</td></tr>
+              <tr><td>Actor</td><td class="mono">s.iqbal</td></tr>
+              <tr><td>Timestamp</td><td class="mono">today 13:47:02</td></tr>
+            </table>
+            <div class="cfgrow" style="margin-top:14px">
+              <div>
+                <div class="tiny muted mono">previous value</div>
+                <div class="cfgval">0.70</div>
+              </div>
+              <div class="cfgarrow">&rarr;</div>
+              <div>
+                <div class="tiny muted mono">new value</div>
+                <div class="cfgval">0.65</div>
+              </div>
+              <div></div>
+            </div>
+            <div class="honest" style="margin-top:12px">
+              Only the field, the two values, the actor and the timestamp are recorded. Nothing
+              else about this change is inferred or displayed, because a configuration event has
+              no model behind it to attribute anything to. <span class="req">FR9.9</span></div>
+            <div class="tiny muted mono" style="margin-top:10px">
+              Also recorded in <a href="S14-audit-log.html" style="color:var(--focus)">S14 Audit log</a>.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="padding:8px 24px 64px">
+<ol class="wf-notes" style="max-width:920px">
+  <li><b>An alert event reuses the S04 layout exactly, read-only.</b> Same header table, same
+    full nine-feature attribution, same timeline shape - only the honest banner at the top
+    changes, stating plainly that this is the frozen record from 19:42:10 yesterday and will
+    never recompute. <span class="req">FR5.6</span> <span class="req">FR8.7</span></li>
+
+  <li><b>Status reads CLEARED, not OPEN.</b> A-1039 is history; it already resolved. The
+    acknowledgement line names the actor without inventing a second timestamp beyond what the
+    canonical record supports. <span class="req">FR8.1</span></li>
+
+  <li><b>All nine signed contributions render, not a summary of three.</b> The same zero-centred
+    bars as the live view, because History does not get a lighter version of the truth.
+    <span class="req">FR5.2</span></li>
+
+  <li><b>A link forward to the suggestion this alert produced.</b> An alert event and a
+    suggestion event are two different records; naming SG-0771 here and anchoring to its outcome
+    below is what lets a reviewer follow one incident end to end without leaving this screen.</li>
+
+  <li><b>The map crop is explicitly marked illustrative, not stored.</b> Only cell-level values
+    are the historical record; nothing implies a stored image exists to be replayed pixel for
+    pixel - that capability belongs to S10, not to a single event.</li>
+
+  <li><b>The suggestion event shows the full option set, not only the one that was confirmed.</b>
+    Rank 2, superseded, and rank 3, rejected before issue, both render with their own reason,
+    because an audit of "what was suggested" is incomplete if it only shows what happened to
+    stick. <span class="req">FR7.4</span></li>
+
+  <li><b>EXPIRED and REJECTED are labelled as distinct outcomes, not both dismissed.</b> A person
+    dismisses an option; a safeguard rejects one before it is ever offered; confirming one
+    expires the others automatically. Three different actors, three different words, so the
+    audit trail never blurs who or what made each option stop being live.
+    <span class="req">FR7.8</span></li>
+
+  <li><b>Every safeguard on the confirmed option still renders individually.</b> Five named
+    checks, each with its own PASS, even though nobody needs to check them again - the audit
+    value is in showing exactly what was verified at the time. <span class="req">FR7.3</span></li>
+
+  <li><b>The outcome chart plots all three affected cells against all four band boundaries,</b>
+    0.00, 0.40, 0.70 and 0.85, because a verdict of IMPROVED only means something next to where
+    the risk bands actually sit. The lines stay continuous because these cells never lost
+    observation during the window; a gap would show as a break, never a smoothed guess.
+    <span class="req">FR8.6</span></li>
+
+  <li><b>The verdict rule is stated in the same sentence as the numbers that produced it.</b>
+    "Improved when peak risk in the window falls more than 0.10 below the risk at confirm time"
+    sits beside 0.78, 0.61 and -0.17, so a reviewer can check the arithmetic without opening a
+    separate reference. <span class="req">FR8.6</span></li>
+
+  <li><b>PENDING is shown as an active countdown, not a placeholder.</b> SG-0772's window closes
+    at 14:13:05; at 14:03:12 that reads 9m 53s remaining, matching the confirmation card shown
+    at the moment of confirming in C05. No peak is claimed while the window is still open.
+    <span class="req">FR8.6</span></li>
+
+  <li><b>A configuration change carries only five facts and nothing more.</b> Field, previous,
+    new, actor, timestamp. Padding this card with a chart or a rationale would misrepresent a
+    plain settings edit as something the system reasoned about. <span class="req">FR9.9</span></li>
+</ol>
+</div>
+
+<script src="_assets/wireframe.js"></script>
+</body>
+</html>

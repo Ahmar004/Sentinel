@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D04 Notification permission - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .modal-body{padding:16px 18px}
+  .kicker{font:700 10px/1.4 var(--mono);letter-spacing:.04em;color:var(--ink-2)}
+  .miniplan{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font:600 11px var(--mono);color:var(--ink-2);text-align:center;padding:0 24px}
+  .toggle-row{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:9px 0;border-top:1px solid var(--g3)}
+  .toggle{width:38px;height:22px;border-radius:99px;background:var(--g4);position:relative;
+    flex:0 0 auto;border:1px solid var(--g5)}
+  .toggle::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;
+    border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3)}
+  .toggle.on{background:var(--g7)}
+  .toggle.on::after{left:auto;right:2px}
+  .menuflyout{position:absolute;border:1px solid var(--g5);background:var(--g0);border-radius:5px;
+    box-shadow:0 4px 14px rgba(0,0,0,.14);padding:5px;width:190px;z-index:35;font-size:12px}
+  .menuflyout .mi{display:flex;align-items:center;gap:8px;padding:8px 9px;border-radius:4px}
+  .menuflyout .mi.hi{background:var(--g2)}
+  .toast{position:absolute;background:var(--g0);border:1px solid var(--g5);border-radius:6px;
+    box-shadow:0 4px 14px rgba(0,0,0,.16);padding:9px 11px;width:240px;font-size:11px;z-index:20}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">D04</span>
+  <h1>D04 Notification permission - explained before it is requested</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>D04</b></li>
+    <li>viewport <b>390 x 844 and 1440 x 900</b></li>
+    <li>role <b>Coordinator, Administrator, Drone Operator</b></li>
+    <li>state <b>shown on first alert / reopened from user menu</b></li>
+    <li>requirement <b>FR5.5</b></li>
+    <li>batch <b>6</b></li>
+  </ul>
+</header>
+
+<!-- ================= CONTEXT 1: first alert ================= -->
+<h2 style="margin:30px 24px 4px;font-size:16px;font-weight:650">1. Shown automatically on the first alert</h2>
+<p style="margin:0 24px 16px;font-size:13px;color:var(--ink-2);max-width:78ch">
+  A-1042 has just fired. Its toast is visible behind the dialog, which is deliberate: the
+  permission prompt appears in the same moment a real alert exists, not on first load before
+  the user has any reason to care.
+</p>
+
+<div class="wf-stage">
+
+  <!-- desktop -->
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900 - modal</span>
+
+    <span class="cx" style="left:1000px;top:224px">1</span>
+    <span class="cx" style="left:1000px;top:300px">2</span>
+    <span class="cx" style="left:1000px;top:430px">3</span>
+    <span class="cx" style="left:1000px;top:520px">4</span>
+    <span class="cx" style="left:1000px;top:600px">5</span>
+    <span class="cx" style="left:1240px;top:40px">6</span>
+
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#" aria-current="page"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <div class="rail-note">Signed in as <b>a.rahman</b><br><span class="st st-neutral">COORDINATOR</span></div>
+      </nav>
+      <div class="col grow">
+        <div class="top"><span class="b">Riverside Arena</span><span class="grow"></span>
+          <span class="mono tiny">14:03:12</span></div>
+        <div class="row grow" style="position:relative">
+          <div class="map">
+            <img class="plan" src="_assets/site-plan.svg" alt="">
+            <div class="miniplan">Live map, simplified. A-1042 just crossed into ELEVATED.</div>
+            <div class="toast" style="top:14px;right:14px">
+              <div class="row between center"><span class="st st-elevated">ELEVATED</span>
+                <span class="mono tiny muted">A-1042</span></div>
+              <div class="tiny" style="margin-top:5px">Zone B North Gate - flowConvergence +0.19</div>
+            </div>
+          </div>
+
+          <div class="scrim">
+            <div class="modal" style="max-width:480px">
+              <div class="modal-head">Turn on alert notifications?</div>
+              <form onsubmit="event.preventDefault()">
+                <div class="modal-body">
+                  <p style="margin:0 0 10px;font-size:13px">
+                    Sentinel always shows alerts inside the app. Turning this on also sends a
+                    browser notification for an <b>ELEVATED</b> or <b>CRITICAL</b> alert when
+                    this tab is not in focus, naming the zone and the top contributing feature.
+                  </p>
+                  <div class="honest">
+                    Sentinel does not send SMS or email. This browser notification and the
+                    in-app rail are the only two delivery channels.
+                  </div>
+
+                  <div class="toggle-row">
+                    <div>
+                      <div style="font-size:13px;font-weight:600">Audible tone</div>
+                      <div class="tiny muted">Plays for elevated and critical alerts, muted otherwise.</div>
+                    </div>
+                    <div class="toggle on" role="switch" aria-checked="true"></div>
+                  </div>
+                </div>
+                <div class="modal-foot">
+                  <button class="btn" type="button">Not now</button>
+                  <button class="btn btn--primary" type="submit">Enable notifications</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- mobile -->
+  <div class="device device--mobile">
+    <span class="device-tag">390 x 844 - sheet</span>
+
+    <span class="cx" style="left:196px;top:300px">7</span>
+    <span class="cx" style="left:196px;top:760px">8</span>
+
+    <div class="top"><span class="b" style="font-size:13px">Riverside Arena</span><span class="grow"></span>
+      <span class="mono tiny">14:03:12</span></div>
+    <div class="map" style="flex:0 0 140px">
+      <img class="plan" src="_assets/site-plan.svg" alt="">
+      <div class="miniplan" style="font-size:10px">Live map behind the sheet - A-1042 just fired</div>
+    </div>
+
+    <div class="scrim" style="align-items:flex-end;padding:0">
+      <form onsubmit="event.preventDefault()" style="width:100%">
+        <div class="sheet" style="width:100%">
+          <div class="sheet-handle" style="position:relative;border-bottom:1px solid var(--line)">
+            <span class="b" style="font-size:13px">Turn on alert notifications?</span>
+          </div>
+          <div class="pad">
+            <p style="margin:0 0 9px;font-size:13px">
+              Alerts always show in-app. This also sends a browser notification for an
+              ELEVATED or CRITICAL alert when the app is backgrounded, naming the zone and the
+              top contributing feature.
+            </p>
+            <div class="honest">
+              No SMS, no email. Only in-app and this optional browser notification.
+            </div>
+            <div class="toggle-row">
+              <div>
+                <div style="font-size:13px;font-weight:600">Audible tone</div>
+                <div class="tiny muted">Elevated and critical only.</div>
+              </div>
+              <div class="toggle on" role="switch" aria-checked="true"></div>
+            </div>
+            <div class="row gap-s" style="margin-top:14px">
+              <button class="btn btn--tap grow" type="button">Not now</button>
+              <button class="btn btn--tap btn--primary grow" type="submit">Enable</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <nav class="navbar">
+      <a href="#" aria-current="page"><i class="icon"></i>Live</a>
+      <a href="#"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+</div>
+
+<!-- ================= CONTEXT 2: reopened from user menu ================= -->
+<h2 style="margin:36px 24px 4px;font-size:16px;font-weight:650">2. Reopened later from the user menu</h2>
+<p style="margin:0 24px 16px;font-size:13px;color:var(--ink-2);max-width:78ch">
+  Identical dialog, reached deliberately rather than forced a second time. A user who declined
+  or who wants to check the tone setting finds it in one place, not buried in browser settings.
+</p>
+
+<div class="wf-stage">
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900 - reopened</span>
+    <span class="cx" style="left:1310px;top:70px">9</span>
+
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#" aria-current="page"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <div class="rail-note">Signed in as <b>a.rahman</b><br><span class="st st-neutral">COORDINATOR</span></div>
+      </nav>
+      <div class="col grow">
+        <div class="top"><span class="b">Riverside Arena</span><span class="grow"></span>
+          <span class="mono tiny">14:03:12</span><span class="chip">a.rahman</span></div>
+        <div class="row grow" style="position:relative">
+          <div class="map"><img class="plan" src="_assets/site-plan.svg" alt="">
+            <div class="miniplan">Live map, simplified. User menu opened top right.</div>
+          </div>
+          <div class="menuflyout" style="top:44px;right:14px">
+            <div class="mi"><span class="icon"></span>Profile</div>
+            <div class="mi hi"><span class="icon"></span>Notification settings</div>
+            <div class="mi"><span class="icon"></span>Install app</div>
+            <div class="mi"><span class="icon"></span>Sign out</div>
+          </div>
+          <div class="scrim">
+            <div class="modal" style="max-width:480px">
+              <div class="modal-head">Turn on alert notifications?</div>
+              <form onsubmit="event.preventDefault()">
+                <div class="modal-body">
+                  <p style="margin:0 0 10px;font-size:13px">Same dialog as on first alert. Reopening it does not
+                    re-trigger the browser's own permission popup if it was already answered; it shows the
+                    current state and lets the audible tone be changed.</p>
+                  <div class="honest">No SMS, no email. In-app and this optional browser notification only.</div>
+                  <div class="toggle-row">
+                    <div><div style="font-size:13px;font-weight:600">Audible tone</div>
+                      <div class="tiny muted">Elevated and critical only.</div></div>
+                    <div class="toggle" role="switch" aria-checked="false"></div>
+                  </div>
+                </div>
+                <div class="modal-foot">
+                  <button class="btn" type="button">Close</button>
+                  <button class="btn btn--primary" type="submit">Save</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="padding:8px 24px 64px">
+<ol class="wf-notes" style="max-width:920px">
+  <li><b>The explanation comes before the request, not after.</b> The dialog states exactly what
+    a notification will contain and when it fires before any browser permission popup appears,
+    because a bare permission prompt with no context is usually refused, and a refusal cannot be
+    undone by asking again louder. <span class="req">FR5.5</span></li>
+
+  <li><b>It is triggered by a real alert, not by first load.</b> A-1042's toast sits visibly
+    behind the scrim so the request lands at the moment its value is obvious, not before the
+    user has seen Sentinel do anything worth being notified about.</li>
+
+  <li><b>The audible tone toggle lives in the same dialog, not a second screen.</b> Both settings
+    a user might want to control on first contact with notifications - whether they arrive at
+    all, and whether they make a sound - are decided together.</li>
+
+  <li><b>SMS and email are named and ruled out in the dialog's own words.</b> This is the
+    interface half of decision D4: every paid delivery gateway is excluded, so the honest
+    statement is that in-app and this one browser channel are all there is.
+    <span class="req">FR5.5</span></li>
+
+  <li><b>Not now is <code>type="button"</code>, Enable is <code>type="submit"</code>, on a real
+    <code>&lt;form onsubmit&gt;</code> calling <code>event.preventDefault()</code>.</b> Enter
+    submits, Esc cancels, and focus is trapped in the dialog while open and returned to the
+    toast or the menu item that opened it once it closes.</li>
+
+  <li><b>Mobile carries the identical two sentences and the same toggle,</b> shortened only in
+    layout, because the SMS/email boundary and the tone setting are not content a coordinator's
+    device can afford to drop.</li>
+
+  <li><b>Available afterwards from the user menu, unchanged.</b> The second context shows the
+    exact same dialog reached from "Notification settings", proving there is one definition of
+    this surface rather than a fresh copy written for the reopened case. On reopen, the toggle
+    reflects whatever was last chosen rather than defaulting back on. <span class="req">FR5.5</span></li>
+</ol>
+</div>
+
+</body>
+</html>

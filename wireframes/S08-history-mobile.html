@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S08 History, mobile - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .tabs-scroll{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}
+  .tabs-scroll button{flex:0 0 auto}
+  .type-alert{color:var(--band-elevated);border-color:var(--band-elevated)}
+  .type-suggestion{color:var(--obs-dwell);border-color:var(--obs-dwell)}
+  .type-config{color:var(--ink-2);border-color:var(--g5)}
+  .hrow{display:flex;align-items:center;justify-content:space-between;gap:6px}
+  .field{display:flex;flex-direction:column;gap:4px}
+  .field label{font:600 10px var(--mono);color:var(--ink-2);letter-spacing:.03em}
+  .field .sel{display:flex;align-items:center;justify-content:space-between;gap:6px;
+    min-height:40px;padding:0 10px;border:1px solid var(--g5);border-radius:5px;
+    background:var(--g0);font:600 13px var(--font)}
+  .field .sel span:last-child{color:var(--g6);font-size:11px}
+  .fchip{display:inline-flex;align-items:center;gap:6px;padding:3px 6px 3px 9px;border-radius:99px;
+    border:1px solid var(--g5);background:var(--g0);font:600 11px var(--mono)}
+  .fchip button{appearance:none;border:0;background:var(--g3);border-radius:50%;width:16px;
+    height:16px;font:700 10px/16px var(--font);color:var(--ink);cursor:pointer;padding:0}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">F-013</span>
+  <h1>S08 History - mobile, Filters button and stacked cards</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S08, C09</b></li>
+    <li>viewport <b>390 x 844</b></li>
+    <li>role <b>Coordinator</b></li>
+    <li>state <b>ALL TAB, ZONE B + LAST 24H FILTERS ACTIVE</b></li>
+    <li>requirement <b>FR8.1 FR8.2 FR8.3 FR5.6 NFR4</b></li>
+    <li>batch <b>3</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <!-- ============ device A: result list, filters sheet closed ============ -->
+  <div class="device device--mobile">
+    <span class="device-tag">filters closed</span>
+
+    <span class="cx" style="left:110px;top:60px">1</span>
+    <span class="cx" style="left:300px;top:60px">2</span>
+    <span class="cx" style="left:195px;top:100px">3</span>
+    <span class="cx" style="left:340px;top:150px">4</span>
+    <span class="cx" style="left:195px;top:230px">5</span>
+    <span class="cx" style="left:60px;top:380px">6</span>
+    <span class="cx" style="left:340px;top:520px">7</span>
+    <span class="cx" style="left:195px;top:700px">8</span>
+
+    <div class="top">
+      <a href="S02-live-map-mobile.html" class="mono tiny" style="text-decoration:none;color:var(--focus)">&larr;</a>
+      <span class="b" style="font-size:13px">History</span>
+      <span class="grow"></span>
+      <span class="mono tiny">14:03:12</span>
+    </div>
+
+    <!-- filter bar collapses to one button with an active count -->
+    <div class="row between center" style="padding:8px 10px;border-bottom:1px solid var(--line)">
+      <button class="btn btn--tap" type="button">Filters <span class="chip" style="margin-left:6px">2</span></button>
+      <span class="tiny muted mono">7 results</span>
+    </div>
+
+    <!-- active chips stay visible even with the bar collapsed -->
+    <div class="row gap-s" style="padding:0 10px 8px;flex-wrap:wrap">
+      <span class="fchip">Zone: B<button type="button" aria-label="remove">&times;</button></span>
+      <span class="fchip">Last 24h<button type="button" aria-label="remove">&times;</button></span>
+    </div>
+
+    <!-- resolution notice -->
+    <div class="row gap-s center" style="padding:0 10px 8px">
+      <span class="chip" style="border-color:var(--band-watch);color:var(--band-watch)">0.1 Hz beyond 1h</span>
+      <span class="tiny muted mono">FR8.2</span>
+    </div>
+
+    <!-- tab bar scrolls horizontally at this width -->
+    <div class="tabs tabs-scroll" role="tablist">
+      <button role="tab" id="m-tab-all" aria-selected="true" aria-controls="m-panel-all" tabindex="0">All</button>
+      <button role="tab" id="m-tab-alerts" aria-selected="false" aria-controls="m-panel-alerts" tabindex="-1">Alerts</button>
+      <button role="tab" id="m-tab-sugg" aria-selected="false" aria-controls="m-panel-sugg" tabindex="-1">Suggestions</button>
+      <button role="tab" id="m-tab-config" aria-selected="false" aria-controls="m-panel-config" tabindex="-1">Configuration changes</button>
+    </div>
+
+    <div class="col scroll grow" style="overflow-y:auto">
+      <div class="pad col gap" style="gap:8px">
+
+        <!-- ---------- ALL, stacked cards ---------- -->
+        <div class="panel" id="m-panel-all" role="tabpanel" aria-labelledby="m-tab-all">
+          <div class="col gap" style="gap:8px">
+
+            <div class="card" style="border-left:3px solid var(--band-elevated)">
+              <div class="hrow"><span class="chip type-alert">ALERT</span><span class="st st-neutral">OPEN</span></div>
+              <div class="mono tiny b" style="margin-top:5px">today 14:02:51 - B North Gate - C-031-022</div>
+              <div class="tiny" style="margin-top:3px">Risk 0.78 crossed the 0.70 threshold - ELEVATED</div>
+              <div class="tiny muted mono" style="margin-top:4px">a.rahman (ack)</div>
+              <div class="row gap-s" style="margin-top:8px">
+                <button class="btn btn--tap grow" type="button">View</button>
+                <button class="btn btn--tap grow" type="button">Replay</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="hrow"><span class="chip type-suggestion">SUGGESTION</span><span class="st st-neutral">PROPOSED</span></div>
+              <div class="mono tiny b" style="margin-top:5px">today 14:02:55 - B North Gate - C-031-022</div>
+              <div class="tiny" style="margin-top:3px">Rank 1 DIVERT to Exit E2 - all five safeguards passed</div>
+              <div class="tiny muted mono" style="margin-top:4px">system (MODEL)</div>
+              <button class="btn btn--tap" style="width:100%;margin-top:8px" type="button">View</button>
+            </div>
+
+            <div class="card">
+              <div class="hrow"><span class="chip type-suggestion">SUGGESTION</span><span class="st st-neutral">PROPOSED</span></div>
+              <div class="mono tiny b" style="margin-top:5px">today 14:02:55 - B North Gate - C-030-019</div>
+              <div class="tiny" style="margin-top:3px">Rank 2 HOLD_AND_METER - neighbour rises to 0.61, below 0.70</div>
+              <div class="tiny muted mono" style="margin-top:4px">system (MODEL)</div>
+              <button class="btn btn--tap" style="width:100%;margin-top:8px" type="button">View</button>
+            </div>
+
+            <div class="card" style="opacity:.85">
+              <div class="hrow"><span class="chip type-suggestion">SUGGESTION</span><span class="st st-critical">REJECTED</span></div>
+              <div class="mono tiny b" style="margin-top:5px">today 14:02:55 - B North Gate - C-024-026</div>
+              <div class="tiny" style="margin-top:3px">Rank 3 OPEN_ALTERNATE_ROUTE - STALE_CELL_ON_ROUTE, 7s ago</div>
+              <div class="tiny muted mono" style="margin-top:4px">system (MODEL)</div>
+              <button class="btn btn--tap" style="width:100%;margin-top:8px" type="button">View</button>
+            </div>
+
+            <div class="card">
+              <div class="hrow"><span class="chip type-alert">ALERT</span><span class="st st-neutral">CLEARED</span></div>
+              <div class="mono tiny b" style="margin-top:5px">yesterday 19:42:10 - B North Gate - C-031-022</div>
+              <div class="tiny" style="margin-top:3px">Risk 0.78 crossed the 0.70 threshold - ELEVATED, cleared</div>
+              <div class="tiny muted mono" style="margin-top:4px">system (auto-clear)</div>
+              <div class="row gap-s" style="margin-top:8px">
+                <button class="btn btn--tap grow" type="button">View</button>
+                <button class="btn btn--tap grow" type="button">Replay</button>
+              </div>
+            </div>
+
+            <div class="card" style="border-left:3px solid var(--band-normal)">
+              <div class="hrow"><span class="chip type-suggestion">SUGGESTION</span>
+                <span class="chip" style="border-color:var(--band-normal);color:var(--band-normal)">IMPROVED</span></div>
+              <div class="mono tiny b" style="margin-top:5px">yesterday 19:42:38 - B North Gate - C-031/032/033</div>
+              <div class="tiny" style="margin-top:3px">SG-0771 DIVERT confirmed - peak risk fell to 0.61 in the 10 min window</div>
+              <div class="tiny muted mono" style="margin-top:4px">a.rahman (confirm)</div>
+              <div class="row gap-s" style="margin-top:8px">
+                <button class="btn btn--tap grow" type="button">View</button>
+                <button class="btn btn--tap grow" type="button">Replay</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="hrow"><span class="chip type-config">CONFIG</span><span class="st st-neutral">SAVED</span></div>
+              <div class="mono tiny b" style="margin-top:5px">venue setup - B North Gate</div>
+              <div class="tiny" style="margin-top:3px">Alert threshold 0.70, density threshold 4.0 /m2</div>
+              <div class="tiny muted mono" style="margin-top:4px">s.iqbal</div>
+              <button class="btn btn--tap" style="width:100%;margin-top:8px" type="button">View</button>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="panel" id="m-panel-alerts" role="tabpanel" aria-labelledby="m-tab-alerts" hidden>
+          <div class="honest">Same two alert cards as the All tab, scoped to Alerts only.</div>
+        </div>
+        <div class="panel" id="m-panel-sugg" role="tabpanel" aria-labelledby="m-tab-sugg" hidden>
+          <div class="honest">Same four suggestion cards as the All tab, scoped to Suggestions only.</div>
+        </div>
+        <div class="panel" id="m-panel-config" role="tabpanel" aria-labelledby="m-tab-config" hidden>
+          <div class="honest">The one Configuration change card, scoped to Zone B by the active filter.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <nav class="navbar">
+      <a href="#"><i class="icon"></i>Live</a>
+      <a href="#"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#" aria-current="page"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+
+  <!-- ============ device B: filters sheet open ============ -->
+  <div class="device device--mobile">
+    <span class="device-tag">filters sheet open</span>
+    <span class="cx" style="left:195px;top:200px">9</span>
+    <span class="cx" style="left:195px;top:760px">10</span>
+
+    <div class="top">
+      <a href="S02-live-map-mobile.html" class="mono tiny" style="text-decoration:none;color:var(--focus)">&larr;</a>
+      <span class="b" style="font-size:13px">History</span>
+      <span class="grow"></span>
+      <span class="mono tiny">14:03:12</span>
+    </div>
+
+    <div class="scrim" style="position:absolute;inset:0;top:48px;background:rgba(28,28,26,.42)"></div>
+
+    <form class="sheet grow" style="position:relative;z-index:31;display:flex;flex-direction:column;overflow:hidden">
+      <div class="sheet-handle" style="position:relative;border-bottom:1px solid var(--line)">
+        <span class="b" style="font-size:13px">Filters</span>
+        <span class="grow"></span>
+        <button class="btn btn--sm" type="button">Clear all</button>
+      </div>
+
+      <div class="pad col gap scroll grow" style="overflow-y:auto">
+        <div class="field"><label>TIME RANGE</label>
+          <div class="sel"><span>Last 24 hours</span><span>&#9662;</span></div></div>
+        <div class="field"><label>ZONE</label>
+          <div class="sel"><span>B North Gate</span><span>&#9662;</span></div></div>
+        <div class="field"><label>CELL</label>
+          <div class="sel"><span>Any cell</span><span>&#9662;</span></div></div>
+        <div class="field"><label>RISK BAND</label>
+          <div class="sel"><span>Any band</span><span>&#9662;</span></div></div>
+        <div class="field"><label>ALERT STATUS</label>
+          <div class="sel"><span>Any status</span><span>&#9662;</span></div></div>
+        <div class="field"><label>SUGGESTION STATUS</label>
+          <div class="sel"><span>Any status</span><span>&#9662;</span></div></div>
+        <div class="field"><label>ACTOR</label>
+          <div class="sel"><span>Any actor</span><span>&#9662;</span></div></div>
+        <div class="field"><label>FREE TEXT</label>
+          <div class="sel" style="color:var(--ink-2)"><span>Search summaries&hellip;</span><span></span></div></div>
+        <div class="honest">
+          Last 24 hours exceeds the full-rate hour, so samples in this range return at 0.1 Hz -
+          shown as a chip on the results screen, not silently.
+        </div>
+      </div>
+
+      <div class="row gap-s" style="padding:10px 12px;border-top:1px solid var(--line)">
+        <button class="btn btn--tap grow" type="button">Cancel</button>
+        <button class="btn btn--tap btn--primary grow" type="submit">Show 7 results</button>
+      </div>
+    </form>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>The filter bar collapses to one Filters button carrying an active count.</b> Eight
+      fields do not fit in a row at 390px, so they move to a sheet, and the button itself states
+      how many are applied so the count is visible without opening it. <span class="req">FR8.3</span></li>
+
+    <li><b>Active chips stay visible under the collapsed button,</b> not only inside the sheet,
+      so a coordinator scanning the result list still sees exactly what narrowed it and can
+      remove one without opening the sheet. <span class="req">FR8.3</span></li>
+
+    <li><b>The tab bar scrolls horizontally rather than wrapping or shrinking labels.</b>
+      "Configuration changes" keeps its full label; the row scrolls instead of truncating a tab
+      name a coordinator would then have to guess at. <span class="req">FR8.1</span></li>
+
+    <li><b>The resolution notice is a fixed chip above the list, not buried in the sheet.</b>
+      0.1 Hz beyond 1 hour is true of every row in this 24 hour range, so it is stated once at
+      the top rather than repeated per row. <span class="req">FR8.2</span></li>
+
+    <li><b>Rows become stacked cards, one type badge and one status chip per card.</b> The same
+      seven fields as the desktop table - type, time, zone, cell, summary, actor, status - none
+      dropped, only re-flowed vertically. <span class="req">FR8.1</span></li>
+
+    <li><b>The suggestion outcome renders as its own chip, same as desktop.</b> SG-0771's card
+      shows CONFIRMED status is implied by the IMPROVED outcome chip itself, matching the
+      canonical dataset's verdict rule stated in S09. <span class="req">FR8.6</span></li>
+
+    <li><b>Every card names an actor.</b> "system (MODEL)" for machine-proposed suggestions,
+      a username and the action taken for anything a person did, so NFR4's "who acted" is never
+      a card without an answer. <span class="req">NFR4</span></li>
+
+    <li><b>Row actions stay two full-width tap targets, not icons.</b> View and Replay are each
+      44px minimum height, because this list is read standing up, not at a desk.
+      <span class="req">FR5.6</span></li>
+
+    <li><b>The filters sheet lists all eight fields in the same order as desktop.</b> Nothing is
+      demoted to an "advanced" section - the mobile coordinator gets the same search power as
+      the administrator at a desk, just reached through a sheet instead of a row.
+      <span class="req">FR8.3</span></li>
+
+    <li><b>The sheet's primary action states the result count before it is pressed.</b>
+      "Show 7 results" lets a coordinator judge whether the current filter combination is worth
+      applying before losing sight of the list underneath. <span class="req">FR8.3</span></li>
+  </ol>
+
+</div>
+<script src="_assets/wireframe.js"></script>
+</body>
+</html>

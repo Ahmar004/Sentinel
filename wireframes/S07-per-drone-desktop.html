@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S07 Per-drone view, desktop - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  /* Scoped additions - wireframe.css is not edited. */
+  .dronemap{position:relative;height:300px;background:var(--g1);border:1px solid var(--g4);
+    border-radius:4px;overflow:hidden}
+  .dronemap .gridwrap{position:absolute;inset:0;gap:1px;background:var(--g4)}
+  .dronemap .gc{background:var(--g0)}
+  .dwrow{margin-top:7px}
+  .dwbar{height:6px;margin-top:3px;border-radius:3px;overflow:hidden;background:var(--g3)}
+  .dwbar i{display:block;height:100%}
+  .telrow{display:flex;justify-content:space-between;padding:3px 0}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">S07</span>
+  <h1>S07 Per-drone view - desktop, OBSERVE against TRANSIT</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S07</b></li>
+    <li>viewport <b>1440 x 900</b></li>
+    <li>role <b>Drone Operator</b></li>
+    <li>state <b>D-01 OBSERVE, D-03 TRANSIT</b></li>
+    <li>requirement <b>FR1.2 FR1.4 FR1.5 FR2.1 FR2.3 FR3.1 FR4.2</b></li>
+    <li>batch <b>4</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <!-- ============ device A: D-01, OBSERVE ============ -->
+  <div class="device device--desktop">
+    <span class="device-tag">D-01 - OBSERVE</span>
+
+    <span class="cx" style="left:640px;top:150px">1</span>
+    <span class="cx" style="left:400px;top:230px">2</span>
+    <span class="cx" style="left:900px;top:230px">3</span>
+    <span class="cx" style="left:900px;top:400px">4</span>
+    <span class="cx" style="left:900px;top:540px">5</span>
+    <span class="cx" style="left:900px;top:660px">6</span>
+    <span class="cx" style="left:400px;top:780px">7</span>
+    <span class="cx" style="left:1160px;top:850px">8</span>
+
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="S02-live-map-desktop.html"><i class="icon"></i>Live map</a>
+        <a href="S06-fleet-desktop.html" aria-current="page"><i class="icon"></i>Fleet</a>
+        <div class="rail-note">
+          Signed in as <b>m.tariq</b><br>
+          <span class="st st-neutral" style="margin-top:4px">DRONE_OPERATOR</span>
+        </div>
+      </nav>
+
+      <div class="col grow">
+        <div class="top">
+          <span class="b">Riverside Arena</span>
+          <span class="tiny muted">300 x 200 m - 60 x 40 grid - 2400 cells</span>
+          <span class="st st-observed">LIVE</span>
+          <span class="mono tiny">latency 1.2s / 2.0s budget</span>
+          <span class="grow"></span>
+          <span class="mono tiny">14:03:12</span>
+          <span class="chip">m.tariq</span>
+        </div>
+
+        <div class="row between center" style="padding:10px 16px;border-bottom:1px solid var(--line)">
+          <div class="row gap center">
+            <a href="S06-fleet-desktop.html" class="tiny mono" style="color:var(--focus);text-decoration:none">&larr; Fleet</a>
+            <span class="mono b" style="font-size:15px">D-01 - North Gate high</span>
+            <span class="st st-neutral">OBSERVE</span>
+          </div>
+          <span class="tiny muted">Not a video player - per-cell summaries only, no imagery</span>
+        </div>
+
+        <div class="banner banner--live">
+          Observing. Density, flow and risk are all produced while the drone holds position -
+          dwell 4m12s elapsed.
+        </div>
+
+        <div class="col grow scroll pad-l" style="overflow:auto">
+          <div class="wrap gap" style="gap:16px;align-items:flex-start">
+
+            <div class="card" style="flex:0 0 460px">
+              <div class="mono tiny b">FOOTPRINT - WIND-MAP OVERLAY</div>
+              <div class="dronemap" style="margin-top:8px">
+                <div class="gridwrap" data-cols="8" data-map="
+                  w2w3e3e4e3w3w2o2
+                  w2w3e3e4e3w3w2o2
+                  w2w3e3e3e3w3w2o2
+                  w1w2w3w3w3w2w1o1
+                  o1o1w2w2w2w1o1o1
+                  o1o1o1o1o1o1o1o1"></div>
+              </div>
+              <div class="tiny muted" style="margin-top:8px">
+                Cropped to D-01's own 48 footprint cells only. Shading is density, arrows are
+                flow sized by speed, the outline is the risk band - the same three channels
+                `S02` draws, at a smaller crop.
+              </div>
+            </div>
+
+            <div class="col gap" style="flex:1 1 360px;min-width:340px">
+              <div class="card">
+                <div class="mono tiny b">DWELL - 30 S GATE</div>
+                <div class="tiny" style="margin-top:6px">
+                  All 48 footprint cells have completed the continuous 30 s window. Dwell has
+                  been satisfied since each cell first reached 30 s of unbroken observation.
+                </div>
+                <div class="dwrow tiny mono"><div class="row between"><span>C-030-004</span><span>30 / 30 s</span></div>
+                  <div class="dwbar"><i style="width:100%;background:var(--obs-observed)"></i></div></div>
+                <div class="dwrow tiny mono"><div class="row between"><span>C-031-004</span><span>30 / 30 s</span></div>
+                  <div class="dwbar"><i style="width:100%;background:var(--obs-observed)"></i></div></div>
+                <div class="dwrow tiny mono"><div class="row between"><span>C-032-005</span><span>30 / 30 s</span></div>
+                  <div class="dwbar"><i style="width:100%;background:var(--obs-observed)"></i></div></div>
+              </div>
+
+              <div class="card">
+                <div class="row between center"><span class="mono tiny b">REGISTRATION</span>
+                  <span class="st st-neutral">LOCKED</span></div>
+                <div class="tiny mono" style="margin-top:6px">412 inliers matched to the saved
+                  reference frame.</div>
+                <div class="honest" style="margin-top:8px">
+                  Each frame is matched to a saved reference frame so drone drift is never
+                  counted as crowd movement.
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="mono tiny b">TELEMETRY</div>
+                <div class="tiny mono" style="margin-top:6px">
+                  <div class="telrow"><span class="muted">Pose (ground frame)</span><span>128.4 m, 24.6 m</span></div>
+                  <div class="telrow"><span class="muted">Altitude</span><span>38 m AGL</span></div>
+                  <div class="telrow"><span class="muted">Heading</span><span>212&deg;</span></div>
+                  <div class="telrow"><span class="muted">Battery</span><span>78%</span></div>
+                  <div class="telrow"><span class="muted">Link</span><span class="st st-neutral">ONLINE</span></div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="mono tiny b">ESTIMATED PEOPLE IN FOOTPRINT</div>
+                <div class="mono b" style="font-size:26px;margin-top:4px">~96</div>
+                <div class="tiny muted">people, summed over <b>48 of 48</b> observed cells</div>
+                <div class="tiny muted" style="margin-top:6px">
+                  Estimate covers this footprint's observed cells only, not the full site.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:16px">
+            <div class="mono tiny b" style="margin-bottom:8px">FOOTPRINT CELLS - 8 OF 48 SHOWN</div>
+            <table class="wt">
+              <tr><th>Cell</th><th>Density /m2</th><th>Flow</th><th>Observation state</th></tr>
+              <tr><td class="mono">C-030-004</td><td class="mono">1.9</td><td class="mono">214&deg; @ 1.1 m/s</td><td><span class="st st-observed">OBSERVED</span></td></tr>
+              <tr><td class="mono">C-031-004</td><td class="mono">2.6</td><td class="mono">210&deg; @ 1.3 m/s</td><td><span class="st st-observed">OBSERVED</span></td></tr>
+              <tr><td class="mono">C-032-004</td><td class="mono">3.1</td><td class="mono">205&deg; @ 1.6 m/s</td><td><span class="st st-observed">OBSERVED</span></td></tr>
+              <tr><td class="mono">C-033-004</td><td class="mono">2.2</td><td class="mono">218&deg; @ 1.0 m/s</td><td><span class="st st-observed">OBSERVED</span></td></tr>
+              <tr><td class="mono">C-030-005</td><td class="mono">1.6</td><td class="mono">220&deg; @ 0.8 m/s</td><td><span class="st st-observed">OBSERVED</span></td></tr>
+              <tr><td class="mono">C-031-005</td><td class="mono">2.0</td><td class="mono">212&deg; @ 1.2 m/s</td><td><span class="st st-observed">OBSERVED</span></td></tr>
+              <tr><td class="mono">C-032-005</td><td class="mono">2.4</td><td class="mono">208&deg; @ 1.4 m/s</td><td><span class="st st-observed">OBSERVED</span></td></tr>
+              <tr><td class="mono">C-033-005</td><td class="mono">1.8</td><td class="mono">216&deg; @ 0.9 m/s</td><td><span class="st st-observed">OBSERVED</span></td></tr>
+            </table>
+          </div>
+
+          <div class="honest" style="margin-top:14px">
+            The live path carries per-cell summaries only. No imagery is transmitted from any
+            drone.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ device B: D-03, TRANSIT ============ -->
+  <div class="device device--desktop">
+    <span class="device-tag">D-03 - TRANSIT</span>
+
+    <span class="cx" style="left:640px;top:150px">9</span>
+    <span class="cx" style="left:400px;top:230px">10</span>
+    <span class="cx" style="left:900px;top:230px">11</span>
+    <span class="cx" style="left:900px;top:400px">12</span>
+    <span class="cx" style="left:900px;top:540px">13</span>
+    <span class="cx" style="left:400px;top:780px">14</span>
+
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="S02-live-map-desktop.html"><i class="icon"></i>Live map</a>
+        <a href="S06-fleet-desktop.html" aria-current="page"><i class="icon"></i>Fleet</a>
+        <div class="rail-note">
+          Signed in as <b>m.tariq</b><br>
+          <span class="st st-neutral" style="margin-top:4px">DRONE_OPERATOR</span>
+        </div>
+      </nav>
+
+      <div class="col grow">
+        <div class="top">
+          <span class="b">Riverside Arena</span>
+          <span class="tiny muted">300 x 200 m - 60 x 40 grid - 2400 cells</span>
+          <span class="st st-observed">LIVE</span>
+          <span class="mono tiny">latency 1.2s / 2.0s budget</span>
+          <span class="grow"></span>
+          <span class="mono tiny">14:03:12</span>
+          <span class="chip">m.tariq</span>
+        </div>
+
+        <div class="row between center" style="padding:10px 16px;border-bottom:1px solid var(--line)">
+          <div class="row gap center">
+            <a href="S06-fleet-desktop.html" class="tiny mono" style="color:var(--focus);text-decoration:none">&larr; Fleet</a>
+            <span class="mono b" style="font-size:15px">D-03 - Roving</span>
+            <span class="st st-neutral">TRANSIT</span>
+          </div>
+          <span class="tiny muted">Not a video player - per-cell summaries only, no imagery</span>
+        </div>
+
+        <div class="banner banner--degraded">
+          In transit. Density only. Flow and risk are not produced from a moving camera.
+        </div>
+
+        <div class="col grow scroll pad-l" style="overflow:auto">
+          <div class="wrap gap" style="gap:16px;align-items:flex-start">
+
+            <div class="card" style="flex:0 0 460px">
+              <div class="mono tiny b">FOOTPRINT - DENSITY ONLY</div>
+              <div class="dronemap" id="d03map" style="margin-top:8px"></div>
+              <div class="tiny muted" style="margin-top:8px">
+                44 cells, leaving Arena north and arriving Arena south-east. Every cell carries
+                density hatching and no arrow and no outline - not because the cells scored low,
+                but because a moving camera never produces flow or risk at all.
+              </div>
+            </div>
+
+            <div class="col gap" style="flex:1 1 360px;min-width:340px">
+              <div class="card">
+                <div class="mono tiny b">DWELL - 30 S GATE</div>
+                <div class="tiny" style="margin-top:6px">
+                  Dwell has not started for any cell in this footprint. D-03 is transiting; the
+                  observation clock only begins once a cell is held under an OBSERVE-state drone.
+                </div>
+                <div class="dwrow tiny mono"><div class="row between"><span>C-024-018</span><span>0 / 30 s</span></div>
+                  <div class="dwbar"><i style="width:0%;background:var(--obs-dwell)"></i></div></div>
+                <div class="dwrow tiny mono"><div class="row between"><span>C-025-018</span><span>0 / 30 s</span></div>
+                  <div class="dwbar"><i style="width:0%;background:var(--obs-dwell)"></i></div></div>
+                <div class="dwrow tiny mono"><div class="row between"><span>C-026-019</span><span>0 / 30 s</span></div>
+                  <div class="dwbar"><i style="width:0%;background:var(--obs-dwell)"></i></div></div>
+              </div>
+
+              <div class="card">
+                <div class="row between center"><span class="mono tiny b">REGISTRATION</span>
+                  <span class="st st-watch">SEARCHING</span></div>
+                <div class="tiny mono" style="margin-top:6px">0 inliers. No frame is confirmed
+                  stable against the reference yet.</div>
+                <div class="honest" style="margin-top:8px">
+                  Each frame is matched to a saved reference frame so drone drift is never
+                  counted as crowd movement. While searching, flow is never attempted.
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="mono tiny b">TELEMETRY</div>
+                <div class="tiny mono" style="margin-top:6px">
+                  <div class="telrow"><span class="muted">Pose (ground frame)</span><span>96.0 m, 118.2 m</span></div>
+                  <div class="telrow"><span class="muted">Altitude</span><span>45 m AGL</span></div>
+                  <div class="telrow"><span class="muted">Heading</span><span>96&deg;</span></div>
+                  <div class="telrow"><span class="muted">Battery</span><span>91%</span></div>
+                  <div class="telrow"><span class="muted">Link</span><span class="st st-neutral">ONLINE</span></div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="mono tiny b">ESTIMATED PEOPLE IN FOOTPRINT</div>
+                <div class="mono b" style="font-size:20px;margin-top:4px">No estimate</div>
+                <div class="tiny muted" style="margin-top:4px">
+                  0 of 44 footprint cells are observed. A transiting drone contributes density
+                  only; people are estimated over OBSERVED cells only, and none here qualify yet.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:16px">
+            <div class="mono tiny b" style="margin-bottom:8px">FOOTPRINT CELLS - 8 OF 44 SHOWN</div>
+            <table class="wt">
+              <tr><th>Cell</th><th>Density /m2</th><th>Flow</th><th>Observation state</th></tr>
+              <tr><td class="mono">C-024-018</td><td class="mono">0.6</td><td class="mono muted">not produced (transit)</td><td><span class="st st-dwell">NOT_ENOUGH_DWELL</span></td></tr>
+              <tr><td class="mono">C-025-018</td><td class="mono">0.9</td><td class="mono muted">not produced (transit)</td><td><span class="st st-dwell">NOT_ENOUGH_DWELL</span></td></tr>
+              <tr><td class="mono">C-026-018</td><td class="mono">1.1</td><td class="mono muted">not produced (transit)</td><td><span class="st st-dwell">NOT_ENOUGH_DWELL</span></td></tr>
+              <tr><td class="mono">C-027-018</td><td class="mono">0.8</td><td class="mono muted">not produced (transit)</td><td><span class="st st-dwell">NOT_ENOUGH_DWELL</span></td></tr>
+              <tr><td class="mono">C-024-019</td><td class="mono">0.7</td><td class="mono muted">not produced (transit)</td><td><span class="st st-dwell">NOT_ENOUGH_DWELL</span></td></tr>
+              <tr><td class="mono">C-025-019</td><td class="mono">1.0</td><td class="mono muted">not produced (transit)</td><td><span class="st st-dwell">NOT_ENOUGH_DWELL</span></td></tr>
+              <tr><td class="mono">C-026-019</td><td class="mono">1.3</td><td class="mono muted">not produced (transit)</td><td><span class="st st-dwell">NOT_ENOUGH_DWELL</span></td></tr>
+              <tr><td class="mono">C-027-019</td><td class="mono">1.2</td><td class="mono muted">not produced (transit)</td><td><span class="st st-dwell">NOT_ENOUGH_DWELL</span></td></tr>
+            </table>
+          </div>
+
+          <div class="honest" style="margin-top:14px">
+            The live path carries per-cell summaries only. No imagery is transmitted from any
+            drone.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>The two devices are the whole point of this screen.</b> Same layout, same panel
+      order, same table columns - only the values change, so the contrast between OBSERVE and
+      TRANSIT is legible at a glance rather than requiring two separate mental models.
+      <span class="req">FR2.3</span></li>
+
+    <li><b>Neither device is a video player, and both say so beside the header.</b> Where a
+      camera preview might be expected, the interface states plainly that only per-cell
+      summaries travel the live path. <span class="req">FR1.4</span></li>
+
+    <li><b>The state banner is a sentence, not a colour.</b> D-03's reads exactly "In transit.
+      Density only. Flow and risk are not produced from a moving camera." - the drone-state rule
+      stated in the interface rather than implied by an absent arrow. <span class="req">FR2.3</span></li>
+
+    <li><b>The mini map is cropped to the drone's own footprint only,</b> drawing the same three
+      channels `S02` draws - density fill, flow arrow, risk outline - at a smaller scale.
+      <span class="req">FR3.1</span></li>
+
+    <li><b>D-03's crop carries density hatching and nothing else,</b> built without the arrow
+      logic the shared map renderer would otherwise apply to a not-enough-dwell cell, because
+      here the absence must be total: no arrow, no outline, anywhere in the tile.
+      <span class="req">FR2.3</span> <span class="req">FR3.5</span></li>
+
+    <li><b>The dwell panel is where a viewer watches the gate, not just reads about it.</b> D-01
+      shows 48 of 48 cells already past 30 s; D-03 shows every sampled cell frozen at 0 of 30 s
+      until the drone actually holds position. <span class="req">FR4.2</span></li>
+
+    <li><b>Registration names the mechanism, not just a status word.</b> "Each frame is matched
+      to a saved reference frame so drone drift is never counted as crowd movement" explains why
+      412 inliers matters for D-01 and why 0 inliers means flow cannot be trusted for D-03.
+      <span class="req">FR2.1</span></li>
+
+    <li><b>Estimated people is summed over observed cells only, and D-03 states "No estimate",
+      never "0".</b> Zero would claim the footprint is confirmed empty; no estimate states that
+      nothing has been measured yet. <span class="req">FR1.5</span></li>
+
+    <li><b>The footprint table names the reason in its own Flow column,</b> not just a blank
+      cell - "not produced (transit)" reads correctly even if a viewer never opens the legend.
+      <span class="req">FR1.2</span></li>
+
+    <li><b>The closing line is identical on both devices.</b> "The live path carries per-cell
+      summaries only. No imagery is transmitted from any drone" - stated once per screen state,
+      regardless of which drone or which flight state is showing. <span class="req">FR1.4</span></li>
+  </ol>
+
+</div>
+<script src="_assets/wireframe.js"></script>
+<script>
+  (function () {
+    var host = document.getElementById('d03map');
+    if (!host) { return; }
+    var cols = 11, rows = 4, buckets = [1,2,1,2,3,2,1,2,1,2,3,1,2,1,2,1,2,3,1,2,1,1,
+      2,1,2,1,3,2,1,2,1,2,1,2,1,3,2,1,2,1,2,1,3,2,1];
+    host.style.display = 'grid';
+    host.style.gridTemplateColumns = 'repeat(' + cols + ',1fr)';
+    host.style.gridTemplateRows = 'repeat(' + rows + ',1fr)';
+    host.style.gap = '1px';
+    host.style.background = 'var(--g4)';
+    var html = '';
+    for (var i = 0; i < cols * rows; i++) {
+      html += '<i class="gc obs-dwell d-' + (buckets[i % buckets.length]) + '"></i>';
+    }
+    host.innerHTML = html;
+  })();
+</script>
+</body>
+</html>

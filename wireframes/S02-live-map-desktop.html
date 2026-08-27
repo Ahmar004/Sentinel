@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S02 Live site map, desktop - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">F-003</span>
+  <h1>S02 Live site map - desktop, rail and inspector open together</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S02</b></li>
+    <li>viewport <b>1440 x 900</b></li>
+    <li>role <b>Coordinator</b></li>
+    <li>state <b>LIVE</b></li>
+    <li>requirement <b>FR1 FR2 FR3 FR4 FR5 FR6</b></li>
+    <li>batch <b>1</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900</span>
+
+    <span class="cx" style="left:100px;top:120px">1</span>
+    <span class="cx" style="left:660px;top:26px">2</span>
+    <span class="cx" style="left:430px;top:110px">3</span>
+    <span class="cx" style="left:560px;top:300px">4</span>
+    <span class="cx" style="left:280px;top:560px">5</span>
+    <span class="cx" style="left:760px;top:640px">6</span>
+    <span class="cx" style="left:900px;top:200px">7</span>
+    <span class="cx" style="left:1258px;top:150px">8</span>
+    <span class="cx" style="left:1258px;top:470px">9</span>
+
+    <div class="row grow">
+
+      <!-- nav rail, 200px with labels, derived from the session role -->
+      <nav class="navrail">
+        <a href="#" aria-current="page"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <div class="rail-note">
+          Signed in as <b>a.rahman</b><br>
+          <span class="st st-neutral" style="margin-top:4px">COORDINATOR</span>
+        </div>
+      </nav>
+
+      <div class="col grow">
+        <!-- top bar -->
+        <div class="top">
+          <span class="b">Riverside Arena</span>
+          <span class="tiny muted">300 x 200 m - 60 x 40 grid - 2400 cells</span>
+          <span class="st st-observed">LIVE</span>
+          <span class="mono tiny">latency 1.2s / 2.0s budget</span>
+          <span class="grow"></span>
+          <span class="mono tiny">14:03:12</span>
+          <span class="chip">a.rahman</span>
+        </div>
+
+        <!-- zone strip -->
+        <div class="zstrip">
+          <div class="ztile">
+            <div class="row between center"><span class="mono tiny b">ZONE A - Concourse</span>
+              <span class="st st-normal">NORMAL</span></div>
+            <div class="row between center" style="margin-top:4px">
+              <span class="mono b" style="font-size:22px">0.31</span>
+              <span class="tiny muted mono">~1,480 people over 656 observed cells</span></div>
+            <div class="cov"><i class="c-obs" style="width:82%"></i><i class="c-dwl" style="width:4%"></i>
+              <i class="c-stl" style="width:3%"></i><i class="c-gap" style="width:11%"></i></div>
+            <div class="tiny muted mono" style="margin-top:4px">
+              656 obs / 32 dwell / 24 stale / 88 gap - peak cell C-012-034 at 0.44</div>
+          </div>
+          <div class="ztile" style="outline:3px solid var(--band-elevated);outline-offset:-3px">
+            <div class="row between center"><span class="mono tiny b">ZONE B - North Gate</span>
+              <span class="st st-elevated">ELEVATED</span></div>
+            <div class="row between center" style="margin-top:4px">
+              <span class="mono b" style="font-size:22px">0.78</span>
+              <span class="tiny muted mono">~410 people over 192 observed cells</span></div>
+            <div class="cov"><i class="c-obs" style="width:24%"></i><i class="c-dwl" style="width:9%"></i>
+              <i class="c-stl" style="width:7%"></i><i class="c-gap" style="width:60%"></i></div>
+            <div class="tiny muted mono" style="margin-top:4px">
+              192 obs / 72 dwell / 56 stale / 480 gap - peak cell C-031-022 at 0.78</div>
+          </div>
+          <div class="ztile">
+            <div class="row between center"><span class="mono tiny b">ZONE C - Arena Floor</span>
+              <span class="st st-dwell">NOT_ENOUGH_DWELL</span></div>
+            <div class="row between center" style="margin-top:4px">
+              <span class="mono b" style="font-size:22px">-</span>
+              <span class="tiny muted mono">no estimate, no observed cells</span></div>
+            <div class="cov"><i class="c-obs" style="width:0%"></i><i class="c-dwl" style="width:62%"></i>
+              <i class="c-stl" style="width:0%"></i><i class="c-gap" style="width:38%"></i></div>
+            <div class="tiny muted mono" style="margin-top:4px">
+              0 obs / 372 dwell / 0 stale / 228 gap - risk not produced</div>
+          </div>
+        </div>
+
+        <div class="row grow">
+          <!-- map -->
+          <div class="map">
+            <img class="plan" src="_assets/site-plan.svg" alt="">
+            <div class="gridwrap" data-cols="15" data-map="
+              g0g0g0s2s2o1o2w3e3w3o2s2g0g0g0
+              g0g0s2o2w3e4e4c4e4w3o2s1g0g0g0
+              g0g0s1o2w3e4e4e4w3o2o1g0g0g0g0
+              g0g0g0o1o2w3w3w2o2o1g0g0g0g0g0
+              g0g0g0g0o1o1o2o1o1g0g0g0g0g0g0
+              g0g0g0g0g0d2d2d2g0g0g0g0g0g0g0
+              g0g0g0d1d2d2d3d2d2d1g0g0g0g0g0
+              g0g0d1d2d2d3d3d3d2d2d1g0g0g0g0
+              g0g0d1d2d2d3d3d3d2d2d1g0g0g0g0
+              g0g0g0d1d2d2d2d2d2d1g0g0g0g0g0
+              g0g0g0g0d1d1d2d1d1g0g0g0g0g0g0
+              o1o1o1o2o2o2o2o2o2o1o1o1g0g0g0
+              o1o2o2o2o3o3o2o2o2o2o1o1o1g0g0
+              o1o1o2o2o2o2o2o2o2o1o1o1s1g0g0
+              o0o1o1o1o2o2o2o1o1o1o1s1g0g0g0"></div>
+
+            <div class="zoneline" style="left:110px;top:4px;width:340px;height:160px">
+              <span>ZONE B - North Gate</span></div>
+            <div class="zoneline" style="left:50px;top:210px;width:450px;height:190px;
+              border-style:dashed"><span>ZONE C - Arena Floor</span></div>
+            <div class="zoneline" style="left:4px;top:420px;width:490px;height:130px">
+              <span>ZONE A - Concourse</span></div>
+
+            <div class="footprint" style="left:170px;top:12px;width:180px;height:92px">
+              <span>D-01 OBSERVE 4m12s</span></div>
+            <div class="footprint" style="left:14px;top:428px;width:220px;height:92px">
+              <span>D-02 OBSERVE 9m03s</span></div>
+            <div class="footprint" style="left:290px;top:250px;width:186px;height:92px;
+              border-style:dotted;opacity:.7"><span>D-03 TRANSIT - density only</span></div>
+            <div class="footprint" style="left:256px;top:436px;width:200px;height:88px">
+              <span>D-04 OBSERVE 2m41s</span></div>
+
+            <div class="pin" style="left:252px;top:56px"></div>
+
+            <!-- layers panel, expanded on desktop -->
+            <div class="card" style="position:absolute;left:10px;top:10px;width:186px">
+              <div class="mono tiny b" style="margin-bottom:6px">LAYERS</div>
+              <div class="col gap-s tiny mono">
+                <label><input type="checkbox" checked> Site plan</label>
+                <label><input type="checkbox" checked> Cell grid</label>
+                <label><input type="checkbox" checked> Density shading</label>
+                <label><input type="checkbox" checked> Flow arrows</label>
+                <label><input type="checkbox" checked> Risk band</label>
+                <label><input type="checkbox" checked> Zone boundaries</label>
+                <label><input type="checkbox" checked> Drone footprints</label>
+                <label><input type="checkbox" checked> Alert markers</label>
+                <label><input type="checkbox"> Static attributes</label>
+              </div>
+            </div>
+
+            <!-- legend, expanded panel. A requirement surface, not decoration. -->
+            <div class="card" style="position:absolute;left:10px;bottom:10px;width:390px">
+              <div class="row between center" style="margin-bottom:7px">
+                <span class="mono tiny b">LEGEND - all eight treatments</span>
+                <span class="tiny muted mono">L to collapse</span>
+              </div>
+              <div class="legend">
+                <div class="lg"><span class="sw cell d-2 obs-observed band-normal"></span>OBSERVED - NORMAL</div>
+                <div class="lg"><span class="sw cell d-2 obs-observed band-watch"></span>OBSERVED - WATCH</div>
+                <div class="lg"><span class="sw cell d-2 obs-observed band-elevated"></span>OBSERVED - ELEVATED</div>
+                <div class="lg"><span class="sw cell d-2 obs-observed band-critical"></span>OBSERVED - CRITICAL</div>
+                <div class="lg"><span class="sw cell d-2 obs-dwell"></span>NOT_ENOUGH_DWELL - no band</div>
+                <div class="lg"><span class="sw cell d-2 obs-stale"><u class="age">6s</u></span>STALE - shown with age</div>
+                <div class="lg"><span class="sw cell obs-gap"></span>GAP - no observation</div>
+                <div class="lg"><span class="sw" style="display:flex;align-items:center">
+                  <b class="arrow" style="position:relative;left:0;top:0;width:20px;transform:none"></b>
+                  </span>flow, sized by speed</div>
+              </div>
+              <div class="honest" style="margin-top:8px">
+                Density is fill, flow is the arrow, risk band is the outline. A gap is never
+                guessed and a stale value is never shown as current.
+              </div>
+            </div>
+          </div>
+
+          <!-- alert rail, persistent 360px -->
+          <aside class="rail">
+            <div class="row between center pad-s" style="border-bottom:1px solid var(--line)">
+              <span class="mono tiny b">ALERTS</span>
+              <span class="row gap-s"><span class="st st-elevated">1 OPEN</span>
+                <span class="st st-watch">1 WATCH</span></span>
+            </div>
+
+            <div class="pad-s scroll grow">
+              <div class="card" style="border-left:3px solid var(--band-elevated)">
+                <div class="row between center">
+                  <span class="mono tiny b">A-1042</span>
+                  <span class="st st-elevated">ELEVATED</span>
+                </div>
+                <div class="mono tiny muted" style="margin-top:3px">
+                  Zone B North Gate - cell C-031-022</div>
+                <div class="row between center" style="margin-top:6px">
+                  <span class="mono b" style="font-size:24px">0.78</span>
+                  <span class="tiny muted mono" style="text-align:right">
+                    threshold 0.70<br>raised 14:02:51, 21s ago<br>
+                    <span class="st st-neutral">OPEN</span></span>
+                </div>
+
+                <div class="honest" style="margin:9px 0 7px;border-left-color:var(--band-elevated)">
+                  Why this fired - top three contributing features
+                </div>
+                <div class="attr">
+                  <span>flowConvergence</span><span class="b">+0.19</span>
+                  <i class="attrbar" style="width:100%"></i><span></span>
+                  <span>densityRateOfChange</span><span class="b">+0.14</span>
+                  <i class="attrbar" style="width:74%"></i><span></span>
+                  <span>stopStartPulses</span><span class="b">+0.09</span>
+                  <i class="attrbar" style="width:47%"></i><span></span>
+                </div>
+
+                <div class="tiny muted" style="margin-top:8px">
+                  Clears when risk stays below 0.65 for 30 seconds.</div>
+
+                <div class="row gap-s" style="margin-top:10px">
+                  <button class="btn grow" type="button">Acknowledge</button>
+                  <button class="btn btn--primary grow" type="button">Suggestions (3)</button>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="row between center">
+                  <span class="mono tiny b">Zone B - 7 cells rising</span>
+                  <span class="st st-watch">WATCH</span>
+                </div>
+                <div class="row between center" style="margin-top:5px">
+                  <span class="mono b">0.55</span>
+                  <span class="tiny muted">no alert raised - watch band</span>
+                </div>
+                <div class="bx" style="height:44px;margin-top:7px"></div>
+                <div class="tiny muted mono" style="margin-top:5px">last 15 min</div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>Nav rail is 200px with labels and is derived from one session object.</b> The
+      Coordinator's five entries. Configuration, Accounts, Audit and Health are absent rather
+      than disabled, because the role cannot open them at all. <span class="req">FR10.3</span></li>
+
+    <li><b>Top bar states the site, the connection, the latency against its budget and the
+      clock.</b> Desktop has room to name the budget explicitly rather than only the measured
+      value. <span class="req">FR3.3</span> <span class="req">NFR1</span></li>
+
+    <li><b>Zone strip, three zones, risk and coverage inseparable.</b> Desktop shows the
+      coverage breakdown as counts as well as a bar, and names the peak cell. Zone C reads
+      a dash because no cell in it has completed its dwell window - never 0.00.
+      <span class="req">FR1.5</span> <span class="req">FR4.5</span>
+      <span class="req">FR4.6</span> <span class="req">SRS 2.3</span></li>
+
+    <li><b>Layer control is a persistent panel here, a sheet on mobile.</b> Nine layers, each
+      independently toggleable, static attributes off by default. <span class="req">FR9.3</span>
+      <span class="req">FR9.4</span></li>
+
+    <li><b>D-03 is in transit and its footprint is dotted.</b> Its cells contribute density
+      only, and the cells it vacated are ageing left to right through stale into gap. This is
+      the drone-state rule made visible rather than implied.
+      <span class="req">FR2.3</span> <span class="req">FR6.3</span></li>
+
+    <li><b>The legend is a requirement surface.</b> All eight treatments with pattern, colour
+      and label, plus the sentence stating that gaps are never guessed and stale values are
+      never shown as current. This is where the honesty invariant becomes visible to someone
+      who has never seen the system. <span class="req">NFR5</span>
+      <span class="req">FR3.4</span> <span class="req">FR6.3</span></li>
+
+    <li><b>Zone boundaries are a display grouping over cells, not a container.</b> Zone C is
+      dashed because it currently holds no observed cell. Drones are not assigned to zones -
+      D-04 straddles A and C, which is only possible because every measurement belongs to a
+      cell. <span class="req">FR6.2</span> <span class="req">FR9.8</span></li>
+
+    <li><b>Alert rail is persistent at 360px.</b> One card per open alert, newest first. On
+      desktop the rail and a cell inspector can be open at the same time beside the map.
+      <span class="req">FR5.1</span></li>
+
+    <li><b>Attribution is on the card, not behind a link.</b> Three signed contributions and
+      the clear condition in plain words, readable without navigating. Suggestions expand
+      inline; the button does not leave the map. <span class="req">FR5.2</span>
+      <span class="req">FR5.3</span> <span class="req">FR5.4</span> <span class="req">NFR3</span></li>
+  </ol>
+
+</div>
+<script src="_assets/wireframe.js"></script>
+</body>
+</html>

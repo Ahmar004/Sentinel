@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S11 step 5 Exits, mobile - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .wzform{display:flex;flex-direction:column;min-height:0;flex:1}
+  .wz-progress{flex:0 0 auto;padding:9px 12px 11px;border-bottom:1px solid var(--line);background:var(--g0)}
+  .wz-stepbtn{display:flex;align-items:center;gap:9px;width:100%;min-height:40px;
+    border:1px solid var(--g4);border-radius:6px;background:var(--g1);padding:0 10px;
+    font:600 12px var(--font);color:var(--ink)}
+  .wz-stepbtn .cur{font:700 11px/1 var(--mono);color:var(--ink-2);flex:0 0 auto}
+  .wz-stepbtn .name{flex:1;text-align:left}
+  .wz-caret{width:7px;height:7px;border-right:2px solid var(--ink-2);
+    border-bottom:2px solid var(--ink-2);transform:rotate(45deg);flex:0 0 auto}
+  .wz-bar{height:4px;background:var(--g3);border-radius:2px;margin-top:8px;overflow:hidden}
+  .wz-body{overflow-y:auto;padding:14px 14px 20px}
+  .wz-actions{flex:0 0 auto;display:flex;gap:8px;padding:10px 12px;
+    border-top:1px solid var(--line);background:var(--g0)}
+  .wz-field{margin-bottom:14px}
+  .wz-field label{display:block;font:600 11px var(--mono);color:var(--ink-2);margin-bottom:5px}
+  .wz-input{display:flex;align-items:center;min-height:40px;padding:0 10px;
+    border:1px solid var(--g4);border-radius:5px;background:var(--g0);font:600 13px var(--font)}
+  .wz-input .unit{margin-left:auto;color:var(--ink-2);font:600 11px var(--mono)}
+
+  .exitcard{border:1px solid var(--g4);border-radius:7px;background:var(--g0);
+    padding:12px;margin-bottom:12px}
+  .exitcard.editing{border-color:var(--g7);box-shadow:0 0 0 1px var(--g7)}
+  .exitmap{position:relative;height:64px;border:1px solid var(--g5);border-radius:5px;
+    overflow:hidden;background:var(--g2);margin-bottom:10px}
+  .exitmap img{position:absolute;inset:-20%;width:140%;height:140%;object-fit:fill;opacity:.5}
+  .exitmap .cells{position:absolute;display:flex;gap:2px}
+  .exitmap .cells i{width:12px;height:12px;background:var(--g6);border-radius:1px}
+  .exitmap .cells span{position:absolute;top:-16px;left:0;font:700 9px var(--mono);
+    background:var(--g6);color:#fff;padding:1px 4px;border-radius:2px}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">S11.5</span>
+  <h1>S11 venue setup, step 5 of 8 - Exits, mobile</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S11</b></li>
+    <li>viewport <b>390 x 844</b></li>
+    <li>role <b>Administrator</b></li>
+    <li>state <b>E1 South Gate 1200 p/min, E2 North Gate 900 p/min</b></li>
+    <li>requirement <b>FR9.5</b></li>
+    <li>batch <b>2</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <div class="device device--mobile">
+    <span class="device-tag">step 5</span>
+
+    <span class="cx" style="left:214px;top:24px">1</span>
+    <span class="cx" style="left:120px;top:180px">2</span>
+    <span class="cx" style="left:340px;top:270px">3</span>
+    <span class="cx" style="left:120px;top:430px">4</span>
+    <span class="cx" style="left:200px;top:600px">5</span>
+    <span class="cx" style="left:355px;top:812px">6</span>
+
+    <form class="wzform" onsubmit="event.preventDefault()">
+      <div class="top">
+        <span class="b">Venue setup</span>
+        <span class="grow"></span>
+        <button class="btn btn--sm" type="button">Exit</button>
+      </div>
+
+      <div class="wz-progress">
+        <button class="wz-stepbtn" type="button" aria-haspopup="true">
+          <span class="cur">STEP 5 OF 8</span>
+          <span class="name">Exits</span>
+          <i class="wz-caret"></i>
+        </button>
+        <div class="wz-bar"><i style="width:56%"></i></div>
+      </div>
+
+      <div class="wz-body grow">
+        <div class="honest" style="margin-bottom:14px">
+          Capacity here is the denominator for exit occupancy on the live map - it is not a
+          planning tool. Sentinel does not design, size or schedule exits; it measures what
+          passes through the ones that already exist.
+        </div>
+
+        <div class="exitcard">
+          <div class="row between center" style="margin-bottom:8px">
+            <span class="mono b">E1 - South Gate</span>
+            <span class="chip">8 cells</span>
+          </div>
+          <div class="exitmap">
+            <img src="_assets/site-plan.svg" alt="">
+            <div class="cells" style="left:30%;bottom:14px"><span>E1</span>
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="wz-field" style="margin-bottom:8px">
+            <label>Capacity</label>
+            <div class="wz-input"><span>1200</span><span class="unit">people / min</span></div>
+          </div>
+          <button class="btn btn--sm" type="button" style="width:100%">Edit cell selection</button>
+        </div>
+
+        <div class="exitcard editing">
+          <div class="row between center" style="margin-bottom:8px">
+            <span class="mono b">E2 - North Gate</span>
+            <span class="chip">6 cells</span>
+          </div>
+          <div class="exitmap">
+            <img src="_assets/site-plan.svg" alt="">
+            <div class="cells" style="left:55%;top:14px"><span>E2</span>
+              <i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="wz-field" style="margin-bottom:0">
+            <label>Name</label>
+            <div class="wz-input"><span>North Gate</span></div>
+          </div>
+          <div class="wz-field" style="margin:10px 0 8px">
+            <label>Capacity</label>
+            <div class="wz-input" style="border-color:var(--g7);box-shadow:0 0 0 1px var(--g7)">
+              <span>900</span><span class="unit">people / min</span></div>
+          </div>
+          <button class="btn btn--sm" type="button" style="width:100%">Edit cell selection</button>
+        </div>
+
+        <button class="btn" type="button" style="width:100%">Add exit</button>
+      </div>
+
+      <div class="wz-actions">
+        <button class="btn btn--tap" type="button">Back</button>
+        <button class="btn btn--tap btn--primary grow" type="submit">Continue</button>
+      </div>
+    </form>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>Capacity is a denominator, stated as one up front.</b> The honest note sits above
+      both exits because this is the boundary an examiner will test first: Sentinel never
+      plans, sizes or schedules an exit, it only measures throughput against a number the
+      administrator supplies. <span class="req">FR9.5</span></li>
+
+    <li><b>Each exit groups a set of exit-attributed cells under one name.</b> E1 South
+      Gate holds 8 cells, E2 North Gate holds 6, matching the attribute counts painted in
+      Step 4 - an exit cannot claim a cell that was not marked exit there.
+      <span class="req">FR9.5</span></li>
+
+    <li><b>The map thumbnail shows which cells the name refers to</b>, so "South Gate"
+      is never just a label floating apart from the grid - tapping it opens cell selection
+      to add or remove cells from the group. <span class="req">FR9.5</span></li>
+
+    <li><b>Capacity is a plain number in people per minute</b>, editable inline, matching
+      srs.md's unit for exit occupancy exactly - no derived units, no rate conversions the
+      administrator would have to trust blindly. <span class="req">FR9.5</span></li>
+
+    <li><b>An exit under edit is visually distinct</b> - a stronger border and focus ring on
+      E2 - so a long list of exits never leaves it ambiguous which one the open keyboard is
+      about to change.</li>
+
+    <li><b>Add exit has no upper bound stated</b>, unlike zones in Step 6 - srs.md fixes
+      the zone count at two to four but places no limit on exits, so the control stays
+      enabled regardless of how many already exist. <span class="req">FR9.5</span></li>
+  </ol>
+
+</div>
+</body>
+</html>

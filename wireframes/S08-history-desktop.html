@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S08 History, desktop - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .field{display:flex;flex-direction:column;gap:3px;min-width:0}
+  .field label{font:600 10px var(--mono);color:var(--ink-2);letter-spacing:.03em}
+  .field .sel{display:flex;align-items:center;justify-content:space-between;gap:6px;
+    min-height:32px;padding:0 9px;border:1px solid var(--g5);border-radius:5px;
+    background:var(--g0);font:600 12px var(--font);white-space:nowrap}
+  .field .sel span:last-child{color:var(--g6);font-size:10px}
+  .filterbar{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;padding:10px 16px;
+    border-bottom:1px solid var(--line);background:var(--g1)}
+  .chiprow{display:flex;align-items:center;gap:7px;padding:8px 16px;border-bottom:1px solid var(--line)}
+  .fchip{display:inline-flex;align-items:center;gap:6px;padding:3px 6px 3px 9px;border-radius:99px;
+    border:1px solid var(--g5);background:var(--g0);font:600 11px var(--mono)}
+  .fchip button{appearance:none;border:0;background:var(--g3);border-radius:50%;width:16px;
+    height:16px;font:700 10px/16px var(--font);color:var(--ink);cursor:pointer;padding:0}
+  .type-alert{color:var(--band-elevated);border-color:var(--band-elevated)}
+  .type-suggestion{color:var(--obs-dwell);border-color:var(--obs-dwell)}
+  .type-config{color:var(--ink-2);border-color:var(--g5)}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">F-012</span>
+  <h1>S08 History - desktop, filtered stream across four tabs</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S08, C09</b></li>
+    <li>viewport <b>1440 x 900</b></li>
+    <li>role <b>Coordinator</b></li>
+    <li>state <b>ALL TAB, ZONE B + LAST 24H FILTERS ACTIVE</b></li>
+    <li>requirement <b>FR8.1 FR8.2 FR8.3 FR5.6 NFR4</b></li>
+    <li>batch <b>3</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900</span>
+
+    <span class="cx" style="left:340px;top:132px">1</span>
+    <span class="cx" style="left:1100px;top:132px">2</span>
+    <span class="cx" style="left:1370px;top:196px">3</span>
+    <span class="cx" style="left:260px;top:244px">4</span>
+    <span class="cx" style="left:260px;top:300px">5</span>
+    <span class="cx" style="left:900px;top:360px">6</span>
+    <span class="cx" style="left:900px;top:440px">7</span>
+    <span class="cx" style="left:1370px;top:520px">8</span>
+    <span class="cx" style="left:900px;top:660px">9</span>
+    <span class="cx" style="left:340px;top:730px">10</span>
+
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#" aria-current="page"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <div class="rail-note">Signed in as <b>a.rahman</b><br>
+          <span class="st st-neutral" style="margin-top:4px">COORDINATOR</span></div>
+      </nav>
+
+      <div class="col grow">
+        <div class="top">
+          <span class="b">History</span>
+          <span class="tiny muted">Riverside Arena - 30 day audit retention</span>
+          <span class="grow"></span>
+          <span class="mono tiny">14:03:12</span>
+          <span class="chip">a.rahman</span>
+        </div>
+
+        <!-- filter bar, C09 - eight independently narrowing fields -->
+        <div class="filterbar">
+          <div class="field"><label>TIME RANGE</label>
+            <div class="sel"><span>Last 24 hours</span><span>&#9662;</span></div></div>
+          <div class="field"><label>ZONE</label>
+            <div class="sel"><span>B North Gate</span><span>&#9662;</span></div></div>
+          <div class="field"><label>CELL</label>
+            <div class="sel"><span>Any cell</span><span>&#9662;</span></div></div>
+          <div class="field"><label>RISK BAND</label>
+            <div class="sel"><span>Any band</span><span>&#9662;</span></div></div>
+          <div class="field"><label>ALERT STATUS</label>
+            <div class="sel"><span>Any status</span><span>&#9662;</span></div></div>
+          <div class="field"><label>SUGGESTION STATUS</label>
+            <div class="sel"><span>Any status</span><span>&#9662;</span></div></div>
+          <div class="field"><label>ACTOR</label>
+            <div class="sel"><span>Any actor</span><span>&#9662;</span></div></div>
+          <div class="field"><label>FREE TEXT</label>
+            <div class="sel" style="color:var(--ink-2)"><span>Search summaries&hellip;</span><span></span></div></div>
+        </div>
+
+        <!-- active filter chips, each individually removable -->
+        <div class="chiprow">
+          <span class="mono tiny b muted">ACTIVE</span>
+          <span class="fchip">Zone: B North Gate<button type="button" aria-label="remove">&times;</button></span>
+          <span class="fchip">Time: Last 24 hours<button type="button" aria-label="remove">&times;</button></span>
+          <span class="grow"></span>
+          <span class="tiny muted mono">7 results narrowed by 2 filters</span>
+          <button class="btn btn--sm" type="button">Clear all</button>
+        </div>
+
+        <!-- resolution notice, because the selected range exceeds the full-rate hour -->
+        <div class="row gap-s center" style="padding:8px 16px;border-bottom:1px solid var(--line)">
+          <span class="chip" style="border-color:var(--band-watch);color:var(--band-watch)">
+            RESOLUTION 0.1 Hz beyond 1 hour</span>
+          <span class="tiny muted mono">Last 24 hours spans more than the full-rate hour, so
+            cell samples in this range are returned at 1 per 10 s, not 1 Hz - FR8.2</span>
+        </div>
+
+        <div class="tabs" role="tablist">
+          <button role="tab" id="tab-all" aria-selected="true" aria-controls="panel-all" tabindex="0">All</button>
+          <button role="tab" id="tab-alerts" aria-selected="false" aria-controls="panel-alerts" tabindex="-1">Alerts</button>
+          <button role="tab" id="tab-sugg" aria-selected="false" aria-controls="panel-sugg" tabindex="-1">Suggestions</button>
+          <button role="tab" id="tab-config" aria-selected="false" aria-controls="panel-config" tabindex="-1">Configuration changes</button>
+        </div>
+
+        <div class="col scroll grow pad" style="overflow-y:auto">
+
+          <!-- ---------- ALL ---------- -->
+          <div class="panel" id="panel-all" role="tabpanel" aria-labelledby="tab-all">
+            <table class="wt">
+              <tr><th>Type</th><th>Time</th><th>Zone</th><th>Cell</th><th>Summary</th><th>Actor</th><th>Status</th><th>Actions</th></tr>
+
+              <tr>
+                <td><span class="chip type-alert">ALERT</span></td>
+                <td class="mono">today 14:02:51</td>
+                <td class="mono">B North Gate</td>
+                <td class="mono">C-031-022</td>
+                <td>Risk 0.78 crossed the 0.70 threshold - ELEVATED</td>
+                <td class="mono">a.rahman (ack)</td>
+                <td><span class="st st-neutral">OPEN</span></td>
+                <td><button class="btn btn--sm" type="button">View</button>
+                    <button class="btn btn--sm" type="button">Replay</button></td>
+              </tr>
+              <tr>
+                <td><span class="chip type-suggestion">SUGGESTION</span></td>
+                <td class="mono">today 14:02:55</td>
+                <td class="mono">B North Gate</td>
+                <td class="mono">C-031-022</td>
+                <td>Rank 1 DIVERT to Exit E2 proposed - all five safeguards passed</td>
+                <td class="mono">system (MODEL)</td>
+                <td><span class="st st-neutral">PROPOSED</span></td>
+                <td><button class="btn btn--sm" type="button">View</button></td>
+              </tr>
+              <tr>
+                <td><span class="chip type-suggestion">SUGGESTION</span></td>
+                <td class="mono">today 14:02:55</td>
+                <td class="mono">B North Gate</td>
+                <td class="mono">C-030-019</td>
+                <td>Rank 2 HOLD_AND_METER proposed - neighbour rises to 0.61, below its 0.70 threshold</td>
+                <td class="mono">system (MODEL)</td>
+                <td><span class="st st-neutral">PROPOSED</span></td>
+                <td><button class="btn btn--sm" type="button">View</button></td>
+              </tr>
+              <tr>
+                <td><span class="chip type-suggestion">SUGGESTION</span></td>
+                <td class="mono">today 14:02:55</td>
+                <td class="mono">B North Gate</td>
+                <td class="mono">C-024-026</td>
+                <td>Rank 3 OPEN_ALTERNATE_ROUTE - STALE_CELL_ON_ROUTE, cell last observed 7s ago</td>
+                <td class="mono">system (MODEL)</td>
+                <td><span class="st st-critical">REJECTED</span></td>
+                <td><button class="btn btn--sm" type="button">View</button></td>
+              </tr>
+              <tr>
+                <td><span class="chip type-alert">ALERT</span></td>
+                <td class="mono">yesterday 19:42:10</td>
+                <td class="mono">B North Gate</td>
+                <td class="mono">C-031-022</td>
+                <td>Risk 0.78 crossed the 0.70 threshold - ELEVATED, cleared</td>
+                <td class="mono">system (auto-clear)</td>
+                <td><span class="st st-neutral">CLEARED</span></td>
+                <td><button class="btn btn--sm" type="button">View</button>
+                    <button class="btn btn--sm" type="button">Replay</button></td>
+              </tr>
+              <tr>
+                <td><span class="chip type-suggestion">SUGGESTION</span></td>
+                <td class="mono">yesterday 19:42:38</td>
+                <td class="mono">B North Gate</td>
+                <td class="mono">C-031/032/033</td>
+                <td>SG-0771 DIVERT confirmed - peak risk in the 10 min window fell to 0.61</td>
+                <td class="mono">a.rahman (confirm)</td>
+                <td><span class="st st-neutral">CONFIRMED</span> <span class="chip" style="border-color:var(--band-normal);color:var(--band-normal)">IMPROVED</span></td>
+                <td><button class="btn btn--sm" type="button">View</button>
+                    <button class="btn btn--sm" type="button">Replay</button></td>
+              </tr>
+              <tr>
+                <td><span class="chip type-config">CONFIG</span></td>
+                <td class="mono muted">venue setup</td>
+                <td class="mono">B North Gate</td>
+                <td class="mono muted">-</td>
+                <td>Alert threshold set to 0.70, density threshold set to 4.0 /m2</td>
+                <td class="mono">s.iqbal</td>
+                <td><span class="st st-neutral">SAVED</span></td>
+                <td><button class="btn btn--sm" type="button">View</button></td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- ---------- ALERTS ---------- -->
+          <div class="panel" id="panel-alerts" role="tabpanel" aria-labelledby="tab-alerts" hidden>
+            <table class="wt">
+              <tr><th>Time</th><th>Zone</th><th>Cell</th><th>Score vs threshold</th><th>Actor</th><th>Status</th><th>Actions</th></tr>
+              <tr>
+                <td class="mono">today 14:02:51</td><td class="mono">B North Gate</td><td class="mono">C-031-022</td>
+                <td class="mono">0.78 vs 0.70 - ELEVATED</td><td class="mono">a.rahman (ack)</td>
+                <td><span class="st st-neutral">OPEN</span></td>
+                <td><button class="btn btn--sm" type="button">View</button>
+                    <button class="btn btn--sm" type="button">Replay</button></td>
+              </tr>
+              <tr>
+                <td class="mono">yesterday 19:42:10</td><td class="mono">B North Gate</td><td class="mono">C-031-022</td>
+                <td class="mono">0.78 vs 0.70 - ELEVATED</td><td class="mono">system (auto-clear)</td>
+                <td><span class="st st-neutral">CLEARED</span></td>
+                <td><button class="btn btn--sm" type="button">View</button>
+                    <button class="btn btn--sm" type="button">Replay</button></td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- ---------- SUGGESTIONS ---------- -->
+          <div class="panel" id="panel-sugg" role="tabpanel" aria-labelledby="tab-sugg" hidden>
+            <table class="wt">
+              <tr><th>Time</th><th>Alert</th><th>Action</th><th>Summary</th><th>Actor</th><th>Status</th><th>Outcome</th><th>Actions</th></tr>
+              <tr>
+                <td class="mono">today 14:02:55</td><td class="mono">A-1042</td><td class="mono">DIVERT</td>
+                <td>To Exit E2. All five safeguards passed.</td><td class="mono">system (MODEL)</td>
+                <td><span class="st st-neutral">PROPOSED</span></td><td class="muted mono tiny">window not started</td>
+                <td><button class="btn btn--sm" type="button">View</button></td>
+              </tr>
+              <tr>
+                <td class="mono">today 14:02:55</td><td class="mono">A-1042</td><td class="mono">HOLD_AND_METER</td>
+                <td>North approach. Neighbour C-030-019 rises to 0.61, still below 0.70.</td><td class="mono">system (MODEL)</td>
+                <td><span class="st st-neutral">PROPOSED</span></td><td class="muted mono tiny">window not started</td>
+                <td><button class="btn btn--sm" type="button">View</button></td>
+              </tr>
+              <tr>
+                <td class="mono">today 14:02:55</td><td class="mono">A-1042</td><td class="mono">OPEN_ALTERNATE_ROUTE</td>
+                <td>West toward E1. STALE_CELL_ON_ROUTE, C-024-026 last observed 7s ago.</td><td class="mono">system (MODEL)</td>
+                <td><span class="st st-critical">REJECTED</span></td><td class="muted mono tiny">nothing to confirm</td>
+                <td><button class="btn btn--sm" type="button">View</button></td>
+              </tr>
+              <tr>
+                <td class="mono">yesterday 19:42:38</td><td class="mono">A-1039</td><td class="mono">DIVERT</td>
+                <td>SG-0771. Confirmed by a.rahman, 0.78 at confirm, peak 0.61 in the 10 min window.</td>
+                <td class="mono">a.rahman (confirm)</td>
+                <td><span class="st st-neutral">CONFIRMED</span></td>
+                <td><span class="chip" style="border-color:var(--band-normal);color:var(--band-normal)">IMPROVED -0.17</span></td>
+                <td><button class="btn btn--sm" type="button">View</button>
+                    <button class="btn btn--sm" type="button">Replay</button></td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- ---------- CONFIGURATION CHANGES ---------- -->
+          <div class="panel" id="panel-config" role="tabpanel" aria-labelledby="tab-config" hidden>
+            <table class="wt">
+              <tr><th>When</th><th>Zone</th><th>Field</th><th>Summary</th><th>Actor</th></tr>
+              <tr>
+                <td class="mono muted">venue setup</td><td class="mono">B North Gate</td>
+                <td class="mono">alertThreshold, densityThreshold</td>
+                <td>Set to the default 0.70 alert threshold and 4.0 /m2 density threshold</td>
+                <td class="mono">s.iqbal</td>
+              </tr>
+            </table>
+            <div class="honest" style="margin-top:10px">
+              Only Zone B's configuration entry matches the active Zone filter. Zone A and Zone
+              C were configured in the same setup pass, and reappear here the moment the zone
+              filter is cleared - filters narrow the same underlying log, they never create a
+              separate one per tab.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>Eight filter fields, each narrowing independently.</b> Time range, zone, cell, risk
+      band, alert status, suggestion status, actor and free text sit in one bar; picking any one
+      narrows the result set without resetting the others. <span class="req">FR8.3</span></li>
+
+    <li><b>Active filters are chips, each individually removable.</b> Zone and time range are
+      both applied here; removing one re-widens the set without touching the other, and Clear
+      all resets both at once. <span class="req">FR8.3</span> <span class="req">C09</span></li>
+
+    <li><b>The narrowed count is stated, not just the rows.</b> "7 results narrowed by 2 filters"
+      tells the coordinator filters are doing something, distinct from there being only 7 events
+      in the whole 30 day retention. <span class="req">FR8.3</span></li>
+
+    <li><b>The resolution notice names the actual rate, 0.1 Hz, because the range exceeds the
+      full-rate hour.</b> The 24 hour range spans yesterday's incident, so cell samples in that
+      part of the range come back at one per 10 s and the screen says so instead of implying
+      1 Hz precision it cannot deliver. <span class="req">FR8.2</span></li>
+
+    <li><b>Four tabs scope the same underlying stream.</b> All, Alerts, Suggestions and
+      Configuration changes are views over one filtered set, not four separate queries - the
+      Configuration tab's own note demonstrates this by naming what the zone filter is hiding.
+      <span class="req">FR8.1</span></li>
+
+    <li><b>Every row carries type, time, zone, cell and a one-line summary,</b> exactly as
+      design.md specifies, so a row is legible without opening it. <span class="req">FR8.1</span></li>
+
+    <li><b>Suggestion rows carry the outcome verdict as its own chip, separate from status.</b>
+      SG-0771 shows CONFIRMED and IMPROVED -0.17 side by side; A-1042's still-open suggestions
+      show PROPOSED with "window not started" rather than a guessed verdict.
+      <span class="req">FR8.6</span></li>
+
+    <li><b>Every row names its actor, not only its time.</b> System-raised events read "system",
+      human actions read the username and what they did - acknowledge, confirm, or save -
+      because NFR4 requires who acted, not only when. <span class="req">NFR4</span></li>
+
+    <li><b>Row actions open S09 for detail or S10 for the surrounding period,</b> so a
+      coordinator moves from "what happened" to "watch it happen" without leaving the filtered
+      list behind. <span class="req">FR5.6</span></li>
+
+    <li><b>The header states the retention window plainly.</b> "30 day audit retention" sits in
+      the top bar on every visit to this screen, so a coordinator never has to guess how far
+      back a search can reach. <span class="req">FR8.2</span> <span class="req">NFR4</span></li>
+  </ol>
+
+</div>
+<script src="_assets/wireframe.js"></script>
+</body>
+</html>

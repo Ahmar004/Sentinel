@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S06 Drone fleet, mobile - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  /* Scoped additions - wireframe.css is not edited. */
+  .stat-row{display:flex;gap:8px;padding:10px 12px 0}
+  .stat-sm{flex:0 0 auto;text-align:center;padding:7px 14px}
+  .stat-sm b{display:block;font:700 22px var(--mono);color:var(--ink)}
+  .sm-map{position:relative;height:120px;background:var(--g1);border:1px solid var(--g4);
+    border-radius:4px;overflow:hidden;margin-top:7px}
+  .sm-map .gridwrap{position:absolute;inset:0;gap:1px;background:var(--g4)}
+  .sm-map .gc{background:var(--g0)}
+  .overlap-box{position:absolute;z-index:6;border:2px solid var(--focus);
+    background:rgba(37,99,235,.10);pointer-events:none}
+  .overlap-tag{position:absolute;z-index:7;font:700 8px/1 var(--mono);background:var(--focus);
+    color:#fff;padding:2px 4px;border-radius:2px;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">S06</span>
+  <h1>S06 Drone fleet - mobile, two tab states</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S06</b></li>
+    <li>viewport <b>390 x 844</b></li>
+    <li>role <b>Drone Operator</b></li>
+    <li>state <b>LIVE</b></li>
+    <li>requirement <b>FR1.2 FR1.4 FR3.1 FR6.1 FR9.8 SRS 2.6</b></li>
+    <li>batch <b>4</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <!-- ============ device A: Fleet list tab active ============ -->
+  <div class="device device--mobile">
+    <span class="device-tag">Fleet list</span>
+
+    <span class="cx" style="left:340px;top:26px">1</span>
+    <span class="cx" style="left:120px;top:106px">2</span>
+    <span class="cx" style="left:60px;top:210px">3</span>
+    <span class="cx" style="left:340px;top:260px">4</span>
+    <span class="cx" style="left:340px;top:520px">5</span>
+
+    <div class="col grow" style="min-height:0">
+      <div class="top">
+        <span class="b" style="font-size:13px">Riverside Arena</span>
+        <span class="st st-observed">LIVE</span>
+        <span class="grow"></span>
+        <span class="mono tiny">14:03:12</span>
+      </div>
+
+      <!-- the count of drones and the count of zones, side by side, deliberately mismatched -->
+      <div class="stat-row">
+        <div class="card stat-sm"><b>4</b><span class="tiny muted mono">DRONES</span></div>
+        <div class="card stat-sm"><b>3</b><span class="tiny muted mono">ZONES</span></div>
+      </div>
+      <div class="honest" style="margin:8px 12px 0">
+        Drones are not assigned to zones - every measurement belongs to a cell. Four drones
+        over three zones makes that visible: D-04's footprint currently spans both Zone A
+        and Zone C at once.
+      </div>
+
+      <div class="tabs" role="tablist" style="margin-top:10px">
+        <button role="tab" id="a-tab-fleet" aria-selected="true" aria-controls="a-panel-fleet" tabindex="0">Fleet list</button>
+        <button role="tab" id="a-tab-feeds" aria-selected="false" aria-controls="a-panel-feeds" tabindex="-1">Combined feeds</button>
+      </div>
+
+      <div class="col grow scroll" style="overflow:auto">
+        <div id="a-panel-fleet" role="tabpanel" aria-labelledby="a-tab-fleet" class="panel pad">
+          <div class="col gap">
+
+            <div class="card">
+              <div class="row between center">
+                <span class="mono b">D-01 - North Gate high</span>
+                <span class="st st-neutral">OBSERVE</span>
+              </div>
+              <div class="row between center tiny mono muted" style="margin-top:6px">
+                <span>dwell 4m12s</span><span class="st st-neutral">ONLINE</span><span>batt 78%</span>
+              </div>
+              <div class="hr" style="margin:9px 0"></div>
+              <div class="tiny mono">
+                area <b>North Gate approach</b><br>
+                footprint <b>48 cells</b> - contributing <b>48</b>
+              </div>
+              <div class="row gap-s" style="margin-top:11px">
+                <button class="btn btn--tap grow" type="button">Open</button>
+                <button class="btn btn--tap btn--primary grow" type="button">Assign</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="row between center">
+                <span class="mono b">D-02 - Concourse west</span>
+                <span class="st st-neutral">OBSERVE</span>
+              </div>
+              <div class="row between center tiny mono muted" style="margin-top:6px">
+                <span>dwell 9m03s</span><span class="st st-neutral">ONLINE</span><span>batt 64%</span>
+              </div>
+              <div class="hr" style="margin:9px 0"></div>
+              <div class="tiny mono">
+                area <b>West concourse</b><br>
+                footprint <b>52 cells</b> - contributing <b>52</b>
+              </div>
+              <div class="row gap-s" style="margin-top:11px">
+                <button class="btn btn--tap grow" type="button">Open</button>
+                <button class="btn btn--tap btn--primary grow" type="button">Assign</button>
+              </div>
+            </div>
+
+            <div class="card" style="outline:2px dashed var(--focus);outline-offset:-2px">
+              <div class="row between center">
+                <span class="mono b">D-03 - Roving</span>
+                <span class="st st-neutral">TRANSIT</span>
+              </div>
+              <div class="row between center tiny mono muted" style="margin-top:6px">
+                <span>ETA 24s</span><span class="st st-neutral">ONLINE</span><span>batt 91%</span>
+              </div>
+              <div class="hr" style="margin:9px 0"></div>
+              <div class="tiny mono">
+                leaving <b>Arena north</b>, arriving <b>Arena south-east</b><br>
+                footprint <b>44 cells</b> - contributing <b>DENSITY ONLY</b>
+              </div>
+              <div class="row gap-s" style="margin-top:11px">
+                <button class="btn btn--tap grow" type="button">Open</button>
+                <button class="btn btn--tap btn--primary grow" type="button">Assign</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="row between center">
+                <span class="mono b">D-04 - Concourse east</span>
+                <span class="st st-neutral">OBSERVE</span>
+              </div>
+              <div class="row between center tiny mono muted" style="margin-top:6px">
+                <span>dwell 2m41s</span><span class="st st-watch">DEGRADED</span><span>batt 43%</span>
+              </div>
+              <div class="hr" style="margin:9px 0"></div>
+              <div class="tiny mono">
+                area <b>East concourse</b><br>
+                footprint <b>50 cells</b> - contributing <b>50</b>
+              </div>
+              <div class="row gap-s" style="margin-top:11px">
+                <button class="btn btn--tap grow" type="button">Open</button>
+                <button class="btn btn--tap btn--primary grow" type="button">Assign</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div id="a-panel-feeds" role="tabpanel" aria-labelledby="a-tab-feeds" class="panel pad" hidden></div>
+      </div>
+    </div>
+
+    <nav class="navbar">
+      <a href="#"><i class="icon"></i>Live</a>
+      <a href="#" aria-current="page"><i class="icon"></i>Fleet</a>
+    </nav>
+  </div>
+
+  <!-- ============ device B: Combined feeds tab active ============ -->
+  <div class="device device--mobile">
+    <span class="device-tag">Combined feeds</span>
+
+    <span class="cx" style="left:196px;top:106px">6</span>
+    <span class="cx" style="left:196px;top:290px">7</span>
+    <span class="cx" style="left:196px;top:540px">8</span>
+    <span class="cx" style="left:196px;top:730px">9</span>
+    <span class="cx" style="left:196px;top:800px">10</span>
+
+    <div class="col grow" style="min-height:0">
+      <div class="top">
+        <span class="b" style="font-size:13px">Riverside Arena</span>
+        <span class="st st-observed">LIVE</span>
+        <span class="grow"></span>
+        <span class="mono tiny">14:03:12</span>
+      </div>
+
+      <div class="stat-row">
+        <div class="card stat-sm"><b>4</b><span class="tiny muted mono">DRONES</span></div>
+        <div class="card stat-sm"><b>3</b><span class="tiny muted mono">ZONES</span></div>
+      </div>
+
+      <div class="tabs" role="tablist" style="margin-top:10px">
+        <button role="tab" id="b-tab-fleet" aria-selected="false" aria-controls="b-panel-fleet" tabindex="-1">Fleet list</button>
+        <button role="tab" id="b-tab-feeds" aria-selected="true" aria-controls="b-panel-feeds" tabindex="0">Combined feeds</button>
+      </div>
+
+      <div class="col grow scroll" style="overflow:auto">
+        <div id="b-panel-fleet" role="tabpanel" aria-labelledby="b-tab-fleet" class="panel pad" hidden></div>
+
+        <div id="b-panel-feeds" role="tabpanel" aria-labelledby="b-tab-feeds" class="panel pad">
+          <div class="honest" style="margin-bottom:12px">
+            Views are placed by coordinates on the shared grid. Images are never stitched.
+          </div>
+
+          <div class="col gap">
+            <div class="card">
+              <div class="row between center">
+                <span class="mono b" style="font-size:12px">D-01 - North Gate high</span>
+              </div>
+              <div class="tiny mono muted" style="margin-top:2px">OBSERVE 4m12s</div>
+              <div class="sm-map">
+                <div class="gridwrap" data-cols="8" data-map="
+                  w2w3e3e4e3w3w2o2
+                  w2w3e3e4e3w3w2o2
+                  w2w3e3e3e3w3w2o2
+                  w1w2w3w3w3w2w1o1
+                  o1o1w2w2w2w1o1o1
+                  o1o1o1o1o1o1o1o1"></div>
+              </div>
+              <div class="tiny muted mono" style="margin-top:6px">North Gate approach - 48 cells</div>
+            </div>
+
+            <div class="card">
+              <div class="row between center">
+                <span class="mono b" style="font-size:12px">D-02 - Concourse west</span>
+              </div>
+              <div class="tiny mono muted" style="margin-top:2px">OBSERVE 9m03s</div>
+              <div class="sm-map">
+                <div class="gridwrap" data-cols="13" data-map="
+                  o1o1o2o1o1o2o1o2o1o1o2o1o1
+                  o1o2o1o1o2o1o1o2o1o1o1o2o1
+                  o1o1o1o2o1o1o1o1o2o1o1o1o2
+                  o2o1o1o1o2o1o1o1o1o2o1o1o1"></div>
+                <div class="overlap-box" style="right:0;top:0;width:30px;height:64px"></div>
+                <span class="overlap-tag" style="right:2px;top:2px">also D-04</span>
+              </div>
+              <div class="tiny muted mono" style="margin-top:6px">West concourse - 52 cells</div>
+            </div>
+
+            <div class="card" style="outline:2px dashed var(--focus);outline-offset:-2px">
+              <div class="row between center">
+                <span class="mono b" style="font-size:12px">D-03 - Roving</span>
+                <span class="st st-neutral">TRANSIT</span>
+              </div>
+              <div class="sm-map" id="d03-sm-mobile"></div>
+              <div class="tiny muted mono" style="margin-top:6px">Arena north &rarr; south-east - 44 cells</div>
+            </div>
+
+            <div class="card">
+              <div class="row between center">
+                <span class="mono b" style="font-size:12px">D-04 - Concourse east</span>
+                <span class="st st-watch">DEGRADED</span>
+              </div>
+              <div class="tiny mono muted" style="margin-top:2px">OBSERVE 2m41s</div>
+              <div class="sm-map">
+                <div class="gridwrap" data-cols="10" data-map="
+                  o1o1o1o2o1d1d1d2d1d1
+                  o1o2o1o1o1d1d2d1d1d1
+                  o2o1o1o1o1d1d1d1d2d1
+                  o1o1o2o1o1d2d1d1d1d1
+                  o1o1o1o1o2d1d1d2d1d1"></div>
+                <div class="overlap-box" style="left:0;top:0;width:36px;height:52px"></div>
+                <span class="overlap-tag" style="left:2px;top:2px">also D-02</span>
+              </div>
+              <div class="tiny muted mono" style="margin-top:6px">East concourse - 50 cells - straddles Zone A and Zone C</div>
+            </div>
+
+            <div class="card" style="border-left:3px solid var(--focus)">
+              <div class="mono tiny b">TAPPED - cells C-020-030 to C-022-030</div>
+              <div class="tiny muted" style="margin-top:4px">
+                One cell store record per cell, written by whichever drone observes it.
+                Tapping an overlapping cell in either small multiple names both:
+              </div>
+              <div class="row gap-s" style="margin-top:8px">
+                <span class="st st-neutral">D-02</span><span class="st st-neutral">D-04</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar">
+      <a href="#"><i class="icon"></i>Live</a>
+      <a href="#" aria-current="page"><i class="icon"></i>Fleet</a>
+    </nav>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>Nav is a two-entry bottom bar, the same two entries the desktop rail shows for this
+      role.</b> A Drone Operator reaches the live map and the fleet only; Timeline, History,
+      Replay, Configuration, Accounts, Audit and Health are absent, not disabled.
+      <span class="req">FR10.3</span></li>
+
+    <li><b>4 drones, 3 zones, stated side by side, exactly as on desktop.</b> The honest line
+      below states the reason in words rather than leaving a viewer to notice the mismatch and
+      wonder about it. <span class="req">FR9.8</span></li>
+
+    <li><b>Each card carries state, dwell, link, battery, area and contribution stacked, not
+      spread across a second screen.</b> On a 390px card everything still fits without opening
+      the per-drone view first. <span class="req">FR1.2</span></li>
+
+    <li><b>D-03 contributes "DENSITY ONLY", never a cell count on its own.</b> 44 cells covered,
+      but writing a number there would claim the same kind of measurement an observing drone
+      makes. <span class="req">FR2.3</span></li>
+
+    <li><b>Assign is present because the role can act on it.</b> FR9.8 gives drone assignment to
+      the Drone Operator as well as the Administrator; tapping it opens `D07`.
+      <span class="req">FR9.8</span></li>
+
+    <li><b>Combined feeds stacks in a single scrolling column on a phone.</b> This is a designed
+      layout, not the desktop's four-wide row shrunk to fit - each small multiple keeps its full
+      120px map height so the wind-map overlay stays legible at arm's length.
+      <span class="req">FR1.2</span> <span class="req">FR3.1</span></li>
+
+    <li><b>The out-of-scope boundary is stated at the top of the tab, not left implied.</b> The
+      same sentence SRS 2.6 uses for the constraint itself, placed where a viewer would otherwise
+      wonder whether "combined feeds" means stitched video. <span class="req">SRS 2.6</span></li>
+
+    <li><b>D-03's small multiple carries density hatching with no arrow and no outline.</b> Not
+      because its cells scored low, but because a moving camera never produces flow or risk at
+      all. The TRANSIT chip beside a tile with no bands is what makes the absence read as a rule.
+      <span class="req">FR2.3</span> <span class="req">FR3.5</span></li>
+
+    <li><b>Overlap is marked on both tiles and named on tap, identically to desktop.</b>
+      C-020-030 through C-022-030 exist as one record each, written by whichever drone observed
+      them. <span class="req">FR6.1</span></li>
+
+    <li><b>Fleet list and Combined feeds are real tabs, wired with `wireframe.js`.</b> Each
+      device shows one default state so both can be reviewed without clicking, but the tablist
+      in either device switches panels live. <span class="req">FR1.4</span></li>
+  </ol>
+
+</div>
+<script src="_assets/wireframe.js"></script>
+<script>
+  (function () {
+    var host = document.getElementById('d03-sm-mobile');
+    if (!host) { return; }
+    var cols = 11, rows = 4, buckets = [1,2,1,2,3,2,1,2,1,2,3,1,2,1,2,1,2,3,1,2,1,1,
+      2,1,2,1,3,2,1,2,1,2,1,2,1,3,2,1,2,1,2,1,3,2,1];
+    host.style.display = 'grid';
+    host.style.gridTemplateColumns = 'repeat(' + cols + ',1fr)';
+    host.style.gridTemplateRows = 'repeat(' + rows + ',1fr)';
+    host.style.gap = '1px';
+    host.style.background = 'var(--g4)';
+    var html = '';
+    for (var i = 0; i < cols * rows; i++) {
+      html += '<i class="gc obs-dwell d-' + (buckets[i % buckets.length]) + '"></i>';
+    }
+    host.innerHTML = html;
+  })();
+</script>
+</body>
+</html>

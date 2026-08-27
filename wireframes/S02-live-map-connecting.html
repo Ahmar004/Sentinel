@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S02 Live site map, connecting and no site - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  /* Scoped to this file only. wireframe.css is not edited. */
+  .sk-map{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+  .sk-map .msg{font:600 12px var(--mono);color:var(--ink-2);text-align:center}
+  .sk-ztile .ph{margin-bottom:6px}
+  .sk-cov{display:flex;height:7px;border-radius:2px;overflow:hidden;margin-top:6px;
+    border:1px solid var(--g4);background:repeating-linear-gradient(45deg,var(--g3) 0 4px,var(--g2) 4px 8px)}
+  .empty{max-width:340px;margin:auto;text-align:center;padding:28px}
+  .empty .ico{width:56px;height:56px;border:2px dashed var(--g5);border-radius:10px;margin:0 auto 16px}
+  .empty h2{margin:0 0 8px;font-size:16px}
+  .empty p{margin:0 0 6px;font-size:13px;color:var(--ink-2);line-height:1.5}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">F-007</span>
+  <h1>S02 Live site map - connecting, and no site configured</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S02, Section 10</b></li>
+    <li>viewport <b>390 x 844 and 1440 x 900</b></li>
+    <li>role <b>Coordinator</b></li>
+    <li>state <b>CONNECTING / NO_SITE</b></li>
+    <li>requirement <b>FR9.1 FR10.3</b></li>
+    <li>batch <b>1</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <!-- ============ mobile, connecting ============ -->
+  <div class="device device--mobile">
+    <span class="device-tag">CONNECTING, t+0.4s</span>
+
+    <span class="cx" style="left:196px;top:26px">1</span>
+    <span class="cx" style="left:200px;top:120px">2</span>
+    <span class="cx" style="left:200px;top:400px">3</span>
+    <span class="cx" style="left:200px;top:790px">4</span>
+
+    <div class="top">
+      <span class="bx" style="width:120px;height:11px"></span>
+      <span class="st st-neutral">CONNECTING</span>
+      <span class="grow"></span>
+      <span class="bx" style="width:44px;height:11px"></span>
+      <span class="icon icon--r" aria-label="user menu"></span>
+    </div>
+
+    <div class="banner" style="background:var(--g2);color:var(--ink-2)">
+      Connecting to Riverside Arena. No value below is a measurement yet.
+    </div>
+
+    <!-- zone strip: skeleton bars only, never a zero, never a percent -->
+    <div class="zstrip">
+      <div class="ztile sk-ztile">
+        <div class="row between center"><span class="ph ph--w60"></span><span class="ph" style="width:34px"></span></div>
+        <div class="ph ph--w40" style="height:15px;margin-top:6px"></div>
+        <div class="sk-cov"></div>
+        <div class="ph ph--w60" style="margin-top:6px"></div>
+      </div>
+      <div class="ztile sk-ztile">
+        <div class="row between center"><span class="ph ph--w60"></span><span class="ph" style="width:34px"></span></div>
+        <div class="ph ph--w40" style="height:15px;margin-top:6px"></div>
+        <div class="sk-cov"></div>
+        <div class="ph ph--w60" style="margin-top:6px"></div>
+      </div>
+      <div class="ztile sk-ztile" style="min-width:60px;flex:0 0 60px">
+        <div class="ph ph--w80"></div>
+        <div class="ph" style="width:22px;height:14px;margin-top:6px"></div>
+      </div>
+    </div>
+
+    <!-- map: no grid at all, not one cell drawn in any state -->
+    <div class="map">
+      <img class="plan" src="_assets/site-plan.svg" alt="" style="opacity:.25">
+      <div class="sk-map">
+        <div class="msg">Waiting for the first cell batch.<br>Nothing is drawn until it arrives.</div>
+      </div>
+    </div>
+
+    <div class="sheet">
+      <div class="sheet-handle" style="position:relative">
+        <span class="b" style="font-size:13px">Alerts</span>
+        <span class="ph" style="width:60px;height:12px;margin-left:6px"></span>
+        <span class="grow"></span>
+      </div>
+    </div>
+
+    <nav class="navbar">
+      <a href="#" aria-current="page"><i class="icon"></i>Live</a>
+      <a href="#"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+
+  <!-- ============ desktop, connecting ============ -->
+  <div class="device device--desktop">
+    <span class="device-tag">CONNECTING, t+0.4s</span>
+
+    <span class="cx" style="left:660px;top:26px">5</span>
+    <span class="cx" style="left:560px;top:105px">6</span>
+    <span class="cx" style="left:900px;top:250px">7</span>
+    <span class="cx" style="left:1258px;top:250px">8</span>
+
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#" aria-current="page"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <div class="rail-note">
+          Signed in as <b>a.rahman</b><br>
+          <span class="st st-neutral" style="margin-top:4px">COORDINATOR</span>
+        </div>
+      </nav>
+
+      <div class="col grow">
+        <div class="top">
+          <span class="bx" style="width:150px;height:11px"></span>
+          <span class="bx" style="width:220px;height:11px"></span>
+          <span class="st st-neutral">CONNECTING</span>
+          <span class="bx" style="width:130px;height:11px"></span>
+          <span class="grow"></span>
+          <span class="bx" style="width:60px;height:11px"></span>
+          <span class="chip">a.rahman</span>
+        </div>
+
+        <div class="banner" style="background:var(--g2);color:var(--ink-2)">
+          Connecting to Riverside Arena over the WebSocket feed. Skeletons below are placeholders,
+          not zeros - no number is shown until a real cell batch arrives.
+        </div>
+
+        <div class="zstrip">
+          <div class="ztile sk-ztile">
+            <div class="row between center"><span class="ph ph--w60"></span><span class="ph" style="width:60px"></span></div>
+            <div class="ph ph--w40" style="height:20px;margin-top:8px"></div>
+            <div class="sk-cov"></div>
+            <div class="ph ph--w80" style="margin-top:8px"></div>
+          </div>
+          <div class="ztile sk-ztile">
+            <div class="row between center"><span class="ph ph--w60"></span><span class="ph" style="width:60px"></span></div>
+            <div class="ph ph--w40" style="height:20px;margin-top:8px"></div>
+            <div class="sk-cov"></div>
+            <div class="ph ph--w80" style="margin-top:8px"></div>
+          </div>
+          <div class="ztile sk-ztile">
+            <div class="row between center"><span class="ph ph--w60"></span><span class="ph" style="width:60px"></span></div>
+            <div class="ph ph--w40" style="height:20px;margin-top:8px"></div>
+            <div class="sk-cov"></div>
+            <div class="ph ph--w80" style="margin-top:8px"></div>
+          </div>
+        </div>
+
+        <div class="row grow">
+          <div class="map">
+            <img class="plan" src="_assets/site-plan.svg" alt="" style="opacity:.25">
+            <div class="sk-map">
+              <div class="msg">Waiting for the first cell batch from the perception pipeline.<br>
+                No cell renders in any state, including gap, until data exists to show.</div>
+            </div>
+            <div class="card" style="position:absolute;left:10px;top:10px;width:186px">
+              <div class="mono tiny b" style="margin-bottom:6px">LAYERS</div>
+              <div class="col gap-s tiny mono" style="opacity:.5">
+                <label><input type="checkbox" checked disabled> Site plan</label>
+                <label><input type="checkbox" checked disabled> Cell grid</label>
+                <label><input type="checkbox" checked disabled> Density shading</label>
+                <label><input type="checkbox" checked disabled> Flow arrows</label>
+                <label><input type="checkbox" checked disabled> Risk band</label>
+                <label><input type="checkbox" checked disabled> Zone boundaries</label>
+                <label><input type="checkbox" checked disabled> Drone footprints</label>
+                <label><input type="checkbox" checked disabled> Alert markers</label>
+                <label><input type="checkbox" disabled> Static attributes</label>
+              </div>
+            </div>
+          </div>
+
+          <aside class="rail">
+            <div class="row between center pad-s" style="border-bottom:1px solid var(--line)">
+              <span class="mono tiny b">ALERTS</span>
+              <span class="ph" style="width:70px;height:12px"></span>
+            </div>
+            <div class="pad-s scroll grow">
+              <div class="card">
+                <div class="ph ph--w60" style="height:13px"></div>
+                <div class="ph ph--w80" style="margin-top:8px"></div>
+                <div class="ph ph--w40" style="margin-top:8px;height:18px"></div>
+                <div class="bx" style="height:30px;margin-top:8px"></div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ desktop, no site configured, non-administrator ============ -->
+  <div class="device device--desktop">
+    <span class="device-tag">NO_SITE, role: Coordinator</span>
+
+    <span class="cx" style="left:660px;top:26px">9</span>
+    <span class="cx" style="left:820px;top:420px">10</span>
+    <span class="cx" style="left:100px;top:120px">11</span>
+
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#" aria-current="page"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <div class="rail-note">
+          Signed in as <b>a.rahman</b><br>
+          <span class="st st-neutral" style="margin-top:4px">COORDINATOR</span>
+        </div>
+      </nav>
+
+      <div class="col grow">
+        <div class="top">
+          <span class="b muted">Sentinel</span>
+          <span class="tiny muted">no site configured</span>
+          <span class="grow"></span>
+          <span class="mono tiny">14:03:12</span>
+          <span class="chip">a.rahman</span>
+        </div>
+
+        <div class="grow" style="display:flex;align-items:center;justify-content:center">
+          <div class="empty">
+            <div class="ico"></div>
+            <h2>No site is configured yet</h2>
+            <p>Riverside Arena has no plan, grid or zones on record, so there is nothing for the
+              live map, zone strip or alert rail to draw.</p>
+            <p>An <b>Administrator</b> completes venue setup before this screen can show anything.
+              <b>s.iqbal</b> is the Administrator on this deployment.</p>
+            <div class="tiny muted mono" style="margin-top:14px">
+              Coordinator cannot run venue setup - S11 is closed to this role.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>The banner names the state, not a spinner alone.</b> "Connecting", the same word the
+      connection chip uses, so a coordinator glancing at either one gets the same answer about
+      whether the feed is live yet. <span class="req">design.md Section 10</span></li>
+
+    <li><b>The top bar is skeleton, including the site name and the latency figure.</b> A latency
+      number has no meaning before a first measurement exists, so it is a placeholder bar, never
+      "0.0s" and never the last session's value carried over. <span class="req">FR3.3</span></li>
+
+    <li><b>Zone tiles carry skeleton bars where the risk score, the band chip and the coverage
+      bar go - never 0.00 and never a 0% coverage bar.</b> This is the entire point of the frame:
+      a zone with no data yet must not be able to look identical to a zone that is genuinely
+      calm. <span class="req">SRS 2.3</span> <span class="req">FR4.6</span></li>
+
+    <li><b>The map draws nothing at all, not even gap.</b> Gap is itself a claim - "no observation
+      arrived for this cell" - and that claim cannot be made before the client has received a
+      single batch to reason from, so the grid is entirely absent rather than pre-filled grey.
+      <span class="req">FR6.3</span> <span class="req">SRS 2.3</span></li>
+
+    <li><b>Same discipline at desktop scale, wider skeletons.</b> Site name, grid dimensions and
+      the connection chip are all placeholders together, because the desktop top bar has room to
+      state more values and every one of them is equally unmeasured right now.
+      <span class="req">FR3.3</span></li>
+
+    <li><b>The banner spells out why nothing is drawn, not only that something is loading.</b> A
+      coordinator under time pressure should never have to guess whether a blank map means "safe"
+      or "not yet connected". <span class="req">design.md Section 10</span></li>
+
+    <li><b>Layers panel renders but every control is disabled.</b> Toggling a layer before there
+      is anything to toggle would imply a choice with no effect; disabling it states plainly that
+      the panel is waiting on the same feed as the map. <span class="req">NFR5</span></li>
+
+    <li><b>The alert rail skeleton mirrors a real card's shape without inventing its content.</b>
+      No count, no band chip, no score - only the layout a real card will eventually fill.
+      <span class="req">FR5.1</span></li>
+
+    <li><b>No site name in the top bar - "Sentinel" and a plain state label instead.</b> Riverside
+      Arena has not been named to the system yet, so the interface does not print a name it has
+      not been given. <span class="req">FR9.1</span></li>
+
+    <li><b>The empty state names who can fix this and by which screen, without offering the
+      control itself.</b> A Coordinator reading "an Administrator completes venue setup" and the
+      specific Administrator's username knows exactly who to ask, while `S11` stays correctly
+      closed to this role. <span class="req">FR9.1</span> <span class="req">FR10.3</span>
+      <span class="req">design.md Section 10</span></li>
+
+    <li><b>Nav rail is unaffected by the missing site.</b> The role's five entries render exactly
+      as they do when a site exists, because navigation is derived from the session, not from
+      whether a venue has been configured - only the content area is empty.
+      <span class="req">FR10.3</span></li>
+  </ol>
+
+</div>
+<script src="_assets/wireframe.js"></script>
+</body>
+</html>

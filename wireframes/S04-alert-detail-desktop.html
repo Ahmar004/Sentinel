@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S04 Alert detail, desktop - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .attrtrack{position:relative;height:10px;background:var(--g2);border-radius:2px;overflow:visible}
+  .attrtrack .zero{position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--g5)}
+  .attrrow{display:grid;grid-template-columns:132px 210px 56px 90px;gap:8px;align-items:center;
+    font:600 11px var(--mono);padding:4px 0}
+  .attrrow .raw{color:var(--ink-2);font-weight:500;text-align:right}
+  .attrrow .val{text-align:right}
+  .attrrow .valneg{color:var(--obs-dwell)}
+  .tl{width:100%;height:140px;display:block}
+  .tl .ref{stroke:var(--g4);stroke-width:1;stroke-dasharray:3 3}
+  .tl .refc{stroke:var(--band-critical);stroke-width:1;stroke-dasharray:2 2}
+  .tl .line{fill:none;stroke:var(--g7);stroke-width:2}
+  .tl .dwellline{fill:none;stroke:var(--obs-dwell);stroke-width:2;stroke-dasharray:2 3}
+  .tl .lbl{font:600 9px var(--mono);fill:var(--ink-2)}
+  .tl .marker{stroke:var(--band-elevated);stroke-width:1.5}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">F-006</span>
+  <h1>S04 Alert detail - desktop, A-1042</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S04</b></li>
+    <li>viewport <b>1440 x 900</b></li>
+    <li>role <b>Coordinator</b></li>
+    <li>state <b>OPEN, opened from the alert rail</b></li>
+    <li>requirement <b>FR5.2 FR5.4 FR5.6 FR8.7</b></li>
+    <li>batch <b>2</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900</span>
+
+    <span class="cx" style="left:280px;top:108px">1</span>
+    <span class="cx" style="left:280px;top:210px">2</span>
+    <span class="cx" style="left:280px;top:430px">3</span>
+    <span class="cx" style="left:280px;top:620px">4</span>
+    <span class="cx" style="left:900px;top:150px">5</span>
+    <span class="cx" style="left:900px;top:520px">6</span>
+    <span class="cx" style="left:900px;top:700px">7</span>
+
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <div class="rail-note">Signed in as <b>a.rahman</b><br>
+          <span class="st st-neutral" style="margin-top:4px">COORDINATOR</span></div>
+      </nav>
+
+      <div class="col grow">
+        <div class="top">
+          <a href="S02-live-map-desktop.html" class="mono tiny" style="text-decoration:none;color:var(--focus)">&larr; live map</a>
+          <span class="b">Alert A-1042</span>
+          <span class="grow"></span>
+          <span class="mono tiny">14:03:12</span>
+          <span class="chip">a.rahman</span>
+        </div>
+
+        <div class="honest" style="margin:10px 14px 0;border-left-color:var(--g6)">
+          Viewed live. If this alert is opened from History instead, the attribution below is
+          the one recorded at 14:02:51 and is never recomputed against current data.
+        </div>
+
+        <div class="scroll grow" style="overflow-y:auto">
+        <div class="pad" style="display:grid;grid-template-columns:1.2fr 1fr;gap:16px">
+
+          <div class="col gap">
+
+            <div class="card">
+              <div class="row between center">
+                <span class="mono b" style="font-size:15px">A-1042</span>
+                <span class="st st-elevated">ELEVATED</span>
+              </div>
+              <table class="wt" style="margin-top:8px">
+                <tr><td>Zone</td><td class="mono">B - North Gate</td></tr>
+                <tr><td>Cell</td><td class="mono">C-031-022</td></tr>
+                <tr><td>Score vs threshold</td><td class="mono">0.78 vs 0.70</td></tr>
+                <tr><td>Raised at</td><td class="mono">14:02:51 - 21s ago</td></tr>
+                <tr><td>Status</td><td><span class="st st-neutral">OPEN</span></td></tr>
+                <tr><td>Acknowledged</td><td class="mono muted">not yet acknowledged</td></tr>
+              </table>
+              <div class="honest" style="margin-top:10px">
+                Clears when risk stays below 0.65 for 30 seconds.
+              </div>
+              <div class="row gap-s" style="margin-top:10px">
+                <button class="btn grow" type="button">Acknowledge</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="row between center" style="margin-bottom:8px">
+                <span class="mono tiny b">FULL FEATURE ATTRIBUTION - all nine, ordered by absolute contribution</span>
+                <span class="tiny muted mono">C04</span>
+              </div>
+              <div class="attrrow" style="color:var(--ink-2);font-weight:700">
+                <span>feature</span><span></span><span class="raw">raw</span><span class="val">contribution</span>
+              </div>
+
+              <div class="attrrow">
+                <span>flowConvergence</span>
+                <div class="attrtrack"><span class="zero"></span>
+                  <i class="attrbar" style="position:absolute;left:50%;top:0;height:100%;width:50%"></i>
+                </div>
+                <span class="raw">0.71</span><span class="val">+0.19</span>
+              </div>
+              <div class="attrrow">
+                <span>densityRateOfChange</span>
+                <div class="attrtrack"><span class="zero"></span>
+                  <i class="attrbar" style="position:absolute;left:50%;top:0;height:100%;width:36.8%"></i>
+                </div>
+                <span class="raw">0.42 /m2/s</span><span class="val">+0.14</span>
+              </div>
+              <div class="attrrow">
+                <span>stopStartPulses</span>
+                <div class="attrtrack"><span class="zero"></span>
+                  <i class="attrbar" style="position:absolute;left:50%;top:0;height:100%;width:23.7%"></i>
+                </div>
+                <span class="raw">0.33</span><span class="val">+0.09</span>
+              </div>
+              <div class="attrrow">
+                <span>exitOccupancy</span>
+                <div class="attrtrack"><span class="zero"></span>
+                  <i class="attrbar" style="position:absolute;left:50%;top:0;height:100%;width:15.8%"></i>
+                </div>
+                <span class="raw">0.27</span><span class="val">+0.06</span>
+              </div>
+              <div class="attrrow">
+                <span>counterFlow</span>
+                <div class="attrtrack"><span class="zero"></span>
+                  <i class="attrbar" style="position:absolute;left:50%;top:0;height:100%;width:13.2%"></i>
+                </div>
+                <span class="raw">118 deg</span><span class="val">+0.05</span>
+              </div>
+              <div class="attrrow">
+                <span>speedVariance</span>
+                <div class="attrtrack"><span class="zero"></span>
+                  <i class="attrbar" style="position:absolute;left:50%;top:0;height:100%;width:7.9%"></i>
+                </div>
+                <span class="raw">0.61</span><span class="val">+0.03</span>
+              </div>
+              <div class="attrrow">
+                <span>density</span>
+                <div class="attrtrack"><span class="zero"></span>
+                  <i class="attrbar" style="position:absolute;left:50%;top:0;height:100%;width:5.3%"></i>
+                </div>
+                <span class="raw">3.9 /m2</span><span class="val">+0.02</span>
+              </div>
+              <div class="attrrow">
+                <span>densityGradient</span>
+                <div class="attrtrack"><span class="zero"></span>
+                  <i class="attrbar--neg" style="position:absolute;right:50%;top:0;height:100%;width:5.3%"></i>
+                </div>
+                <span class="raw">0.14</span><span class="val valneg">-0.02</span>
+              </div>
+              <div class="attrrow">
+                <span>speedMean</span>
+                <div class="attrtrack"><span class="zero"></span>
+                  <i class="attrbar--neg" style="position:absolute;right:50%;top:0;height:100%;width:10.5%"></i>
+                </div>
+                <span class="raw">0.38 m/s</span><span class="val valneg">-0.04</span>
+              </div>
+
+              <div class="honest" style="margin-top:10px">
+                Bars grow from a zero centre line. Nine features are stored per alert regardless
+                of sign, because a feature that pushed risk down at the moment of the alert is
+                still part of why the score came out where it did.
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="row between center" style="margin-bottom:6px">
+                <span class="mono tiny b">CELL RISK TIMELINE - 30 s window before the alert, and everything since</span>
+              </div>
+              <svg class="tl" viewBox="0 0 640 140" preserveAspectRatio="none">
+                <line class="ref" x1="0" y1="84" x2="640" y2="84"/><text class="lbl" x="4" y="81">0.40</text>
+                <line class="ref" x1="0" y1="42" x2="640" y2="42"/><text class="lbl" x="4" y="39">0.70</text>
+                <line class="refc" x1="0" y1="21" x2="640" y2="21"/><text class="lbl" x="4" y="18">0.85</text>
+                <polyline class="dwellline" points="0,110 20,104" />
+                <polyline class="line" points="20,104 90,96 160,88 230,80 300,60 360,42 380,30" />
+                <line class="marker" x1="380" y1="0" x2="380" y2="140"/>
+                <text class="lbl" x="384" y="12">raised 14:02:51</text>
+                <polyline class="line" points="380,30 460,26 520,22 580,26 640,24" />
+              </svg>
+              <div class="row between tiny muted mono"><span>-30s (window start)</span>
+                <span>raised</span><span>now, +21s since</span></div>
+            </div>
+          </div>
+
+          <div class="col gap">
+            <div class="card" style="padding:8px">
+              <div class="row between center" style="padding:0 4px;margin-bottom:6px">
+                <span class="mono tiny b">MAP - cropped to the alerting cell and neighbourhood</span>
+                <span class="tiny muted mono">same layers as S02</span>
+              </div>
+              <div class="map" style="height:280px;border-radius:4px">
+                <img class="plan" src="_assets/site-plan.svg" alt="">
+                <div class="gridwrap" data-cols="9" data-map="
+                  s2s2o1o2w3e3w3o2s2
+                  o2w3e4e4c4e4w3o2s1
+                  o2w3e4e4e4w3o2o1g0
+                  o1o2w3w3w2o2o1g0g0
+                  g0o1o1o2o1o1g0g0g0"></div>
+                <div class="zoneline" style="left:2px;top:2px;width:280px;height:110px">
+                  <span>ZONE B</span></div>
+                <div class="footprint" style="left:80px;top:6px;width:150px;height:80px">
+                  <span>D-01 OBSERVE</span></div>
+                <div class="pin" style="left:174px;top:60px"></div>
+              </div>
+              <div class="tiny muted mono" style="margin-top:6px;padding:0 4px">
+                Pin marks C-031-022. Density shading, flow arrows and the risk-band outline
+                render exactly as they do on the live map.</div>
+            </div>
+
+            <div class="card">
+              <div class="row between center" style="margin-bottom:8px">
+                <span class="mono tiny b">SUGGESTIONS - C05</span>
+                <span class="tiny muted mono">3 ranked options</span>
+              </div>
+
+              <div class="card" style="border-left:3px solid var(--band-normal)">
+                <div class="row between center">
+                  <span class="chip">rank 1</span><span class="mono b">DIVERT</span>
+                  <span class="st st-neutral">PROPOSED</span><span class="chip">MODEL</span>
+                </div>
+                <div class="tiny" style="margin-top:6px">
+                  Divert arriving flow north-east to Exit E2. E2 is running at 240 of 900
+                  people per minute, so it has headroom; E1 is at 780 of 1200.</div>
+                <div class="tiny muted mono" style="margin-top:5px">
+                  Route: C-031-022 &rarr; C-032-022 &rarr; C-033-021 &rarr; C-034-020 &rarr; C-035-019</div>
+                <div class="tiny mono" style="margin-top:6px">
+                  <span class="st st-normal" style="margin-right:3px">PASS</span>OVER_THRESHOLD_CELL<br>
+                  <span class="st st-normal" style="margin:3px 3px 0 0;display:inline-block">PASS</span>WOULD_PUSH_NEIGHBOUR_OVER<br>
+                  <span class="st st-normal" style="margin:3px 3px 0 0;display:inline-block">PASS</span>STALE_CELL_ON_ROUTE<br>
+                  <span class="st st-normal" style="margin:3px 3px 0 0;display:inline-block">PASS</span>UNKNOWN_CELL_ON_ROUTE<br>
+                  <span class="st st-normal" style="margin:3px 3px 0 0;display:inline-block">PASS</span>EXIT_OVER_CAPACITY</div>
+                <div class="row gap-s" style="margin-top:9px">
+                  <button class="btn grow" type="button">Dismiss</button>
+                  <button class="btn btn--primary grow" type="button">Confirm</button>
+                </div>
+              </div>
+
+              <div class="card" style="margin-top:8px">
+                <div class="row between center">
+                  <span class="chip">rank 2</span><span class="mono b">HOLD_AND_METER</span>
+                  <span class="st st-neutral">PROPOSED</span><span class="chip">MODEL</span>
+                </div>
+                <div class="tiny" style="margin-top:6px">
+                  Hold arrivals at the north approach and meter entry while convergence falls.</div>
+                <div class="tiny muted mono" style="margin-top:5px">
+                  Route: C-029-018 &rarr; C-030-018 &rarr; C-031-018</div>
+                <div class="tiny mono" style="margin-top:6px">
+                  four safeguards <span class="st st-normal">PASS</span> - WOULD_PUSH_NEIGHBOUR_OVER
+                  <span class="st st-normal">PASS</span>, noting C-030-019 rises to 0.61, still
+                  below its 0.70 threshold</div>
+                <div class="row gap-s" style="margin-top:9px">
+                  <button class="btn grow" type="button">Dismiss</button>
+                  <button class="btn btn--primary grow" type="button">Confirm</button>
+                </div>
+              </div>
+
+              <div class="card" style="margin-top:8px;opacity:.85">
+                <div class="row between center">
+                  <span class="chip">rank 3</span><span class="mono b">OPEN_ALTERNATE_ROUTE</span>
+                  <span class="st st-critical">REJECTED</span><span class="chip">MODEL</span>
+                </div>
+                <div class="tiny" style="margin-top:6px">
+                  Open the west service route toward Exit E1.</div>
+                <div class="tiny muted mono" style="margin-top:5px">
+                  Route: C-026-024 &rarr; C-025-025 &rarr; C-024-026 &rarr; C-023-027</div>
+                <div class="tiny mono" style="margin-top:6px">
+                  <span class="st st-critical" style="margin-right:3px">FAILED</span>
+                  STALE_CELL_ON_ROUTE - cell C-024-026 was last observed 7 s ago</div>
+                <div class="honest" style="margin-top:7px">Rejected. Not offerable. Nothing to confirm.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>Header carries every field FR5.6 requires in one block.</b> Zone, cell, score against
+      threshold, raised time, status and the acknowledger. It reads "not yet acknowledged" rather
+      than a blank or a placeholder name, because inventing an actor would be the same failure as
+      inventing a risk score. <span class="req">FR5.6</span></li>
+
+    <li><b>All nine features render, not the rail's top three.</b> The two negative
+      contributions, densityGradient and speedMean, draw with <code>attrbar--neg</code> on the
+      opposite side of a zero centre line, because a feature that pushed the score down is still
+      part of the explanation and hiding it would make the attribution look more one-sided than
+      the model actually was. <span class="req">FR5.2</span></li>
+
+    <li><b>The clear condition is one sentence in plain words,</b> not a formula. "Below 0.65 for
+      30 seconds" is what a non-technical operator needs, not the hysteresis constant by itself.
+      <span class="req">FR5.4</span></li>
+
+    <li><b>The risk timeline spans the dwell window before the alert and everything after.</b>
+      The dwell-dashed lead-in on the left is where the cell was still filling its 30 s window;
+      the vertical marker is the moment the alert fired. This is the one place the interface
+      shows a score's entire life, not just its current value. <span class="req">FR5.2</span></li>
+
+    <li><b>The map crop uses the same layers, same cell treatments and the same map string as
+      S02, just windowed to nine columns by five rows around the alerting cell.</b> Nothing about
+      how a cell is drawn changes because the surface got smaller. <span class="req">FR5.3</span></li>
+
+    <li><b>Suggestions render in full here, not just on the rail card.</b> All three ranked
+      options, every safeguard with its result, and option 3 shown rejected with the failing
+      safeguard and the cell named, matching the canonical dataset exactly.
+      <span class="req">FR7.3</span> <span class="req">FR7.4</span></li>
+
+    <li><b>The from-history note sits at the top of the frame, not buried.</b> A reviewer who
+      only ever opens this alert from History still sees, before reading anything else, that the
+      attribution is frozen at 14:02:51 and is not being recalculated against the current tick.
+      <span class="req">FR8.7</span></li>
+  </ol>
+
+</div>
+</body>
+</html>

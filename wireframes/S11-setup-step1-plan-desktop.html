@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S11 Setup step 1 - Site plan, desktop - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  /* Wizard shell - step list beside the active step, desktop only (design.md S11). */
+  .wiz-steps{padding:10px 0;overflow-y:auto}
+  .wiz-step{display:flex;align-items:center;gap:10px;padding:8px 14px;min-height:44px;
+    text-decoration:none;color:var(--ink-2);border-left:3px solid transparent}
+  .wiz-num{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--g5);
+    display:flex;align-items:center;justify-content:center;font:700 11px var(--mono);
+    flex:0 0 auto;color:var(--ink-2);background:var(--g0)}
+  .wiz-step.done .wiz-num{background:var(--band-normal);border-color:var(--band-normal);color:#fff}
+  .wiz-step.current{color:var(--ink);background:var(--g0);border-left-color:var(--g7)}
+  .wiz-step.current .wiz-num{background:var(--g7);border-color:var(--g7);color:#fff}
+  .wiz-step .wiz-txt{display:flex;flex-direction:column;gap:1px}
+  .wiz-step .wiz-lbl{font:600 12px var(--font)}
+  .wiz-step .wiz-meta{font:600 9px var(--mono);color:var(--ink-2);letter-spacing:.03em}
+  .wiz-foot{padding:10px 14px 14px;border-top:1px solid var(--line);margin-top:auto}
+  .wizfoot-row{display:flex;justify-content:space-between;align-items:center;
+    padding:12px 18px;border-top:1px solid var(--line);background:var(--g1)}
+
+  /* Plan canvas for step 1 */
+  .plancanvas{position:relative;flex:1;min-height:0;background:var(--g2);
+    display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .plancanvas img{max-width:92%;max-height:92%;border:1px solid var(--g5);background:#fff}
+  .scaleline{position:absolute;height:2px;background:var(--focus)}
+  .scaleline::before,.scaleline::after{content:"";position:absolute;top:50%;width:10px;height:10px;
+    border-radius:50%;background:var(--focus);border:2px solid #fff;transform:translate(-50%,-50%)}
+  .scaleline::before{left:0}.scaleline::after{left:100%}
+  .scalelabel{position:absolute;font:700 11px var(--mono);color:var(--focus);
+    background:#fff;padding:1px 5px;border-radius:3px;border:1px solid var(--focus)}
+  .fld{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+  .fld label{font:600 11px var(--mono);color:var(--ink-2)}
+  .fld input{height:34px;border:1px solid var(--g5);border-radius:4px;background:var(--g0);
+    padding:0 9px;font:600 13px var(--mono);color:var(--ink)}
+  .fld .unit{position:relative}
+  .fld .unit input{padding-right:34px}
+  .fld .unit span{position:absolute;right:9px;top:50%;transform:translateY(-50%);
+    font:600 11px var(--mono);color:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">S11.1</span>
+  <h1>S11 Venue setup - Step 1 of 8, Site plan</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S11</b></li>
+    <li>viewport <b>1440 x 900</b></li>
+    <li>role <b>Administrator</b></li>
+    <li>state <b>first run, no site configured</b></li>
+    <li>requirement <b>FR9.1, NFR8</b></li>
+    <li>batch <b>2</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900</span>
+
+    <span class="cx" style="left:230px;top:150px">1</span>
+    <span class="cx" style="left:700px;top:98px">2</span>
+    <span class="cx" style="left:960px;top:220px">3</span>
+    <span class="cx" style="left:1110px;top:130px">4</span>
+    <span class="cx" style="left:1110px;top:430px">5</span>
+    <span class="cx" style="left:600px;top:800px">6</span>
+
+    <div class="row grow">
+
+      <nav class="navrail wiz-steps" style="flex:0 0 240px">
+        <a href="S11-setup-step1-plan-desktop.html" class="wiz-step current" aria-current="step">
+          <span class="wiz-num">1</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Site plan</span>
+            <span class="wiz-meta">IN PROGRESS</span></span></a>
+        <a href="S11-setup-step2-grid-desktop.html" class="wiz-step">
+          <span class="wiz-num">2</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Grid</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-step3-proposals-desktop.html" class="wiz-step">
+          <span class="wiz-num">3</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Proposals</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-step4-attributes-desktop.html" class="wiz-step">
+          <span class="wiz-num">4</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Attributes</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-step5-exits-desktop.html" class="wiz-step">
+          <span class="wiz-num">5</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Exits</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-step6-zones-desktop.html" class="wiz-step">
+          <span class="wiz-num">6</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Zones</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-step7-thresholds-desktop.html" class="wiz-step">
+          <span class="wiz-num">7</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Thresholds</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-step8-drones-desktop.html" class="wiz-step">
+          <span class="wiz-num">8</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Drones</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-review-desktop.html" class="wiz-step">
+          <span class="wiz-num">R</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Review</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <div class="rail-note">Steps are non-linear once visited and progress
+          is saved per step - any step can be revisited from here.</div>
+      </nav>
+
+      <div class="col grow">
+        <div class="top">
+          <span class="b">Venue setup - Riverside Arena</span>
+          <span class="tiny muted">Step 1 of 8 - Site plan</span>
+          <span class="grow"></span>
+          <span class="chip">s.iqbal</span>
+          <span class="st st-neutral">ADMINISTRATOR</span>
+        </div>
+
+        <form class="col grow" style="min-height:0">
+          <div class="row grow" style="min-height:0">
+
+            <div class="col plancanvas">
+              <img src="_assets/site-plan.svg" alt="Uploaded site plan, Riverside Arena">
+              <div class="scaleline" style="left:26%;top:88%;width:47%"></div>
+              <div class="scalelabel" style="left:47%;top:81%">50 m drawn - south stand</div>
+            </div>
+
+            <div class="col" style="flex:0 0 340px;border-left:1px solid var(--line);
+              background:var(--g1);padding:16px;overflow-y:auto">
+
+              <div class="card" style="margin-bottom:14px">
+                <div class="mono tiny b" style="margin-bottom:6px">UPLOADED PLAN</div>
+                <div class="mono tiny">riverside-arena-plan.png</div>
+                <div class="tiny muted" style="margin-top:2px">2048 x 1365 px - uploaded by s.iqbal</div>
+                <button type="button" class="btn btn--sm" style="margin-top:8px">Replace image</button>
+              </div>
+
+              <div class="mono tiny b" style="margin-bottom:8px">GROUND EXTENT</div>
+              <div class="row gap">
+                <div class="fld grow"><label for="ext-w">WIDTH</label>
+                  <div class="unit"><input id="ext-w" value="300" inputmode="decimal"><span>m</span></div></div>
+                <div class="fld grow"><label for="ext-h">HEIGHT</label>
+                  <div class="unit"><input id="ext-h" value="200" inputmode="decimal"><span>m</span></div></div>
+              </div>
+
+              <div class="hr" style="margin:12px 0"></div>
+
+              <div class="mono tiny b" style="margin-bottom:8px">SET SCALE BY KNOWN DISTANCE</div>
+              <p class="tiny muted" style="margin:0 0 8px">
+                Drawn on the plan: a line across the south stand, known in the real
+                world to be exactly 50 m.</p>
+              <div class="fld"><label for="known-d">KNOWN DISTANCE</label>
+                <div class="unit"><input id="known-d" value="50.0" inputmode="decimal"><span>m</span></div></div>
+              <div class="fld"><label>DRAWN LENGTH</label>
+                <input value="341 px" readonly style="color:var(--ink-2)"></div>
+
+              <div class="bx" style="padding:10px;margin-top:4px">
+                <div class="row between"><span class="tiny muted">Computed scale</span>
+                  <span class="mono b">0.1466 m/px</span></div>
+                <div class="row between" style="margin-top:3px"><span class="tiny muted">Equivalent</span>
+                  <span class="mono tiny">6.82 px/m</span></div>
+              </div>
+
+              <div class="honest" style="margin-top:12px">
+                Leaflet renders this uploaded image directly. There is no map tile
+                provider and no API key anywhere in Sentinel.
+              </div>
+            </div>
+          </div>
+
+          <div class="wizfoot-row">
+            <button type="button" class="btn" disabled>Back</button>
+            <div class="row gap-s">
+              <button type="button" class="btn">Save and exit</button>
+              <button type="submit" class="btn btn--primary">Continue</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>Upload, then set extent, then draw scale - in that order.</b> The extent in
+      metres and the drawn known distance are independent inputs; scale is derived from
+      the drawing, never assumed from the extent alone, because the uploaded image's pixel
+      dimensions carry no metric information on their own.
+      <span class="req">FR9.1</span></li>
+
+    <li><b>The 50 m line is drawn across the south stand</b>, a distance the site operator
+      can verify on the ground, and its two endpoints are shown as handles so the
+      administrator can see exactly what was measured. <span class="req">FR9.1</span></li>
+
+    <li><b>Drawn length and computed scale are read-only outputs.</b> An administrator can
+      correct the known distance or redraw the line, but cannot type a scale directly,
+      because a scale not derived from a real measurement is the exact number the
+      acceptance test for FR9.1 is checking against. <span class="req">FR9.1</span></li>
+
+    <li><b>Ground extent is entered in metres, matching srs.md 2.7</b>: 300 m by 200 m for
+      Riverside Arena. This value feeds Step 2's grid, not the other way around.
+      <span class="req">FR9.2</span></li>
+
+    <li><b>The scale-source honesty note is stated on the same screen, not buried in help
+      text.</b> Every dependency in Sentinel must be free of paid services, and the map
+      technology choice is exactly the kind of decision an examiner asks about, so it is
+      answered here. <span class="req">NFR8</span></li>
+
+    <li><b>This step is a real form.</b> Enter submits and continues to Step 2; Esc cancels
+      any in-progress edit on this step. Continue is <code>type="submit"</code>, every
+      other button is <code>type="button"</code>.</li>
+  </ol>
+
+</div>
+</body>
+</html>

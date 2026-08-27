@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D10 Unsaved changes - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .simple-row{display:flex;justify-content:space-between;align-items:center;
+    padding:9px 12px;border:1px solid var(--g4);border-radius:5px;background:var(--g0);
+    margin-bottom:8px}
+  .wiz-num{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--g5);
+    display:flex;align-items:center;justify-content:center;font:700 11px var(--mono);
+    flex:0 0 auto;color:var(--ink-2);background:var(--g0)}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">D10</span>
+  <h1>Unsaved changes - a usability guard, not a requirement</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>D10</b></li>
+    <li>viewport <b>390 x 844 and 1440 x 900</b></li>
+    <li>role <b>Administrator</b></li>
+    <li>state <b>dirty tab, navigating away</b></li>
+    <li>requirement <b>none - usability guard</b></li>
+    <li>batch <b>5</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <!-- ============ desktop: leaving S12 Zones tab with unsaved reassignment ============ -->
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900 - leaving S12</span>
+
+    <span class="cx" style="left:640px;top:260px">1</span>
+    <span class="cx" style="left:640px;top:330px">2</span>
+    <span class="cx" style="left:640px;top:420px">3</span>
+    <span class="cx" style="left:640px;top:460px">4</span>
+    <span class="cx" style="left:640px;top:500px">5</span>
+    <span class="cx" style="left:100px;top:220px">6</span>
+
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <a href="#" aria-current="page"><i class="icon"></i>Configuration</a>
+        <a href="#"><i class="icon"></i>Accounts</a>
+        <a href="#"><i class="icon"></i>Audit log</a>
+        <a href="#"><i class="icon"></i>System health</a>
+        <a href="#"><i class="icon"></i>Roles ref</a>
+        <div class="rail-note">Signed in as <b>s.iqbal</b><br>
+          <span class="st st-neutral" style="margin-top:4px">ADMINISTRATOR</span></div>
+      </nav>
+
+      <div class="col grow" style="filter:saturate(.9)">
+        <div class="top">
+          <span class="b">Site configuration - Riverside Arena</span>
+          <span class="grow"></span>
+          <span class="chip">unsaved</span>
+        </div>
+        <div class="tabs" role="tablist" aria-hidden="true">
+          <button role="tab" aria-selected="false" tabindex="-1">Plan</button>
+          <button role="tab" aria-selected="false" tabindex="-1">Grid</button>
+          <button role="tab" aria-selected="false" tabindex="-1">Attributes</button>
+          <button role="tab" aria-selected="false" tabindex="-1">Exits</button>
+          <button role="tab" aria-selected="true" tabindex="0">Zones *</button>
+          <button role="tab" aria-selected="false" tabindex="-1">Thresholds</button>
+          <button role="tab" aria-selected="false" tabindex="-1">Drones</button>
+        </div>
+        <div class="pad-l">
+          <div class="simple-row"><span class="mono tiny">C-018-021</span>
+            <span class="mono tiny">Zone A &rarr; <b>Zone C</b> (unsaved)</span></div>
+          <div class="simple-row"><span class="mono tiny">C-019-021</span>
+            <span class="mono tiny">Zone A &rarr; <b>Zone C</b> (unsaved)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scrim">
+      <div class="modal" style="max-width:480px">
+        <div class="modal-head">Leave without saving?</div>
+        <form>
+          <div class="pad-l">
+            <p style="margin:0 0 10px">
+              The <b>Zones</b> tab has unsaved changes: <b>2 cells</b> reassigned from
+              Zone A to Zone C. Leaving now discards them.
+            </p>
+            <div class="honest">
+              This dialog exists because a lost reassignment is easy to miss until the next
+              time someone opens Zones and finds it unchanged.
+            </div>
+          </div>
+          <div class="modal-foot">
+            <button type="button" class="btn">Discard and leave</button>
+            <button type="button" class="btn">Save and leave</button>
+            <button type="submit" class="btn btn--primary" autofocus>Stay</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ mobile: leaving S11 step 4 Attributes with unsaved paint ============ -->
+  <div class="device device--mobile">
+    <span class="device-tag">390 x 844 - leaving S11 step 4</span>
+
+    <span class="cx" style="left:195px;top:260px">1</span>
+    <span class="cx" style="left:195px;top:340px">2</span>
+    <span class="cx" style="left:195px;top:430px">3</span>
+    <span class="cx" style="left:195px;top:470px">4</span>
+    <span class="cx" style="left:195px;top:510px">5</span>
+
+    <div class="top" style="filter:saturate(.9)">
+      <span class="wiz-num">4</span>
+      <span class="b">Attributes *</span>
+      <span class="grow"></span>
+      <span class="tiny muted">Step 4 of 8</span>
+    </div>
+    <div class="pad" style="filter:saturate(.9)">
+      <div class="bx" style="height:180px"></div>
+      <p class="tiny muted" style="margin-top:8px">Paint cells as walkable, exit, barrier
+        or obstruction. 14 cells painted this session, not yet saved.</p>
+    </div>
+
+    <div class="scrim" style="align-items:flex-end;padding:0">
+      <div class="device--sheet sheet" style="width:100%">
+        <div class="sheet-handle" style="position:relative;border-bottom:1px solid var(--line)">
+          <span class="b" style="font-size:13px">Leave without saving?</span>
+        </div>
+        <form>
+          <div class="pad">
+            <p style="margin:0 0 10px">
+              The <b>Attributes</b> step has <b>14 cells</b> painted this session that have
+              not been saved. Leaving now discards them.
+            </p>
+            <div class="honest">
+              A usability guard only - the setup wizard holds enough hand work that losing it
+              silently would go unnoticed until much later.
+            </div>
+          </div>
+          <div class="col gap-s pad" style="padding-top:0">
+            <button type="submit" class="btn btn--tap btn--primary" autofocus>Stay</button>
+            <button type="button" class="btn btn--tap">Save and leave</button>
+            <button type="button" class="btn btn--tap">Discard and leave</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>The dialog names the exact step or tab and the exact thing that would be
+      lost.</b> "2 cells reassigned" and "14 cells painted" are concrete counts, not a
+      generic "you have unsaved changes" that leaves the administrator guessing what is at
+      stake.</li>
+
+    <li><b>Three actions, always in the same order</b>: discard and leave, save and leave,
+      stay - with Stay visually last but marked as the default via
+      <code>type="submit"</code> and autofocus, so Enter and a plain click on the emphasised
+      button do the same safe thing.</li>
+
+    <li><b>Stay is the default and Esc chooses it.</b> Leaving is never the path of least
+      resistance; staying on a half-finished configuration screen is.</li>
+
+    <li><b>Discard is a real choice, not a trap.</b> It is <code>type="button"</code> with its
+      own explicit label naming the destructive action in full, never "No" or "Cancel",
+      which would be ambiguous about which direction is destructive.</li>
+
+    <li><b>Save and leave exists because losing setup work is worse than an extra click.</b>
+      An administrator who meant to save can do so from the same dialog instead of returning
+      to the tab first.</li>
+
+    <li><b>This maps to no requirement.</b> It is a usability guard, stated here because the
+      setup wizard holds enough work that a silent loss is exactly the kind of defect an
+      examiner finds by accident rather than by reading a requirement.</li>
+  </ol>
+
+</div>
+<script src="_assets/wireframe.js"></script>
+</body>
+</html>

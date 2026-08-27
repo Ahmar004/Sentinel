@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S11 Setup step 8 - Drones, desktop - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .wiz-steps{padding:10px 0;overflow-y:auto}
+  .wiz-step{display:flex;align-items:center;gap:10px;padding:8px 14px;min-height:44px;
+    text-decoration:none;color:var(--ink-2);border-left:3px solid transparent}
+  .wiz-num{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--g5);
+    display:flex;align-items:center;justify-content:center;font:700 11px var(--mono);
+    flex:0 0 auto;color:var(--ink-2);background:var(--g0)}
+  .wiz-step.done .wiz-num{background:var(--band-normal);border-color:var(--band-normal);color:#fff}
+  .wiz-step.current{color:var(--ink);background:var(--g0);border-left-color:var(--g7)}
+  .wiz-step.current .wiz-num{background:var(--g7);border-color:var(--g7);color:#fff}
+  .wiz-step .wiz-txt{display:flex;flex-direction:column;gap:1px}
+  .wiz-step .wiz-lbl{font:600 12px var(--font)}
+  .wiz-step .wiz-meta{font:600 9px var(--mono);color:var(--ink-2);letter-spacing:.03em}
+  .wizfoot-row{display:flex;justify-content:space-between;align-items:center;
+    padding:12px 18px;border-top:1px solid var(--line);background:var(--g1)}
+  .fld{display:flex;flex-direction:column;gap:4px}
+  .fld label{font:600 11px var(--mono);color:var(--ink-2)}
+  .fld input{height:32px;border:1px solid var(--g5);border-radius:4px;background:var(--g0);
+    padding:0 8px;font:600 12px var(--mono);color:var(--ink)}
+
+  .dronecard{background:var(--g0);border:1px solid var(--g4);border-radius:5px;
+    padding:11px;margin-bottom:10px}
+  .dronecard h3{margin:0;font:700 13px var(--mono)}
+  .reg-lock{color:var(--band-normal)}
+  .reg-search{color:var(--ink-2)}
+
+  .droneplan{position:relative;flex:1;min-height:0;background:var(--g2);overflow:hidden}
+  .droneplan img{position:absolute;inset:6%;width:88%;height:88%;object-fit:fill;opacity:.4}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">S11.8</span>
+  <h1>S11 Venue setup - Step 8 of 8, Drones</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S11</b></li>
+    <li>viewport <b>1440 x 900</b></li>
+    <li>role <b>Administrator</b></li>
+    <li>state <b>4 drones registered, initial areas assigned</b></li>
+    <li>requirement <b>FR9.8</b></li>
+    <li>batch <b>2</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900</span>
+
+    <span class="cx" style="left:1110px;top:150px">1</span>
+    <span class="cx" style="left:1110px;top:420px">2</span>
+    <span class="cx" style="left:660px;top:110px">3</span>
+    <span class="cx" style="left:1110px;top:700px">4</span>
+    <span class="cx" style="left:900px;top:790px">5</span>
+
+    <div class="row grow">
+
+      <nav class="navrail wiz-steps" style="flex:0 0 240px">
+        <a href="S11-setup-step1-plan-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Site plan</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step2-grid-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Grid</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step3-proposals-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Proposals</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step4-attributes-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Attributes</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step5-exits-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Exits</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step6-zones-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Zones</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step7-thresholds-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Thresholds</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step8-drones-desktop.html" class="wiz-step current" aria-current="step">
+          <span class="wiz-num">8</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Drones</span>
+            <span class="wiz-meta">IN PROGRESS</span></span></a>
+        <a href="S11-setup-review-desktop.html" class="wiz-step">
+          <span class="wiz-num">R</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Review</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <div class="rail-note">Steps are non-linear once visited and progress
+          is saved per step.</div>
+      </nav>
+
+      <div class="col grow">
+        <div class="top">
+          <span class="b">Venue setup - Riverside Arena</span>
+          <span class="tiny muted">Step 8 of 8 - Drones</span>
+          <span class="grow"></span>
+          <span class="chip">s.iqbal</span>
+          <span class="st st-neutral">ADMINISTRATOR</span>
+        </div>
+
+        <form class="col grow" style="min-height:0">
+          <div class="row grow" style="min-height:0">
+
+            <div class="col" style="flex:0 0 380px;border-right:1px solid var(--line);
+              background:var(--g1);padding:16px;overflow-y:auto">
+
+              <div class="row between center" style="margin-bottom:10px">
+                <span class="mono tiny b">4 DRONES REGISTERED</span>
+                <button type="button" class="btn btn--sm">+ Register drone</button>
+              </div>
+
+              <div class="dronecard">
+                <div class="row between center">
+                  <h3>D-01 - North Gate high</h3>
+                  <span class="reg-lock tiny mono b">LOCKED - 412 inliers</span>
+                </div>
+                <div class="row gap" style="margin-top:9px">
+                  <div class="fld grow"><label>INITIAL AREA</label>
+                    <input value="North Gate high"></div>
+                  <div class="fld" style="width:120px"><label>CELL COUNT</label>
+                    <input value="48 cells" readonly style="color:var(--ink-2)"></div>
+                </div>
+              </div>
+
+              <div class="dronecard">
+                <div class="row between center">
+                  <h3>D-02 - Concourse west</h3>
+                  <span class="reg-lock tiny mono b">LOCKED - 380 inliers</span>
+                </div>
+                <div class="row gap" style="margin-top:9px">
+                  <div class="fld grow"><label>INITIAL AREA</label>
+                    <input value="Concourse west"></div>
+                  <div class="fld" style="width:120px"><label>CELL COUNT</label>
+                    <input value="52 cells" readonly style="color:var(--ink-2)"></div>
+                </div>
+              </div>
+
+              <div class="dronecard">
+                <div class="row between center">
+                  <h3>D-03 - Roving</h3>
+                  <span class="reg-search tiny mono b">SEARCHING - 0 inliers</span>
+                </div>
+                <div class="row gap" style="margin-top:9px">
+                  <div class="fld grow"><label>INITIAL AREA</label>
+                    <input value="Arena north to south-east"></div>
+                  <div class="fld" style="width:120px"><label>CELL COUNT</label>
+                    <input value="44 cells" readonly style="color:var(--ink-2)"></div>
+                </div>
+                <p class="tiny muted" style="margin:8px 0 0">
+                  Registration is still searching for a visual lock - this drone can be
+                  assigned an initial area before its pose is confirmed, and will start
+                  contributing density once locked.</p>
+              </div>
+
+              <div class="dronecard">
+                <div class="row between center">
+                  <h3>D-04 - Concourse east</h3>
+                  <span class="reg-lock tiny mono b">LOCKED - 291 inliers</span>
+                </div>
+                <div class="row gap" style="margin-top:9px">
+                  <div class="fld grow"><label>INITIAL AREA</label>
+                    <input value="Concourse east"></div>
+                  <div class="fld" style="width:120px"><label>CELL COUNT</label>
+                    <input value="50 cells" readonly style="color:var(--ink-2)"></div>
+                </div>
+              </div>
+
+              <div class="honest" style="margin-top:6px">
+                Drones are not assigned to zones. Every measurement belongs to a cell, which
+                is what allows a drone to move without any zone configuration changing -
+                D-04's area already spans both Zone A and Zone C.
+              </div>
+            </div>
+
+            <div class="col grow droneplan">
+              <img src="_assets/site-plan.svg" alt="Site plan with four initial drone areas">
+              <div class="footprint" style="left:170px;top:22px;width:180px;height:92px">
+                <span>D-01 - 48 cells</span></div>
+              <div class="footprint" style="left:14px;top:438px;width:220px;height:92px">
+                <span>D-02 - 52 cells</span></div>
+              <div class="footprint" style="left:290px;top:260px;width:186px;height:92px;
+                border-style:dotted;opacity:.7"><span>D-03 - 44 cells, roving</span></div>
+              <div class="footprint" style="left:256px;top:446px;width:200px;height:88px">
+                <span>D-04 - 50 cells</span></div>
+              <div class="zoneline" style="left:110px;top:14px;width:340px;height:160px">
+                <span>ZONE B - North Gate</span></div>
+              <div class="zoneline" style="left:4px;top:430px;width:490px;height:130px">
+                <span>ZONE A - Concourse</span></div>
+            </div>
+          </div>
+
+          <div class="wizfoot-row">
+            <button type="button" class="btn">Back</button>
+            <div class="row gap-s">
+              <button type="button" class="btn">Save and exit</button>
+              <button type="submit" class="btn btn--primary">Continue to review</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>Registration status is shown per drone, independent of area assignment.</b>
+      Locked with an inlier count, or searching with none, matching the canonical dataset -
+      D-01, D-02 and D-04 locked, D-03 still searching - because a pose lock and an area
+      assignment answer two different questions. <span class="req">FR9.8</span></li>
+
+    <li><b>Cell count is read-only and derived from the drawn area, never typed.</b> An
+      administrator names or redraws the area; the count of cells that area covers is
+      computed, matching the same footprint sizes S06 shows once the drone is live - 48,
+      52, 44 and 50 cells. <span class="req">FR9.8</span></li>
+
+    <li><b>D-03's area is a route, not a point</b>, because a roving drone's initial
+      assignment is a transit corridor between two positions. Its card states plainly that
+      an unlocked drone can still be assigned before its pose is confirmed.
+      <span class="req">FR9.8</span> <span class="req">FR2.3</span></li>
+
+    <li><b>The map shows drone footprints and zone boundaries together, on purpose.</b>
+      D-04's footprint is drawn straddling Zone A and Zone B's neighbouring cells, the same
+      overlap S06 and S02 render live, so the boundary drawn here is the boundary the map
+      keeps later. <span class="req">FR9.8</span> <span class="req">FR6.2</span></li>
+
+    <li><b>The no-zone-binding rule is stated in words, not only implied by the picture.</b>
+      This is the same sentence S06's fleet screen carries, introduced once here at the
+      point an administrator might otherwise expect a zone picker. <span class="req">FR9.8</span></li>
+  </ol>
+
+</div>
+</body>
+</html>

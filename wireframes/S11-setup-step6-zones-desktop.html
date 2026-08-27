@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S11 Setup step 6 - Zones, desktop - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .wiz-steps{padding:10px 0;overflow-y:auto}
+  .wiz-step{display:flex;align-items:center;gap:10px;padding:8px 14px;min-height:44px;
+    text-decoration:none;color:var(--ink-2);border-left:3px solid transparent}
+  .wiz-num{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--g5);
+    display:flex;align-items:center;justify-content:center;font:700 11px var(--mono);
+    flex:0 0 auto;color:var(--ink-2);background:var(--g0)}
+  .wiz-step.done .wiz-num{background:var(--band-normal);border-color:var(--band-normal);color:#fff}
+  .wiz-step.current{color:var(--ink);background:var(--g0);border-left-color:var(--g7)}
+  .wiz-step.current .wiz-num{background:var(--g7);border-color:var(--g7);color:#fff}
+  .wiz-step .wiz-txt{display:flex;flex-direction:column;gap:1px}
+  .wiz-step .wiz-lbl{font:600 12px var(--font)}
+  .wiz-step .wiz-meta{font:600 9px var(--mono);color:var(--ink-2);letter-spacing:.03em}
+  .wizfoot-row{display:flex;justify-content:space-between;align-items:center;
+    padding:12px 18px;border-top:1px solid var(--line);background:var(--g1)}
+
+  .zonecard{background:var(--g0);border:1px solid var(--g4);border-radius:5px;
+    padding:11px;margin-bottom:10px}
+  .zonecard h3{margin:0;font:700 13px var(--mono)}
+  .zsw{width:18px;height:18px;flex:0 0 auto;border:1.5px solid var(--g7);border-radius:3px}
+  .zsw.z-a{background:var(--g1)}
+  .zsw.z-b{background:repeating-linear-gradient(45deg,var(--g5) 0 3px,var(--g1) 3px 6px)}
+  .zsw.z-c{background:var(--g3)}
+  .zsw.z-d{background:repeating-linear-gradient(90deg,var(--g6) 0 2px,var(--g1) 2px 5px)}
+
+  .zoneplan{position:relative;flex:1;min-height:0;background:var(--g2);overflow:hidden}
+  .zoneplan img{position:absolute;inset:6%;width:88%;height:88%;object-fit:fill;opacity:.4}
+
+  .addzone-limit{display:flex;align-items:center;gap:8px;padding:9px 10px;
+    border:1px dashed var(--g5);border-radius:5px;color:var(--ink-2);font:600 12px var(--font);
+    background:var(--g1)}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">S11.6</span>
+  <h1>S11 Venue setup - Step 6 of 8, Zones - two states</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S11</b></li>
+    <li>viewport <b>1440 x 900</b></li>
+    <li>role <b>Administrator</b></li>
+    <li>state <b>3 zones, add enabled - and - 4 zones, add disabled</b></li>
+    <li>requirement <b>FR9.6, FR6.5</b></li>
+    <li>batch <b>2</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <!-- ============ device A: three zones, fourth addable ============ -->
+  <div class="device device--desktop">
+    <span class="device-tag">3 zones - add enabled</span>
+
+    <span class="cx" style="left:1110px;top:150px">1</span>
+    <span class="cx" style="left:1110px;top:520px">2</span>
+    <span class="cx" style="left:660px;top:110px">3</span>
+
+    <div class="row grow">
+
+      <nav class="navrail wiz-steps" style="flex:0 0 240px">
+        <a href="S11-setup-step1-plan-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Site plan</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step2-grid-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Grid</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step3-proposals-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Proposals</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step4-attributes-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Attributes</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step5-exits-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Exits</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step6-zones-desktop.html" class="wiz-step current" aria-current="step">
+          <span class="wiz-num">6</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Zones</span>
+            <span class="wiz-meta">IN PROGRESS</span></span></a>
+        <a href="S11-setup-step7-thresholds-desktop.html" class="wiz-step">
+          <span class="wiz-num">7</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Thresholds</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-step8-drones-desktop.html" class="wiz-step">
+          <span class="wiz-num">8</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Drones</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-review-desktop.html" class="wiz-step">
+          <span class="wiz-num">R</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Review</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <div class="rail-note">Steps are non-linear once visited and progress
+          is saved per step.</div>
+      </nav>
+
+      <div class="col grow">
+        <div class="top">
+          <span class="b">Venue setup - Riverside Arena</span>
+          <span class="tiny muted">Step 6 of 8 - Zones</span>
+          <span class="grow"></span>
+          <span class="chip">s.iqbal</span>
+          <span class="st st-neutral">ADMINISTRATOR</span>
+        </div>
+
+        <form class="col grow" style="min-height:0">
+          <div class="row grow" style="min-height:0">
+
+            <div class="col" style="flex:0 0 340px;border-right:1px solid var(--line);
+              background:var(--g1);padding:16px;overflow-y:auto">
+
+              <div class="mono tiny b" style="margin-bottom:10px">ZONES - 3 of 2 to 4</div>
+
+              <div class="zonecard">
+                <div class="row gap center"><i class="zsw z-a"></i><h3>A - Concourse</h3></div>
+                <div class="tiny muted mono" style="margin-top:5px">800 cells selected</div>
+                <button type="button" class="btn btn--sm" style="margin-top:8px">Edit selection</button>
+              </div>
+              <div class="zonecard">
+                <div class="row gap center"><i class="zsw z-b"></i><h3>B - North Gate</h3></div>
+                <div class="tiny muted mono" style="margin-top:5px">800 cells selected</div>
+                <button type="button" class="btn btn--sm" style="margin-top:8px">Edit selection</button>
+              </div>
+              <div class="zonecard">
+                <div class="row gap center"><i class="zsw z-c"></i><h3>C - Arena Floor</h3></div>
+                <div class="tiny muted mono" style="margin-top:5px">600 cells selected</div>
+                <button type="button" class="btn btn--sm" style="margin-top:8px">Edit selection</button>
+              </div>
+
+              <button type="button" class="btn" style="width:100%;margin-top:6px">
+                + Add zone</button>
+              <p class="tiny muted" style="margin:6px 0 0">
+                2200 of 2400 cells are zoned; the remaining 200 sit outside any named zone,
+                which is permitted - a zone is a display grouping, not a requirement that
+                every cell belong to one.</p>
+            </div>
+
+            <div class="col grow zoneplan">
+              <img src="_assets/site-plan.svg" alt="Site plan with three zone boundaries">
+              <div class="zoneline" style="left:110px;top:40px;width:340px;height:160px">
+                <span>A ZONE B - North Gate</span></div>
+              <div class="zoneline" style="left:50px;top:230px;width:450px;height:190px;
+                border-style:dashed"><span>ZONE C - Arena Floor</span></div>
+              <div class="zoneline" style="left:4px;top:440px;width:490px;height:130px">
+                <span>ZONE A - Concourse</span></div>
+            </div>
+          </div>
+
+          <div class="wizfoot-row">
+            <button type="button" class="btn">Back</button>
+            <div class="row gap-s">
+              <button type="button" class="btn">Save and exit</button>
+              <button type="submit" class="btn btn--primary">Continue</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ device B: four zones, add disabled at the limit ============ -->
+  <div class="device device--desktop">
+    <span class="device-tag">4 zones - add disabled at limit</span>
+
+    <span class="cx" style="left:1110px;top:590px">4</span>
+    <span class="cx" style="left:1110px;top:660px">5</span>
+
+    <div class="row grow">
+
+      <nav class="navrail wiz-steps" style="flex:0 0 240px">
+        <a href="S11-setup-step1-plan-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Site plan</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step2-grid-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Grid</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step3-proposals-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Proposals</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step4-attributes-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Attributes</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step5-exits-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Exits</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step6-zones-desktop.html" class="wiz-step current" aria-current="step">
+          <span class="wiz-num">6</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Zones</span>
+            <span class="wiz-meta">IN PROGRESS</span></span></a>
+        <a href="S11-setup-step7-thresholds-desktop.html" class="wiz-step">
+          <span class="wiz-num">7</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Thresholds</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-step8-drones-desktop.html" class="wiz-step">
+          <span class="wiz-num">8</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Drones</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-review-desktop.html" class="wiz-step">
+          <span class="wiz-num">R</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Review</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <div class="rail-note">Steps are non-linear once visited and progress
+          is saved per step.</div>
+      </nav>
+
+      <div class="col grow">
+        <div class="top">
+          <span class="b">Venue setup - Riverside Arena</span>
+          <span class="tiny muted">Step 6 of 8 - Zones</span>
+          <span class="grow"></span>
+          <span class="chip">s.iqbal</span>
+          <span class="st st-neutral">ADMINISTRATOR</span>
+        </div>
+
+        <form class="col grow" style="min-height:0">
+          <div class="row grow" style="min-height:0">
+
+            <div class="col" style="flex:0 0 340px;border-right:1px solid var(--line);
+              background:var(--g1);padding:16px;overflow-y:auto">
+
+              <div class="mono tiny b" style="margin-bottom:10px">ZONES - 4 of 2 to 4</div>
+
+              <div class="zonecard">
+                <div class="row gap center"><i class="zsw z-a"></i><h3>A - Concourse</h3></div>
+                <div class="tiny muted mono" style="margin-top:5px">800 cells selected</div>
+                <button type="button" class="btn btn--sm" style="margin-top:8px">Edit selection</button>
+              </div>
+              <div class="zonecard">
+                <div class="row gap center"><i class="zsw z-b"></i><h3>B - North Gate</h3></div>
+                <div class="tiny muted mono" style="margin-top:5px">800 cells selected</div>
+                <button type="button" class="btn btn--sm" style="margin-top:8px">Edit selection</button>
+              </div>
+              <div class="zonecard">
+                <div class="row gap center"><i class="zsw z-c"></i><h3>C - Arena Floor</h3></div>
+                <div class="tiny muted mono" style="margin-top:5px">600 cells selected</div>
+                <button type="button" class="btn btn--sm" style="margin-top:8px">Edit selection</button>
+              </div>
+              <div class="zonecard" style="outline:2px solid var(--focus);outline-offset:-2px">
+                <div class="row gap center"><i class="zsw z-d"></i><h3>D - West Concourse</h3></div>
+                <div class="tiny muted mono" style="margin-top:5px">
+                  200 cells selected - drawn from the previously unzoned cells</div>
+                <button type="button" class="btn btn--sm" style="margin-top:8px">Edit selection</button>
+              </div>
+
+              <button type="button" class="btn" style="width:100%;margin-top:6px" disabled>
+                + Add zone</button>
+              <div class="addzone-limit" style="margin-top:8px">
+                Four zones is the validated limit. Sentinel supports two to four zones;
+                a fifth cannot be added here or anywhere else in the product.
+              </div>
+            </div>
+
+            <div class="col grow zoneplan">
+              <img src="_assets/site-plan.svg" alt="Site plan with four zone boundaries">
+              <div class="zoneline" style="left:110px;top:40px;width:340px;height:160px">
+                <span>ZONE B - North Gate</span></div>
+              <div class="zoneline" style="left:50px;top:230px;width:450px;height:190px;
+                border-style:dashed"><span>ZONE C - Arena Floor</span></div>
+              <div class="zoneline" style="left:4px;top:440px;width:490px;height:130px">
+                <span>ZONE A - Concourse</span></div>
+              <div class="zoneline" style="left:400px;top:440px;width:150px;height:130px;
+                border-style:dotted"><span>ZONE D - West Concourse</span></div>
+            </div>
+          </div>
+
+          <div class="wizfoot-row">
+            <button type="button" class="btn">Back</button>
+            <div class="row gap-s">
+              <button type="button" class="btn">Save and exit</button>
+              <button type="submit" class="btn btn--primary">Continue</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>Device A: three zones, matching the canonical dataset - A Concourse 800 cells,
+      B North Gate 800, C Arena Floor 600.</b> Add zone is enabled because the demo venue
+      sits inside the validated two-to-four range with room for one more.
+      <span class="req">FR9.6</span></li>
+
+    <li><b>Zone swatches are grey patterns scoped to this screen</b> (<code>z-a</code> through
+      <code>z-d</code>), not risk-band colours, because a setup screen shows grouping, never
+      observed risk.</li>
+
+    <li><b>Device B: a fourth zone, D West Concourse, carved from the 200 previously unzoned
+      cells.</b> Zones A, B and C keep their exact canonical cell counts, so adding a
+      demonstration fourth zone never contradicts the dataset the rest of this set
+      transcribes. <span class="req">FR9.6</span></li>
+
+    <li><b>Add zone is visibly disabled at four, with the validated limit stated inline</b>,
+      not just greyed out with no explanation - the sentence names the number and states
+      the boundary holds everywhere in the product, not only on this screen.
+      <span class="req">FR6.5</span></li>
+
+    <li><b>Every cell belongs to at most one zone.</b> Zone D's cells come only from the
+      pool that held no zone before; no cell is shown moving from A, B or C, because FR9.6
+      requires a cell to belong to at most one zone at a time. <span class="req">FR9.6</span></li>
+  </ol>
+
+</div>
+</body>
+</html>

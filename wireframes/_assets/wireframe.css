@@ -1,0 +1,278 @@
+/* Sentinel wireframes - shared greybox stylesheet.
+   Greybox everywhere, with one exception: the four observation states and the
+   four risk bands render in their real colour, fill pattern and label, because
+   those eight treatments are a requirement (NFR5) and the honesty invariant
+   cannot be reviewed if they are greyed out. */
+
+:root {
+  /* Greybox tokens. Nothing here is a brand colour. */
+  --g0:#ffffff; --g1:#f6f6f5; --g2:#ececea; --g3:#dededa;
+  --g4:#c4c4be; --g5:#9a9a93; --g6:#6b6b64; --g7:#3d3d38; --g8:#1c1c1a;
+  --ink:#1c1c1a; --ink-2:#6b6b64; --line:#c4c4be;
+  --focus:#2563eb;                       /* interactive affordance only */
+  --paper:#f0efec;                       /* page behind the device */
+
+  /* Density ramp. Fill lightness carries densityPerSqM, dark equals dense. */
+  --d0:#f4f4f2; --d1:#dcdcd6; --d2:#b9b9b0; --d3:#8f8f85; --d4:#5f5f57;
+
+  /* Risk band. Outline only: colour AND weight AND style, so the band
+     survives greyscale and never fights the density fill. */
+  --band-normal:#2f7d4f;   --band-watch:#a8760a;
+  --band-elevated:#c2410c; --band-critical:#b3161c;
+
+  /* Observation state accents, used for labels and legend swatches. */
+  --obs-observed:#2f7d4f; --obs-dwell:#5b6b8c;
+  --obs-stale:#8a6d3b;    --obs-gap:#6b6b64;
+
+  --r:6px; --tap:44px;
+  --font:ui-sans-serif,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"Cascadia Mono",Consolas,"Courier New",monospace;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.45 var(--font)}
+a{color:inherit}
+
+/* ---------- Frame chrome. Outside the wireframe, never part of it. ---------- */
+.wf-head{padding:18px 24px 14px;border-bottom:1px solid var(--line);background:var(--g0)}
+.wf-head h1{margin:2px 0 8px;font-size:19px;font-weight:650;letter-spacing:-.01em}
+.wf-id{font:600 11px/1 var(--mono);letter-spacing:.09em;color:var(--ink-2)}
+.wf-back{float:right;font:600 11px/1 var(--mono);color:var(--focus);text-decoration:none}
+.wf-meta{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
+.wf-meta li{font:500 11px/1 var(--mono);padding:5px 9px;border:1px solid var(--line);
+  border-radius:99px;background:var(--g1);color:var(--ink-2)}
+.wf-meta li b{color:var(--ink);font-weight:650}
+.wf-stage{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start;padding:28px 24px 64px}
+
+/* Device shells at exact reference sizes. */
+.device{background:var(--g0);border:1px solid var(--g5);border-radius:var(--r);
+  position:relative;overflow:hidden;display:flex;flex-direction:column;flex:0 0 auto}
+.device--mobile{width:390px;height:844px}
+.device--desktop{width:1440px;height:900px}
+.device--sheet{width:390px;height:auto;min-height:360px}
+.device--modal{width:560px;height:auto}
+.device-tag{position:absolute;top:0;right:0;z-index:40;font:600 10px/1 var(--mono);
+  padding:4px 7px;background:var(--g7);color:var(--g0);border-bottom-left-radius:var(--r)}
+
+/* Numbered callouts. A wireframe that cannot name its requirement is decoration. */
+.cx{position:absolute;z-index:50;width:20px;height:20px;border-radius:50%;
+  background:var(--focus);color:#fff;font:700 11px/20px var(--font);text-align:center;
+  box-shadow:0 0 0 2px #fff;transform:translate(-50%,-50%)}
+.wf-notes{flex:1 1 340px;min-width:300px;max-width:480px;margin:0;padding-left:22px;
+  font-size:13px;color:var(--ink)}
+.wf-notes li{margin-bottom:11px}
+.wf-notes code,.wf-notes .req{font:600 11px/1 var(--mono);background:var(--g2);
+  padding:2px 5px;border-radius:3px;color:var(--g7);white-space:nowrap}
+
+/* ---------- Greybox primitives ---------- */
+.bx{background:var(--g2);border:1px solid var(--g4);border-radius:4px}
+.bx--fill{background:var(--g3)}
+.ph{background:var(--g3);border-radius:3px;height:9px}          /* text placeholder */
+.ph--w40{width:40%}.ph--w60{width:60%}.ph--w80{width:80%}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  min-height:36px;padding:0 14px;border:1px solid var(--g5);border-radius:5px;
+  background:var(--g1);font:600 13px var(--font);color:var(--ink)}
+.btn--primary{background:var(--g7);border-color:var(--g7);color:var(--g0)}
+.btn--tap{min-height:var(--tap)}
+.btn--sm{min-height:28px;padding:0 9px;font-size:11px}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border-radius:99px;
+  border:1px solid var(--g4);background:var(--g1);font:600 11px/1.5 var(--mono)}
+.hr{height:1px;background:var(--line);border:0;margin:0}
+.mono{font-family:var(--mono)}
+.muted{color:var(--ink-2)}
+.tiny{font-size:11px}
+.b{font-weight:700}
+
+/* Honesty notes. Where the interface states a boundary in words. */
+.honest{border-left:3px solid var(--g6);background:var(--g1);padding:8px 10px;
+  font-size:12px;color:var(--ink-2);border-radius:0 4px 4px 0}
+
+/* ---------- THE EIGHT TREATMENTS ----------
+   Three independent channels for three independent dimensions:
+     fill lightness  = densityPerSqM
+     fill pattern    = observationState
+     outline         = riskBand, and only when OBSERVED
+   Every cell also carries a text label, so hue is never load-bearing. */
+
+.cell{position:relative;width:56px;height:56px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:2px;
+  font:600 9px/1.1 var(--mono);color:var(--ink);text-align:center}
+.cell .v{font-size:11px;font-weight:700;position:relative;z-index:4}
+.cell .lbl{font-size:8px;letter-spacing:.03em;color:var(--ink-2);position:relative;z-index:4}
+
+/* density fill */
+.d-0{background:var(--d0)}.d-1{background:var(--d1)}.d-2{background:var(--d2)}
+.d-3{background:var(--d3)}.d-4{background:var(--d4);color:#fff}
+.d-3 .lbl,.d-4 .lbl{color:#f0f0ee}
+
+/* observation state = fill pattern overlay */
+.obs-observed::before{content:none}
+.obs-dwell::before{content:"";position:absolute;inset:0;z-index:1;
+  background:repeating-linear-gradient(45deg,transparent 0 5px,rgba(91,107,140,.42) 5px 10px)}
+.obs-stale{filter:saturate(.25)}
+.obs-stale::before{content:"";position:absolute;inset:0;z-index:1;
+  background:repeating-linear-gradient(90deg,transparent 0 4px,rgba(138,109,59,.35) 4px 8px),
+             repeating-linear-gradient(0deg,transparent 0 4px,rgba(138,109,59,.35) 4px 8px)}
+.obs-gap{background:var(--g3)!important;color:var(--ink-2)!important}
+.obs-gap::before{content:"";position:absolute;inset:0;z-index:1;
+  background:repeating-linear-gradient(45deg,rgba(107,107,100,.30) 0 2px,transparent 2px 6px),
+             repeating-linear-gradient(-45deg,rgba(107,107,100,.30) 0 2px,transparent 2px 6px)}
+
+/* risk band = outline, drawn ONLY on an OBSERVED cell */
+.band-normal  {outline:1px solid var(--band-normal);  outline-offset:-1px}
+.band-watch   {outline:2px dashed var(--band-watch);  outline-offset:-2px}
+.band-elevated{outline:3px solid var(--band-elevated);outline-offset:-3px}
+.band-critical{outline:4px double var(--band-critical);outline-offset:-4px}
+.band-critical::after{content:"";position:absolute;inset:5px;z-index:2;
+  border:1px solid var(--band-critical);border-radius:2px}
+
+/* stale age badge, mandatory on every stale cell */
+.age{position:absolute;top:2px;right:2px;z-index:5;font:700 8px/1 var(--mono);
+  background:var(--obs-stale);color:#fff;padding:2px 3px;border-radius:2px}
+
+/* flow arrow, drawn only where flow is not null. Never zero-length. */
+.arrow{position:absolute;z-index:3;left:50%;top:50%;transform-origin:0 50%;
+  height:2px;background:var(--g8);border-radius:2px}
+.arrow::after{content:"";position:absolute;right:-1px;top:-3px;
+  border:4px solid transparent;border-left-color:var(--g8);border-right:0}
+.d-3 .arrow,.d-4 .arrow{background:#fff}
+.d-3 .arrow::after,.d-4 .arrow::after{border-left-color:#fff}
+
+/* state chips - C10 renders every domain string, nothing else does */
+.st{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:3px;
+  font:700 10px/1.6 var(--mono);letter-spacing:.03em;border:1px solid;white-space:nowrap}
+.st-observed{color:var(--obs-observed);border-color:var(--obs-observed);background:rgba(47,125,79,.08)}
+.st-dwell   {color:var(--obs-dwell);   border-color:var(--obs-dwell);   background:rgba(91,107,140,.08)}
+.st-stale   {color:var(--obs-stale);   border-color:var(--obs-stale);   background:rgba(138,109,59,.08)}
+.st-gap     {color:var(--obs-gap);     border-color:var(--obs-gap);     background:rgba(107,107,100,.08)}
+.st-normal  {color:var(--band-normal);  border-color:var(--band-normal)}
+.st-watch   {color:var(--band-watch);   border-color:var(--band-watch)}
+.st-elevated{color:var(--band-elevated);border-color:var(--band-elevated);background:rgba(194,65,12,.08)}
+.st-critical{color:var(--band-critical);border-color:var(--band-critical);background:rgba(179,22,28,.10)}
+.st-neutral {color:var(--ink-2);border-color:var(--g5)}
+
+/* ---------- Shell regions ---------- */
+.top{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:0 12px;height:48px;
+  border-bottom:1px solid var(--line);background:var(--g1);font-size:12px}
+.top .grow{flex:1}
+.navbar{flex:0 0 auto;display:flex;border-top:1px solid var(--line);background:var(--g1)}
+.navbar a{flex:1;min-height:56px;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:3px;font:600 10px var(--font);color:var(--ink-2);
+  text-decoration:none;border-right:1px solid var(--g3)}
+.navbar a:last-child{border-right:0}
+.navbar a[aria-current]{color:var(--ink);background:var(--g0);box-shadow:inset 0 -2px 0 var(--g7)}
+.navrail{flex:0 0 200px;border-right:1px solid var(--line);background:var(--g1);
+  display:flex;flex-direction:column;padding:8px 0}
+.navrail a{display:flex;align-items:center;gap:9px;min-height:40px;padding:0 14px;
+  font:600 13px var(--font);color:var(--ink-2);text-decoration:none}
+.navrail a[aria-current]{color:var(--ink);background:var(--g0);
+  box-shadow:inset 3px 0 0 var(--g7)}
+.navrail .rail-note{margin-top:auto;padding:10px 14px;font-size:11px;color:var(--ink-2)}
+.icon{width:16px;height:16px;border:1.5px solid currentColor;border-radius:3px;flex:0 0 auto}
+.icon--r{border-radius:50%}
+.row{display:flex}.col{display:flex;flex-direction:column}
+.grow{flex:1;min-width:0;min-height:0}
+.pad{padding:12px}.pad-s{padding:8px}.pad-l{padding:18px}
+.gap{gap:10px}.gap-s{gap:6px}
+.scroll{overflow:hidden}
+.wrap{display:flex;flex-wrap:wrap}
+.between{justify-content:space-between}
+.center{align-items:center}
+
+/* tabs - the only interactive behaviour in the whole wireframe set */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--line);background:var(--g1);
+  overflow:hidden;flex:0 0 auto}
+.tabs button{appearance:none;border:0;border-right:1px solid var(--g3);background:transparent;
+  padding:10px 14px;font:600 12px var(--font);color:var(--ink-2);cursor:pointer;white-space:nowrap}
+.tabs button[aria-selected="true"]{background:var(--g0);color:var(--ink);
+  box-shadow:inset 0 -2px 0 var(--g7)}
+.panel[hidden]{display:none}
+
+table.wt{width:100%;border-collapse:collapse;font-size:12px}
+table.wt th{text-align:left;font:600 11px var(--mono);color:var(--ink-2);
+  padding:7px 8px;border-bottom:1px solid var(--line);background:var(--g1)}
+table.wt td{padding:7px 8px;border-bottom:1px solid var(--g3)}
+table.wt td.mono{font-family:var(--mono);font-size:11px}
+
+/* grid cells drawn by the renderer. Same three channels as .cell, no labels,
+   because at map scale the label lives in the legend and the inspector. */
+.gc{position:relative;display:block}
+.gc.off-grid{background:transparent}
+.gc .age{font-size:7px;padding:1px 2px;top:1px;right:1px}
+.gc .arrow{height:1.5px}
+.gc .arrow::after{border-width:3px;top:-2px}
+
+/* map surface */
+.map{position:relative;flex:1;min-height:0;background:var(--g1);overflow:hidden}
+.plan{position:absolute;inset:0;opacity:.5}
+.gridwrap{position:absolute;inset:0;display:grid;gap:0}
+.footprint{position:absolute;border:2px dashed var(--focus);border-radius:3px;
+  background:rgba(37,99,235,.05)}
+.footprint span{position:absolute;top:-9px;left:4px;font:700 9px/1 var(--mono);
+  background:var(--focus);color:#fff;padding:2px 4px;border-radius:2px}
+.pin{position:absolute;width:18px;height:18px;border-radius:50% 50% 50% 0;
+  transform:rotate(-45deg) translate(-50%,-50%);background:var(--band-elevated);
+  border:2px solid #fff;box-shadow:0 0 0 2px rgba(194,65,12,.35)}
+.zoneline{position:absolute;border:2px solid var(--g7);border-radius:2px}
+.zoneline span{position:absolute;top:2px;left:4px;font:700 10px/1 var(--mono);
+  background:var(--g7);color:#fff;padding:2px 4px;border-radius:2px}
+
+/* alert rail and cards */
+.rail{flex:0 0 360px;border-left:1px solid var(--line);background:var(--g1);
+  display:flex;flex-direction:column;overflow:hidden}
+.card{background:var(--g0);border:1px solid var(--g4);border-radius:5px;padding:10px}
+.card + .card{margin-top:8px}
+.attr{display:grid;grid-template-columns:1fr auto;gap:3px 8px;font:600 11px var(--mono);
+  align-items:center}
+.attrbar{height:7px;background:var(--band-elevated);border-radius:2px}
+.attrbar--neg{background:var(--obs-dwell)}
+
+/* zone strip */
+.zstrip{flex:0 0 auto;display:flex;gap:8px;padding:8px;border-bottom:1px solid var(--line);
+  background:var(--g1);overflow:hidden}
+.ztile{flex:1 1 0;min-width:118px;background:var(--g0);border:1px solid var(--g4);
+  border-radius:5px;padding:8px}
+.cov{display:flex;height:7px;border-radius:2px;overflow:hidden;margin-top:6px;
+  border:1px solid var(--g4)}
+.cov i{display:block;height:100%}
+.cov .c-obs{background:var(--obs-observed)}
+.cov .c-dwl{background:repeating-linear-gradient(45deg,var(--obs-dwell) 0 3px,#fff 3px 6px)}
+.cov .c-stl{background:repeating-linear-gradient(90deg,var(--obs-stale) 0 3px,#fff 3px 6px)}
+.cov .c-gap{background:repeating-linear-gradient(45deg,var(--g5) 0 2px,#fff 2px 5px)}
+
+/* bottom sheet */
+.sheet{flex:0 0 auto;border-top:1px solid var(--g5);background:var(--g0);
+  border-radius:10px 10px 0 0;box-shadow:0 -3px 10px rgba(0,0,0,.07)}
+.sheet-handle{display:flex;align-items:center;gap:8px;padding:9px 12px;min-height:44px}
+.sheet-handle::before{content:"";width:34px;height:4px;border-radius:2px;background:var(--g4);
+  position:absolute;left:50%;top:5px;transform:translateX(-50%)}
+
+/* banners */
+.banner{flex:0 0 auto;padding:7px 12px;font:600 12px var(--font);
+  border-bottom:1px solid var(--line)}
+.banner--live{background:rgba(47,125,79,.10);color:var(--band-normal)}
+.banner--degraded{background:rgba(168,118,10,.12);color:var(--band-watch)}
+.banner--down{background:rgba(179,22,28,.10);color:var(--band-critical)}
+
+/* legend */
+.legend{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
+.legend .lg{display:flex;align-items:center;gap:8px;font-size:11px}
+.legend .sw{width:30px;height:26px;flex:0 0 auto;position:relative}
+
+/* modal scrim */
+.scrim{position:absolute;inset:0;background:rgba(28,28,26,.42);z-index:30;
+  display:flex;align-items:center;justify-content:center;padding:16px}
+.modal{background:var(--g0);border:1px solid var(--g5);border-radius:8px;
+  width:100%;max-width:520px;overflow:hidden}
+.modal-head{padding:12px 14px;border-bottom:1px solid var(--line);font-weight:650}
+.modal-foot{padding:12px 14px;border-top:1px solid var(--line);display:flex;
+  justify-content:flex-end;gap:8px;background:var(--g1)}
+
+/* index contact sheet */
+.sheetgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.sheetgrid a{display:block;padding:10px 12px;background:var(--g0);border:1px solid var(--g4);
+  border-radius:5px;text-decoration:none}
+.sheetgrid a:hover{border-color:var(--focus)}
+.sheetgrid .k{font:700 11px/1.4 var(--mono);color:var(--focus)}
+.sheetgrid .t{font-weight:600;font-size:13px;margin:2px 0}
+.batch{margin:26px 0 10px;font-size:15px;font-weight:650}

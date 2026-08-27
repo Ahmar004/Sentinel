@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S09 Event detail, mobile - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .statehead{margin:36px 24px 4px;font-size:17px;font-weight:650}
+  .statesub{margin:0 24px 18px;font-size:13px;color:var(--ink-2);max-width:86ch}
+  .attrrow{display:grid;grid-template-columns:1fr 40px;gap:4px 8px;align-items:center;
+    font:600 11px var(--mono);padding:3px 0}
+  .attrrow .val{text-align:right}
+  .attrrow .valneg{color:var(--obs-dwell)}
+  .tl{width:100%;height:100px;display:block}
+  .tl .ref{stroke:var(--g4);stroke-width:1;stroke-dasharray:3 3}
+  .tl .refc{stroke:var(--band-critical);stroke-width:1;stroke-dasharray:2 2}
+  .tl .line{fill:none;stroke:var(--g7);stroke-width:2}
+  .tl .dwellline{fill:none;stroke:var(--obs-dwell);stroke-width:2;stroke-dasharray:2 3}
+  .tl .lbl{font:600 8px var(--mono);fill:var(--ink-2)}
+  .tl .marker{stroke:var(--band-elevated);stroke-width:1.5}
+  /* Outcome chart, redesigned for a narrow phone: stacked small-multiples read
+     top to bottom rather than one wide line chart squeezed into 358px. */
+  .outm{width:100%;height:74px;display:block}
+  .outm .ref{stroke:var(--g4);stroke-width:1;stroke-dasharray:3 3}
+  .outm .lbl{font:600 8px var(--mono);fill:var(--ink-2)}
+  .outm .line{fill:none;stroke:var(--g7);stroke-width:2.4}
+  .outm .confirm{stroke:var(--band-elevated);stroke-width:1.5}
+  .outm .peak{fill:var(--band-normal)}
+  .cfgrow{display:flex;align-items:center;gap:10px;justify-content:space-between}
+  .cfgval{font:700 22px var(--mono)}
+  .cfgarrow{color:var(--ink-2);font-size:16px}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">F-021</span>
+  <h1>S09 Event detail - mobile, one screen per event type</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S09</b></li>
+    <li>viewport <b>390 x 844</b></li>
+    <li>role <b>Coordinator</b></li>
+    <li>state <b>alert / suggestion / outcome / configuration change</b></li>
+    <li>requirement <b>FR5.6 FR7.3 FR7.4 FR7.8 FR8.6 FR8.7 FR9.9</b></li>
+    <li>batch <b>3</b></li>
+  </ul>
+</header>
+
+<!-- ================= TYPE 1: ALERT ================= -->
+<h2 class="statehead" id="evt-alert">1. Alert - A-1039</h2>
+<p class="statesub">Single column, same frozen record as desktop: the attribution recorded at
+  19:42:10 yesterday, never recomputed (FR8.7).</p>
+
+<div class="wf-stage">
+  <div class="device device--mobile">
+    <span class="device-tag">A-1039</span>
+    <span class="cx" style="left:200px;top:100px">1</span>
+    <span class="cx" style="left:200px;top:300px">2</span>
+    <span class="cx" style="left:200px;top:700px">3</span>
+
+    <div class="top">
+      <a href="S08-history-mobile.html" class="mono tiny" style="text-decoration:none;color:var(--focus)">&larr; history</a>
+      <span class="grow"></span>
+      <span class="icon icon--r" aria-label="user menu"></span>
+    </div>
+
+    <div class="scroll grow" style="overflow-y:auto">
+      <div class="honest" style="margin:10px;border-left-color:var(--g6)">
+        Recorded when A-1039 fired at 19:42:10 yesterday. Never recomputed.
+        <span class="req">FR8.7</span>
+      </div>
+
+      <div class="pad" style="padding-top:0">
+        <div class="card">
+          <div class="row between center">
+            <span class="mono b">A-1039</span>
+            <span class="st st-elevated">ELEVATED</span>
+          </div>
+          <table class="wt" style="margin-top:8px">
+            <tr><td>Zone / cell</td><td class="mono">B - C-031-022</td></tr>
+            <tr><td>Score vs threshold</td><td class="mono">0.78 vs 0.70</td></tr>
+            <tr><td>Raised</td><td class="mono">yesterday 19:42:10</td></tr>
+            <tr><td>Status</td><td><span class="st st-neutral">CLEARED</span></td></tr>
+            <tr><td>Ack&#39;d</td><td class="mono">a.rahman, before 19:42:38</td></tr>
+          </table>
+        </div>
+
+        <div class="card" style="margin-top:8px">
+          <div class="mono tiny b" style="margin-bottom:6px">TOP CONTRIBUTING FEATURES</div>
+          <div class="attrrow"><span>flowConvergence (0.71)</span><span class="val">+0.19</span></div>
+          <div class="attrrow"><span>densityRateOfChange (0.42/m2/s)</span><span class="val">+0.14</span></div>
+          <div class="attrrow"><span>stopStartPulses (0.33)</span><span class="val">+0.09</span></div>
+          <div class="attrrow"><span>exitOccupancy (0.27)</span><span class="val">+0.06</span></div>
+          <div class="attrrow"><span>counterFlow (118 deg)</span><span class="val">+0.05</span></div>
+          <div class="attrrow"><span>speedVariance (0.61)</span><span class="val">+0.03</span></div>
+          <div class="attrrow"><span>density (3.9/m2)</span><span class="val">+0.02</span></div>
+          <div class="attrrow"><span>densityGradient (0.14)</span><span class="val valneg">-0.02</span></div>
+          <div class="attrrow"><span>speedMean (0.38m/s)</span><span class="val valneg">-0.04</span></div>
+          <div class="tiny muted" style="margin-top:7px">
+            All nine, same as the open A-1042 view - History shows the full record, not a
+            shortened one.</div>
+        </div>
+
+        <div class="card" style="margin-top:8px">
+          <div class="mono tiny b" style="margin-bottom:6px">TIMELINE, 30s BEFORE THE ALERT</div>
+          <svg class="tl" viewBox="0 0 320 100" preserveAspectRatio="none">
+            <line class="ref" x1="0" y1="60" x2="320" y2="60"/><text class="lbl" x="2" y="57">.40</text>
+            <line class="ref" x1="0" y1="30" x2="320" y2="30"/><text class="lbl" x="2" y="27">.70</text>
+            <line class="refc" x1="0" y1="15" x2="320" y2="15"/><text class="lbl" x="2" y="12">.85</text>
+            <polyline class="dwellline" points="0,80 10,76"/>
+            <polyline class="line" points="10,76 60,68 110,60 160,48 190,30 200,22"/>
+            <line class="marker" x1="200" y1="0" x2="200" y2="100"/>
+            <polyline class="line" points="200,22 240,19 280,16 320,17"/>
+          </svg>
+          <div class="tiny muted mono">-30s &middot; raised 19:42:10 &middot; cleared shortly after</div>
+        </div>
+
+        <div class="card" style="margin-top:8px">
+          <div class="row between center">
+            <span class="mono b" style="font-size:13px">SG-0771 - DIVERT</span>
+            <span class="st st-observed">CONFIRMED</span>
+          </div>
+          <div class="tiny muted mono" style="margin-top:5px">
+            Confirmed by a.rahman at 19:42:38, 28s later</div>
+          <a href="#evt-outcome" class="btn btn--tap grow" style="text-decoration:none;margin-top:8px">
+            See the outcome &darr;</a>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar">
+      <a href="#"><i class="icon"></i>Live</a>
+      <a href="#"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#" aria-current="page"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>Same fields as desktop, one column.</b> Nothing about the honesty invariant is
+      shortened for width - all nine features still render. <span class="req">FR5.6</span></li>
+    <li><b>The frozen-record banner is the first thing read,</b> before the score, so a
+      coordinator scanning fast on a phone still sees it before anything else.
+      <span class="req">FR8.7</span></li>
+    <li><b>The forward link to the outcome uses an in-page anchor,</b> matching the tab
+      convention of this wireframe set - no new screen, no data fetch implied.</li>
+  </ol>
+</div>
+
+<!-- ================= TYPE 2: SUGGESTION ================= -->
+<h2 class="statehead" id="evt-suggestion">2. Suggestion - SG-0772</h2>
+<p class="statesub">The full option set as issued: confirmed, superseded and rejected, each with
+  its reason (FR7.4, FR7.8).</p>
+
+<div class="wf-stage">
+  <div class="device device--mobile">
+    <span class="device-tag">SG-0772</span>
+    <span class="cx" style="left:200px;top:120px">4</span>
+    <span class="cx" style="left:200px;top:420px">5</span>
+    <span class="cx" style="left:200px;top:680px">6</span>
+
+    <div class="top">
+      <a href="S08-history-mobile.html" class="mono tiny" style="text-decoration:none;color:var(--focus)">&larr; history</a>
+      <span class="grow"></span>
+      <span class="icon icon--r"></span>
+    </div>
+
+    <div class="scroll grow" style="overflow-y:auto">
+      <div class="pad">
+        <div class="card">
+          <div class="mono tiny b" style="margin-bottom:6px">ALL THREE, RANK ORDER, ISSUED 14:02:53</div>
+          <table class="wt">
+            <tr><th>Rank</th><th>Action</th><th>Status</th></tr>
+            <tr><td class="mono">1</td><td class="mono">DIVERT</td><td><span class="st st-observed">CONFIRMED</span></td></tr>
+            <tr><td class="mono">2</td><td class="mono">HOLD_AND_METER</td><td><span class="st st-neutral">EXPIRED</span></td></tr>
+            <tr><td class="mono">3</td><td class="mono">ALTERNATE_ROUTE</td><td><span class="st st-critical">REJECTED</span></td></tr>
+          </table>
+        </div>
+
+        <div class="card" style="margin-top:8px;border-left:3px solid var(--band-normal)">
+          <div class="row between center">
+            <span class="chip">rank 1</span><span class="mono b" style="font-size:12px">DIVERT</span>
+            <span class="st st-observed">CONFIRMED</span>
+          </div>
+          <div class="tiny" style="margin-top:6px">Divert to Exit E2, 240 of 900/min, headroom;
+            E1 at 780 of 1200.</div>
+          <div class="tiny mono" style="margin-top:6px">5 of 5 safeguards <span class="st st-normal">PASS</span></div>
+          <div class="tiny mono" style="margin-top:6px">Confirmed by <b>a.rahman</b> at 14:03:05</div>
+          <div class="tiny muted" style="margin-top:6px">
+            Sentinel does not control barriers, signage or gates.</div>
+        </div>
+
+        <div class="card" style="margin-top:8px;opacity:.75">
+          <div class="row between center">
+            <span class="chip">rank 2</span><span class="mono b" style="font-size:12px">HOLD_AND_METER</span>
+            <span class="st st-neutral">EXPIRED</span>
+          </div>
+          <div class="honest" style="margin-top:6px">
+            Superseded when rank 1 was confirmed. No safeguard failed; it was never given a
+            chance to be confirmed or dismissed. <span class="req">FR7.8</span></div>
+        </div>
+
+        <div class="card" style="margin-top:8px;opacity:.75">
+          <div class="row between center">
+            <span class="chip">rank 3</span><span class="mono b" style="font-size:12px">ALTERNATE_ROUTE</span>
+            <span class="st st-critical">REJECTED</span>
+          </div>
+          <div class="tiny mono" style="margin-top:5px">
+            <span class="st st-critical">FAILED</span> STALE_CELL_ON_ROUTE - C-024-026, 7s ago</div>
+          <div class="honest" style="margin-top:6px">
+            Rejected before issue. Nothing to confirm or dismiss. <span class="req">FR7.4</span></div>
+        </div>
+
+        <div class="card" style="margin-top:8px">
+          <div class="mono tiny b" style="margin-bottom:4px">PHRASING SOURCE</div>
+          <div class="tiny">All three options phrased by the local
+            <span class="chip">MODEL</span> - available at 14:02:53.</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar">
+      <a href="#"><i class="icon"></i>Live</a>
+      <a href="#"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#" aria-current="page"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>The rank table up top gives the shape of the whole record</b> before the coordinator
+      scrolls into any one card's detail - useful on a screen where all three cannot be seen
+      at once. <span class="req">FR7.1</span></li>
+    <li><b>EXPIRED and REJECTED keep their distinct words and distinct reasons on mobile too.</b>
+      Shortened prose, same vocabulary, same facts. <span class="req">FR7.8</span></li>
+    <li><b>The advisory sentence survives every screen size.</b> "Sentinel does not control
+      barriers, signage or gates" is never the line that gets cut for space.</li>
+  </ol>
+</div>
+
+<!-- ================= TYPE 3: OUTCOME ================= -->
+<h2 class="statehead" id="evt-outcome">3. Outcome - SG-0771 IMPROVED, SG-0772 PENDING</h2>
+<p class="statesub">Designed for the phone, not shrunk from desktop: three small stacked traces
+  instead of one wide chart, each cell readable at its own height (FR8.6).</p>
+
+<div class="wf-stage">
+  <div class="device device--mobile">
+    <span class="device-tag">SG-0771</span>
+    <span class="cx" style="left:200px;top:120px">7</span>
+    <span class="cx" style="left:200px;top:420px">8</span>
+    <span class="cx" style="left:200px;top:660px">9</span>
+
+    <div class="top">
+      <a href="S08-history-mobile.html" class="mono tiny" style="text-decoration:none;color:var(--focus)">&larr; history</a>
+      <span class="grow"></span>
+      <span class="icon icon--r"></span>
+    </div>
+
+    <div class="scroll grow" style="overflow-y:auto">
+      <div class="pad">
+        <div class="card">
+          <div class="row between center">
+            <span class="mono b" style="font-size:13px">SG-0771 - DIVERT</span>
+            <span class="st st-normal">IMPROVED</span>
+          </div>
+          <table class="wt" style="margin-top:8px">
+            <tr><td>Window</td><td class="mono">19:42:38 - 19:52:38</td></tr>
+            <tr><td>At confirm</td><td class="mono">0.78</td></tr>
+            <tr><td>Peak</td><td class="mono">0.61</td></tr>
+            <tr><td>Change</td><td class="mono">-0.17</td></tr>
+          </table>
+        </div>
+
+        <div class="card" style="margin-top:8px">
+          <div class="mono tiny b" style="margin-bottom:6px">C-031-022 - the alerting cell</div>
+          <svg class="outm" viewBox="0 0 320 70" preserveAspectRatio="none">
+            <line class="ref" x1="0" y1="52" x2="320" y2="52"/><text class="lbl" x="2" y="50">.40</text>
+            <line class="ref" x1="0" y1="26" x2="320" y2="26"/><text class="lbl" x="2" y="24">.70</text>
+            <line class="confirm" x1="14" y1="0" x2="14" y2="70"/>
+            <circle class="peak" cx="30" cy="30" r="3"/>
+            <polyline class="line" points="14,18 30,30 90,44 160,54 230,60 300,63 320,64"/>
+          </svg>
+          <div class="tiny muted mono">0.78 at confirm &middot; 0.61 peak &middot; falls to ~0.28</div>
+        </div>
+        <div class="card" style="margin-top:8px">
+          <div class="mono tiny b" style="margin-bottom:6px">C-032-022</div>
+          <svg class="outm" viewBox="0 0 320 70" preserveAspectRatio="none">
+            <line class="ref" x1="0" y1="52" x2="320" y2="52"/>
+            <line class="ref" x1="0" y1="26" x2="320" y2="26"/>
+            <line class="confirm" x1="14" y1="0" x2="14" y2="70"/>
+            <polyline class="line" points="14,20 30,32 90,46 160,55 230,60 300,63 320,64"/>
+          </svg>
+        </div>
+        <div class="card" style="margin-top:8px">
+          <div class="mono tiny b" style="margin-bottom:6px">C-033-021</div>
+          <svg class="outm" viewBox="0 0 320 70" preserveAspectRatio="none">
+            <line class="ref" x1="0" y1="52" x2="320" y2="52"/>
+            <line class="ref" x1="0" y1="26" x2="320" y2="26"/>
+            <line class="confirm" x1="14" y1="0" x2="14" y2="70"/>
+            <polyline class="line" points="14,22 30,34 90,48 160,56 230,61 300,63 320,64"/>
+          </svg>
+        </div>
+
+        <div class="honest" style="margin-top:8px">
+          Improved when peak risk in the window falls more than 0.10 below the risk at confirm
+          time: 0.61 is 0.17 below 0.78, so <span class="st st-normal" style="margin:0 3px">IMPROVED</span>.
+          <span class="req">FR8.6</span></div>
+
+        <div class="card" style="margin-top:10px;border-left:3px solid var(--obs-dwell)">
+          <div class="mono tiny b" style="margin-bottom:6px">WHAT PENDING LOOKS LIKE - SG-0772</div>
+          <div class="honest" style="border-left-color:var(--obs-dwell)">
+            Outcome <span class="st st-dwell">PENDING</span> - 9m 53s remaining.
+          </div>
+          <div class="tiny muted" style="margin-top:6px">Window closes 14:13:05. No peak is
+            final yet, so no verdict is shown.</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar">
+      <a href="#"><i class="icon"></i>Live</a>
+      <a href="#"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#" aria-current="page"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>Three stacked traces, not one squeezed line chart.</b> At 358px wide, three
+      overlapping lines with a shared legend below would be unreadable; three small charts
+      each carry one cell's own shape clearly instead. <span class="req">FR8.6</span></li>
+    <li><b>Every trace still marks the confirm point and, on the first, the peak.</b> The
+      numbers in the summary table are traceable to a specific point on a specific line, not
+      asserted separately from the chart. <span class="req">FR8.6</span></li>
+    <li><b>PENDING sits directly below the settled example</b> so the two states can be compared
+      without navigating away, exactly as on desktop.</li>
+  </ol>
+</div>
+
+<!-- ================= TYPE 4: CONFIGURATION CHANGE ================= -->
+<h2 class="statehead" id="evt-config">4. Configuration change - CFG-0210</h2>
+<p class="statesub">Field, previous, new, actor, timestamp. Nothing more (FR9.9).</p>
+
+<div class="wf-stage">
+  <div class="device device--mobile">
+    <span class="device-tag">CFG-0210</span>
+    <span class="cx" style="left:200px;top:160px">10</span>
+
+    <div class="top">
+      <a href="S08-history-mobile.html" class="mono tiny" style="text-decoration:none;color:var(--focus)">&larr; history</a>
+      <span class="grow"></span>
+      <span class="icon icon--r"></span>
+    </div>
+
+    <div class="pad">
+      <div class="card">
+        <div class="row between center">
+          <span class="mono b">CFG-0210</span>
+          <span class="chip">threshold edit</span>
+        </div>
+        <table class="wt" style="margin-top:8px">
+          <tr><td>Field</td><td class="mono">Zone B - risk threshold</td></tr>
+          <tr><td>Actor</td><td class="mono">s.iqbal</td></tr>
+          <tr><td>Timestamp</td><td class="mono">today 13:47:02</td></tr>
+        </table>
+        <div class="cfgrow" style="margin-top:14px">
+          <div><div class="tiny muted mono">previous</div><div class="cfgval">0.70</div></div>
+          <div class="cfgarrow">&rarr;</div>
+          <div><div class="tiny muted mono">new</div><div class="cfgval">0.65</div></div>
+        </div>
+        <div class="honest" style="margin-top:12px">
+          Field, two values, actor, timestamp - nothing else. <span class="req">FR9.9</span></div>
+      </div>
+    </div>
+
+    <nav class="navbar">
+      <a href="#"><i class="icon"></i>Live</a>
+      <a href="#"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#" aria-current="page"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>Identical content to desktop, no reflow needed.</b> Five facts fit one column at
+      any width, so mobile and desktop show the same record rather than a trimmed one.
+      <span class="req">FR9.9</span></li>
+  </ol>
+</div>
+
+<script src="_assets/wireframe.js"></script>
+</body>
+</html>

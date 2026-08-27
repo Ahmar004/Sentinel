@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D09 Deactivate user - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .modal-body{padding:16px 18px}
+  .miniplan{font:600 11px var(--mono);color:var(--ink-2)}
+  .accttbl{width:100%;border-collapse:collapse;font-size:12px}
+  .accttbl th{text-align:left;font:600 10px var(--mono);color:var(--ink-2);
+    padding:6px 8px;border-bottom:1px solid var(--line);background:var(--g1)}
+  .accttbl td{padding:6px 8px;border-bottom:1px solid var(--g3)}
+  .accttbl tr.hi td{background:rgba(37,99,235,.06)}
+  .spinner{width:13px;height:13px;border:2px solid var(--g4);border-top-color:var(--g7);
+    border-radius:50%;display:inline-block;flex:0 0 auto}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">D09</span>
+  <h1>D09 Deactivate user - reversible, not a delete</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>D09</b></li>
+    <li>viewport <b>390 x 844 and 1440 x 900</b></li>
+    <li>role <b>Administrator</b></li>
+    <li>state <b>idle / submitting / failed / self-deactivation refused</b></li>
+    <li>requirement <b>FR10.5</b></li>
+    <li>batch <b>6</b></li>
+  </ul>
+</header>
+
+<!-- ================= STATE 1: IDLE ================= -->
+<h2 style="margin:30px 24px 4px;font-size:16px;font-weight:650">1. Idle - confirming deactivation of k.javed</h2>
+<p style="margin:0 24px 16px;font-size:13px;color:var(--ink-2);max-width:78ch">
+  s.iqbal, signed in as Administrator, opened this from the account row for k.javed in `S13`.
+  The account is shown active here because the row only becomes DEACTIVATED after this dialog
+  is submitted - the canonical dataset's `k.javed - deactivated` row in `wireframes.md` Section 5
+  is this action's own outcome.
+</p>
+
+<div class="wf-stage">
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900 - modal</span>
+    <span class="cx" style="left:1000px;top:210px">1</span>
+    <span class="cx" style="left:1000px;top:300px">2</span>
+    <span class="cx" style="left:1000px;top:380px">3</span>
+    <span class="cx" style="left:1000px;top:470px">4</span>
+    <span class="cx" style="left:640px;top:340px">5</span>
+
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <a href="#"><i class="icon"></i>Configuration</a>
+        <a href="#" aria-current="page"><i class="icon"></i>Accounts</a>
+        <a href="#"><i class="icon"></i>Audit log</a>
+        <a href="#"><i class="icon"></i>System health</a>
+        <a href="#"><i class="icon"></i>Roles reference</a>
+        <div class="rail-note">Signed in as <b>s.iqbal</b><br><span class="st st-neutral">ADMINISTRATOR</span></div>
+      </nav>
+      <div class="col grow">
+        <div class="top"><span class="b">Riverside Arena</span><span class="grow"></span>
+          <span class="mono tiny">14:03:12</span><span class="chip">s.iqbal</span></div>
+        <div class="row grow" style="position:relative">
+          <div class="pad-l scroll" style="overflow:hidden;width:100%">
+            <div class="miniplan" style="margin-bottom:10px">S13 Accounts, simplified</div>
+            <table class="accttbl">
+              <tr><th>Username</th><th>Role</th><th>Status</th><th>Last login</th></tr>
+              <tr><td class="mono">a.rahman</td><td><span class="st st-neutral">COORDINATOR</span></td>
+                <td><span class="st st-normal">ACTIVE</span></td><td><span class="ph ph--w60"></span></td></tr>
+              <tr><td class="mono">s.iqbal</td><td><span class="st st-neutral">ADMINISTRATOR</span></td>
+                <td><span class="st st-normal">ACTIVE</span></td><td><span class="ph ph--w60"></span></td></tr>
+              <tr><td class="mono">m.tariq</td><td><span class="st st-neutral">DRONE_OPERATOR</span></td>
+                <td><span class="st st-normal">ACTIVE</span></td><td><span class="ph ph--w60"></span></td></tr>
+              <tr><td class="mono">n.hassan</td><td><span class="st st-neutral">IT</span></td>
+                <td><span class="st st-normal">ACTIVE</span></td><td><span class="ph ph--w60"></span></td></tr>
+              <tr class="hi"><td class="mono">k.javed</td><td><span class="st st-neutral">COORDINATOR</span></td>
+                <td><span class="st st-normal">ACTIVE</span></td><td><span class="ph ph--w60"></span></td></tr>
+            </table>
+          </div>
+
+          <div class="scrim">
+            <div class="modal" style="max-width:480px">
+              <div class="modal-head">Deactivate k.javed?</div>
+              <form onsubmit="event.preventDefault()">
+                <div class="modal-body">
+                  <p style="margin:0 0 10px;font-size:13px">
+                    <b class="mono">k.javed</b> will no longer be able to sign in. Every audit
+                    entry already attributed to this account - past logins, acknowledgements,
+                    confirmations - stays exactly as recorded, still attributed to k.javed.
+                  </p>
+                  <div class="honest">
+                    This is reversible. An administrator can reactivate k.javed from this same
+                    Accounts screen at any time; nothing is deleted.
+                  </div>
+                </div>
+                <div class="modal-foot">
+                  <button class="btn" type="button" autofocus>Cancel</button>
+                  <button class="btn btn--primary" type="submit" style="background:var(--band-critical);border-color:var(--band-critical)">Deactivate account</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="device device--mobile">
+    <span class="device-tag">390 x 844 - sheet</span>
+    <span class="cx" style="left:196px;top:560px">6</span>
+
+    <div class="top"><span class="b" style="font-size:13px">Accounts</span><span class="grow"></span>
+      <span class="mono tiny">14:03:12</span></div>
+    <div class="pad" style="flex:0 0 auto">
+      <div class="miniplan" style="margin-bottom:8px">Account list behind the sheet - k.javed row</div>
+      <div class="card">
+        <div class="row between center"><span class="mono b">k.javed</span>
+          <span class="st st-normal">ACTIVE</span></div>
+        <div class="tiny muted mono" style="margin-top:3px">COORDINATOR</div>
+      </div>
+    </div>
+
+    <div class="scrim" style="align-items:flex-end;padding:0">
+      <form onsubmit="event.preventDefault()" style="width:100%">
+        <div class="sheet" style="width:100%">
+          <div class="sheet-handle" style="position:relative;border-bottom:1px solid var(--line)">
+            <span class="b" style="font-size:13px">Deactivate k.javed?</span>
+          </div>
+          <div class="pad">
+            <p style="margin:0 0 9px;font-size:13px">k.javed will no longer be able to sign in.
+              Its historical audit entries stay intact and attributed to it.</p>
+            <div class="honest">Reversible from Accounts at any time. Nothing is deleted.</div>
+            <div class="row gap-s" style="margin-top:14px">
+              <button class="btn btn--tap grow" type="button" autofocus>Cancel</button>
+              <button class="btn btn--tap grow" type="submit"
+                style="background:var(--band-critical);border-color:var(--band-critical);color:#fff">Deactivate</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <nav class="navbar">
+      <a href="#"><i class="icon"></i>Live</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#" aria-current="page"><i class="icon"></i>Accounts</a>
+      <a href="#"><i class="icon"></i>Audit</a>
+      <a href="#"><i class="icon"></i>Health</a>
+    </nav>
+  </div>
+</div>
+
+<!-- ================= STATE 2: SUBMITTING ================= -->
+<h2 style="margin:36px 24px 4px;font-size:16px;font-weight:650">2. Submitting</h2>
+<p style="margin:0 24px 16px;font-size:13px;color:var(--ink-2);max-width:78ch">
+  Both actions disable the instant the form submits, so a second tap cannot fire a duplicate
+  deactivation while the request is in flight.
+</p>
+<div class="wf-stage">
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900 - modal</span>
+    <span class="cx" style="left:1000px;top:470px">7</span>
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#"><i class="icon"></i>Live map</a>
+        <a href="#" aria-current="page"><i class="icon"></i>Accounts</a>
+        <div class="rail-note">Signed in as <b>s.iqbal</b><br><span class="st st-neutral">ADMINISTRATOR</span></div>
+      </nav>
+      <div class="col grow">
+        <div class="top"><span class="b">Riverside Arena</span><span class="grow"></span><span class="mono tiny">14:03:12</span></div>
+        <div class="row grow" style="position:relative">
+          <div class="pad-l"><div class="miniplan">Accounts table, dimmed behind the scrim</div></div>
+          <div class="scrim">
+            <div class="modal" style="max-width:480px">
+              <div class="modal-head">Deactivate k.javed?</div>
+              <form onsubmit="event.preventDefault()">
+                <div class="modal-body">
+                  <p style="margin:0 0 10px;font-size:13px;opacity:.55">k.javed will no longer be able to
+                    sign in. Historical audit entries stay intact and attributed to it.</p>
+                  <div class="honest" style="opacity:.55">Reversible from Accounts at any time.</div>
+                </div>
+                <div class="modal-foot">
+                  <button class="btn" type="button" disabled>Cancel</button>
+                  <button class="btn btn--primary" type="submit" disabled
+                    style="background:var(--band-critical);border-color:var(--band-critical)">
+                    <span class="spinner"></span> Deactivating...</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="device device--mobile">
+    <span class="device-tag">390 x 844 - sheet</span>
+    <div class="top"><span class="b" style="font-size:13px">Accounts</span><span class="grow"></span><span class="mono tiny">14:03:12</span></div>
+    <div class="scrim" style="align-items:flex-end;padding:0;flex:1">
+      <form onsubmit="event.preventDefault()" style="width:100%">
+        <div class="sheet" style="width:100%">
+          <div class="sheet-handle" style="position:relative;border-bottom:1px solid var(--line)">
+            <span class="b" style="font-size:13px">Deactivate k.javed?</span></div>
+          <div class="pad">
+            <p style="margin:0 0 9px;font-size:13px;opacity:.55">k.javed will no longer be able to sign in.</p>
+            <div class="row gap-s" style="margin-top:14px">
+              <button class="btn btn--tap grow" type="button" disabled>Cancel</button>
+              <button class="btn btn--tap grow" type="submit" disabled
+                style="background:var(--band-critical);border-color:var(--band-critical);color:#fff">
+                <span class="spinner"></span> Deactivating...</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <nav class="navbar"><a href="#"><i class="icon"></i>Live</a><a href="#" aria-current="page"><i class="icon"></i>Accounts</a></nav>
+  </div>
+</div>
+
+<!-- ================= STATE 3: FAILED ================= -->
+<h2 style="margin:36px 24px 4px;font-size:16px;font-weight:650">3. Failed</h2>
+<p style="margin:0 24px 16px;font-size:13px;color:var(--ink-2);max-width:78ch">
+  The dialog stays open with the account untouched and an explicit retry, rather than closing
+  silently on an error the administrator never saw.
+</p>
+<div class="wf-stage">
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900 - modal</span>
+    <span class="cx" style="left:1000px;top:330px">8</span>
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#"><i class="icon"></i>Live map</a>
+        <a href="#" aria-current="page"><i class="icon"></i>Accounts</a>
+        <div class="rail-note">Signed in as <b>s.iqbal</b><br><span class="st st-neutral">ADMINISTRATOR</span></div>
+      </nav>
+      <div class="col grow">
+        <div class="top"><span class="b">Riverside Arena</span><span class="grow"></span><span class="mono tiny">14:03:12</span></div>
+        <div class="row grow" style="position:relative">
+          <div class="pad-l"><div class="miniplan">Accounts table, dimmed behind the scrim</div></div>
+          <div class="scrim">
+            <div class="modal" style="max-width:480px">
+              <div class="modal-head">Deactivate k.javed?</div>
+              <form onsubmit="event.preventDefault()">
+                <div class="modal-body">
+                  <div class="honest" style="border-left-color:var(--band-critical);margin-bottom:10px">
+                    Could not deactivate k.javed. The account is unchanged and still active.
+                    Check your connection and try again.
+                  </div>
+                  <p style="margin:0;font-size:13px">k.javed will no longer be able to sign in.
+                    Historical audit entries stay intact and attributed to it.</p>
+                </div>
+                <div class="modal-foot">
+                  <button class="btn" type="button" autofocus>Cancel</button>
+                  <button class="btn btn--primary" type="submit"
+                    style="background:var(--band-critical);border-color:var(--band-critical)">Try again</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="device device--mobile">
+    <span class="device-tag">390 x 844 - sheet</span>
+    <div class="top"><span class="b" style="font-size:13px">Accounts</span><span class="grow"></span><span class="mono tiny">14:03:12</span></div>
+    <div class="scrim" style="align-items:flex-end;padding:0;flex:1">
+      <form onsubmit="event.preventDefault()" style="width:100%">
+        <div class="sheet" style="width:100%">
+          <div class="sheet-handle" style="position:relative;border-bottom:1px solid var(--line)">
+            <span class="b" style="font-size:13px">Deactivate k.javed?</span></div>
+          <div class="pad">
+            <div class="honest" style="border-left-color:var(--band-critical);margin-bottom:9px">
+              Could not deactivate. Account unchanged. Try again.</div>
+            <div class="row gap-s" style="margin-top:6px">
+              <button class="btn btn--tap grow" type="button" autofocus>Cancel</button>
+              <button class="btn btn--tap grow" type="submit"
+                style="background:var(--band-critical);border-color:var(--band-critical);color:#fff">Try again</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <nav class="navbar"><a href="#"><i class="icon"></i>Live</a><a href="#" aria-current="page"><i class="icon"></i>Accounts</a></nav>
+  </div>
+</div>
+
+<!-- ================= STATE 4: SELF-DEACTIVATION REFUSED ================= -->
+<h2 style="margin:36px 24px 4px;font-size:16px;font-weight:650">4. Deactivating your own account - refused</h2>
+<p style="margin:0 24px 16px;font-size:13px;color:var(--ink-2);max-width:78ch">
+  s.iqbal opened this from their own row. There is no path from here to actually deactivate the
+  signed-in account, so the destructive action is not offered at all rather than offered and
+  then rejected on submit.
+</p>
+<div class="wf-stage">
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900 - modal</span>
+    <span class="cx" style="left:1000px;top:250px">9</span>
+    <span class="cx" style="left:1000px;top:420px">10</span>
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#"><i class="icon"></i>Live map</a>
+        <a href="#" aria-current="page"><i class="icon"></i>Accounts</a>
+        <div class="rail-note">Signed in as <b>s.iqbal</b><br><span class="st st-neutral">ADMINISTRATOR</span></div>
+      </nav>
+      <div class="col grow">
+        <div class="top"><span class="b">Riverside Arena</span><span class="grow"></span><span class="mono tiny">14:03:12</span><span class="chip">s.iqbal</span></div>
+        <div class="row grow" style="position:relative">
+          <div class="pad-l"><div class="miniplan">Accounts table - the s.iqbal row, dimmed behind the scrim</div></div>
+          <div class="scrim">
+            <div class="modal" style="max-width:480px">
+              <div class="modal-head">Can't deactivate your own account</div>
+              <form onsubmit="event.preventDefault()">
+                <div class="modal-body">
+                  <div class="honest">
+                    You are signed in as <b class="mono">s.iqbal</b>. Deactivating the account
+                    you are using would end your own session mid-task, so this action is refused.
+                    Ask another administrator to deactivate this account if it is genuinely needed.
+                  </div>
+                </div>
+                <div class="modal-foot">
+                  <button class="btn btn--primary" type="submit" autofocus>Close</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="device device--mobile">
+    <span class="device-tag">390 x 844 - sheet</span>
+    <div class="top"><span class="b" style="font-size:13px">Accounts</span><span class="grow"></span><span class="mono tiny">14:03:12</span></div>
+    <div class="scrim" style="align-items:flex-end;padding:0;flex:1">
+      <form onsubmit="event.preventDefault()" style="width:100%">
+        <div class="sheet" style="width:100%">
+          <div class="sheet-handle" style="position:relative;border-bottom:1px solid var(--line)">
+            <span class="b" style="font-size:13px">Can't deactivate your own account</span></div>
+          <div class="pad">
+            <div class="honest">Signed in as s.iqbal. Deactivating this account would end your
+              own session. Ask another administrator instead.</div>
+            <button class="btn btn--tap grow btn--primary" type="submit" autofocus style="margin-top:12px">Close</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <nav class="navbar"><a href="#"><i class="icon"></i>Live</a><a href="#" aria-current="page"><i class="icon"></i>Accounts</a></nav>
+  </div>
+</div>
+
+<div style="padding:8px 24px 64px">
+<ol class="wf-notes" style="max-width:920px">
+  <li><b>The account is named, not implied by which row was clicked.</b> "Deactivate k.javed?"
+    in the header and again in the body, so a screen reader user or a fast scroller cannot
+    confirm the wrong account. <span class="req">FR10.5</span></li>
+
+  <li><b>Two consequences are stated separately: sign-in stops, audit history does not.</b>
+    Splitting them is the point - a reader who only heard "can no longer authenticate" could
+    reasonably assume the account's record disappears too, and it does not.
+    <span class="req">FR10.5</span></li>
+
+  <li><b>Reversibility is stated in the dialog's own words, not left to be inferred from an
+    Accounts screen the administrator has not opened yet.</b> This is what keeps the action
+    reading as deactivate rather than delete. <span class="req">FR10.5</span></li>
+
+  <li><b>Cancel carries the initial focus, not Deactivate.</b> The destructive action is never
+    the keyboard default, so pressing Enter out of habit lands on Cancel.
+    <span class="req">FR10.5</span></li>
+
+  <li><b>Confirm is <code>type="submit"</code> on a real <code>&lt;form onsubmit&gt;</code>;
+    Cancel is <code>type="button"</code>.</b> Enter submits, Esc cancels, focus is trapped in
+    the dialog while open and returns to the account row's action button on close.</li>
+
+  <li><b>Submitting disables both buttons and shows progress in words, not just a spinner.</b>
+    "Deactivating..." on the button itself states what is happening, so a slow response does
+    not read as a frozen dialog.</li>
+
+  <li><b>A failed request leaves the account visibly untouched and offers Try again in place.</b>
+    Per SRS 3.4, a failed request never leaves a previously fetched value looking live; here the
+    account's ACTIVE status is restated so nothing is ambiguous about what did or did not happen.</li>
+
+  <li><b>Deactivating the account you are signed in as is refused before any request is sent,</b>
+    with the reason given in plain words, because the account performing the action must remain
+    able to see the result of it. There is no Deactivate button to mis-tap in this state at all.
+    <span class="req">FR10.5</span></li>
+
+  <li><b>Mobile keeps the same two consequences and the same reversibility sentence,</b> as a
+    full-width sheet rather than a centred modal, with the same focus order.</li>
+
+  <li><b>The Accounts table behind the scrim is simplified but carries the real five accounts
+    from the canonical dataset,</b> so the dialog is seen in the context it actually opens from
+    rather than floating over an empty page. `S13` itself is drawn in a later batch.
+    <span class="req">FR10.2</span></li>
+</ol>
+</div>
+
+</body>
+</html>

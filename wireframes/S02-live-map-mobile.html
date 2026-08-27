@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S02 Live site map, mobile - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">F-002</span>
+  <h1>S02 Live site map - mobile, the coordinator's device</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S02</b></li>
+    <li>viewport <b>390 x 844</b></li>
+    <li>role <b>Coordinator</b></li>
+    <li>state <b>LIVE</b></li>
+    <li>requirement <b>FR1 FR2 FR3 FR4 FR5 FR6</b></li>
+    <li>batch <b>1</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <!-- ============ map view, alert sheet collapsed ============ -->
+  <div class="device device--mobile">
+    <span class="device-tag">sheet collapsed</span>
+
+    <span class="cx" style="left:214px;top:26px">1</span>
+    <span class="cx" style="left:32px;top:96px">2</span>
+    <span class="cx" style="left:200px;top:225px">3</span>
+    <span class="cx" style="left:120px;top:400px">4</span>
+    <span class="cx" style="left:290px;top:330px">5</span>
+    <span class="cx" style="left:355px;top:640px">6</span>
+    <span class="cx" style="left:44px;top:718px">7</span>
+    <span class="cx" style="left:196px;top:790px">8</span>
+
+    <!-- top bar -->
+    <div class="top">
+      <span class="b">Riverside Arena</span>
+      <span class="st st-observed">LIVE</span>
+      <span class="mono tiny">1.2s</span>
+      <span class="grow"></span>
+      <span class="mono tiny">14:03:12</span>
+      <span class="icon icon--r" aria-label="user menu"></span>
+    </div>
+
+    <!-- zone strip, scrolls horizontally -->
+    <div class="zstrip">
+      <div class="ztile">
+        <div class="row between center"><span class="mono tiny b">A Concourse</span>
+          <span class="st st-normal">NORMAL</span></div>
+        <div class="row between center" style="margin-top:3px">
+          <span class="mono b" style="font-size:17px">0.31</span>
+          <span class="tiny muted mono">~1,480 ppl</span></div>
+        <div class="cov"><i class="c-obs" style="width:82%"></i><i class="c-dwl" style="width:4%"></i>
+          <i class="c-stl" style="width:3%"></i><i class="c-gap" style="width:11%"></i></div>
+        <div class="tiny muted mono" style="margin-top:3px">82% obs - peak C-012-034</div>
+      </div>
+      <div class="ztile" style="outline:2px solid var(--band-elevated);outline-offset:-2px">
+        <div class="row between center"><span class="mono tiny b">B North Gate</span>
+          <span class="st st-elevated">ELEVATED</span></div>
+        <div class="row between center" style="margin-top:3px">
+          <span class="mono b" style="font-size:17px">0.78</span>
+          <span class="tiny muted mono">~410 ppl</span></div>
+        <div class="cov"><i class="c-obs" style="width:24%"></i><i class="c-dwl" style="width:9%"></i>
+          <i class="c-stl" style="width:7%"></i><i class="c-gap" style="width:60%"></i></div>
+        <div class="tiny muted mono" style="margin-top:3px">24% obs - peak C-031-022</div>
+      </div>
+      <div class="ztile" style="min-width:60px;flex:0 0 60px">
+        <div class="mono tiny b">C Arena</div>
+        <div class="mono b" style="font-size:15px">-</div>
+        <div class="tiny muted mono">0%</div>
+      </div>
+    </div>
+
+    <!-- map -->
+    <div class="map">
+      <img class="plan" src="_assets/site-plan.svg" alt="">
+      <div class="gridwrap" data-cols="15" data-map="
+        g0g0g0s2s2o1o2w3e3w3o2s2g0g0g0
+        g0g0s2o2w3e4e4c4e4w3o2s1g0g0g0
+        g0g0s1o2w3e4e4e4w3o2o1g0g0g0g0
+        g0g0g0o1o2w3w3w2o2o1g0g0g0g0g0
+        g0g0g0g0o1o1o2o1o1g0g0g0g0g0g0
+        g0g0g0g0g0d2d2d2g0g0g0g0g0g0g0
+        g0g0g0d1d2d2d3d2d2d1g0g0g0g0g0
+        g0g0d1d2d2d3d3d3d2d2d1g0g0g0g0
+        g0g0d1d2d2d3d3d3d2d2d1g0g0g0g0
+        g0g0g0d1d2d2d2d2d2d1g0g0g0g0g0
+        g0g0g0g0d1d1d2d1d1g0g0g0g0g0g0
+        o1o1o1o2o2o2o2o2o2o1o1o1g0g0g0
+        o1o2o2o2o3o3o2o2o2o2o1o1o1g0g0
+        o1o1o2o2o2o2o2o2o2o1o1o1s1g0g0
+        o0o1o1o1o2o2o2o1o1o1o1s1g0g0g0"></div>
+
+      <!-- zone boundaries -->
+      <div class="zoneline" style="left:60px;top:2px;width:200px;height:96px">
+        <span>ZONE B</span></div>
+      <div class="zoneline" style="left:26px;top:130px;width:270px;height:110px;
+        border-style:dashed"><span>ZONE C</span></div>
+      <div class="zoneline" style="left:2px;top:252px;width:290px;height:80px">
+        <span>ZONE A</span></div>
+
+      <!-- drone footprints, labelled with id and state -->
+      <div class="footprint" style="left:98px;top:8px;width:106px;height:56px">
+        <span>D-01 OBSERVE</span></div>
+      <div class="footprint" style="left:8px;top:256px;width:132px;height:56px">
+        <span>D-02 OBSERVE</span></div>
+      <div class="footprint" style="left:170px;top:150px;width:110px;height:56px;
+        border-style:dotted;opacity:.7"><span>D-03 TRANSIT</span></div>
+      <div class="footprint" style="left:150px;top:262px;width:120px;height:52px">
+        <span>D-04 OBSERVE</span></div>
+
+      <!-- alert marker on the alerting cell -->
+      <div class="pin" style="left:148px;top:34px"></div>
+
+      <!-- layers and legend, collapsed -->
+      <div style="position:absolute;right:8px;bottom:8px;display:flex;flex-direction:column;gap:6px">
+        <button class="btn btn--sm" type="button" style="min-height:38px">Layers</button>
+        <button class="btn btn--sm" type="button" style="min-height:38px">Legend</button>
+      </div>
+    </div>
+
+    <!-- alert sheet handle -->
+    <div class="sheet">
+      <div class="sheet-handle" style="position:relative">
+        <span class="b" style="font-size:13px">Alerts</span>
+        <span class="st st-elevated">1 OPEN</span>
+        <span class="st st-watch">1 WATCH</span>
+        <span class="grow"></span>
+        <span class="tiny muted mono">drag up</span>
+      </div>
+    </div>
+
+    <!-- nav bottom bar, coordinator entries only -->
+    <nav class="navbar">
+      <a href="#" aria-current="page"><i class="icon"></i>Live</a>
+      <a href="#"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+
+  <!-- ============ same screen, alert sheet dragged up ============ -->
+  <div class="device device--mobile">
+    <span class="device-tag">sheet expanded</span>
+    <span class="cx" style="left:355px;top:300px">9</span>
+    <span class="cx" style="left:36px;top:470px">10</span>
+    <span class="cx" style="left:300px;top:700px">11</span>
+
+    <div class="top">
+      <span class="b">Riverside Arena</span>
+      <span class="st st-observed">LIVE</span>
+      <span class="mono tiny">1.2s</span>
+      <span class="grow"></span>
+      <span class="icon icon--r"></span>
+    </div>
+
+    <div class="map" style="flex:0 0 220px">
+      <img class="plan" src="_assets/site-plan.svg" alt="">
+      <div class="gridwrap" data-cols="15" data-map="
+        g0g0g0s2s2o1o2w3e3w3o2s2g0g0g0
+        g0g0s2o2w3e4e4c4e4w3o2s1g0g0g0
+        g0g0s1o2w3e4e4e4w3o2o1g0g0g0g0
+        g0g0g0o1o2w3w3w2o2o1g0g0g0g0g0
+        g0g0g0g0o1o1o2o1o1g0g0g0g0g0g0
+        g0g0g0g0g0d2d2d2g0g0g0g0g0g0g0
+        g0g0g0d1d2d2d3d2d2d1g0g0g0g0g0
+        g0g0d1d2d2d3d3d3d2d2d1g0g0g0g0"></div>
+      <div class="pin" style="left:148px;top:36px"></div>
+    </div>
+
+    <div class="sheet grow" style="overflow:hidden">
+      <div class="sheet-handle" style="position:relative;border-bottom:1px solid var(--line)">
+        <span class="b" style="font-size:13px">Alerts</span>
+        <span class="st st-elevated">1 OPEN</span>
+        <span class="grow"></span>
+        <span class="tiny muted mono">drag down</span>
+      </div>
+
+      <div class="pad">
+        <!-- open alert card, C05 attribution readable without navigation -->
+        <div class="card" style="border-left:3px solid var(--band-elevated)">
+          <div class="row between center">
+            <span class="mono tiny b">A-1042 - Zone B - C-031-022</span>
+            <span class="st st-elevated">ELEVATED</span>
+          </div>
+          <div class="row between center" style="margin-top:5px">
+            <span class="mono b" style="font-size:19px">0.78</span>
+            <span class="tiny muted mono">threshold 0.70 - 14:02:51 - 21s ago</span>
+          </div>
+
+          <div class="honest" style="margin:8px 0 6px;border-left-color:var(--band-elevated)">
+            Top three contributing features
+          </div>
+          <div class="attr">
+            <span>flowConvergence</span><span class="b">+0.19</span>
+            <i class="attrbar" style="width:100%"></i><span></span>
+            <span>densityRateOfChange</span><span class="b">+0.14</span>
+            <i class="attrbar" style="width:74%"></i><span></span>
+            <span>stopStartPulses</span><span class="b">+0.09</span>
+            <i class="attrbar" style="width:47%"></i><span></span>
+          </div>
+
+          <div class="tiny muted" style="margin-top:7px">
+            Clears when risk stays below 0.65 for 30 seconds.
+          </div>
+
+          <div class="row gap-s" style="margin-top:9px">
+            <button class="btn btn--tap grow" type="button">Acknowledge</button>
+            <button class="btn btn--tap btn--primary grow" type="button">Suggestions (3)</button>
+          </div>
+        </div>
+
+        <!-- watch band, present as a trend with no alert -->
+        <div class="card">
+          <div class="row between center">
+            <span class="mono tiny b">Zone B - C-030-020 and 6 cells</span>
+            <span class="st st-watch">WATCH</span>
+          </div>
+          <div class="row between center" style="margin-top:4px">
+            <span class="mono b">0.55</span>
+            <span class="tiny muted">rising - no alert raised</span>
+          </div>
+          <div class="bx" style="height:28px;margin-top:6px"></div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar">
+      <a href="#" aria-current="page"><i class="icon"></i>Live</a>
+      <a href="#"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>Top bar, always present.</b> Connection chip and measured end-to-end latency appear
+      on every screen, because a coordinator must never have to ask whether what they are
+      looking at is current. <span class="req">FR3.3</span> <span class="req">NFR1</span></li>
+
+    <li><b>Zone strip, risk and coverage always together.</b> Zone A reads 0.31 NORMAL over
+      82% observed. A risk score is never rendered without its coverage bar beside it, because
+      a zone can only look calm by being unobserved. The estimated people count is stated over
+      the zone's observed cells only, with that observed percentage next to it.
+      <span class="req">FR1.5</span> <span class="req">FR4.5</span> <span class="req">FR4.6</span></li>
+
+    <li><b>Zone C reads a dash, not a zero.</b> Every cell in the arena floor is still filling
+      its 30 s dwell window, so the zone has no score at all. It shows "-" and 0% observed.
+      Rendering it as 0.00 would claim the floor is safe.
+      <span class="req">FR4.2</span> <span class="req">SRS 2.3</span></li>
+
+    <li><b>The wind-map overlay.</b> Density is fill lightness, flow is one arrow per cell
+      sized by speed, and the risk band is the outline. Three channels, so all three facts are
+      readable at once. The arena floor cells carry arrows and hatching but no outline, because
+      a cell without dwell has no band. <span class="req">FR1.2</span>
+      <span class="req">FR2.2</span> <span class="req">FR3.1</span> <span class="req">FR4.4</span></li>
+
+    <li><b>Gaps stay gaps.</b> Four drones cover 2400 cells, so most of the map is grey
+      crosshatch with no numbers. Nothing is interpolated and nothing is held as last-known-good.
+      The stale band at the left edge is where D-02 last looked, carrying its age badge.
+      <span class="req">FR3.4</span> <span class="req">FR6.3</span></li>
+
+    <li><b>Drone footprints carry id and state.</b> D-03 is dotted because it is in transit,
+      contributing density only. Its previous cells are ageing through stale into gap.
+      <span class="req">FR2.3</span> <span class="req">FR6.1</span></li>
+
+    <li><b>Layers and legend within thumb reach.</b> Both open as sheets rather than panels on
+      mobile. Every layer in the design.md table is independently toggleable.
+      <span class="req">NFR5</span></li>
+
+    <li><b>Nav is a bottom bar and is derived from the session role.</b> A Coordinator sees five
+      entries. Configuration, Accounts, Audit and Health are absent, not disabled, because the
+      role cannot open them at all. <span class="req">FR10.3</span></li>
+
+    <li><b>Alert rail is a bottom sheet on mobile.</b> Collapsed it is a 44px handle with the
+      open count; dragged up it covers the lower map. One gesture, no navigation away from the
+      map. <span class="req">NFR3</span></li>
+
+    <li><b>Every alert answers why, on the card itself.</b> The top three contributing features
+      with their signed contributions are readable without opening anything, and the clear
+      condition is stated in plain words. <span class="req">FR5.3</span>
+      <span class="req">FR5.4</span></li>
+
+    <li><b>The watch band earns its place.</b> A watch-band zone appears in the rail as a trend
+      with no alert and no actions, which is exactly what the watch band exists for.
+      <span class="req">FR4.4</span></li>
+  </ol>
+
+</div>
+<script src="_assets/wireframe.js"></script>
+</body>
+</html>

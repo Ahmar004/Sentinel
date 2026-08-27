@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D02 Confirm suggestion - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .modal-body{padding:16px 18px;max-height:560px;overflow-y:auto}
+  .safe-line{display:flex;justify-content:space-between;align-items:center;
+    padding:5px 0;border-bottom:1px solid var(--g3);font:600 12px var(--mono)}
+  .safe-line:last-child{border-bottom:0}
+  .kicker{font:700 10px/1.4 var(--mono);letter-spacing:.04em;color:var(--ink-2)}
+  .miniplan{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font:600 11px var(--mono);color:var(--ink-2);text-align:center;padding:0 24px}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">D02</span>
+  <h1>D02 Confirm suggestion - the mandatory human step</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>D02</b></li>
+    <li>viewport <b>390 x 844 and 1440 x 900</b></li>
+    <li>role <b>Coordinator, Administrator</b></li>
+    <li>state <b>rank 1 DIVERT, all safeguards passed</b></li>
+    <li>requirement <b>FR7.3, FR7.7, SRS 2.6</b></li>
+    <li>batch <b>2</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <!-- ================= DESKTOP - modal over the live map ================= -->
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900 - modal</span>
+
+    <span class="cx" style="left:1000px;top:224px">1</span>
+    <span class="cx" style="left:1000px;top:352px">2</span>
+    <span class="cx" style="left:1000px;top:420px">3</span>
+    <span class="cx" style="left:1000px;top:520px">4</span>
+    <span class="cx" style="left:1000px;top:648px">5</span>
+    <span class="cx" style="left:1000px;top:748px">6</span>
+    <span class="cx" style="left:80px;top:760px">9</span>
+
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#" aria-current="page"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <div class="rail-note">Signed in as <b>a.rahman</b><br><span class="st st-neutral">COORDINATOR</span></div>
+      </nav>
+      <div class="col grow">
+        <div class="top"><span class="b">Riverside Arena</span><span class="grow"></span>
+          <span class="mono tiny">14:03:12</span></div>
+        <div class="row grow" style="position:relative">
+          <div class="map">
+            <img class="plan" src="_assets/site-plan.svg" alt="">
+            <div class="miniplan">Parent screen, simplified. The coordinator tapped Confirm
+              on rank 1 for A-1042 in the alert rail (see C05-suggestions state 1) and this
+              dialog opened over it.</div>
+          </div>
+          <aside class="rail" style="opacity:.5">
+            <div class="pad-s"><span class="mono tiny b">A-1042 - SUGGESTIONS</span></div>
+          </aside>
+
+          <div class="scrim">
+            <div class="modal" style="max-width:560px">
+              <div class="modal-head row between center">
+                <span>Confirm suggestion - rank 1</span>
+                <span class="chip">A-1042</span>
+              </div>
+              <form onsubmit="event.preventDefault()">
+                <div class="modal-body">
+                  <div class="row between center">
+                    <span class="row gap-s center">
+                      <span class="chip">rank 1</span>
+                      <span class="mono b" style="font-size:15px">DIVERT</span>
+                    </span>
+                    <span class="row gap-s center">
+                      <span class="st st-neutral">PROPOSED</span><span class="chip">MODEL</span>
+                    </span>
+                  </div>
+                  <div class="tiny muted" style="margin-top:8px">
+                    Zone B North Gate - cell <b class="mono">C-031-022</b> - risk
+                    <b class="mono">0.78</b> <span class="st st-elevated" style="margin-left:4px">ELEVATED</span>
+                  </div>
+
+                  <hr class="hr" style="margin:12px 0">
+
+                  <div class="kicker">TARGET EXIT</div>
+                  <div class="mono" style="margin-top:3px">Exit E2 - North Gate</div>
+
+                  <div class="kicker" style="margin-top:11px">ROUTE - 5 CELLS</div>
+                  <div class="tiny mono" style="margin-top:4px;line-height:1.6">
+                    C-031-022 <span class="muted">&rarr;</span> C-032-022
+                    <span class="muted">&rarr;</span> C-033-021
+                    <span class="muted">&rarr;</span> C-034-020
+                    <span class="muted">&rarr;</span> C-035-019
+                  </div>
+
+                  <div class="kicker" style="margin-top:11px">RATIONALE</div>
+                  <div class="tiny" style="margin-top:3px">
+                    Divert arriving flow north-east to Exit E2. E2 is running at
+                    <b>240 of 900</b> people per minute, so it has headroom; E1 is at
+                    <b>780 of 1200</b>.
+                  </div>
+
+                  <div class="kicker" style="margin-top:11px">SAFEGUARDS - 5 OF 5 PASSED</div>
+                  <div style="margin-top:4px">
+                    <div class="safe-line"><span>OVER_THRESHOLD_CELL</span><span class="st st-normal">PASS</span></div>
+                    <div class="safe-line"><span>WOULD_PUSH_NEIGHBOUR_OVER</span><span class="st st-normal">PASS</span></div>
+                    <div class="safe-line"><span>STALE_CELL_ON_ROUTE</span><span class="st st-normal">PASS</span></div>
+                    <div class="safe-line"><span>UNKNOWN_CELL_ON_ROUTE</span><span class="st st-normal">PASS</span></div>
+                    <div class="safe-line"><span>EXIT_OVER_CAPACITY</span><span class="st st-normal">PASS</span></div>
+                  </div>
+
+                  <div class="honest" style="margin-top:12px">
+                    Sentinel does not control barriers, signage or gates. Confirming records
+                    your decision and notifies your team.
+                  </div>
+                </div>
+                <div class="modal-foot">
+                  <button class="btn" type="button">Cancel</button>
+                  <button class="btn btn--primary" type="submit">Confirm</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MOBILE - bottom sheet over the live map ================= -->
+  <div class="device device--mobile">
+    <span class="device-tag">390 x 844 - sheet</span>
+
+    <span class="cx" style="left:196px;top:250px">7</span>
+    <span class="cx" style="left:196px;top:800px">8</span>
+
+    <div class="top"><span class="b" style="font-size:13px">Riverside Arena</span><span class="grow"></span>
+      <span class="mono tiny">14:03:12</span></div>
+    <div class="map" style="flex:0 0 100px">
+      <img class="plan" src="_assets/site-plan.svg" alt="">
+      <div class="miniplan" style="font-size:10px">Parent screen behind the sheet</div>
+    </div>
+
+    <div class="scrim" style="align-items:flex-end;padding:0">
+      <form onsubmit="event.preventDefault()" style="width:100%">
+        <div class="sheet" style="width:100%;max-height:660px;overflow-y:auto">
+          <div class="sheet-handle" style="position:relative;border-bottom:1px solid var(--line)">
+            <span class="b" style="font-size:13px">Confirm suggestion</span>
+            <span class="grow"></span><span class="chip">A-1042</span>
+          </div>
+          <div class="pad">
+            <div class="row between center">
+              <span class="row gap-s center">
+                <span class="chip">rank 1</span><span class="mono b" style="font-size:13px">DIVERT</span>
+              </span>
+              <span class="st st-neutral">PROPOSED</span>
+            </div>
+            <div class="tiny muted" style="margin-top:6px">
+              Zone B North Gate - C-031-022 - risk <b class="mono">0.78</b>
+              <span class="st st-elevated">ELEVATED</span>
+            </div>
+
+            <div class="kicker" style="margin-top:10px">TARGET EXIT</div>
+            <div class="mono" style="margin-top:3px">Exit E2 - North Gate</div>
+
+            <div class="kicker" style="margin-top:10px">ROUTE - 5 CELLS</div>
+            <div class="tiny mono muted" style="margin-top:3px">
+              C-031-022 &rarr; C-032-022 &rarr; C-033-021 &rarr; C-034-020 &rarr; C-035-019
+            </div>
+
+            <div class="kicker" style="margin-top:10px">RATIONALE</div>
+            <div class="tiny" style="margin-top:3px">
+              E2 at <b>240 of 900</b> people/min, headroom; E1 at <b>780 of 1200</b>.
+            </div>
+
+            <div class="kicker" style="margin-top:10px">SAFEGUARDS - 5 OF 5 PASSED</div>
+            <div style="margin-top:4px">
+              <div class="safe-line"><span>OVER_THRESHOLD_CELL</span><span class="st st-normal">PASS</span></div>
+              <div class="safe-line"><span>WOULD_PUSH_NEIGHBOUR_OVER</span><span class="st st-normal">PASS</span></div>
+              <div class="safe-line"><span>STALE_CELL_ON_ROUTE</span><span class="st st-normal">PASS</span></div>
+              <div class="safe-line"><span>UNKNOWN_CELL_ON_ROUTE</span><span class="st st-normal">PASS</span></div>
+              <div class="safe-line"><span>EXIT_OVER_CAPACITY</span><span class="st st-normal">PASS</span></div>
+            </div>
+
+            <div class="honest" style="margin-top:10px">
+              Sentinel does not control barriers, signage or gates. Confirming records your
+              decision and notifies your team.
+            </div>
+
+            <div class="row gap-s" style="margin-top:12px">
+              <button class="btn btn--tap grow" type="button">Cancel</button>
+              <button class="btn btn--tap btn--primary grow" type="submit">Confirm</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <nav class="navbar">
+      <a href="#" aria-current="page"><i class="icon"></i>Live</a>
+      <a href="#"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+
+</div>
+
+<div style="padding:8px 24px 64px">
+<ol class="wf-notes" style="max-width:920px">
+  <li><b>The header restates which suggestion this is in full: rank, action and the alert it
+    answers.</b> "Confirm suggestion - rank 1", DIVERT, A-1042 - nothing about which option is
+    about to be confirmed is left for the coordinator to recall from the card they just left.
+    <span class="req">FR7.7</span></li>
+
+  <li><b>The route is five explicit cell ids in order, not "5 cells".</b> A coordinator
+    confirming a diversion can see exactly where people are being sent, cell by cell, not a
+    count that hides the path. <span class="req">FR7.2</span></li>
+
+  <li><b>The rationale repeats the exact occupancy numbers from the suggestion card: E2 at 240
+    of 900, E1 at 780 of 1200.</b> These match the canonical dataset exactly - a confirm dialog
+    that quoted different numbers to the card it opened from would itself be a small honesty
+    violation. <span class="req">FR7.2</span></li>
+
+  <li><b>All five safeguards render as individually named PASS lines, not one summary badge.</b>
+    A coordinator confirming a route should see which specific checks were run - over-threshold,
+    neighbour push, stale cell, unknown cell, exit capacity - not be asked to trust a single
+    "safe" verdict. <span class="req">FR7.3</span></li>
+
+  <li><b>The advisory boundary is stated in the dialog's own words, at the moment of decision.</b>
+    "Sentinel does not control barriers, signage or gates. Confirming records your decision and
+    notifies your team" sits directly above the buttons, where a user could otherwise assume the
+    system is about to act on the route it just described. <span class="req">SRS 2.6</span>
+    <span class="req">FR7.7</span></li>
+
+  <li><b>Confirm is <code>type="submit"</code> on a real <code>&lt;form onsubmit&gt;</code> that
+    calls <code>event.preventDefault()</code>; Cancel is <code>type="button"</code>.</b> Enter
+    submits the form and confirms; Esc cancels. Focus is trapped inside the modal while it is
+    open and returns to the suggestion card's Confirm button once it closes, so a coordinator
+    working by keyboard never loses their place. <span class="req">FR7.7</span></li>
+
+  <li><b>Mobile keeps every field from the desktop dialog: the target exit, all five route
+    cells, the exact rationale numbers, and all five named safeguards.</b> A decision dialog is
+    exactly where shortening content for width would be indefensible - the sheet scrolls rather
+    than cutting anything a coordinator needs to decide. <span class="req">FR7.1</span>
+    <span class="req">FR7.3</span></li>
+
+  <li><b>The mobile sheet does not close on backdrop tap or drag-down,</b> unlike the alert
+    sheet in `S02`. This is the one dialog in the product where an accidental dismissal that
+    silently loses the decision would be worse than requiring an explicit tap on Cancel.
+    <span class="req">FR7.7</span></li>
+
+  <li><b>The parent screen is kept as a simplified greybox behind the scrim,</b> map and alert
+    rail dimmed, so a reviewer sees the dialog in the context it actually opens from - the rank
+    1 card in `C05-suggestions` - rather than judging it floating alone.
+    <span class="req">FR7.1</span></li>
+</ol>
+</div>
+
+</body>
+</html>

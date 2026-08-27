@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S11 step 2 Grid, mobile - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  /* Scoped wizard chrome, retyped from S11-setup-step1-plan-mobile.html so this
+     frame stays self-contained - the wireframe set shares no CSS file besides
+     wireframe.css. */
+  .wzform{display:flex;flex-direction:column;min-height:0;flex:1}
+  .wz-progress{flex:0 0 auto;padding:9px 12px 11px;border-bottom:1px solid var(--line);background:var(--g0)}
+  .wz-stepbtn{display:flex;align-items:center;gap:9px;width:100%;min-height:40px;
+    border:1px solid var(--g4);border-radius:6px;background:var(--g1);padding:0 10px;
+    font:600 12px var(--font);color:var(--ink)}
+  .wz-stepbtn .cur{font:700 11px/1 var(--mono);color:var(--ink-2);flex:0 0 auto}
+  .wz-stepbtn .name{flex:1;text-align:left}
+  .wz-caret{width:7px;height:7px;border-right:2px solid var(--ink-2);
+    border-bottom:2px solid var(--ink-2);transform:rotate(45deg);flex:0 0 auto}
+  .wz-bar{height:4px;background:var(--g3);border-radius:2px;margin-top:8px;overflow:hidden}
+  .wz-bar i{display:block;height:100%;background:var(--g7)}
+  .wz-body{overflow-y:auto;padding:14px 14px 20px}
+  .wz-actions{flex:0 0 auto;display:flex;gap:8px;padding:10px 12px;
+    border-top:1px solid var(--line);background:var(--g0)}
+  .wz-field{margin-bottom:14px}
+  .wz-field label{display:block;font:600 11px var(--mono);color:var(--ink-2);margin-bottom:5px}
+  .wz-input{display:flex;align-items:center;min-height:40px;padding:0 10px;
+    border:1px solid var(--g4);border-radius:5px;background:var(--g0);font:600 13px var(--font)}
+  .wz-input .unit{margin-left:auto;color:var(--ink-2);font:600 11px var(--mono)}
+  .wz-section{border:1px solid var(--g4);border-radius:6px;padding:12px;margin-bottom:14px;background:var(--g1)}
+  .wz-section h3{margin:0 0 8px;font-size:13px}
+
+  /* Setup-only grid preview. Deliberately not obs-* / band-* / d-* - a setup
+     screen shows the plan and the grid, never live data, and must never be
+     mistaken for one. Plain grid lines over the plan, own scoped classes only. */
+  .chipset{display:flex;gap:6px;margin-bottom:10px}
+  .chipset button{flex:1;min-height:36px;border:1px solid var(--g5);border-radius:4px;
+    background:var(--g0);font:700 12px var(--mono);color:var(--ink-2)}
+  .chipset button[aria-pressed="true"]{background:var(--g7);border-color:var(--g7);color:#fff}
+  .gridprev{position:relative;border:1px solid var(--g5);background:var(--g2);
+    overflow:hidden;height:126px}
+  .gridprev img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;opacity:.55}
+  .gridprev .lines{position:absolute;inset:0;
+    background-image:
+      linear-gradient(to right, rgba(61,61,56,.55) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(61,61,56,.55) 1px, transparent 1px);}
+  .gridprev .origin{position:absolute;left:0;bottom:0;width:11px;height:11px;
+    background:var(--focus);border:2px solid #fff;border-radius:50%;transform:translate(-50%,50%)}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">S11.2</span>
+  <h1>S11 venue setup, step 2 of 8 - Grid, mobile</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S11</b></li>
+    <li>viewport <b>390 x 844</b></li>
+    <li>role <b>Administrator</b></li>
+    <li>state <b>5 m cells, 60 x 40 = 2400 cells</b></li>
+    <li>requirement <b>FR9.2</b></li>
+    <li>batch <b>2</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <!-- ============ step 2, 5 m selected ============ -->
+  <div class="device device--mobile">
+    <span class="device-tag">5 m selected</span>
+
+    <span class="cx" style="left:214px;top:24px">1</span>
+    <span class="cx" style="left:120px;top:118px">2</span>
+    <span class="cx" style="left:80px;top:230px">3</span>
+    <span class="cx" style="left:340px;top:330px">4</span>
+    <span class="cx" style="left:80px;top:400px">5</span>
+    <span class="cx" style="left:80px;top:560px">6</span>
+
+    <form class="wzform" onsubmit="event.preventDefault()">
+      <div class="top">
+        <span class="b">Venue setup</span>
+        <span class="grow"></span>
+        <button class="btn btn--sm" type="button">Exit</button>
+      </div>
+
+      <div class="wz-progress">
+        <button class="wz-stepbtn" type="button" aria-haspopup="true">
+          <span class="cur">STEP 2 OF 8</span>
+          <span class="name">Grid</span>
+          <i class="wz-caret"></i>
+        </button>
+        <div class="wz-bar"><i style="width:19%"></i></div>
+      </div>
+
+      <div class="wz-body grow">
+        <div class="wz-section">
+          <h3>Cell size</h3>
+          <div class="chipset" role="group" aria-label="cell size">
+            <button type="button" aria-pressed="false">2 m</button>
+            <button type="button" aria-pressed="true">5 m</button>
+            <button type="button" aria-pressed="false">10 m</button>
+          </div>
+          <div class="wz-field" style="margin-bottom:0">
+            <label>Exact value</label>
+            <div class="wz-input"><span>5.0</span><span class="unit">m</span></div>
+          </div>
+        </div>
+
+        <div class="wz-field">
+          <label>Live preview - 300 m by 200 m extent</label>
+          <div class="gridprev">
+            <img src="_assets/site-plan.svg" alt="">
+            <div class="lines" style="background-size:6px 6px"></div>
+            <div class="origin"></div>
+          </div>
+          <div class="row between" style="margin-top:7px">
+            <span class="mono b" style="font-size:17px">60 x 40 = 2400 cells</span>
+            <span class="chip">CURRENT</span>
+          </div>
+        </div>
+
+        <div class="wz-section">
+          <h3>Origin offset</h3>
+          <p class="tiny muted" style="margin:0 0 8px">
+            Origin is the south-west corner of the plan by convention.
+          </p>
+          <div class="row gap">
+            <div class="wz-field" style="flex:1;margin-bottom:0">
+              <label>East</label>
+              <div class="wz-input"><span>0</span><span class="unit">m</span></div>
+            </div>
+            <div class="wz-field" style="flex:1;margin-bottom:0">
+              <label>North</label>
+              <div class="wz-input"><span>0</span><span class="unit">m</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bx pad-s" style="margin-bottom:0">
+          <div class="row between"><span class="tiny muted">Cell identifier form</span>
+            <span class="mono tiny">C-&lt;col&gt;-&lt;row&gt;, zero padded</span></div>
+          <div class="row between" style="margin-top:4px"><span class="tiny muted">Example</span>
+            <span class="mono tiny">C-042-017</span></div>
+        </div>
+      </div>
+
+      <div class="wz-actions">
+        <button class="btn btn--tap" type="button">Back</button>
+        <button class="btn btn--tap btn--primary grow" type="submit">Continue</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ============ same step, 10 m selected - proves the count reacts ============ -->
+  <div class="device device--mobile">
+    <span class="device-tag">10 m selected, for comparison</span>
+    <span class="cx" style="left:120px;top:118px">7</span>
+    <span class="cx" style="left:340px;top:330px">8</span>
+
+    <div class="top">
+      <span class="b">Venue setup</span>
+      <span class="grow"></span>
+      <button class="btn btn--sm" type="button">Exit</button>
+    </div>
+    <div class="wz-progress">
+      <button class="wz-stepbtn" type="button" aria-haspopup="true">
+        <span class="cur">STEP 2 OF 8</span><span class="name">Grid</span>
+        <i class="wz-caret"></i>
+      </button>
+      <div class="wz-bar"><i style="width:19%"></i></div>
+    </div>
+
+    <div class="wz-body grow">
+      <div class="wz-section">
+        <h3>Cell size</h3>
+        <div class="chipset" role="group" aria-label="cell size">
+          <button type="button" aria-pressed="false">2 m</button>
+          <button type="button" aria-pressed="false">5 m</button>
+          <button type="button" aria-pressed="true">10 m</button>
+        </div>
+        <div class="wz-field" style="margin-bottom:0">
+          <label>Exact value</label>
+          <div class="wz-input"><span>10.0</span><span class="unit">m</span></div>
+        </div>
+      </div>
+
+      <div class="wz-field">
+        <label>Live preview - 300 m by 200 m extent</label>
+        <div class="gridprev">
+          <img src="_assets/site-plan.svg" alt="">
+          <div class="lines" style="background-size:12px 12px"></div>
+          <div class="origin"></div>
+        </div>
+        <div class="row between" style="margin-top:7px">
+          <span class="mono b" style="font-size:17px">30 x 20 = 600 cells</span>
+          <span class="chip">IF CHANGED</span>
+        </div>
+        <div class="tiny muted" style="margin-top:6px">
+          Fewer, coarser cells - a bottleneck narrower than 10 m would blend into its
+          neighbours and stop being resolvable.
+        </div>
+      </div>
+    </div>
+
+    <div class="wz-actions">
+      <button class="btn btn--tap" type="button">Back</button>
+      <button class="btn btn--tap btn--primary grow" type="submit">Continue</button>
+    </div>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>Cell size is a small closed set, not a free number an administrator could
+      mistune.</b> 2, 5 and 10 m as one-tap chips, with the exact value shown read-only
+      beside them; 5 m is Riverside Arena's fixed value from srs.md 2.7.
+      <span class="req">FR9.2</span></li>
+
+    <li><b>The preview regenerates from the same value the chips set</b> - there is one
+      source of truth for cell size, never a separate apply step that could let the count
+      and the picture disagree. <span class="req">FR9.2</span></li>
+
+    <li><b>60 x 40 = 2400 cells is computed, not typed.</b> This is the acceptance test in
+      srs.md FR9.2 made visible: a 5 m cell size over the fixed 300 m by 200 m extent
+      produces exactly this count. <span class="req">FR9.2</span></li>
+
+    <li><b>The count visibly changes with the size.</b> The second device is the same step
+      at 10 m: 30 x 20 = 600 cells, with visibly coarser grid lines on the same plan image,
+      proving the count is derived rather than a fixed label. <span class="req">FR9.2</span></li>
+
+    <li><b>Origin is the south-west corner, offset in metres.</b> Riverside Arena uses 0 m
+      east and 0 m north; the marker on the preview would move if either were non-zero, so
+      an offset is visible, not just numeric. <span class="req">FR9.2</span></li>
+
+    <li><b>The grid preview uses plain lines, never a live cell treatment.</b> No
+      <span class="req">obs-*</span> or <span class="req">band-*</span> class appears here -
+      this screen shows the plan and the grid, never observed data, so it can never read as
+      a live map.</li>
+
+    <li><b>The cell identifier form is decided here.</b> <span class="mono">C-&lt;col&gt;-&lt;row&gt;</span>
+      zero padded to three digits, because every later screen in the product references
+      cells by this identifier. <span class="req">FR9.2</span></li>
+
+    <li><b>Continue is the form's submit action</b>; Enter submits and Esc cancels the
+      wizard per the shared wizard shell.</li>
+  </ol>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S04 Alert detail, mobile - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .attrtrack{position:relative;height:9px;background:var(--g2);border-radius:2px}
+  .attrtrack .zero{position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--g5)}
+  .attrrow{display:grid;grid-template-columns:96px 1fr 46px 44px;gap:6px;align-items:center;
+    font:600 10px var(--mono);padding:3px 0}
+  .attrrow .raw{color:var(--ink-2);font-weight:500;text-align:right;font-size:9px}
+  .attrrow .val{text-align:right}
+  .attrrow .valneg{color:var(--obs-dwell)}
+  .tl{width:100%;height:110px;display:block}
+  .tl .ref{stroke:var(--g4);stroke-width:1;stroke-dasharray:3 3}
+  .tl .refc{stroke:var(--band-critical);stroke-width:1;stroke-dasharray:2 2}
+  .tl .line{fill:none;stroke:var(--g7);stroke-width:2}
+  .tl .dwellline{fill:none;stroke:var(--obs-dwell);stroke-width:2;stroke-dasharray:2 3}
+  .tl .marker{stroke:var(--band-elevated);stroke-width:1.5}
+  .tl .lbl{font:600 8px var(--mono);fill:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">F-007</span>
+  <h1>S04 Alert detail - mobile, A-1042</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S04</b></li>
+    <li>viewport <b>390 x 844</b></li>
+    <li>role <b>Coordinator</b></li>
+    <li>state <b>OPEN, opened from the alert sheet</b></li>
+    <li>requirement <b>FR5.2 FR5.4 FR5.6 FR8.7</b></li>
+    <li>batch <b>2</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <div class="device device--mobile">
+    <span class="device-tag">390 x 844</span>
+
+    <span class="cx" style="left:200px;top:90px">1</span>
+    <span class="cx" style="left:60px;top:270px">2</span>
+    <span class="cx" style="left:340px;top:480px">3</span>
+    <span class="cx" style="left:60px;top:600px">4</span>
+    <span class="cx" style="left:200px;top:700px">5</span>
+    <span class="cx" style="left:200px;top:790px">6</span>
+
+    <div class="top">
+      <a href="S02-live-map-mobile.html" class="mono tiny" style="text-decoration:none;color:var(--focus)">&larr;</a>
+      <span class="b" style="font-size:13px">A-1042</span>
+      <span class="grow"></span>
+      <span class="mono tiny">14:03:12</span>
+    </div>
+
+    <div class="honest" style="margin:8px 10px 0;border-left-color:var(--g6);font-size:11px">
+      Viewed live. From History, this attribution is frozen at 14:02:51 and never recomputed.
+    </div>
+
+    <div class="col scroll grow" style="overflow-y:auto">
+      <div class="pad col gap">
+
+        <div class="card">
+          <div class="row between center">
+            <span class="mono b">A-1042</span><span class="st st-elevated">ELEVATED</span>
+          </div>
+          <table class="wt" style="margin-top:6px">
+            <tr><td>Zone</td><td class="mono">B North Gate</td></tr>
+            <tr><td>Cell</td><td class="mono">C-031-022</td></tr>
+            <tr><td>Score</td><td class="mono">0.78 vs 0.70</td></tr>
+            <tr><td>Raised</td><td class="mono">14:02:51 - 21s ago</td></tr>
+            <tr><td>Status</td><td><span class="st st-neutral">OPEN</span></td></tr>
+            <tr><td>Ack'd</td><td class="mono muted">not yet</td></tr>
+          </table>
+          <div class="honest" style="margin-top:8px">Clears below 0.65 held for 30 seconds.</div>
+          <button class="btn btn--tap" style="width:100%;margin-top:8px" type="button">Acknowledge</button>
+        </div>
+
+        <div class="card">
+          <div class="mono tiny b" style="margin-bottom:6px">ALL NINE FEATURES - by absolute contribution</div>
+          <div class="attrrow"><span>flowConvergence</span>
+            <div class="attrtrack"><span class="zero"></span>
+              <i class="attrbar" style="position:absolute;left:50%;top:0;height:100%;width:50%"></i></div>
+            <span class="raw">0.71</span><span class="val">+0.19</span></div>
+          <div class="attrrow"><span>densityRateOfChg</span>
+            <div class="attrtrack"><span class="zero"></span>
+              <i class="attrbar" style="position:absolute;left:50%;top:0;height:100%;width:36.8%"></i></div>
+            <span class="raw">0.42</span><span class="val">+0.14</span></div>
+          <div class="attrrow"><span>stopStartPulses</span>
+            <div class="attrtrack"><span class="zero"></span>
+              <i class="attrbar" style="position:absolute;left:50%;top:0;height:100%;width:23.7%"></i></div>
+            <span class="raw">0.33</span><span class="val">+0.09</span></div>
+          <div class="attrrow"><span>exitOccupancy</span>
+            <div class="attrtrack"><span class="zero"></span>
+              <i class="attrbar" style="position:absolute;left:50%;top:0;height:100%;width:15.8%"></i></div>
+            <span class="raw">0.27</span><span class="val">+0.06</span></div>
+          <div class="attrrow"><span>counterFlow</span>
+            <div class="attrtrack"><span class="zero"></span>
+              <i class="attrbar" style="position:absolute;left:50%;top:0;height:100%;width:13.2%"></i></div>
+            <span class="raw">118deg</span><span class="val">+0.05</span></div>
+          <div class="attrrow"><span>speedVariance</span>
+            <div class="attrtrack"><span class="zero"></span>
+              <i class="attrbar" style="position:absolute;left:50%;top:0;height:100%;width:7.9%"></i></div>
+            <span class="raw">0.61</span><span class="val">+0.03</span></div>
+          <div class="attrrow"><span>density</span>
+            <div class="attrtrack"><span class="zero"></span>
+              <i class="attrbar" style="position:absolute;left:50%;top:0;height:100%;width:5.3%"></i></div>
+            <span class="raw">3.9</span><span class="val">+0.02</span></div>
+          <div class="attrrow"><span>densityGradient</span>
+            <div class="attrtrack"><span class="zero"></span>
+              <i class="attrbar--neg" style="position:absolute;right:50%;top:0;height:100%;width:5.3%"></i></div>
+            <span class="raw">0.14</span><span class="val valneg">-0.02</span></div>
+          <div class="attrrow"><span>speedMean</span>
+            <div class="attrtrack"><span class="zero"></span>
+              <i class="attrbar--neg" style="position:absolute;right:50%;top:0;height:100%;width:10.5%"></i></div>
+            <span class="raw">0.38</span><span class="val valneg">-0.04</span></div>
+          <div class="tiny muted" style="margin-top:7px">
+            Negative bars grow left from the centre line using the same colour as the
+            NOT_ENOUGH_DWELL pattern - down-weighting, not danger.</div>
+        </div>
+
+        <div class="card">
+          <div class="mono tiny b" style="margin-bottom:5px">CELL RISK TIMELINE - window before, and since</div>
+          <svg class="tl" viewBox="0 0 340 110" preserveAspectRatio="none">
+            <line class="ref" x1="0" y1="66" x2="340" y2="66"/><text class="lbl" x="2" y="63">0.40</text>
+            <line class="ref" x1="0" y1="33" x2="340" y2="33"/><text class="lbl" x="2" y="30">0.70</text>
+            <line class="refc" x1="0" y1="16.5" x2="340" y2="16.5"/><text class="lbl" x="2" y="13">0.85</text>
+            <polyline class="dwellline" points="0,86 12,82"/>
+            <polyline class="line" points="12,82 60,76 110,68 160,52 190,33 200,24"/>
+            <line class="marker" x1="200" y1="0" x2="200" y2="110"/>
+            <polyline class="line" points="200,24 250,20 290,17 340,19"/>
+          </svg>
+          <div class="row between tiny muted mono"><span>-30s</span><span>raised</span><span>now</span></div>
+        </div>
+
+        <div class="card" style="padding:8px">
+          <div class="mono tiny b" style="padding:0 4px 6px">MAP - cropped to the cell and neighbourhood</div>
+          <div class="map" style="height:200px;border-radius:4px">
+            <img class="plan" src="_assets/site-plan.svg" alt="">
+            <div class="gridwrap" data-cols="9" data-map="
+              s2s2o1o2w3e3w3o2s2
+              o2w3e4e4c4e4w3o2s1
+              o2w3e4e4e4w3o2o1g0
+              o1o2w3w3w2o2o1g0g0
+              g0o1o1o2o1o1g0g0g0"></div>
+            <div class="pin" style="left:174px;top:44px"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="row between center" style="margin-bottom:8px">
+            <span class="mono tiny b">SUGGESTIONS</span><span class="tiny muted mono">3 ranked</span>
+          </div>
+
+          <div class="card" style="border-left:3px solid var(--band-normal)">
+            <div class="row between center">
+              <span class="chip">rank 1</span><span class="mono b" style="font-size:12px">DIVERT</span>
+              <span class="chip">MODEL</span>
+            </div>
+            <div class="tiny" style="margin-top:5px">
+              Divert flow north-east to Exit E2. E2 at 240 of 900 /min, headroom; E1 at 780 of 1200.</div>
+            <div class="tiny muted mono" style="margin-top:4px">C-031-022 &rarr; C-032-022 &rarr; C-033-021 &rarr; C-034-020 &rarr; C-035-019</div>
+            <div class="tiny mono" style="margin-top:5px">5 of 5 safeguards <span class="st st-normal">PASS</span></div>
+            <div class="row gap-s" style="margin-top:8px">
+              <button class="btn btn--tap grow" type="button">Dismiss</button>
+              <button class="btn btn--tap btn--primary grow" type="button">Confirm</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:7px">
+            <div class="row between center">
+              <span class="chip">rank 2</span><span class="mono b" style="font-size:12px">HOLD_AND_METER</span>
+              <span class="chip">MODEL</span>
+            </div>
+            <div class="tiny" style="margin-top:5px">Hold arrivals north, meter entry while convergence falls.</div>
+            <div class="tiny muted mono" style="margin-top:4px">C-029-018 &rarr; C-030-018 &rarr; C-031-018</div>
+            <div class="tiny mono" style="margin-top:5px">note: C-030-019 rises to 0.61, still below 0.70</div>
+            <div class="row gap-s" style="margin-top:8px">
+              <button class="btn btn--tap grow" type="button">Dismiss</button>
+              <button class="btn btn--tap btn--primary grow" type="button">Confirm</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:7px;opacity:.85">
+            <div class="row between center">
+              <span class="chip">rank 3</span><span class="mono b" style="font-size:12px">OPEN_ALTERNATE_ROUTE</span>
+              <span class="st st-critical">REJECTED</span>
+            </div>
+            <div class="tiny" style="margin-top:5px">Open the west service route toward Exit E1.</div>
+            <div class="tiny mono" style="margin-top:5px">
+              <span class="st st-critical">FAILED</span> STALE_CELL_ON_ROUTE - C-024-026 last
+              observed 7s ago</div>
+            <div class="honest" style="margin-top:6px">Rejected. Nothing to confirm.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <nav class="navbar">
+      <a href="#"><i class="icon"></i>Live</a>
+      <a href="#"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#" aria-current="page"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>The from-history note is pinned above the fold,</b> so on a small screen where the
+      user scrolls immediately, the boundary between live attribution and recorded attribution
+      is read before anything else. <span class="req">FR8.7</span></li>
+
+    <li><b>All nine features still render on mobile, none dropped for space.</b> The layout
+      narrows the columns, not the feature count, because a partial attribution list would be
+      a different kind of honesty failure than a missing coverage bar.
+      <span class="req">FR5.2</span></li>
+
+    <li><b>Negative contributions keep the same colour as NOT_ENOUGH_DWELL,</b> not a warning
+      colour, because a feature pulling the score down is neutral information, not a second
+      danger signal. <span class="req">FR5.2</span></li>
+
+    <li><b>Header states "not yet" for acknowledgement</b> rather than omitting the row, so the
+      field is always present and its absence of a value is explicit. <span class="req">FR5.6</span></li>
+
+    <li><b>Suggestions keep full safeguard detail even at this width.</b> Option 3's rejection
+      names the exact cell and the exact safeguard that failed, matching the desktop frame and
+      the canonical dataset word for word. <span class="req">FR7.3</span> <span class="req">FR7.4</span></li>
+  </ol>
+
+</div>
+</body>
+</html>

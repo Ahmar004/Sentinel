@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S11 step 6 Zones, mobile - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .wzform{display:flex;flex-direction:column;min-height:0;flex:1}
+  .wz-progress{flex:0 0 auto;padding:9px 12px 11px;border-bottom:1px solid var(--line);background:var(--g0)}
+  .wz-stepbtn{display:flex;align-items:center;gap:9px;width:100%;min-height:40px;
+    border:1px solid var(--g4);border-radius:6px;background:var(--g1);padding:0 10px;
+    font:600 12px var(--font);color:var(--ink)}
+  .wz-stepbtn .cur{font:700 11px/1 var(--mono);color:var(--ink-2);flex:0 0 auto}
+  .wz-stepbtn .name{flex:1;text-align:left}
+  .wz-caret{width:7px;height:7px;border-right:2px solid var(--ink-2);
+    border-bottom:2px solid var(--ink-2);transform:rotate(45deg);flex:0 0 auto}
+  .wz-bar{height:4px;background:var(--g3);border-radius:2px;margin-top:8px;overflow:hidden}
+  .wz-body{overflow-y:auto;padding:14px 14px 20px}
+  .wz-actions{flex:0 0 auto;display:flex;gap:8px;padding:10px 12px;
+    border-top:1px solid var(--line);background:var(--g0)}
+
+  /* Zone swatches - setup-only greybox patterns, never a risk band colour, so
+     "this cell belongs to Zone B" can never be mistaken for "this cell is in
+     the ELEVATED band". */
+  .zonecard{border:1px solid var(--g4);border-radius:7px;background:var(--g0);
+    padding:12px;margin-bottom:12px}
+  .zsw{width:20px;height:20px;border-radius:4px;flex:0 0 auto;border:1px solid var(--g6)}
+  .zsw-a{background:var(--g2)}
+  .zsw-b{background:repeating-linear-gradient(45deg,var(--g4) 0 3px,var(--g2) 3px 6px)}
+  .zsw-c{background:repeating-linear-gradient(90deg,var(--g5) 0 3px,var(--g2) 3px 6px)}
+  .zsw-d{background:var(--g6)}
+  .zonemini{position:relative;height:70px;border:1px solid var(--g5);border-radius:5px;
+    overflow:hidden;background:var(--g1);margin-top:9px}
+  .zonemini img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;opacity:.4}
+  .zonemini .zoneline{border-width:2px}
+
+  .limitnote{border:1px dashed var(--g5);border-radius:6px;padding:9px 10px;
+    font-size:12px;color:var(--ink-2);text-align:center;margin-top:2px}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">S11.6</span>
+  <h1>S11 venue setup, step 6 of 8 - Zones, mobile</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S11</b></li>
+    <li>viewport <b>390 x 844</b></li>
+    <li>role <b>Administrator</b></li>
+    <li>state <b>3 zones, add enabled / 4 zones, add disabled</b></li>
+    <li>requirement <b>FR9.6, FR6.5</b></li>
+    <li>batch <b>2</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <!-- ============ three zones, add still available ============ -->
+  <div class="device device--mobile">
+    <span class="device-tag">3 zones - canonical demo</span>
+
+    <span class="cx" style="left:214px;top:24px">1</span>
+    <span class="cx" style="left:120px;top:160px">2</span>
+    <span class="cx" style="left:340px;top:480px">3</span>
+    <span class="cx" style="left:355px;top:812px">4</span>
+
+    <form class="wzform" onsubmit="event.preventDefault()">
+      <div class="top">
+        <span class="b">Venue setup</span>
+        <span class="grow"></span>
+        <button class="btn btn--sm" type="button">Exit</button>
+      </div>
+
+      <div class="wz-progress">
+        <button class="wz-stepbtn" type="button" aria-haspopup="true">
+          <span class="cur">STEP 6 OF 8</span>
+          <span class="name">Zones</span>
+          <i class="wz-caret"></i>
+        </button>
+        <div class="wz-bar"><i style="width:69%"></i></div>
+      </div>
+
+      <div class="wz-body grow">
+        <p class="tiny muted" style="margin:0 0 12px">
+          A zone is a named group of cells, used for display, alerting and reporting - a
+          presentation layer over the grid, not a new measurement. 2 to 4 zones only.
+        </p>
+
+        <div class="zonecard">
+          <div class="row gap center">
+            <i class="zsw zsw-a"></i>
+            <span class="mono b grow">A Concourse</span>
+            <span class="chip">800 cells</span>
+          </div>
+          <div class="zonemini">
+            <img src="_assets/site-plan.svg" alt="">
+            <div class="zoneline" style="left:6%;top:56%;width:88%;height:36%"><span>A</span></div>
+          </div>
+          <button class="btn btn--sm" type="button" style="width:100%;margin-top:9px">Edit cells</button>
+        </div>
+
+        <div class="zonecard">
+          <div class="row gap center">
+            <i class="zsw zsw-b"></i>
+            <span class="mono b grow">B North Gate</span>
+            <span class="chip">800 cells</span>
+          </div>
+          <div class="zonemini">
+            <img src="_assets/site-plan.svg" alt="">
+            <div class="zoneline" style="left:16%;top:4%;width:56%;height:26%"><span>B</span></div>
+          </div>
+          <button class="btn btn--sm" type="button" style="width:100%;margin-top:9px">Edit cells</button>
+        </div>
+
+        <div class="zonecard">
+          <div class="row gap center">
+            <i class="zsw zsw-c"></i>
+            <span class="mono b grow">C Arena Floor</span>
+            <span class="chip">600 cells</span>
+          </div>
+          <div class="zonemini">
+            <img src="_assets/site-plan.svg" alt="">
+            <div class="zoneline" style="left:8%;top:34%;width:74%;height:28%;
+              border-style:dashed"><span>C</span></div>
+          </div>
+          <button class="btn btn--sm" type="button" style="width:100%;margin-top:9px">Edit cells</button>
+        </div>
+
+        <button class="btn" type="button" style="width:100%">+ Add zone (3 of 4)</button>
+        <p class="tiny muted" style="margin:8px 0 0;text-align:center">
+          200 cells are not assigned to any zone. A cell belongs to at most one zone, and to
+          none is allowed.
+        </p>
+      </div>
+
+      <div class="wz-actions">
+        <button class="btn btn--tap" type="button">Back</button>
+        <button class="btn btn--tap btn--primary grow" type="submit">Continue</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ============ four zones, add disabled at the validated limit ============ -->
+  <div class="device device--mobile">
+    <span class="device-tag">4 zones - limit reached</span>
+    <span class="cx" style="left:120px;top:600px">5</span>
+    <span class="cx" style="left:200px;top:730px">6</span>
+
+    <div class="top">
+      <span class="b">Venue setup</span>
+      <span class="grow"></span>
+      <button class="btn btn--sm" type="button">Exit</button>
+    </div>
+    <div class="wz-progress">
+      <button class="wz-stepbtn" type="button" aria-haspopup="true">
+        <span class="cur">STEP 6 OF 8</span><span class="name">Zones</span>
+        <i class="wz-caret"></i>
+      </button>
+      <div class="wz-bar"><i style="width:69%"></i></div>
+    </div>
+
+    <div class="wz-body grow">
+      <p class="tiny muted" style="margin:0 0 10px">
+        Illustrating the four-zone limit. Riverside Arena's canonical demo configuration
+        uses 3 zones, as in the first device; a fourth zone is added here only to show what
+        happens at the limit.
+      </p>
+
+      <div class="zonecard" style="padding:9px 12px">
+        <div class="row gap center"><i class="zsw zsw-a"></i>
+          <span class="mono" style="font-size:12px" class="grow">A Concourse</span>
+          <span class="grow"></span><span class="chip">800 cells</span></div>
+      </div>
+      <div class="zonecard" style="padding:9px 12px">
+        <div class="row gap center"><i class="zsw zsw-b"></i>
+          <span class="mono" style="font-size:12px">B North Gate</span>
+          <span class="grow"></span><span class="chip">800 cells</span></div>
+      </div>
+      <div class="zonecard" style="padding:9px 12px">
+        <div class="row gap center"><i class="zsw zsw-c"></i>
+          <span class="mono" style="font-size:12px">C Arena Floor</span>
+          <span class="grow"></span><span class="chip">600 cells</span></div>
+      </div>
+      <div class="zonecard" style="padding:9px 12px;border-color:var(--g7)">
+        <div class="row gap center"><i class="zsw zsw-d"></i>
+          <span class="mono" style="font-size:12px">D Practice Field</span>
+          <span class="grow"></span><span class="chip">140 cells</span></div>
+      </div>
+
+      <button class="btn" type="button" style="width:100%" disabled aria-disabled="true">
+        + Add zone (4 of 4)</button>
+      <div class="limitnote">
+        Four zones is the validated limit. Two to four zones only - remove one to add
+        another.
+      </div>
+    </div>
+
+    <div class="wz-actions">
+      <button class="btn btn--tap" type="button">Back</button>
+      <button class="btn btn--tap btn--primary grow" type="submit">Continue</button>
+    </div>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>Zone cards state cell counts derived from the grid</b>, not an area typed by
+      hand: 800, 800 and 600 cells for A, B and C, matching the observed, dwell, stale and
+      gap counts already fixed in the canonical dataset for this venue.
+      <span class="req">FR9.6</span></li>
+
+    <li><b>Cell selection opens over the plan, never a free-text area name.</b> Each zone's
+      thumbnail shows the boundary its cells actually cover, using a plain grey outline -
+      never a risk-band colour - because this is a presentation grouping, not a
+      measurement. <span class="req">FR9.6</span></li>
+
+    <li><b>Not every cell has to belong to a zone.</b> 200 cells here are unassigned, stated
+      directly rather than left to be inferred from counts not summing to 2400 - a zone is a
+      presentation layer over the grid, and coverage of every cell by some zone is not a
+      requirement. <span class="req">FR9.6</span></li>
+
+    <li><b>Add zone is enabled and shows its position against the limit</b> - "3 of 4" - so
+      the ceiling is visible before it is hit, not only announced at the moment it blocks.
+      <span class="req">FR6.5</span></li>
+
+    <li><b>At four zones, Add zone is visibly disabled with the limit stated inline.</b>
+      This is the literal acceptance surface for the scope boundary in CLAUDE.md and
+      srs.md 2.7: two to four zones is validated scope, and a fifth is never offered, not
+      even as a greyed-out promise of "coming soon". <span class="req">FR6.5</span>
+      <span class="req">FR9.6</span></li>
+
+    <li><b>The fourth zone is marked as illustrative</b>, so this frame is honest about not
+      being part of Riverside Arena's actual 3-zone demo configuration - the limit behaviour
+      still had to be shown somewhere, and inventing a момент rather than silently
+      contradicting the canonical dataset is the honest way to do it.</li>
+  </ol>
+
+</div>
+</body>
+</html>

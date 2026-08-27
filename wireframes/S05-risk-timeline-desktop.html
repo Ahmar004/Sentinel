@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S05 Risk timeline, desktop - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .linekey{display:inline-block;width:22px;height:0;vertical-align:middle;margin-right:5px}
+  .lk-a{border-top:2px solid var(--g5)}
+  .lk-b{border-top:4px solid var(--g7)}
+  .lk-c{border-top:2px dashed var(--g5)}
+  .lk-band{border-top:2px dashed var(--band-watch)}
+  .lk-alert{border-top:2px dashed var(--band-elevated)}
+  .popover{position:absolute;z-index:20;background:var(--g0);border:1px solid var(--g5);
+    border-radius:5px;box-shadow:0 3px 10px rgba(0,0,0,.14);padding:9px 10px}
+  .c-banner{position:absolute;border:1px dashed var(--g5);background:rgba(107,107,100,.06);
+    border-radius:4px;padding:6px 9px;font:600 11px/1.35 var(--mono);color:var(--obs-gap)}
+  svg text{font-family:var(--mono)}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">F-010</span>
+  <h1>S05 Risk timeline - desktop, all zones with coverage beneath</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S05, C03</b></li>
+    <li>viewport <b>1440 x 900</b></li>
+    <li>role <b>Coordinator</b></li>
+    <li>state <b>PERIOD 24H, RESOLUTION 0.1 Hz</b></li>
+    <li>requirement <b>FR4.3 FR4.5 FR4.6 FR8.5</b></li>
+    <li>batch <b>2</b></li>
+  </ul>
+</header>
+
+<!-- shared SVG hatch patterns, referenced by id from every coverage chart below -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <pattern id="hDwell" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="7" height="7" fill="#eef0f4"/><line x1="0" y1="0" x2="0" y2="7" stroke="#5b6b8c" stroke-width="2.4"/>
+    </pattern>
+    <pattern id="hStale" width="7" height="7" patternUnits="userSpaceOnUse">
+      <rect width="7" height="7" fill="#f2eee4"/>
+      <line x1="0" y1="0" x2="0" y2="7" stroke="#8a6d3b" stroke-width="1.4"/>
+      <line x1="0" y1="0" x2="7" y2="0" stroke="#8a6d3b" stroke-width="1.4"/>
+    </pattern>
+    <pattern id="hGap" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="7" height="7" fill="#e7e7e2"/>
+      <line x1="0" y1="0" x2="0" y2="7" stroke="#9a9a93" stroke-width="1.6"/>
+      <line x1="3.5" y1="0" x2="3.5" y2="7" stroke="#9a9a93" stroke-width="1.6" transform="rotate(90 3.5 3.5)"/>
+    </pattern>
+  </defs>
+</svg>
+
+<div class="wf-stage">
+
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900</span>
+
+    <span class="cx" style="left:255px;top:86px">1</span>
+    <span class="cx" style="left:705px;top:86px">2</span>
+    <span class="cx" style="left:250px;top:127px">3</span>
+    <span class="cx" style="left:1270px;top:270px">4</span>
+    <span class="cx" style="left:1010px;top:325px">5</span>
+    <span class="cx" style="left:640px;top:300px">6</span>
+    <span class="cx" style="left:497px;top:200px">7</span>
+    <span class="cx" style="left:1046px;top:230px">8</span>
+    <span class="cx" style="left:700px;top:520px">9</span>
+    <span class="cx" style="left:700px;top:665px">10</span>
+
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#"><i class="icon"></i>Live map</a>
+        <a href="#" aria-current="page"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <div class="rail-note">Signed in as <b>a.rahman</b><br>
+          <span class="st st-neutral" style="margin-top:4px">COORDINATOR</span></div>
+      </nav>
+
+      <div class="col grow">
+        <div class="top">
+          <span class="b">Risk timeline</span>
+          <span class="tiny muted">all zones - Riverside Arena</span>
+          <span class="grow"></span>
+          <span class="mono tiny">14:03:12</span>
+          <span class="chip">a.rahman</span>
+        </div>
+
+        <div class="pad-l col gap">
+
+          <!-- period selector + resolution notice -->
+          <div class="row between center" style="flex-wrap:wrap;gap:10px">
+            <div class="row gap-s center">
+              <span class="mono tiny b muted">PERIOD</span>
+              <div class="tabs" role="tablist" style="border:1px solid var(--g4);border-radius:6px">
+                <button role="tab" aria-selected="false" aria-controls="p15" id="t15">15 min</button>
+                <button role="tab" aria-selected="false" aria-controls="p1h" id="t1h">1 hour</button>
+                <button role="tab" aria-selected="true" aria-controls="p24" id="t24">24 hours</button>
+                <button role="tab" aria-selected="false" aria-controls="pc" id="tc">Custom</button>
+              </div>
+            </div>
+            <div class="row gap-s center">
+              <span class="chip" style="border-color:var(--band-watch);color:var(--band-watch)">
+                RESOLUTION 0.1 Hz beyond 1 hour</span>
+              <span class="tiny muted mono">1 sample / 10 s over this range - FR8.5</span>
+            </div>
+          </div>
+
+          <!-- legend -->
+          <div class="row gap wrap tiny mono center">
+            <span><i class="linekey lk-a"></i>Zone A</span>
+            <span><i class="linekey lk-b"></i>Zone B</span>
+            <span><i class="linekey lk-c"></i>Zone C - no line, see coverage below</span>
+            <span><i class="linekey lk-band"></i>band boundary</span>
+            <span><i class="linekey lk-alert"></i>alert raised</span>
+          </div>
+
+          <!-- main risk chart -->
+          <div class="card" style="position:relative;padding:14px 14px 8px">
+            <svg width="1160" height="260" viewBox="0 0 1160 260">
+              <!-- four band boundaries, lower edge of each band, SRS 2.7 -->
+              <line x1="10" y1="230" x2="1030" y2="230" stroke="var(--band-normal)" stroke-width="1.4" stroke-dasharray="4 4"/>
+              <text x="1036" y="233" font-size="9" fill="var(--band-normal)">0.00 NORMAL</text>
+              <line x1="10" y1="142" x2="1030" y2="142" stroke="var(--band-watch)" stroke-width="1.4" stroke-dasharray="4 4"/>
+              <text x="1036" y="145" font-size="9" fill="var(--band-watch)">0.40 WATCH</text>
+              <line x1="10" y1="76" x2="1030" y2="76" stroke="var(--band-elevated)" stroke-width="1.4" stroke-dasharray="4 4"/>
+              <text x="1036" y="79" font-size="9" fill="var(--band-elevated)">0.70 ELEVATED</text>
+              <line x1="10" y1="43" x2="1030" y2="43" stroke="var(--band-critical)" stroke-width="1.4" stroke-dasharray="4 4"/>
+              <text x="1036" y="46" font-size="9" fill="var(--band-critical)">0.85 CRITICAL</text>
+
+              <!-- alert markers on the time axis -->
+              <line x1="265" y1="8" x2="265" y2="230" stroke="var(--band-elevated)" stroke-width="1.4" stroke-dasharray="3 3"/>
+              <text x="265" y="245" font-size="9" text-anchor="middle" fill="var(--band-elevated)">19:42 A-1039</text>
+              <line x1="1030" y1="8" x2="1030" y2="230" stroke="var(--band-elevated)" stroke-width="1.4" stroke-dasharray="3 3"/>
+              <text x="1030" y="245" font-size="9" text-anchor="end" fill="var(--band-elevated)">now A-1042</text>
+
+              <text x="10" y="245" font-size="9" fill="var(--ink-2)">yesterday 14:03</text>
+              <text x="520" y="245" font-size="9" text-anchor="middle" fill="var(--ink-2)">overnight</text>
+              <text x="775" y="245" font-size="9" text-anchor="middle" fill="var(--ink-2)">today 06:03</text>
+
+              <!-- Zone A, thin grey line -->
+              <polyline points="10,164 138,160 265,166 393,155 520,162 648,164 775,157 903,162 1030,162"
+                fill="none" stroke="var(--g5)" stroke-width="2"/>
+              <text x="14" y="180" font-size="9" font-weight="700" fill="var(--g6)">ZONE A</text>
+
+              <!-- Zone B, thick dark line -->
+              <polyline points="10,146 138,131 265,58 393,138 520,142 648,133 775,109 903,80 1030,58"
+                fill="none" stroke="var(--g7)" stroke-width="4"/>
+              <text x="14" y="128" font-size="9" font-weight="700" fill="var(--g7)">ZONE B</text>
+
+              <circle cx="265" cy="58" r="4" fill="var(--g7)"/>
+              <circle cx="1030" cy="58" r="4" fill="var(--g7)"/>
+            </svg>
+
+            <!-- Zone C is never drawn at a value, because it has none -->
+            <div class="c-banner" style="left:420px;top:200px;width:260px">
+              ZONE C - ARENA FLOOR<br>no line drawn - 0 of 600 cells observed,
+              risk cannot be produced
+            </div>
+
+            <!-- point selection affordance, anchored to the current alert -->
+            <div class="popover" style="left:814px;top:86px;width:230px">
+              <div class="mono tiny b">14:02:51 - Zone B - 0.78</div>
+              <div class="tiny muted" style="margin:3px 0 7px">ELEVATED - point selected on the line</div>
+              <button class="btn btn--sm" type="button">Replay from here &rarr;</button>
+              <div class="tiny muted" style="margin-top:5px">opens S10 at this timestamp</div>
+            </div>
+          </div>
+
+          <!-- coverage, one stacked area per zone, same time axis -->
+          <div class="card" style="padding:10px 14px 12px">
+            <div class="mono tiny b">COVERAGE UNDERNEATH - same time axis as the chart above</div>
+
+            <div class="col" style="margin-top:8px">
+              <svg width="1160" height="70" viewBox="0 0 1160 70">
+                <text x="14" y="16" font-size="9" font-weight="700" fill="var(--ink-2)">ZONE A</text>
+                <rect x="10" y="16" width="1020" height="48" fill="var(--obs-observed)"/>
+                <rect x="10" y="14" width="1020" height="2" fill="url(#hDwell)"/>
+                <rect x="10" y="12" width="1020" height="2" fill="url(#hStale)"/>
+                <rect x="10" y="6" width="1020" height="6" fill="url(#hGap)"/>
+                <text x="1036" y="40" font-size="9" fill="var(--ink-2)">82/4/3/11%</text>
+              </svg>
+              <svg width="1160" height="70" viewBox="0 0 1160 70">
+                <text x="14" y="16" font-size="9" font-weight="700" fill="var(--ink-2)">ZONE B</text>
+                <rect x="10" y="50" width="1020" height="14" fill="var(--obs-observed)"/>
+                <rect x="10" y="45" width="1020" height="5" fill="url(#hDwell)"/>
+                <rect x="10" y="41" width="1020" height="4" fill="url(#hStale)"/>
+                <rect x="10" y="6" width="1020" height="35" fill="url(#hGap)"/>
+                <text x="1036" y="40" font-size="9" fill="var(--ink-2)">24/9/7/60%</text>
+              </svg>
+              <svg width="1160" height="70" viewBox="0 0 1160 70">
+                <text x="14" y="16" font-size="9" font-weight="700" fill="var(--ink-2)">ZONE C</text>
+                <rect x="10" y="28" width="1020" height="36" fill="url(#hDwell)"/>
+                <rect x="10" y="6" width="1020" height="22" fill="url(#hGap)"/>
+                <text x="1036" y="40" font-size="9" fill="var(--obs-gap)" font-weight="700">0/62/0/38%</text>
+              </svg>
+            </div>
+
+            <div class="honest" style="margin-top:9px">
+              A zone's risk line is meaningless without knowing how much of the zone was seen at
+              that instant, so coverage is charted underneath on the same time axis, never in a
+              separate view. Zone C carries no observed layer at all across the period, which is
+              exactly why it has no risk line in the chart above - not a flat zero, an absence.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>Period selector: 15 minutes, 1 hour, 24 hours, custom.</b> 24 hours is selected here
+      because it is the state that must be reviewed - the resolution notice only exists once a
+      period longer than the full-rate hour is chosen. <span class="req">FR8.5</span></li>
+
+    <li><b>The resolution notice names the actual sample rate.</b> Beyond the most recent hour,
+      cell history is retained at one sample per 10 s, not 1 Hz, and the chart states this instead
+      of quietly drawing a smoother line than the data supports. <span class="req">FR8.5</span></li>
+
+    <li><b>Risk lines are grey, distinguished by weight, not by hue.</b> Zone A is thin, Zone B is
+      thick, and both carry a text label at the line, so the chart survives greyscale and colour
+      blindness the same way the map's eight treatments do. <span class="req">NFR5</span></li>
+
+    <li><b>Four band boundaries, drawn at the exact SRS thresholds.</b> 0.00, 0.40, 0.70 and 0.85,
+      each labelled and coloured with its band's own colour, so a reader sees which band any zone
+      sat in at any moment without a separate legend lookup. <span class="req">FR4.4</span></li>
+
+    <li><b>Zone risk is the zone's worst cell, already normalised.</b> Each score plotted here is
+      0 to 1 per FR4.3, and the line is the maximum across the zone's observed cells per FR4.5 -
+      Zone B's 0.78 is one cell's score standing in for the whole zone, not an average.
+      <span class="req">FR4.3</span> <span class="req">FR4.5</span></li>
+
+    <li><b>Zone C has no line - not a line pinned at zero.</b> Zero observed cells means no risk
+      can be produced, and drawing a flat line at 0.00 would claim the floor is calm when it is
+      simply unseen. The banner states the reason on the chart itself.
+      <span class="req">SRS 2.3</span> <span class="req">FR4.6</span></li>
+
+    <li><b>Alert markers share the risk axis.</b> A-1039 (yesterday, now closed) and A-1042
+      (current, open) both mark the instant they were raised, so risk history and alert history
+      read off one timeline instead of two. <span class="req">FR5.1</span></li>
+
+    <li><b>Selecting a point offers "Replay from here."</b> Shown here anchored to the current
+      alert as a worked example: choosing any point on a zone's line opens `S10` scrubbed to that
+      exact timestamp, so an incident is investigated at the resolution it was recorded at.
+      <span class="req">FR8.4</span></li>
+
+    <li><b>Coverage is charted underneath, per zone, on the same time axis.</b> Not a single
+      combined bar - three separate stacked areas, so a dip in Zone A's coverage is never
+      mistaken for a dip in Zone B's. <span class="req">FR4.6</span></li>
+
+    <li><b>Zone C's coverage strip is the proof for its missing line above.</b> Zero percent
+      observed for the whole period, the rest split between not-enough-dwell and gap - the same
+      honesty invariant applied to a chart instead of to a single cell.
+      <span class="req">SRS 2.3</span> <span class="req">FR6.3</span></li>
+  </ol>
+
+</div>
+<script src="_assets/wireframe.js"></script>
+</body>
+</html>

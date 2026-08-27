@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S11 Setup step 3 - Proposals, desktop - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .wiz-steps{padding:10px 0;overflow-y:auto}
+  .wiz-step{display:flex;align-items:center;gap:10px;padding:8px 14px;min-height:44px;
+    text-decoration:none;color:var(--ink-2);border-left:3px solid transparent}
+  .wiz-num{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--g5);
+    display:flex;align-items:center;justify-content:center;font:700 11px var(--mono);
+    flex:0 0 auto;color:var(--ink-2);background:var(--g0)}
+  .wiz-step.done .wiz-num{background:var(--band-normal);border-color:var(--band-normal);color:#fff}
+  .wiz-step.current{color:var(--ink);background:var(--g0);border-left-color:var(--g7)}
+  .wiz-step.current .wiz-num{background:var(--g7);border-color:var(--g7);color:#fff}
+  .wiz-step .wiz-txt{display:flex;flex-direction:column;gap:1px}
+  .wiz-step .wiz-lbl{font:600 12px var(--font)}
+  .wiz-step .wiz-meta{font:600 9px var(--mono);color:var(--ink-2);letter-spacing:.03em}
+  .wizfoot-row{display:flex;justify-content:space-between;align-items:center;
+    padding:12px 18px;border-top:1px solid var(--line);background:var(--g1)}
+
+  .propplan{position:relative;flex:1;min-height:0;background:var(--g2)}
+  .propplan img{position:absolute;inset:8%;width:84%;height:84%;object-fit:fill;
+    border:1px solid var(--g5);background:#fff}
+  .propmark{position:absolute;width:22px;height:22px;border-radius:50%;display:flex;
+    align-items:center;justify-content:center;font:700 11px var(--mono);
+    border:2px solid var(--g6);background:var(--g0);color:var(--g7);
+    transform:translate(-50%,-50%)}
+  .propmark.accepted{background:var(--g6);color:#fff}
+  .propmark.rejected{background:var(--g2);color:var(--g5);border-style:dashed;
+    text-decoration:line-through}
+  .propmark.pending{border-color:var(--focus);color:var(--focus);
+    box-shadow:0 0 0 3px rgba(37,99,235,.18)}
+
+  .proptable td{vertical-align:middle}
+  .decided{display:inline-flex;align-items:center;gap:5px;font:700 11px var(--mono)}
+  .decided.acc{color:var(--g6)}
+  .decided.rej{color:var(--g5)}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">S11.3</span>
+  <h1>S11 Venue setup - Step 3 of 8, Proposals</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S11</b></li>
+    <li>viewport <b>1440 x 900</b></li>
+    <li>role <b>Administrator</b></li>
+    <li>state <b>6 accepted, 2 rejected, 1 unreviewed</b></li>
+    <li>requirement <b>FR9.3, FR9.4</b></li>
+    <li>batch <b>2</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900</span>
+
+    <span class="cx" style="left:1110px;top:200px">1</span>
+    <span class="cx" style="left:660px;top:110px">2</span>
+    <span class="cx" style="left:1300px;top:640px">3</span>
+    <span class="cx" style="left:900px;top:500px">4</span>
+    <span class="cx" style="left:1300px;top:400px">5</span>
+
+    <div class="row grow">
+
+      <nav class="navrail wiz-steps" style="flex:0 0 240px">
+        <a href="S11-setup-step1-plan-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Site plan</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step2-grid-desktop.html" class="wiz-step done">
+          <span class="wiz-num">&#10003;</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Grid</span>
+            <span class="wiz-meta">SAVED</span></span></a>
+        <a href="S11-setup-step3-proposals-desktop.html" class="wiz-step current" aria-current="step">
+          <span class="wiz-num">3</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Proposals</span>
+            <span class="wiz-meta">IN PROGRESS</span></span></a>
+        <a href="S11-setup-step4-attributes-desktop.html" class="wiz-step">
+          <span class="wiz-num">4</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Attributes</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-step5-exits-desktop.html" class="wiz-step">
+          <span class="wiz-num">5</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Exits</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-step6-zones-desktop.html" class="wiz-step">
+          <span class="wiz-num">6</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Zones</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-step7-thresholds-desktop.html" class="wiz-step">
+          <span class="wiz-num">7</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Thresholds</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-step8-drones-desktop.html" class="wiz-step">
+          <span class="wiz-num">8</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Drones</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <a href="S11-setup-review-desktop.html" class="wiz-step">
+          <span class="wiz-num">R</span>
+          <span class="wiz-txt"><span class="wiz-lbl">Review</span>
+            <span class="wiz-meta">NOT STARTED</span></span></a>
+        <div class="rail-note">Steps are non-linear once visited and progress
+          is saved per step.</div>
+      </nav>
+
+      <div class="col grow">
+        <div class="top">
+          <span class="b">Venue setup - Riverside Arena</span>
+          <span class="tiny muted">Step 3 of 8 - Proposals</span>
+          <span class="grow"></span>
+          <span class="chip">s.iqbal</span>
+          <span class="st st-neutral">ADMINISTRATOR</span>
+        </div>
+
+        <div class="honest" style="margin:12px 18px 0;border-left-color:var(--focus)">
+          This step can be skipped entirely. Step 4, Attributes, still completes the
+          configuration by hand - manual annotation is the guaranteed path and the setup
+          pass only pre-fills it. A venue with no proposals at all reaches a fully
+          configured site the same way.
+        </div>
+
+        <form class="col grow" style="min-height:0">
+          <div class="row grow" style="min-height:0">
+
+            <div class="col propplan">
+              <img src="_assets/site-plan.svg" alt="Site plan with 9 setup-pass proposals">
+              <div class="propmark accepted" style="left:50%;top:8%">1</div>
+              <div class="propmark accepted" style="left:50%;top:92%">2</div>
+              <div class="propmark accepted" style="left:33%;top:22%">3</div>
+              <div class="propmark accepted" style="left:32%;top:74%">4</div>
+              <div class="propmark accepted" style="left:68%;top:74%">5</div>
+              <div class="propmark rejected" style="left:67%;top:22%">6</div>
+              <div class="propmark accepted" style="left:8%;top:48%">7</div>
+              <div class="propmark rejected" style="left:92%;top:48%">8</div>
+              <div class="propmark pending" style="left:50%;top:50%">9</div>
+            </div>
+
+            <div class="col grow" style="border-left:1px solid var(--line);overflow-y:auto">
+              <div class="row between center pad-s" style="border-bottom:1px solid var(--line);
+                background:var(--g1)">
+                <span class="mono tiny b">9 PROPOSALS - 2 exits, 4 barriers, 3 obstructions</span>
+                <span class="row gap-s">
+                  <span class="chip">6 accepted</span>
+                  <span class="chip">2 rejected</span>
+                  <span class="chip" style="border-color:var(--focus);color:var(--focus)">1 unreviewed</span>
+                </span>
+              </div>
+
+              <table class="wt proptable">
+                <tr><th>#</th><th>Type</th><th>Cells</th><th>Decision</th></tr>
+                <tr><td class="mono">1</td><td>Exit</td><td class="mono">E1 South Gate, 8 cells</td>
+                  <td><span class="decided acc">&#10003; ACCEPTED</span></td></tr>
+                <tr><td class="mono">2</td><td>Exit</td><td class="mono">E2 North Gate, 6 cells</td>
+                  <td><span class="decided acc">&#10003; ACCEPTED</span></td></tr>
+                <tr><td class="mono">3</td><td>Barrier</td><td class="mono">C-018-006 to C-018-014</td>
+                  <td><span class="decided acc">&#10003; ACCEPTED</span></td></tr>
+                <tr><td class="mono">4</td><td>Barrier</td><td class="mono">C-012-030 to C-012-036</td>
+                  <td><span class="decided acc">&#10003; ACCEPTED</span></td></tr>
+                <tr><td class="mono">5</td><td>Barrier</td><td class="mono">C-041-030 to C-041-036</td>
+                  <td><span class="decided acc">&#10003; ACCEPTED</span></td></tr>
+                <tr><td class="mono">6</td><td>Barrier</td><td class="mono">C-040-004 to C-045-004</td>
+                  <td><span class="decided rej">&#10005; REJECTED</span></td></tr>
+                <tr><td class="mono">7</td><td>Obstruction</td><td class="mono">C-004-018 to C-004-021</td>
+                  <td><span class="decided acc">&#10003; ACCEPTED</span></td></tr>
+                <tr><td class="mono">8</td><td>Obstruction</td><td class="mono">C-056-018 to C-056-021</td>
+                  <td><span class="decided rej">&#10005; REJECTED</span></td></tr>
+                <tr style="background:rgba(37,99,235,.06)">
+                  <td class="mono">9</td><td>Obstruction</td><td class="mono">C-029-019 to C-031-020</td>
+                  <td>
+                    <div class="row gap-s">
+                      <button type="button" class="btn btn--sm">Reject</button>
+                      <button type="button" class="btn btn--sm btn--primary">Accept</button>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+
+              <div class="pad-s">
+                <div class="tiny muted">
+                  Accepted and rejected proposals can still be changed here or corrected
+                  later in Step 4 - a decision on this screen is not final until Save on
+                  the Review step.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wizfoot-row">
+            <button type="button" class="btn">Back</button>
+            <div class="row gap-s">
+              <button type="button" class="btn">Skip this step</button>
+              <button type="button" class="btn">Save and exit</button>
+              <button type="submit" class="btn btn--primary">Continue</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>"Skip this step" is a first-class action, not a hidden escape hatch.</b> It sits
+      beside Continue in the footer so an administrator running a demo with no setup pass
+      available reaches Step 4 the same way as one reviewing all nine proposals.
+      <span class="req">FR9.4</span></li>
+
+    <li><b>Each proposal is drawn on the plan and listed in a table, matched by number.</b>
+      Nine proposals total: two exits, four barriers, three obstructions, matching the
+      canonical setup-pass result for Riverside Arena. <span class="req">FR9.3</span></li>
+
+    <li><b>Markers use grey shapes, not the live risk colours</b>, because this is a setup
+      screen showing proposed attributes, not observed risk - accepted is a solid grey
+      disc, rejected is a dashed strikethrough disc, and the one unreviewed proposal uses
+      the same blue affordance colour as every other interactive control in this set, never
+      a risk-band colour, so a proposal can never be mistaken for a live alert.</li>
+
+    <li><b>Accept and reject are per proposal, individually.</b> The unreviewed row is the
+      only one still showing both action buttons; decided rows show their outcome as a
+      label but remain revisable, matching design.md's non-linear step navigation.
+      <span class="req">FR9.3</span></li>
+
+    <li><b>The count strip states the exact split - 6 accepted, 2 rejected, 1 unreviewed</b> -
+      so progress is legible without counting rows, matching the canonical dataset for
+      this demo venue.</li>
+  </ol>
+
+</div>
+</body>
+</html>

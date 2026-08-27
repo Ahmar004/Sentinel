@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>C05 SuggestionList - four states - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .statehead{margin:36px 24px 4px;font-size:17px;font-weight:650}
+  .statesub{margin:0 24px 18px;font-size:13px;color:var(--ink-2);max-width:80ch}
+  .miniplan{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font:600 11px var(--mono);color:var(--ink-2);text-align:center;padding:0 20px}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">F-008</span>
+  <h1>C05 SuggestionList - four states, desktop rail and mobile sheet</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>C05</b></li>
+    <li>viewport <b>390 x 844 and 1440 x 900</b></li>
+    <li>role <b>Coordinator</b></li>
+    <li>state <b>ranked / no safe option / model unavailable / confirmed</b></li>
+    <li>requirement <b>FR7.1 to FR7.8</b></li>
+    <li>batch <b>2</b></li>
+  </ul>
+</header>
+
+<!-- ================= STATE 1: RANKED ================= -->
+<h2 class="statehead">1. Ranked - three options, one to confirm, one rejected</h2>
+<p class="statesub">All three candidates for A-1042 as issued. Option 1 has every safeguard passing and
+  is offered; option 3 is shown rejected with the failing safeguard named, never hidden (FR7.3, FR7.4).</p>
+
+<div class="wf-stage">
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900</span>
+    <span class="cx" style="left:1160px;top:220px">1</span>
+    <span class="cx" style="left:1160px;top:660px">2</span>
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#" aria-current="page"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <div class="rail-note">Signed in as <b>a.rahman</b><br><span class="st st-neutral">COORDINATOR</span></div>
+      </nav>
+      <div class="col grow">
+        <div class="top"><span class="b">Riverside Arena</span><span class="grow"></span>
+          <span class="mono tiny">14:03:12</span></div>
+        <div class="row grow">
+          <div class="map"><img class="plan" src="_assets/site-plan.svg" alt="">
+            <div class="miniplan">Live map - see S02.<br>This frame isolates the alert rail's suggestion list.</div></div>
+          <aside class="rail">
+            <div class="row between center pad-s" style="border-bottom:1px solid var(--line)">
+              <span class="mono tiny b">A-1042 - SUGGESTIONS</span><span class="st st-elevated">ELEVATED</span>
+            </div>
+            <div class="pad-s scroll grow">
+              <div class="card" style="border-left:3px solid var(--band-normal)">
+                <div class="row between center">
+                  <span class="chip">rank 1</span><span class="mono b">DIVERT</span>
+                  <span class="st st-neutral">PROPOSED</span><span class="chip">MODEL</span>
+                </div>
+                <div class="tiny" style="margin-top:6px">Divert arriving flow north-east to Exit E2.
+                  E2 is running at 240 of 900 people per minute, so it has headroom; E1 is at 780 of 1200.</div>
+                <div class="tiny muted mono" style="margin-top:5px">
+                  C-031-022 &rarr; C-032-022 &rarr; C-033-021 &rarr; C-034-020 &rarr; C-035-019</div>
+                <div class="tiny mono" style="margin-top:6px;line-height:1.7">
+                  <span class="st st-normal">PASS</span> OVER_THRESHOLD_CELL<br>
+                  <span class="st st-normal">PASS</span> WOULD_PUSH_NEIGHBOUR_OVER<br>
+                  <span class="st st-normal">PASS</span> STALE_CELL_ON_ROUTE<br>
+                  <span class="st st-normal">PASS</span> UNKNOWN_CELL_ON_ROUTE<br>
+                  <span class="st st-normal">PASS</span> EXIT_OVER_CAPACITY</div>
+                <div class="row gap-s" style="margin-top:9px">
+                  <button class="btn grow" type="button">Dismiss</button>
+                  <button class="btn btn--primary grow" type="button">Confirm</button>
+                </div>
+              </div>
+
+              <div class="card" style="margin-top:8px">
+                <div class="row between center">
+                  <span class="chip">rank 2</span><span class="mono b">HOLD_AND_METER</span>
+                  <span class="st st-neutral">PROPOSED</span><span class="chip">MODEL</span>
+                </div>
+                <div class="tiny" style="margin-top:6px">Hold arrivals at the north approach and
+                  meter entry while convergence falls.</div>
+                <div class="tiny muted mono" style="margin-top:5px">C-029-018 &rarr; C-030-018 &rarr; C-031-018</div>
+                <div class="tiny mono" style="margin-top:6px">four safeguards <span class="st st-normal">PASS</span> -
+                  WOULD_PUSH_NEIGHBOUR_OVER <span class="st st-normal">PASS</span>, C-030-019 rises to
+                  0.61, still below its 0.70 threshold</div>
+                <div class="row gap-s" style="margin-top:9px">
+                  <button class="btn grow" type="button">Dismiss</button>
+                  <button class="btn btn--primary grow" type="button">Confirm</button>
+                </div>
+              </div>
+
+              <div class="card" style="margin-top:8px;opacity:.85">
+                <div class="row between center">
+                  <span class="chip">rank 3</span><span class="mono b">OPEN_ALTERNATE_ROUTE</span>
+                  <span class="st st-critical">REJECTED</span><span class="chip">MODEL</span>
+                </div>
+                <div class="tiny" style="margin-top:6px">Open the west service route toward Exit E1.</div>
+                <div class="tiny muted mono" style="margin-top:5px">C-026-024 &rarr; C-025-025 &rarr; C-024-026 &rarr; C-023-027</div>
+                <div class="tiny mono" style="margin-top:6px">
+                  <span class="st st-critical">FAILED</span> STALE_CELL_ON_ROUTE - cell C-024-026
+                  was last observed 7 s ago</div>
+                <div class="honest" style="margin-top:7px">Rejected. Not offerable. Nothing to confirm.</div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="device device--mobile">
+    <span class="device-tag">390 x 844</span>
+    <span class="cx" style="left:200px;top:420px">3</span>
+    <div class="top"><span class="b" style="font-size:13px">Riverside Arena</span><span class="grow"></span>
+      <span class="mono tiny">14:03:12</span></div>
+    <div class="map" style="flex:0 0 150px"><img class="plan" src="_assets/site-plan.svg" alt="">
+      <div class="miniplan" style="font-size:10px">Live map behind the sheet</div></div>
+    <div class="sheet grow" style="overflow-y:auto">
+      <div class="sheet-handle" style="position:relative;border-bottom:1px solid var(--line)">
+        <span class="b" style="font-size:13px">A-1042 suggestions</span>
+        <span class="grow"></span><span class="st st-elevated">ELEVATED</span>
+      </div>
+      <div class="pad">
+        <div class="card" style="border-left:3px solid var(--band-normal)">
+          <div class="row between center">
+            <span class="chip">rank 1</span><span class="mono b" style="font-size:12px">DIVERT</span>
+            <span class="chip">MODEL</span>
+          </div>
+          <div class="tiny" style="margin-top:5px">Divert flow north-east to Exit E2. E2 at 240 of
+            900/min, headroom; E1 at 780 of 1200.</div>
+          <div class="tiny muted mono" style="margin-top:4px">5 route cells to E2</div>
+          <div class="tiny mono" style="margin-top:5px">5 of 5 safeguards <span class="st st-normal">PASS</span></div>
+          <div class="row gap-s" style="margin-top:8px">
+            <button class="btn btn--tap grow" type="button">Dismiss</button>
+            <button class="btn btn--tap btn--primary grow" type="button">Confirm</button>
+          </div>
+        </div>
+        <div class="card" style="margin-top:7px">
+          <div class="row between center">
+            <span class="chip">rank 2</span><span class="mono b" style="font-size:12px">HOLD_AND_METER</span>
+            <span class="chip">MODEL</span>
+          </div>
+          <div class="tiny" style="margin-top:5px">Hold arrivals north, meter entry while convergence falls.</div>
+          <div class="row gap-s" style="margin-top:8px">
+            <button class="btn btn--tap grow" type="button">Dismiss</button>
+            <button class="btn btn--tap btn--primary grow" type="button">Confirm</button>
+          </div>
+        </div>
+        <div class="card" style="margin-top:7px;opacity:.85">
+          <div class="row between center">
+            <span class="chip">rank 3</span><span class="mono b" style="font-size:12px">OPEN_ALTERNATE_ROUTE</span>
+            <span class="st st-critical">REJECTED</span>
+          </div>
+          <div class="tiny mono" style="margin-top:5px">
+            <span class="st st-critical">FAILED</span> STALE_CELL_ON_ROUTE - C-024-026, 7s ago</div>
+          <div class="honest" style="margin-top:6px">Rejected. Nothing to confirm.</div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar">
+      <a href="#" aria-current="page"><i class="icon"></i>Live</a>
+      <a href="#"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+</div>
+
+<!-- ================= STATE 2: NO SAFE OPTION ================= -->
+<h2 class="statehead">2. No safe option - every candidate rejected</h2>
+<p class="statesub">FR7.5: when safeguards reject all candidates, the system states that no safe option
+  was found and emits no confirmable option. Inventing an option because one is expected is the
+  failure this state exists to prevent.</p>
+
+<div class="wf-stage">
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900</span>
+    <span class="cx" style="left:1160px;top:640px">4</span>
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#" aria-current="page"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <div class="rail-note">Signed in as <b>a.rahman</b><br><span class="st st-neutral">COORDINATOR</span></div>
+      </nav>
+      <div class="col grow">
+        <div class="top"><span class="b">Riverside Arena</span><span class="grow"></span>
+          <span class="mono tiny">14:03:12</span></div>
+        <div class="row grow">
+          <div class="map"><img class="plan" src="_assets/site-plan.svg" alt="">
+            <div class="miniplan">Scenario: every route around A-1042 fails a safeguard</div></div>
+          <aside class="rail">
+            <div class="row between center pad-s" style="border-bottom:1px solid var(--line)">
+              <span class="mono tiny b">A-1042 - SUGGESTIONS</span><span class="st st-elevated">ELEVATED</span>
+            </div>
+            <div class="pad-s scroll grow">
+              <div class="card" style="opacity:.85">
+                <div class="row between center">
+                  <span class="chip">rank 1</span><span class="mono b">DIVERT</span>
+                  <span class="st st-critical">REJECTED</span><span class="chip">MODEL</span>
+                </div>
+                <div class="tiny muted mono" style="margin-top:5px">C-031-022 &rarr; C-034-020 &rarr; Exit E2</div>
+                <div class="tiny mono" style="margin-top:6px">
+                  <span class="st st-critical">FAILED</span> OVER_THRESHOLD_CELL - route cell
+                  C-034-020 is at 0.81, above its 0.70 zone threshold</div>
+              </div>
+              <div class="card" style="margin-top:8px;opacity:.85">
+                <div class="row between center">
+                  <span class="chip">rank 2</span><span class="mono b">HOLD_AND_METER</span>
+                  <span class="st st-critical">REJECTED</span><span class="chip">MODEL</span>
+                </div>
+                <div class="tiny muted mono" style="margin-top:5px">C-029-018 &rarr; C-030-018 &rarr; C-031-018</div>
+                <div class="tiny mono" style="margin-top:6px">
+                  <span class="st st-critical">FAILED</span> WOULD_PUSH_NEIGHBOUR_OVER - holding
+                  here pushes neighbour C-030-019 to 0.86, above its own 0.70 threshold</div>
+              </div>
+              <div class="card" style="margin-top:8px;opacity:.85">
+                <div class="row between center">
+                  <span class="chip">rank 3</span><span class="mono b">OPEN_ALTERNATE_ROUTE</span>
+                  <span class="st st-critical">REJECTED</span><span class="chip">MODEL</span>
+                </div>
+                <div class="tiny muted mono" style="margin-top:5px">C-026-024 &rarr; C-025-025 &rarr; C-024-026 &rarr; C-023-027</div>
+                <div class="tiny mono" style="margin-top:6px">
+                  <span class="st st-critical">FAILED</span> STALE_CELL_ON_ROUTE - cell C-024-026
+                  was last observed 7 s ago</div>
+              </div>
+              <div class="honest" style="margin-top:10px;border-left-color:var(--band-critical)">
+                No safe option was found. All three candidates were rejected by safeguards.
+                Nothing on this alert can be confirmed right now.
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="device device--mobile">
+    <span class="device-tag">390 x 844</span>
+    <span class="cx" style="left:200px;top:560px">5</span>
+    <div class="top"><span class="b" style="font-size:13px">Riverside Arena</span><span class="grow"></span>
+      <span class="mono tiny">14:03:12</span></div>
+    <div class="map" style="flex:0 0 150px"><img class="plan" src="_assets/site-plan.svg" alt="">
+      <div class="miniplan" style="font-size:10px">All routes fail a safeguard</div></div>
+    <div class="sheet grow" style="overflow-y:auto">
+      <div class="sheet-handle" style="position:relative;border-bottom:1px solid var(--line)">
+        <span class="b" style="font-size:13px">A-1042 suggestions</span><span class="grow"></span>
+        <span class="st st-elevated">ELEVATED</span>
+      </div>
+      <div class="pad">
+        <div class="card" style="opacity:.85">
+          <div class="row between center"><span class="chip">rank 1</span>
+            <span class="mono b" style="font-size:12px">DIVERT</span><span class="st st-critical">REJECTED</span></div>
+          <div class="tiny mono" style="margin-top:5px">
+            <span class="st st-critical">FAILED</span> OVER_THRESHOLD_CELL - C-034-020 at 0.81</div>
+        </div>
+        <div class="card" style="margin-top:7px;opacity:.85">
+          <div class="row between center"><span class="chip">rank 2</span>
+            <span class="mono b" style="font-size:12px">HOLD_AND_METER</span><span class="st st-critical">REJECTED</span></div>
+          <div class="tiny mono" style="margin-top:5px">
+            <span class="st st-critical">FAILED</span> WOULD_PUSH_NEIGHBOUR_OVER - C-030-019 to 0.86</div>
+        </div>
+        <div class="card" style="margin-top:7px;opacity:.85">
+          <div class="row between center"><span class="chip">rank 3</span>
+            <span class="mono b" style="font-size:12px">OPEN_ALTERNATE_ROUTE</span><span class="st st-critical">REJECTED</span></div>
+          <div class="tiny mono" style="margin-top:5px">
+            <span class="st st-critical">FAILED</span> STALE_CELL_ON_ROUTE - C-024-026, 7s ago</div>
+        </div>
+        <div class="honest" style="margin-top:9px;border-left-color:var(--band-critical)">
+          No safe option was found. Nothing here can be confirmed.
+        </div>
+      </div>
+    </div>
+    <nav class="navbar">
+      <a href="#" aria-current="page"><i class="icon"></i>Live</a>
+      <a href="#"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+</div>
+
+<!-- ================= STATE 3: MODEL UNAVAILABLE ================= -->
+<h2 class="statehead">3. Model unavailable - template phrasing</h2>
+<p class="statesub">FR7.6, NFR6: the same ranked options with the same routes and the same safeguard
+  results, phrased mechanically from a template instead of the local model, with a badge naming the
+  source. Nothing about ranking, routing or safeguards changes.</p>
+
+<div class="wf-stage">
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900</span>
+    <span class="cx" style="left:1160px;top:220px">6</span>
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#" aria-current="page"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <div class="rail-note">Signed in as <b>a.rahman</b><br><span class="st st-neutral">COORDINATOR</span></div>
+      </nav>
+      <div class="col grow">
+        <div class="top"><span class="b">Riverside Arena</span><span class="grow"></span>
+          <span class="mono tiny">14:03:12</span></div>
+        <div class="row grow">
+          <div class="map"><img class="plan" src="_assets/site-plan.svg" alt="">
+            <div class="miniplan">S15 Services shows the phrasing model unavailable</div></div>
+          <aside class="rail">
+            <div class="row between center pad-s" style="border-bottom:1px solid var(--line)">
+              <span class="mono tiny b">A-1042 - SUGGESTIONS</span><span class="st st-elevated">ELEVATED</span>
+            </div>
+            <div class="honest" style="margin:8px" >
+              Phrasing model unavailable. Suggestions continue with template phrasing; ranking
+              and safeguards are unaffected.
+            </div>
+            <div class="pad-s scroll grow" style="padding-top:0">
+              <div class="card" style="border-left:3px solid var(--band-normal)">
+                <div class="row between center">
+                  <span class="chip">rank 1</span><span class="mono b">DIVERT</span>
+                  <span class="st st-neutral">PROPOSED</span><span class="chip">TEMPLATE</span>
+                </div>
+                <div class="tiny mono" style="margin-top:6px">
+                  Action: DIVERT. Target exit: E2. Exit E2: 240 of 900 people/min. Exit E1: 780 of
+                  1200 people/min. Route: 5 cells.</div>
+                <div class="tiny mono" style="margin-top:6px">5 of 5 safeguards <span class="st st-normal">PASS</span></div>
+                <div class="row gap-s" style="margin-top:9px">
+                  <button class="btn grow" type="button">Dismiss</button>
+                  <button class="btn btn--primary grow" type="button">Confirm</button>
+                </div>
+              </div>
+              <div class="card" style="margin-top:8px">
+                <div class="row between center">
+                  <span class="chip">rank 2</span><span class="mono b">HOLD_AND_METER</span>
+                  <span class="st st-neutral">PROPOSED</span><span class="chip">TEMPLATE</span>
+                </div>
+                <div class="tiny mono" style="margin-top:6px">
+                  Action: HOLD_AND_METER. Location: north approach. Route: 3 cells.
+                  Neighbour C-030-019 projected: 0.61, threshold 0.70.</div>
+                <div class="tiny mono" style="margin-top:6px">4 of 4 safeguards <span class="st st-normal">PASS</span></div>
+                <div class="row gap-s" style="margin-top:9px">
+                  <button class="btn grow" type="button">Dismiss</button>
+                  <button class="btn btn--primary grow" type="button">Confirm</button>
+                </div>
+              </div>
+              <div class="card" style="margin-top:8px;opacity:.85">
+                <div class="row between center">
+                  <span class="chip">rank 3</span><span class="mono b">OPEN_ALTERNATE_ROUTE</span>
+                  <span class="st st-critical">REJECTED</span><span class="chip">TEMPLATE</span>
+                </div>
+                <div class="tiny mono" style="margin-top:6px">
+                  <span class="st st-critical">FAILED</span> STALE_CELL_ON_ROUTE. Cell: C-024-026.
+                  Last observed: 7 s ago.</div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="device device--mobile">
+    <span class="device-tag">390 x 844</span>
+    <div class="top"><span class="b" style="font-size:13px">Riverside Arena</span><span class="grow"></span>
+      <span class="mono tiny">14:03:12</span></div>
+    <div class="map" style="flex:0 0 120px"><img class="plan" src="_assets/site-plan.svg" alt="">
+      <div class="miniplan" style="font-size:10px">Model unavailable</div></div>
+    <div class="sheet grow" style="overflow-y:auto">
+      <div class="sheet-handle" style="position:relative;border-bottom:1px solid var(--line)">
+        <span class="b" style="font-size:13px">A-1042 suggestions</span><span class="grow"></span>
+        <span class="st st-elevated">ELEVATED</span>
+      </div>
+      <div class="honest" style="margin:8px">Template phrasing in use. Ranking unaffected.</div>
+      <div class="pad" style="padding-top:0">
+        <div class="card" style="border-left:3px solid var(--band-normal)">
+          <div class="row between center"><span class="chip">rank 1</span>
+            <span class="mono b" style="font-size:12px">DIVERT</span><span class="chip">TEMPLATE</span></div>
+          <div class="tiny mono" style="margin-top:5px">Action: DIVERT. Target: Exit E2 (240/900).
+            E1 at 780/1200.</div>
+          <div class="row gap-s" style="margin-top:8px">
+            <button class="btn btn--tap grow" type="button">Dismiss</button>
+            <button class="btn btn--tap btn--primary grow" type="button">Confirm</button>
+          </div>
+        </div>
+        <div class="card" style="margin-top:7px;opacity:.85">
+          <div class="row between center"><span class="chip">rank 3</span>
+            <span class="mono b" style="font-size:12px">OPEN_ALTERNATE_ROUTE</span>
+            <span class="st st-critical">REJECTED</span></div>
+          <div class="tiny mono" style="margin-top:5px">
+            <span class="st st-critical">FAILED</span> STALE_CELL_ON_ROUTE. C-024-026, 7s ago.</div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar">
+      <a href="#" aria-current="page"><i class="icon"></i>Live</a>
+      <a href="#"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+</div>
+
+<!-- ================= STATE 4: CONFIRMED, OUTCOME WINDOW OPEN ================= -->
+<h2 class="statehead">4. Confirmed - outcome window open</h2>
+<p class="statesub">FR8.6: option 1 is now confirmed. The card names who confirmed it and when, and shows
+  the 10 minute outcome countdown reading pending with time remaining.</p>
+
+<div class="wf-stage">
+  <div class="device device--desktop">
+    <span class="device-tag">1440 x 900</span>
+    <span class="cx" style="left:1160px;top:230px">7</span>
+    <div class="row grow">
+      <nav class="navrail">
+        <a href="#" aria-current="page"><i class="icon"></i>Live map</a>
+        <a href="#"><i class="icon"></i>Timeline</a>
+        <a href="#"><i class="icon"></i>Fleet</a>
+        <a href="#"><i class="icon"></i>History</a>
+        <a href="#"><i class="icon"></i>Replay</a>
+        <div class="rail-note">Signed in as <b>a.rahman</b><br><span class="st st-neutral">COORDINATOR</span></div>
+      </nav>
+      <div class="col grow">
+        <div class="top"><span class="b">Riverside Arena</span><span class="grow"></span>
+          <span class="mono tiny">14:03:12</span></div>
+        <div class="row grow">
+          <div class="map"><img class="plan" src="_assets/site-plan.svg" alt="">
+            <div class="miniplan">Confirmed 14:03:05 - outcome tracked against the route cells</div></div>
+          <aside class="rail">
+            <div class="row between center pad-s" style="border-bottom:1px solid var(--line)">
+              <span class="mono tiny b">A-1042 - SUGGESTIONS</span><span class="st st-elevated">ELEVATED</span>
+            </div>
+            <div class="pad-s scroll grow">
+              <div class="card" style="border-left:3px solid var(--band-normal)">
+                <div class="row between center">
+                  <span class="chip">rank 1</span><span class="mono b">DIVERT</span>
+                  <span class="st st-observed">CONFIRMED</span><span class="chip">MODEL</span>
+                </div>
+                <div class="tiny" style="margin-top:6px">Divert arriving flow north-east to Exit E2.</div>
+                <div class="tiny muted mono" style="margin-top:5px">
+                  C-031-022 &rarr; C-032-022 &rarr; C-033-021 &rarr; C-034-020 &rarr; C-035-019</div>
+                <div class="tiny mono" style="margin-top:6px">Confirmed by <b>a.rahman</b> at 14:03:05</div>
+                <div class="honest" style="margin-top:8px;border-left-color:var(--obs-dwell)">
+                  Outcome tracking window open. Verdict
+                  <span class="st st-dwell" style="margin:0 4px">PENDING</span> - 9m 53s remaining.
+                </div>
+                <div class="tiny muted" style="margin-top:6px">
+                  Sentinel does not control barriers, signage or gates. This records the decision
+                  and notifies the team; nothing was actuated.</div>
+              </div>
+              <div class="card" style="margin-top:8px;opacity:.6">
+                <div class="row between center">
+                  <span class="chip">rank 2</span><span class="mono b">HOLD_AND_METER</span>
+                  <span class="st st-neutral">EXPIRED</span><span class="chip">MODEL</span>
+                </div>
+                <div class="tiny muted" style="margin-top:6px">
+                  Superseded once option 1 was confirmed. No longer offerable.</div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="device device--mobile">
+    <span class="device-tag">390 x 844</span>
+    <div class="top"><span class="b" style="font-size:13px">Riverside Arena</span><span class="grow"></span>
+      <span class="mono tiny">14:03:12</span></div>
+    <div class="map" style="flex:0 0 150px"><img class="plan" src="_assets/site-plan.svg" alt="">
+      <div class="miniplan" style="font-size:10px">Confirmed - outcome tracked</div></div>
+    <div class="sheet grow" style="overflow-y:auto">
+      <div class="sheet-handle" style="position:relative;border-bottom:1px solid var(--line)">
+        <span class="b" style="font-size:13px">A-1042 suggestions</span><span class="grow"></span>
+        <span class="st st-elevated">ELEVATED</span>
+      </div>
+      <div class="pad">
+        <div class="card" style="border-left:3px solid var(--band-normal)">
+          <div class="row between center">
+            <span class="chip">rank 1</span><span class="mono b" style="font-size:12px">DIVERT</span>
+            <span class="st st-observed">CONFIRMED</span>
+          </div>
+          <div class="tiny mono" style="margin-top:5px">Confirmed by a.rahman at 14:03:05</div>
+          <div class="honest" style="margin-top:7px;border-left-color:var(--obs-dwell)">
+            Outcome <span class="st st-dwell">PENDING</span> - 9m 53s remaining.
+          </div>
+          <div class="tiny muted" style="margin-top:6px">
+            Sentinel does not control barriers, signage or gates.</div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar">
+      <a href="#" aria-current="page"><i class="icon"></i>Live</a>
+      <a href="#"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+</div>
+
+<div style="padding:8px 24px 64px">
+<ol class="wf-notes" style="max-width:900px">
+  <li><b>Option 1 shows every safeguard passing individually, not a single "safe" chip.</b> Five
+    named safeguards, each with its own PASS, because a coordinator confirming a route should be
+    able to see which specific checks were run, not just trust a summary verdict.
+    <span class="req">FR7.3</span></li>
+
+  <li><b>Option 3 renders rejected in the same list, not filtered out.</b> The failing safeguard
+    and the exact cell are named in place, and a rejected card carries no Confirm button at all
+    - there is nothing on it that could be mis-tapped into an action. <span class="req">FR7.4</span></li>
+
+  <li><b>Mobile keeps the same three ranks, the same safeguard vocabulary and the same rejection,</b>
+    only the card copy is shortened; nothing that changes the decision is cut for width.
+    <span class="req">FR7.1</span> <span class="req">FR7.3</span></li>
+
+  <li><b>When every candidate fails, the surface says so in words and offers nothing to confirm.</b>
+    Three rejected cards each name a distinct failing safeguard, proving the rejections are
+    per-route and not a single blanket refusal, and the closing line states plainly that no safe
+    option exists for this alert right now. <span class="req">FR7.5</span></li>
+
+  <li><b>The no-safe-option statement is styled with the critical accent, not the neutral one,</b>
+    because it is telling the coordinator that dispersal cannot be safely suggested, which is
+    itself a fact worth the same visual weight as a critical cell. <span class="req">FR7.5</span></li>
+
+  <li><b>Template phrasing keeps the identical structure, ranks and safeguard results as the model
+    phrasing above; only the sentences read mechanically.</b> The badge changes from MODEL to
+    TEMPLATE and a banner states the model is unavailable, so a coordinator is never left guessing
+    why the wording feels different. <span class="req">FR7.6</span> <span class="req">NFR6</span></li>
+
+  <li><b>Confirmed shows who and when, the outcome countdown, and the actuation boundary in the
+    same breath.</b> "Confirmed by a.rahman at 14:03:05", "PENDING - 9m 53s remaining", and the
+    sentence that nothing was actuated all sit on one card, because outcome tracking and the
+    advisory boundary are two halves of the same guarantee: Sentinel recorded a decision, and it
+    did not act on it. <span class="req">FR7.7</span> <span class="req">FR8.6</span></li>
+
+  <li><b>The superseded option reads EXPIRED, not deleted.</b> Once one option is confirmed the
+    others stop being offerable, and the history of what was proposed is preserved rather than
+    removed, which is what makes the audit trail in FR7.8 possible.
+    <span class="req">FR7.8</span></li>
+</ol>
+</div>
+
+</body>
+</html>

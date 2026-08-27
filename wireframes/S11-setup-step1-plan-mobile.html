@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S11 step 1 Site plan, mobile - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  /* Scoped wizard chrome. Reused (retyped, not shared) across every S11 step
+     frame, because the wireframe set has no shared CSS file besides
+     wireframe.css and each frame must stay self-contained. */
+  .wzform{display:flex;flex-direction:column;min-height:0;flex:1}
+  .wz-progress{flex:0 0 auto;padding:9px 12px 11px;border-bottom:1px solid var(--line);background:var(--g0)}
+  .wz-stepbtn{display:flex;align-items:center;gap:9px;width:100%;min-height:40px;
+    border:1px solid var(--g4);border-radius:6px;background:var(--g1);padding:0 10px;
+    font:600 12px var(--font);color:var(--ink)}
+  .wz-stepbtn .cur{font:700 11px/1 var(--mono);color:var(--ink-2);flex:0 0 auto}
+  .wz-stepbtn .name{flex:1;text-align:left}
+  .wz-caret{width:7px;height:7px;border-right:2px solid var(--ink-2);
+    border-bottom:2px solid var(--ink-2);transform:rotate(45deg);flex:0 0 auto}
+  .wz-bar{height:4px;background:var(--g3);border-radius:2px;margin-top:8px;overflow:hidden}
+  .wz-bar i{display:block;height:100%;background:var(--g7)}
+  .wz-body{overflow-y:auto;padding:14px 14px 20px}
+  .wz-actions{flex:0 0 auto;display:flex;gap:8px;padding:10px 12px;
+    border-top:1px solid var(--line);background:var(--g0)}
+  .wz-field{margin-bottom:14px}
+  .wz-field label{display:block;font:600 11px var(--mono);color:var(--ink-2);margin-bottom:5px}
+  .wz-input{display:flex;align-items:center;min-height:40px;padding:0 10px;
+    border:1px solid var(--g4);border-radius:5px;background:var(--g0);font:600 13px var(--font)}
+  .wz-input .unit{margin-left:auto;color:var(--ink-2);font:600 11px var(--mono)}
+  .wz-section{border:1px solid var(--g4);border-radius:6px;padding:12px;margin-bottom:14px;background:var(--g1)}
+  .wz-section h3{margin:0 0 8px;font-size:13px}
+  .wz-drawer{position:absolute;inset:0;background:rgba(28,28,26,.42);z-index:60;
+    display:flex;align-items:flex-end}
+  .wz-drawer-panel{background:var(--g0);width:100%;border-radius:10px 10px 0 0;
+    max-height:74%;overflow-y:auto;box-shadow:0 -3px 10px rgba(0,0,0,.1)}
+  .wz-drawer-item{display:flex;align-items:center;gap:10px;padding:10px 14px;
+    min-height:44px;border-bottom:1px solid var(--g3);font:600 13px var(--font)}
+  .wz-drawer-item .n{width:22px;height:22px;border-radius:50%;background:var(--g3);
+    display:flex;align-items:center;justify-content:center;font:700 11px var(--mono);flex:0 0 auto}
+  .wz-drawer-item[data-done] .n{background:var(--g7);color:#fff}
+  .wz-drawer-item[data-current]{background:var(--g1)}
+  .plan-thumb{position:relative;height:150px;border:1px solid var(--g4);border-radius:5px;
+    overflow:hidden;background:var(--g2)}
+  .plan-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+  .plan-thumb .known{position:absolute;left:14%;right:20%;bottom:22px;height:0;
+    border-top:2px dashed var(--g7)}
+  .plan-thumb .known::before,.plan-thumb .known::after{content:"";position:absolute;
+    top:-4px;width:8px;height:8px;border-radius:50%;background:var(--g7)}
+  .plan-thumb .known::before{left:-4px}.plan-thumb .known::after{right:-4px}
+  .plan-thumb .known-lbl{position:absolute;left:14%;bottom:28px;font:700 10px var(--mono);
+    background:var(--g7);color:#fff;padding:1px 5px;border-radius:2px}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">S11.1</span>
+  <h1>S11 venue setup, step 1 of 8 - Site plan, mobile</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S11</b></li>
+    <li>viewport <b>390 x 844</b></li>
+    <li>role <b>Administrator</b></li>
+    <li>state <b>plan uploaded, scale set</b></li>
+    <li>requirement <b>FR9.1, NFR8</b></li>
+    <li>batch <b>2</b></li>
+  </ul>
+</header>
+
+<div class="wf-stage">
+
+  <!-- ============ step 1, drawer closed ============ -->
+  <div class="device device--mobile">
+    <span class="device-tag">step drawer closed</span>
+
+    <span class="cx" style="left:214px;top:24px">1</span>
+    <span class="cx" style="left:120px;top:96px">2</span>
+    <span class="cx" style="left:80px;top:210px">3</span>
+    <span class="cx" style="left:80px;top:420px">4</span>
+    <span class="cx" style="left:80px;top:560px">5</span>
+    <span class="cx" style="left:355px;top:812px">6</span>
+
+    <form class="wzform" onsubmit="event.preventDefault()">
+      <div class="top">
+        <span class="b">Venue setup</span>
+        <span class="grow"></span>
+        <button class="btn btn--sm" type="button">Exit</button>
+      </div>
+
+      <div class="wz-progress">
+        <button class="wz-stepbtn" type="button" aria-haspopup="true">
+          <span class="cur">STEP 1 OF 8</span>
+          <span class="name">Site plan</span>
+          <i class="wz-caret"></i>
+        </button>
+        <div class="wz-bar"><i style="width:6%"></i></div>
+      </div>
+
+      <div class="wz-body grow">
+        <div class="honest" style="margin-bottom:14px">
+          Designed for the phone, not the desktop layout reflowed. A venue is normally
+          configured on a desktop, but the administrator who walks the site to confirm
+          the plan lines up with the real gates and stands is holding a phone, so setup
+          must reach a handheld screen as a first-class layout, not a fallback.
+        </div>
+
+        <div class="wz-field">
+          <label>Site plan image</label>
+          <div class="plan-thumb">
+            <img src="_assets/site-plan.svg" alt="">
+            <span class="known-lbl">50 m</span>
+            <div class="known"></div>
+          </div>
+          <div class="row between" style="margin-top:7px">
+            <span class="mono tiny">riverside-arena-plan.png</span>
+            <button class="btn btn--sm" type="button">Replace</button>
+          </div>
+          <div class="tiny muted mono" style="margin-top:2px">2048 x 1365 px - uploaded by s.iqbal</div>
+        </div>
+
+        <div class="wz-section">
+          <h3>Ground extent</h3>
+          <div class="row gap">
+            <div class="wz-field" style="flex:1;margin-bottom:0">
+              <label>Width</label>
+              <div class="wz-input"><span>300</span><span class="unit">m</span></div>
+            </div>
+            <div class="wz-field" style="flex:1;margin-bottom:0">
+              <label>Height</label>
+              <div class="wz-input"><span>200</span><span class="unit">m</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wz-section" style="margin-bottom:0">
+          <h3>Scale</h3>
+          <p class="tiny muted" style="margin:0 0 8px">
+            Drawn as a known distance across the south stand, marked on the plan above.
+          </p>
+          <div class="row between center">
+            <div class="wz-input" style="flex:1"><span>Known distance</span>
+              <span class="unit">50 m</span></div>
+          </div>
+          <div class="row gap-s center" style="margin-top:9px">
+            <span class="st st-observed">SCALE SET</span>
+            <span class="tiny muted">every measurement on the map now converts to metres</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="wz-actions">
+        <button class="btn btn--tap" type="button" disabled aria-disabled="true">Back</button>
+        <button class="btn btn--tap btn--primary grow" type="submit">Continue</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ============ step 1, drawer open ============ -->
+  <div class="device device--mobile">
+    <span class="device-tag">step drawer open</span>
+    <span class="cx" style="left:355px;top:210px">7</span>
+    <span class="cx" style="left:60px;top:520px">8</span>
+
+    <div class="top">
+      <span class="b">Venue setup</span>
+      <span class="grow"></span>
+      <button class="btn btn--sm" type="button">Exit</button>
+    </div>
+    <div class="wz-progress">
+      <button class="wz-stepbtn" type="button" aria-haspopup="true">
+        <span class="cur">STEP 1 OF 8</span><span class="name">Site plan</span>
+        <i class="wz-caret"></i>
+      </button>
+      <div class="wz-bar"><i style="width:6%"></i></div>
+    </div>
+    <div class="wz-body grow" style="opacity:.35"></div>
+
+    <div class="wz-drawer">
+      <div class="wz-drawer-panel">
+        <div class="pad-s row between center" style="border-bottom:1px solid var(--line)">
+          <span class="b" style="font-size:13px">Jump to step</span>
+          <button class="btn btn--sm" type="button">Close</button>
+        </div>
+        <div class="wz-drawer-item" data-current><span class="n">1</span>Site plan</div>
+        <div class="wz-drawer-item"><span class="n">2</span>Grid</div>
+        <div class="wz-drawer-item"><span class="n">3</span>Proposals</div>
+        <div class="wz-drawer-item"><span class="n">4</span>Attributes</div>
+        <div class="wz-drawer-item"><span class="n">5</span>Exits</div>
+        <div class="wz-drawer-item"><span class="n">6</span>Zones</div>
+        <div class="wz-drawer-item"><span class="n">7</span>Thresholds</div>
+        <div class="wz-drawer-item"><span class="n">8</span>Drones</div>
+        <div class="wz-drawer-item"><span class="n">R</span>Review and save</div>
+      </div>
+    </div>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>One full-screen step at a time.</b> No side step list fits at 390px, so a compact
+      progress header replaces it: current step, its name, and a 4px progress bar. This is a
+      designed mobile layout, not the desktop step list reflowed - see the note inside the
+      frame for why a phone still has to reach this wizard. <span class="req">FR9.1</span></li>
+
+    <li><b>Tappable step drawer.</b> Tapping the header opens the sheet shown in the second
+      device: every step, its number and whether it is done, so a step can be revisited without
+      walking forward and back one screen at a time. Steps are non-linear once visited, per
+      design.md. <span class="req">FR9.1</span></li>
+
+    <li><b>Upload replaces, never appends.</b> One plan image per site. The filename, its pixel
+      dimensions and who uploaded it stay visible after upload, because an administrator
+      returning to this step later must be able to confirm which file is live.
+      <span class="req">FR9.1</span></li>
+
+    <li><b>Ground extent in metres.</b> 300 x 200 m for Riverside Arena. This is what turns the
+      cell grid in step 2 into a real area instead of an arbitrary count.
+      <span class="req">FR9.1</span></li>
+
+    <li><b>Scale by drawing a known distance, not by typing a guess.</b> The 50 m line across
+      the south stand is a real, checkable distance on the plan, so the scale the whole grid
+      depends on is anchored to something a person on site can verify with a tape measure.
+      <span class="req">FR9.1</span></li>
+
+    <li><b>Continue is the only enabled primary action; Back is disabled.</b> There is no step
+      0, so Back is present but inert here for consistency with every later step's action bar,
+      rather than the bar changing shape between steps. Enter submits, Esc cancels the wizard
+      and raises <span class="req">D10</span> if any field above is dirty.</li>
+
+    <li><b>The drawer names every step and its state.</b> A filled marker is done, an outlined
+      one is not yet visited; this is the only place progress across all eight steps is visible
+      on a phone. <span class="req">FR9.1</span></li>
+
+    <li><b>Closing the drawer returns to exactly where setup was.</b> The drawer is a sheet over
+      the current step, not a navigation away from it, so opening it to check progress never
+      loses in-progress field values.</li>
+  </ol>
+
+</div>
+</body>
+</html>

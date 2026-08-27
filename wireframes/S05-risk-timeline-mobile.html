@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S05 Risk timeline, mobile - Sentinel wireframes</title>
+<link rel="stylesheet" href="_assets/wireframe.css">
+<style>
+  .linekey{display:inline-block;width:16px;height:0;vertical-align:middle;margin-right:4px}
+  .lk-a{border-top:2px solid var(--g5)}
+  .lk-b{border-top:4px solid var(--g7)}
+  .lk-c{border-top:2px dashed var(--g5)}
+  .lk-band{border-top:2px dashed var(--band-watch)}
+  .lk-alert{border-top:2px dashed var(--band-elevated)}
+  .c-banner{border:1px dashed var(--g5);background:rgba(107,107,100,.06);
+    border-radius:4px;padding:6px 8px;font:600 10px/1.35 var(--mono);color:var(--obs-gap)}
+  svg text{font-family:var(--mono)}
+  .period-pill{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;
+    border:1px solid var(--g5);border-radius:99px;background:var(--g0);font:600 12px var(--font)}
+  .sheet-opt{display:flex;align-items:center;justify-content:space-between;min-height:44px;
+    padding:0 4px;border-bottom:1px solid var(--g3);font:600 13px var(--font)}
+  .sheet-opt:last-of-type{border-bottom:0}
+  .radio{width:18px;height:18px;border-radius:50%;border:2px solid var(--g5);flex:0 0 auto;position:relative}
+  .radio.on{border-color:var(--g7)}
+  .radio.on::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--g7)}
+</style>
+</head>
+<body>
+
+<header class="wf-head">
+  <a class="wf-back" href="index.html">&larr; all frames</a>
+  <span class="wf-id">F-011</span>
+  <h1>S05 Risk timeline - mobile, chart fills the screen, period is a sheet</h1>
+  <ul class="wf-meta">
+    <li>design.md <b>S05, C03</b></li>
+    <li>viewport <b>390 x 844</b></li>
+    <li>role <b>Coordinator</b></li>
+    <li>state <b>PERIOD 24H, RESOLUTION 0.1 Hz</b></li>
+    <li>requirement <b>FR4.3 FR4.5 FR4.6 FR6.4 FR8.5</b></li>
+    <li>batch <b>3</b></li>
+  </ul>
+</header>
+
+<!-- shared SVG hatch patterns, referenced by id from the coverage charts below -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <pattern id="mhDwell" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="6" height="6" fill="#eef0f4"/><line x1="0" y1="0" x2="0" y2="6" stroke="#5b6b8c" stroke-width="2"/>
+    </pattern>
+    <pattern id="mhStale" width="6" height="6" patternUnits="userSpaceOnUse">
+      <rect width="6" height="6" fill="#f2eee4"/>
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#8a6d3b" stroke-width="1.2"/>
+      <line x1="0" y1="0" x2="6" y2="0" stroke="#8a6d3b" stroke-width="1.2"/>
+    </pattern>
+    <pattern id="mhGap" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="6" height="6" fill="#e7e7e2"/>
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#9a9a93" stroke-width="1.4"/>
+      <line x1="3" y1="0" x2="3" y2="6" stroke="#9a9a93" stroke-width="1.4" transform="rotate(90 3 3)"/>
+    </pattern>
+  </defs>
+</svg>
+
+<div class="wf-stage">
+
+  <!-- ============ device A: chart screen, sheet closed ============ -->
+  <div class="device device--mobile">
+    <span class="device-tag">period sheet closed</span>
+
+    <span class="cx" style="left:70px;top:60px">1</span>
+    <span class="cx" style="left:280px;top:60px">2</span>
+    <span class="cx" style="left:195px;top:100px">3</span>
+    <span class="cx" style="left:340px;top:230px">4</span>
+    <span class="cx" style="left:100px;top:300px">5</span>
+    <span class="cx" style="left:195px;top:420px">6</span>
+    <span class="cx" style="left:60px;top:500px">7</span>
+    <span class="cx" style="left:340px;top:560px">8</span>
+
+    <div class="top">
+      <a href="S02-live-map-mobile.html" class="mono tiny" style="text-decoration:none;color:var(--focus)">&larr;</a>
+      <span class="b" style="font-size:13px">Risk timeline</span>
+      <span class="grow"></span>
+      <span class="mono tiny">14:03:12</span>
+    </div>
+
+    <div class="col scroll grow" style="overflow-y:auto">
+      <div class="pad col gap" style="gap:12px">
+
+        <!-- period control opens the sheet, resolution notice sits right beside it -->
+        <div class="row between center" style="flex-wrap:wrap;gap:8px">
+          <button class="period-pill" type="button">24 hours <span aria-hidden="true">&#9662;</span></button>
+          <span class="chip" style="border-color:var(--band-watch);color:var(--band-watch)">
+            0.1 Hz beyond 1h</span>
+        </div>
+
+        <!-- legend, compact -->
+        <div class="row gap-s wrap tiny mono center">
+          <span><i class="linekey lk-a"></i>A</span>
+          <span><i class="linekey lk-b"></i>B</span>
+          <span><i class="linekey lk-c"></i>C - no line</span>
+          <span><i class="linekey lk-band"></i>band</span>
+          <span><i class="linekey lk-alert"></i>alert</span>
+        </div>
+
+        <!-- main risk chart, the whole screen's reason for existing -->
+        <div class="card" style="padding:10px 8px 6px;position:relative">
+          <svg width="100%" height="190" viewBox="0 0 350 200" preserveAspectRatio="none">
+            <line x1="10" y1="170" x2="340" y2="170" stroke="var(--band-normal)" stroke-width="1.2" stroke-dasharray="3 3"/>
+            <text x="12" y="166" font-size="7" fill="var(--band-normal)">0.00 NORMAL</text>
+            <line x1="10" y1="110" x2="340" y2="110" stroke="var(--band-watch)" stroke-width="1.2" stroke-dasharray="3 3"/>
+            <text x="12" y="106" font-size="7" fill="var(--band-watch)">0.40 WATCH</text>
+            <line x1="10" y1="65" x2="340" y2="65" stroke="var(--band-elevated)" stroke-width="1.2" stroke-dasharray="3 3"/>
+            <text x="12" y="61" font-size="7" fill="var(--band-elevated)">0.70 ELEVATED</text>
+            <line x1="10" y1="43" x2="340" y2="43" stroke="var(--band-critical)" stroke-width="1.2" stroke-dasharray="3 3"/>
+            <text x="12" y="39" font-size="7" fill="var(--band-critical)">0.85 CRITICAL</text>
+
+            <!-- alert markers, same instants as the desktop frame -->
+            <line x1="93" y1="8" x2="93" y2="170" stroke="var(--band-elevated)" stroke-width="1.2" stroke-dasharray="2 2"/>
+            <text x="93" y="182" font-size="7" text-anchor="middle" fill="var(--band-elevated)">19:42 A-1039</text>
+            <line x1="340" y1="8" x2="340" y2="170" stroke="var(--band-elevated)" stroke-width="1.2" stroke-dasharray="2 2"/>
+            <text x="340" y="182" font-size="7" text-anchor="end" fill="var(--band-elevated)">now A-1042</text>
+
+            <text x="10" y="196" font-size="7" fill="var(--ink-2)">yesterday 14:03</text>
+            <text x="340" y="196" font-size="7" text-anchor="end" fill="var(--ink-2)">today 14:03</text>
+
+            <!-- Zone A, thin grey -->
+            <polyline points="10,125 51,122 93,126 134,119 175,124 216,125 258,120 299,124 340,124"
+              fill="none" stroke="var(--g5)" stroke-width="2"/>
+            <text x="12" y="135" font-size="7" font-weight="700" fill="var(--g6)">A</text>
+
+            <!-- Zone B, thick dark -->
+            <polyline points="10,113 51,103 93,53 134,107 175,110 216,104 258,88 299,68 340,53"
+              fill="none" stroke="var(--g7)" stroke-width="3.4"/>
+            <text x="12" y="99" font-size="7" font-weight="700" fill="var(--g7)">B</text>
+
+            <circle cx="93" cy="53" r="4" fill="var(--g7)"/>
+            <circle cx="340" cy="53" r="4" fill="var(--g7)"/>
+          </svg>
+        </div>
+
+        <!-- Zone C is stated as an absence, on the chart itself -->
+        <div class="c-banner">
+          ZONE C - ARENA FLOOR - no line drawn. 0 of 600 cells observed over this period,
+          so risk cannot be produced. See coverage below.
+        </div>
+
+        <!-- point selection: tapping a point on the line surfaces this card -->
+        <div class="card" style="border-left:3px solid var(--band-elevated)">
+          <div class="mono tiny b">14:02:51 - Zone B - 0.78 - ELEVATED</div>
+          <div class="tiny muted" style="margin:3px 0 8px">Point selected on the line, current alert A-1042</div>
+          <button class="btn btn--tap" style="width:100%" type="button">Replay from here &rarr;</button>
+          <div class="tiny muted" style="margin-top:5px">Opens S10 scrubbed to this exact timestamp.</div>
+        </div>
+
+        <!-- coverage, one stacked area per zone, same time axis as the chart above -->
+        <div class="card" style="padding:10px 8px 8px">
+          <div class="mono tiny b">COVERAGE UNDERNEATH - same time axis</div>
+          <div class="col" style="margin-top:6px;gap:2px">
+            <svg width="100%" height="52" viewBox="0 0 350 50" preserveAspectRatio="none">
+              <text x="12" y="14" font-size="7" font-weight="700" fill="var(--ink-2)">ZONE A</text>
+              <rect x="10" y="13.2" width="330" height="32.8" fill="var(--obs-observed)"/>
+              <rect x="10" y="11.6" width="330" height="1.6" fill="url(#mhDwell)"/>
+              <rect x="10" y="10.4" width="330" height="1.2" fill="url(#mhStale)"/>
+              <rect x="10" y="6" width="330" height="4.4" fill="url(#mhGap)"/>
+              <text x="300" y="44" font-size="7" fill="var(--ink-2)" text-anchor="end">82/4/3/11%</text>
+            </svg>
+            <svg width="100%" height="52" viewBox="0 0 350 50" preserveAspectRatio="none">
+              <text x="12" y="14" font-size="7" font-weight="700" fill="var(--ink-2)">ZONE B</text>
+              <rect x="10" y="36.4" width="330" height="9.6" fill="var(--obs-observed)"/>
+              <rect x="10" y="32.8" width="330" height="3.6" fill="url(#mhDwell)"/>
+              <rect x="10" y="30" width="330" height="2.8" fill="url(#mhStale)"/>
+              <rect x="10" y="6" width="330" height="24" fill="url(#mhGap)"/>
+              <text x="300" y="44" font-size="7" fill="var(--ink-2)" text-anchor="end">24/9/7/60%</text>
+            </svg>
+            <svg width="100%" height="52" viewBox="0 0 350 50" preserveAspectRatio="none">
+              <text x="12" y="14" font-size="7" font-weight="700" fill="var(--ink-2)">ZONE C</text>
+              <rect x="10" y="21.2" width="330" height="24.8" fill="url(#mhDwell)"/>
+              <rect x="10" y="6" width="330" height="15.2" fill="url(#mhGap)"/>
+              <text x="300" y="44" font-size="7" fill="var(--obs-gap)" font-weight="700" text-anchor="end">0/62/0/38%</text>
+            </svg>
+          </div>
+          <div class="honest" style="margin-top:8px">
+            A risk line is meaningless without knowing how much of the zone was seen at that
+            instant, so coverage is charted underneath on the same time axis rather than in a
+            separate view. Zone C has no observed layer at all across the period - that absence
+            is exactly why it has no risk line above, not a flat zero.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <nav class="navbar">
+      <a href="#"><i class="icon"></i>Live</a>
+      <a href="#" aria-current="page"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+
+  <!-- ============ device B: period sheet dragged up ============ -->
+  <div class="device device--mobile">
+    <span class="device-tag">period sheet open</span>
+    <span class="cx" style="left:195px;top:460px">9</span>
+    <span class="cx" style="left:195px;top:640px">10</span>
+
+    <div class="top">
+      <a href="S02-live-map-mobile.html" class="mono tiny" style="text-decoration:none;color:var(--focus)">&larr;</a>
+      <span class="b" style="font-size:13px">Risk timeline</span>
+      <span class="grow"></span>
+      <span class="mono tiny">14:03:12</span>
+    </div>
+
+    <div class="pad col gap" style="gap:12px;opacity:.4;pointer-events:none">
+      <button class="period-pill" type="button">24 hours <span aria-hidden="true">&#9662;</span></button>
+      <div class="card" style="height:220px"></div>
+    </div>
+
+    <div class="scrim" style="position:absolute;inset:0;top:48px;background:rgba(28,28,26,.42)"></div>
+
+    <form class="sheet" style="position:absolute;left:0;right:0;bottom:0;padding-bottom:6px">
+      <div class="sheet-handle" style="position:relative;border-bottom:1px solid var(--line)">
+        <span class="b" style="font-size:13px">Period</span>
+      </div>
+      <div class="pad col" style="gap:0">
+        <label class="sheet-opt"><span>Last 15 minutes</span><span class="radio"></span></label>
+        <label class="sheet-opt"><span>Last hour</span><span class="radio"></span></label>
+        <label class="sheet-opt"><span>Last 24 hours</span><span class="radio on"></span></label>
+        <label class="sheet-opt"><span>Custom range</span><span class="radio"></span></label>
+      </div>
+      <div class="honest" style="margin:2px 12px 10px">
+        Last 24 hours exceeds the 1 hour full-rate window, so history beyond the last hour is
+        shown at 0.1 Hz (1 sample per 10 s), stated as a resolution chip on the chart rather
+        than smoothed to look continuous.
+      </div>
+      <div class="row gap-s" style="padding:0 12px 4px">
+        <button class="btn btn--tap grow" type="button">Cancel</button>
+        <button class="btn btn--tap btn--primary grow" type="submit">Apply</button>
+      </div>
+    </form>
+
+    <nav class="navbar">
+      <a href="#"><i class="icon"></i>Live</a>
+      <a href="#" aria-current="page"><i class="icon"></i>Timeline</a>
+      <a href="#"><i class="icon"></i>Fleet</a>
+      <a href="#"><i class="icon"></i>History</a>
+      <a href="#"><i class="icon"></i>Replay</a>
+    </nav>
+  </div>
+
+  <ol class="wf-notes">
+    <li><b>The chart is the whole screen, not a shrunk copy of the desktop layout.</b> On a
+      390px width the period control collapses to a single pill button that opens a sheet,
+      because a full tab row and an expanded resolution sentence do not fit beside each other
+      at this width without crowding the chart itself. <span class="req">FR8.5</span></li>
+
+    <li><b>The resolution notice rides beside the pill even before the sheet opens.</b> A
+      coordinator glancing at the screen sees "0.1 Hz beyond 1h" without a tap, so nobody reads
+      a 24 hour chart believing it is full-rate. <span class="req">FR8.5</span></li>
+
+    <li><b>Zone A and Zone B keep the desktop's weight-only distinction.</b> Thin for A, thick
+      for B, both labelled at the line, so the same chart survives greyscale on the phone that
+      is actually carried into the field. <span class="req">NFR5</span></li>
+
+    <li><b>Four band boundaries at the exact SRS thresholds,</b> 0.00, 0.40, 0.70, 0.85, each
+      still labelled even at this width, because a coordinator reading this line under time
+      pressure should not have to hold the thresholds in memory. <span class="req">FR4.4</span></li>
+
+    <li><b>Zone risk is the zone's worst observed cell.</b> Zone B's 0.78 today and 0.78
+      yesterday are each one cell's score standing in for the zone, per FR4.3 and FR4.5, not an
+      average that could hide a single dangerous cell. <span class="req">FR4.3</span>
+      <span class="req">FR4.5</span></li>
+
+    <li><b>Zone C has no line, and the chart says why in words next to where the line would be.</b>
+      A flat line at zero would claim the arena floor is calm; an absence paired with a banner
+      is the only honest rendering when zero cells were observed. <span class="req">FR6.4</span>
+      <span class="req">SRS 2.3</span></li>
+
+    <li><b>Selecting a point surfaces a card, not a floating overlay.</b> Desktop anchors the
+      popover to the point in place; on a 390px chart that overlay would cover the very line it
+      references, so the selection detail sits below the chart instead. <span class="req">FR8.4</span></li>
+
+    <li><b>Coverage is charted underneath, per zone, on the same time axis as the risk line.</b>
+      Not one combined bar - three separate stacked areas, so a coordinator can tell which zone's
+      coverage dropped rather than only that coverage dropped somewhere. <span class="req">FR4.6</span></li>
+
+    <li><b>Zone C's coverage strip is the evidence for its missing line above.</b> Zero percent
+      observed for the whole period is stated as a number here, which is what makes the absent
+      line in the chart a fact rather than a design choice. <span class="req">FR4.6</span>
+      <span class="req">FR6.4</span></li>
+
+    <li><b>The period sheet lists all four options as one tap target each,</b> at 44px minimum
+      height, with the current selection shown filled rather than merely bold, because this is
+      the control a coordinator uses one-handed. <span class="req">NFR2</span></li>
+
+    <li><b>The sheet states the resolution consequence before Apply is pressed.</b> Choosing
+      24 hours or Custom beyond an hour is explained in the sheet itself, not discovered only
+      after the chart redraws. <span class="req">FR8.5</span></li>
+  </ol>
+
+</div>
+</body>
+</html>

@@ -213,7 +213,7 @@ Versioned under `/api/v1`. All responses are JSON. All timestamps are ISO 8601 w
 | Alerts | `GET /alerts/{alertId}` | One alert with its attribution | Coordinator, Administrator |
 | Alerts | `POST /alerts/{alertId}/acknowledge` | Record acknowledgement | Coordinator, Administrator |
 | Suggestions | `GET /alerts/{alertId}/suggestions` | Ranked options for an alert | Coordinator, Administrator |
-| Suggestions | `GET /suggestions` | Filter across alerts by site, zone, status, action, phrasing source, actor and time range | Coordinator, Administrator |
+| Suggestions | `GET /suggestions` | Filter across alerts by site, zone, status, action, text source, actor and time range | Coordinator, Administrator |
 | Suggestions | `GET /suggestions/{suggestionId}` | One option with safeguards and rationale | Coordinator, Administrator |
 | Suggestions | `POST /suggestions/{suggestionId}/confirm`, `/dismiss` | Human decision | Coordinator, Administrator |
 | Suggestions | `GET /suggestions/{suggestionId}/outcome` | Outcome verdict and trajectory | Coordinator, Administrator |
@@ -393,7 +393,7 @@ A rejected option carries `status: "REJECTED"`, at least one safeguard with `pas
 }
 ```
 
-`responseTime` is `null` when no alert in the range was acknowledged, and `acknowledgementRate` is `null` when no suggestion was issued. A count of zero and an absence of data are different facts, and FR11.3 requires the interface to tell them apart. `alertsByZone` lists every zone in the site including those with a count of zero, because a zone that raised no alert is a measured result rather than missing data.
+`responseTime` is `null` when no alert in the range was acknowledged, and `acknowledgementRate` is `null` when no suggestion was issued. A count of zero and an absence of data are different facts, and FR11.3 requires the interface to tell them apart. `alertsByZone` lists every zone in the site including those with a count of zero, because a zone that raised no alert is a measured result rather than missing data. `verdicts` is `null` when no suggestion in the range was confirmed, and its counts otherwise cover confirmed suggestions only, so a zero against `WORSENED` means that no confirmed suggestion worsened the cells it affected, not that nothing was confirmed.
 
 ### 3.4 Error model
 

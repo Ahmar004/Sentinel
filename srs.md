@@ -213,11 +213,13 @@ Versioned under `/api/v1`. All responses are JSON. All timestamps are ISO 8601 w
 | Alerts | `GET /alerts/{alertId}` | One alert with its attribution | Coordinator, Administrator |
 | Alerts | `POST /alerts/{alertId}/acknowledge` | Record acknowledgement | Coordinator, Administrator |
 | Suggestions | `GET /alerts/{alertId}/suggestions` | Ranked options for an alert | Coordinator, Administrator |
+| Suggestions | `GET /suggestions` | Filter across alerts by site, zone, status, action, phrasing source, actor and time range | Coordinator, Administrator |
 | Suggestions | `GET /suggestions/{suggestionId}` | One option with safeguards and rationale | Coordinator, Administrator |
 | Suggestions | `POST /suggestions/{suggestionId}/confirm`, `/dismiss` | Human decision | Coordinator, Administrator |
 | Suggestions | `GET /suggestions/{suggestionId}/outcome` | Outcome verdict and trajectory | Coordinator, Administrator |
 | History | `GET /history/events` | Unified searchable event stream | Coordinator, Administrator |
 | History | `GET /sites/{siteId}/replay` | Frames for a period, `from`, `to`, `step` | Coordinator, Administrator |
+| Analytics | `GET /sites/{siteId}/analytics` | Summary statistics for a time range (FR11) | Coordinator, Administrator |
 | Health | `GET /health`, `/health/workers`, `/health/latency` | System health surfaces | Administrator, Drone Operator, IT |
 | Accounts | `GET`, `POST`, `PATCH`, `DELETE /users` | Account management | Administrator |
 | Accounts | `GET /roles` | Role definitions and capabilities | Administrator, IT |
@@ -373,6 +375,26 @@ A rejected option carries `status: "REJECTED"`, at least one safeguard with `pas
 
 `verdict` is `PENDING` until the window closes.
 
+**Analytics summary:**
+
+```json
+{
+  "siteId": "site-01",
+  "from": "2026-08-27T00:00:00.000Z",
+  "to": "2026-08-27T23:59:59.999Z",
+  "alertsByZone": [
+    { "zoneId": "zone-a", "count": 0 },
+    { "zoneId": "zone-b", "count": 3 },
+    { "zoneId": "zone-c", "count": 0 }
+  ],
+  "responseTime": { "acknowledged": 3, "medianMs": 13000, "p95Ms": 41000 },
+  "acknowledgementRate": { "issued": 7, "confirmed": 3, "dismissed": 2, "expired": 2 },
+  "verdicts": { "IMPROVED": 2, "UNCHANGED": 1, "WORSENED": 0, "PENDING": 0 }
+}
+```
+
+`responseTime` is `null` when no alert in the range was acknowledged, and `acknowledgementRate` is `null` when no suggestion was issued. A count of zero and an absence of data are different facts, and FR11.3 requires the interface to tell them apart. `alertsByZone` lists every zone in the site including those with a count of zero, because a zone that raised no alert is a measured result rather than missing data.
+
 ### 3.4 Error model
 
 One envelope for every failure:
@@ -409,9 +431,11 @@ interface SentinelClient {
   confirmSuggestion(suggestionId: string): Promise<SuggestionOption>
   dismissSuggestion(suggestionId: string): Promise<SuggestionOption>
   getOutcome(suggestionId: string): Promise<Outcome>
+  querySuggestions(query: SuggestionQuery): Promise<Page<SuggestionOption>>
   queryHistory(query: HistoryQuery): Promise<Page<HistoryEvent>>
   getReplayFrames(siteId: string, range: TimeRange, stepMs: number): Promise<ReplayFrame[]>
   getHealth(): Promise<SystemHealth>
+  getAnalytics(siteId: string, range: TimeRange): Promise<AnalyticsSummary>
   // configuration, FR9
   putSitePlan(siteId: string, plan: SitePlanInput): Promise<Site>
   putGrid(siteId: string, grid: GridConfig): Promise<Grid>

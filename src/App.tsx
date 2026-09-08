@@ -5,6 +5,45 @@ import LandingRedirect from '@/routes/LandingRedirect'
 import { ROUTE_DEFS } from '@/routes/routeConfig'
 import S01Login from '@/screens/S01Login'
 import S16NotPermitted from '@/screens/S16NotPermitted'
+import { MockSentinelClient } from '@/mock/MockSentinelClient'
+import { SEED_SITE_ID } from '@/mock/seed'
+import { setSentinelClient } from '@/store/clientRegistry'
+import { connectLiveStore } from '@/store/liveStore'
+import { useConfigStore } from '@/store/configStore'
+
+/**
+ * Composition root: this is the one place in the app that knows a mock
+ * client exists at all (CLAUDE.md - "components must never import
+ * src/mock/ directly"). It registers the client the store layer talks to,
+ * starts the 1 Hz push feed, and hydrates `configStore`.
+ *
+ * `getSiteState` returns exactly the `SiteState` shape `SentinelClient`
+ * declares - site, grid, live cells, live zones, live drones - which has
+ * no room for the full `Zone`/`Exit`/`ThresholdSet` configuration objects
+ * `configStore` also needs (that contract carries only per-tick
+ * `ZoneUpdate`s, not zone definitions). Those come from the same canonical
+ * seed via `getConfigSeed()`, a mock-only convenience method that exists
+ * alongside the `SentinelClient` interface rather than inside it, since
+ * this file was told not to change that interface's signatures.
+ */
+function bootstrapMockBackend(): void {
+  const client = new MockSentinelClient()
+  setSentinelClient(client)
+
+  const { zones, exits, thresholds } = client.getConfigSeed()
+  useConfigStore.getState().setZones(zones)
+  useConfigStore.getState().setExits(exits)
+  useConfigStore.getState().setThresholds(thresholds)
+
+  client.getSiteState(SEED_SITE_ID).then((siteState) => {
+    useConfigStore.getState().setSite(siteState.site)
+    useConfigStore.getState().setGrid(siteState.grid)
+  })
+
+  connectLiveStore()
+}
+
+bootstrapMockBackend()
 
 /**
  * All 19 screens, S01 to S19 (design.md Section 4). S01 and S16 sit

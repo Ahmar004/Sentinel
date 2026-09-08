@@ -40,8 +40,11 @@ export default tseslint.config(
   },
   {
     // Tests legitimately construct fakes against the SentinelClient
-    // interface directly, without going through the store.
-    files: ['src/store/**/*.{ts,tsx}', '**/*.test.{ts,tsx}'],
+    // interface directly, without going through the store. `src/mock` is
+    // the other side of the same contract: `MockSentinelClient` must
+    // implement `SentinelClient`, so it necessarily imports the interface
+    // it satisfies - this is the one non-store module allowed to.
+    files: ['src/store/**/*.{ts,tsx}', 'src/mock/**/*.{ts,tsx}', '**/*.test.{ts,tsx}'],
     rules: {
       'no-restricted-imports': 'off',
     },

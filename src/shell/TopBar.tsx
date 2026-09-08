@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Moon, Sun, LogOut, User as UserIcon } from 'lucide-react'
+import { Bell, Download, Moon, Sun, LogOut, User as UserIcon } from 'lucide-react'
 import { useConfigStore, useConnectionState, useSessionStore } from '@/store'
 import { useClock } from '@/hooks/useClock'
 import { useTheme } from '@/hooks/useTheme'
@@ -11,7 +11,12 @@ import ConnectionChip from '@/components/ConnectionChip'
  * value to show until a live client is wired up, so it reads "-" rather
  * than a fabricated number (CLAUDE.md "honesty over completeness").
  */
-export default function TopBar() {
+export interface TopBarProps {
+  onOpenNotifications?: () => void
+  onOpenInstall?: () => void
+}
+
+export default function TopBar({ onOpenNotifications, onOpenInstall }: TopBarProps) {
   const siteName = useConfigStore((s) => s.site?.name)
   const connectionState = useConnectionState()
   const clock = useClock()
@@ -64,6 +69,30 @@ export default function TopBar() {
                   <Moon className="size-4" aria-hidden="true" />
                 )}
                 {theme === 'dark' ? 'Light theme' : 'Dark theme'}
+              </button>
+              <button
+                type="button"
+                role="menuitem"
+                onClick={() => {
+                  setMenuOpen(false)
+                  onOpenNotifications?.()
+                }}
+                className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-xs hover:bg-surface"
+              >
+                <Bell className="size-4" aria-hidden="true" />
+                Alert notifications
+              </button>
+              <button
+                type="button"
+                role="menuitem"
+                onClick={() => {
+                  setMenuOpen(false)
+                  onOpenInstall?.()
+                }}
+                className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-xs hover:bg-surface"
+              >
+                <Download className="size-4" aria-hidden="true" />
+                Install Sentinel
               </button>
               <button
                 type="button"

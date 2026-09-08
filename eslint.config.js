@@ -20,6 +20,15 @@ export default tseslint.config(
       globals: globals.browser,
     },
     rules: {
+      // An underscore prefix is this codebase's marker for a parameter kept
+      // only to satisfy an interface signature. `MockSentinelClient` has
+      // several: it implements methods whose `siteId` a single-site mock
+      // does not need, and dropping the parameter would break the contract
+      // it exists to satisfy.
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' },
+      ],
       // Only the store layer may talk to SentinelClient. Every other layer
       // (components, hooks, screens) consumes the store, never the client
       // directly, so a real backend swaps in behind src/client without

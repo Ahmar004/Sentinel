@@ -154,12 +154,36 @@ export function useCell(cellId: string): CellObservation {
   return useLiveStoreInternal((s) => s.cells[cellId] ?? GAP_CELL)
 }
 
+/** Every cell the store has actually received an update for. Cells absent
+ * from this list have never been observed and are the caller's to render
+ * as gaps; the list is never padded to the full grid, because a padded
+ * entry would be a value the feed never sent. */
+export function useCells(): CellObservation[] {
+  return useLiveStoreInternal(useShallow((s) => Object.values(s.cells)))
+}
+
+export function useCellEntries(): [string, CellObservation][] {
+  return useLiveStoreInternal(useShallow((s) => Object.entries(s.cells)))
+}
+
 export function useZone(zoneId: string): ZoneUpdate | undefined {
   return useLiveStoreInternal((s) => s.zones[zoneId])
 }
 
+export function useZones(): ZoneUpdate[] {
+  return useLiveStoreInternal(useShallow((s) => Object.values(s.zones)))
+}
+
 export function useDrone(droneId: string): DroneUpdate | undefined {
   return useLiveStoreInternal((s) => s.drones[droneId])
+}
+
+export function useDrones(): DroneUpdate[] {
+  return useLiveStoreInternal(useShallow((s) => Object.values(s.drones)))
+}
+
+export function useAlert(alertId: string): Alert | undefined {
+  return useLiveStoreInternal((s) => s.alerts[alertId])
 }
 
 export function useConnectionState(): ConnectionState {

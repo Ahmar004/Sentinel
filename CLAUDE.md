@@ -14,7 +14,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - Follow roadmap.md in root at all costs.
 - `roadmap.md` governs the order of work. Do one step at a time. DO NOT start a later step, and DO NOT invent a new step - propose it in `roadmap.md` and wait for approval first.
-- The document hierarchy is `docs/Proposal-doc_Version_FINAL.docx` (authoritative), then `docs/understanding.md`, then `srs.md`, then `design.md`, then wireframes, then code. When two disagree, the higher one wins and the lower one is corrected in the same change.
+- The document hierarchy is `docs/Proposal-doc_Version_FINAL.docx` (authoritative), then `docs/understanding.md`, then `docs/srs.md`, then `docs/design.md`, then `docs/wireframes.md` with the frames in `wireframes/`, then code. When two disagree, the higher one wins and the lower one is corrected in the same change.
+- Every specification document lives in `docs/`. Only `roadmap.md` and this file sit at the repository root. Where a comment or doc says "srs.md" or "design.md" without a directory, it means the copy in `docs/`.
 - DO NOT invent requirements. If something the UI needs is not in the proposal, `docs/understanding.md` or the SRS, it is an open question for the user, not a decision to make alone. The five open questions formerly logged in `docs/understanding.md` Section 14 (latency budget, risk bands, final role list, alert delivery channel, drone count) are now closed by the SRS; every number the system depends on is in SRS Section 2.7, and the reasoning behind each decision is in SRS Appendix C.
 - Within the proposal itself, Section 14 (Tools and Technologies) beats Section 9 (Eval plan) where they disagree on model choices: the shipped pipeline is DM-Count, Farneback and XGBoost, while P2PNet, RAFT and LSTM are evaluation only.
 

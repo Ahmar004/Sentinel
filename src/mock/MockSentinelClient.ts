@@ -857,6 +857,12 @@ export class MockSentinelClient implements SentinelClient {
 
   /* ---------------------------------------------------------------- */
   /* Convenience for App.tsx wiring only - not part of SentinelClient    */
+  /*                                                                    */
+  /* srs.md Appendix B marks the demo harness as scaffolding that no     */
+  /* requirement depends on, so a real backend must never be asked to    */
+  /* implement scenario playback. The composition root reads this once   */
+  /* and registers it with src/demo/harness, which is the only boundary  */
+  /* D14 sees, so no screen ever imports this file.                      */
   /* ---------------------------------------------------------------- */
 
   getPlaybackController(): PlaybackController {

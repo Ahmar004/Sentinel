@@ -10,6 +10,8 @@ import { SEED_SITE_ID } from '@/mock/seed'
 import { getSentinelClient, setSentinelClient } from '@/store/clientRegistry'
 import { connectLiveStore } from '@/store/liveStore'
 import { useConfigStore } from '@/store/configStore'
+import { setDemoHarness } from '@/demo/harness'
+import { PLAYBACK_SPEEDS, SCENARIOS } from '@/mock/scenarios'
 
 /**
  * Composition root: this is the one place in the app that knows a mock
@@ -35,6 +37,16 @@ function bootstrapMockBackend(): void {
   sentinelClient.getZones(SEED_SITE_ID).then((zones) => useConfigStore.getState().setZones(zones))
   sentinelClient.getExits(SEED_SITE_ID).then((exits) => useConfigStore.getState().setExits(exits))
   sentinelClient.getThresholds(SEED_SITE_ID).then((thresholds) => useConfigStore.getState().setThresholds(thresholds))
+
+  // srs.md Appendix B: the demo harness is scaffolding, so it is wired
+  // here at the composition root rather than exposed on the client
+  // contract. Delete the mock layer and nothing registers, which is
+  // exactly what D14 then reports.
+  setDemoHarness({
+    controller: client.getPlaybackController(),
+    scenarios: SCENARIOS.map((s) => ({ id: s.id, label: s.label, description: s.description })),
+    speeds: PLAYBACK_SPEEDS,
+  })
 
   connectLiveStore()
 }

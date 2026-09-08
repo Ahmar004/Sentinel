@@ -6,7 +6,7 @@ import { CELL_SIZE_M, SITE_EXTENT_M, parseCellId } from '@/domain/parameters'
 import {
   getSentinelClient,
   useAlerts,
-  useCellEntries,
+  useCellsById,
   useConfigStore,
   useConnectionState,
   useCurrentRole,
@@ -35,7 +35,7 @@ import { CAPABILITY, hasCapability } from '@/auth/permissions'
  */
 export default function S02LiveMap() {
   const role = useCurrentRole()
-  const cellEntries = useCellEntries()
+  const cellsById = useCellsById()
   const zoneUpdates = useZones()
   const drones = useDrones()
   const alerts = useAlerts()
@@ -56,19 +56,18 @@ export default function S02LiveMap() {
 
   const cells: CellGridEntry[] = useMemo(() => {
     const entries: CellGridEntry[] = []
-    for (const [cellId, observation] of cellEntries) {
+    for (const [cellId, observation] of Object.entries(cellsById)) {
       const parsed = parseCellId(cellId)
       if (!parsed) continue
       entries.push({ cellId, col: parsed.col, row: parsed.row, observation })
     }
     return entries
-  }, [cellEntries])
+  }, [cellsById])
 
   const zoneSummaries = useMemo(() => {
     const updatesById = Object.fromEntries(zoneUpdates.map((z) => [z.zoneId, z]))
-    const cellsById = Object.fromEntries(cellEntries)
     return summariseZones(configuredZones, updatesById, cellsById)
-  }, [configuredZones, zoneUpdates, cellEntries])
+  }, [configuredZones, zoneUpdates, cellsById])
 
   const zoneNamesById = useMemo(
     () => Object.fromEntries(configuredZones.map((z) => [z.zoneId, z.name])),

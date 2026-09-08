@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { StateChip } from '@/components'
 import { DRONE_STATE } from '@/domain/constants'
 import type { CellObservation, Drone, DroneUpdate } from '@/domain/types'
-import { getSentinelClient, useCellEntries, useConfigStore, useCurrentRole, useDrones } from '@/store'
+import { getSentinelClient, useCellsById, useConfigStore, useCurrentRole, useDrones } from '@/store'
 import { CAPABILITY, hasCapability } from '@/auth/permissions'
 import FootprintMap from './fleet/FootprintMap'
 import { footprintStats, formatDuration, overlappingCells } from './fleet/droneStats'
@@ -113,7 +113,7 @@ function DroneCard({
 export default function S06DroneFleet() {
   const role = useCurrentRole()
   const drones = useDrones()
-  const cellEntries = useCellEntries()
+  const cellsById = useCellsById()
   const zones = useConfigStore((s) => s.zones)
   const site = useConfigStore((s) => s.site)
   const [tab, setTab] = useState<Tab>('fleet')
@@ -138,7 +138,6 @@ export default function S06DroneFleet() {
     }
   }, [siteId])
 
-  const cellsById: Cells = useMemo(() => Object.fromEntries(cellEntries), [cellEntries])
   const overlap = useMemo(() => overlappingCells(drones), [drones])
   const identityById = useMemo(() => new Map(fleet.map((d) => [d.droneId, d])), [fleet])
 

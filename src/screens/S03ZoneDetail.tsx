@@ -8,7 +8,7 @@ import type { CellObservation, ZoneSample } from '@/domain/types'
 import {
   getSentinelClient,
   useAlerts,
-  useCellEntries,
+  useCellsById,
   useConfigStore,
   useCurrentRole,
   useZone,
@@ -79,7 +79,7 @@ export default function S03ZoneDetail() {
   const { zoneId = '' } = useParams()
   const role = useCurrentRole()
   const update = useZone(zoneId)
-  const cellEntries = useCellEntries()
+  const cellsById = useCellsById()
   const alerts = useAlerts()
   const zones = useConfigStore((s) => s.zones)
   const thresholds = useConfigStore((s) => s.thresholds)
@@ -114,7 +114,7 @@ export default function S03ZoneDetail() {
 
   const memberCells = useMemo(() => {
     if (!zone) return []
-    const byId = Object.fromEntries(cellEntries)
+    const byId = cellsById
     return zone.cellIds
       .map((cellId) => ({
         cellId,
@@ -124,12 +124,12 @@ export default function S03ZoneDetail() {
       }))
       .filter((row) => filter === 'ALL' || row.observation.observationState === filter)
       .sort(byRiskDescending)
-  }, [zone, cellEntries, filter])
+  }, [zone, cellsById, filter])
 
   const summary = useMemo(() => {
     if (!zone) return null
-    return summariseZone(zone, update, Object.fromEntries(cellEntries))
-  }, [zone, update, cellEntries])
+    return summariseZone(zone, update, cellsById)
+  }, [zone, update, cellsById])
 
   if (!role) return null
 

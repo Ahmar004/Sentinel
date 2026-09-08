@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { StateChip } from '@/components'
 import { DRONE_STATE, OBSERVATION_STATE } from '@/domain/constants'
 import { DWELL_GATE_MS } from '@/domain/parameters'
 import type { CellObservation, Drone } from '@/domain/types'
-import { getSentinelClient, useCellEntries, useConfigStore, useCurrentRole, useDrone } from '@/store'
+import { getSentinelClient, useCellsById, useConfigStore, useCurrentRole, useDrone } from '@/store'
 import { CAPABILITY, hasCapability } from '@/auth/permissions'
 import FootprintMap from './fleet/FootprintMap'
 import { footprintStats, formatDuration } from './fleet/droneStats'
@@ -80,7 +80,7 @@ export default function S07PerDroneView() {
   const { droneId = '' } = useParams()
   const role = useCurrentRole()
   const drone = useDrone(droneId)
-  const cellEntries = useCellEntries()
+  const cellsById = useCellsById()
   const site = useConfigStore((s) => s.site)
   const [identity, setIdentity] = useState<Drone | null>(null)
   const [assigning, setAssigning] = useState(false)
@@ -103,7 +103,6 @@ export default function S07PerDroneView() {
     }
   }, [siteId, droneId])
 
-  const cellsById = useMemo(() => Object.fromEntries(cellEntries), [cellEntries])
 
   if (!role) return null
 

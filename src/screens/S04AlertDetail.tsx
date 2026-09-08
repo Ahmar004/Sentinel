@@ -8,7 +8,7 @@ import type { CellSample } from '@/domain/types'
 import {
   getSentinelClient,
   useAlert,
-  useCellEntries,
+  useCellsById,
   useConfigStore,
   useConnectionState,
   useCurrentRole,
@@ -44,7 +44,7 @@ export default function S04AlertDetail() {
   const role = useCurrentRole()
   const alert = useAlert(alertId)
   const suggestions = useSuggestions()
-  const cellEntries = useCellEntries()
+  const cellsById = useCellsById()
   const connectionState = useConnectionState()
   const site = useConfigStore((s) => s.site)
   const zones = useConfigStore((s) => s.zones)
@@ -80,7 +80,7 @@ export default function S04AlertDetail() {
   const neighbourhood: CellGridEntry[] = useMemo(() => {
     if (!centre) return []
     const entries: CellGridEntry[] = []
-    for (const [id, observation] of cellEntries) {
+    for (const [id, observation] of Object.entries(cellsById)) {
       const parsed = parseCellId(id)
       if (!parsed) continue
       if (
@@ -92,7 +92,7 @@ export default function S04AlertDetail() {
       entries.push({ cellId: id, col: parsed.col, row: parsed.row, observation })
     }
     return entries
-  }, [cellEntries, centre])
+  }, [cellsById, centre])
 
   if (!role) return null
 

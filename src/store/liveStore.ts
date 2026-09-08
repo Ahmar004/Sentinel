@@ -154,16 +154,19 @@ export function useCell(cellId: string): CellObservation {
   return useLiveStoreInternal((s) => s.cells[cellId] ?? GAP_CELL)
 }
 
-/** Every cell the store has actually received an update for. Cells absent
- * from this list have never been observed and are the caller's to render
- * as gaps; the list is never padded to the full grid, because a padded
- * entry would be a value the feed never sent. */
-export function useCells(): CellObservation[] {
-  return useLiveStoreInternal(useShallow((s) => Object.values(s.cells)))
-}
-
-export function useCellEntries(): [string, CellObservation][] {
-  return useLiveStoreInternal(useShallow((s) => Object.entries(s.cells)))
+/**
+ * The whole cell map, keyed by cell id.
+ *
+ * An identity selector on purpose. `useSyncExternalStore` calls the
+ * snapshot function on every render and only bails out when the result is
+ * referentially equal to the last, so a selector that allocates - notably
+ * `Object.entries`, which builds a fresh tuple per entry - reports a change
+ * that never happened and loops until React throws. `s.cells` is replaced
+ * only when the feed actually changes it, so returning it directly is both
+ * correct and free.
+ */
+export function useCellsById(): Readonly<Record<string, CellObservation>> {
+  return useLiveStoreInternal((s) => s.cells)
 }
 
 export function useZone(zoneId: string): ZoneUpdate | undefined {

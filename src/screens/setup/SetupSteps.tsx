@@ -12,7 +12,7 @@ import {
   parseCellId,
 } from '@/domain/parameters'
 import type { CellObservation, Drone, Exit, SetupProposal, Zone } from '@/domain/types'
-import { getSentinelClient, useCellEntries, useConfigStore, useDrones } from '@/store'
+import { getSentinelClient, useCellsById, useConfigStore, useDrones } from '@/store'
 
 /** Every step reports whether it has unsaved edits, so the wizard and the
  * configuration tabs can both raise D10 without each tracking it. */
@@ -630,13 +630,14 @@ export function ReviewStep({ onSave }: { onSave?: () => void }) {
   const zones = useConfigStore((s) => s.zones)
   const exits = useConfigStore((s) => s.exits)
   const drones = useDrones()
-  const cellEntries = useCellEntries()
+  const cellsById = useCellsById()
 
-  const observed = cellEntries.filter(
+  const entries = Object.entries(cellsById)
+  const observed = entries.filter(
     ([, cell]: [string, CellObservation]) => cell.observationState === OBSERVATION_STATE.OBSERVED,
   ).length
 
-  const preview: CellGridEntry[] = cellEntries.slice(0, 400).flatMap(([cellId, observation]) => {
+  const preview: CellGridEntry[] = entries.slice(0, 400).flatMap(([cellId, observation]) => {
     const parsed = parseCellId(cellId)
     return parsed ? [{ cellId, col: parsed.col, row: parsed.row, observation }] : []
   })

@@ -799,6 +799,7 @@ The screens column is filled from `design.md`, which is what makes Step-4's veri
 | FR8 | FR8.1 to FR8.7 | none | Coordinator, Administrator | `S08` history, `S09` event detail and outcome, `S10` replay, `C09` |
 | FR9 | FR9.1 to FR9.9 | none | Administrator, Drone Operator | `S11` setup wizard, `S12` configuration tabs, `S06`, `S14`, `D06`, `D07`, `D11` |
 | FR10 | FR10.1 to FR10.6 | none | all | `S01` login, nav rail, `S13` accounts, `S14` audit log, `S16`, `S17` roles reference, `D08`, `D09`, `D12` |
+| FR11 | FR11.1 to FR11.3 | none | Coordinator, Administrator | `S19` analytics, `S08` history |
 
 Sixty-four leaf requirements in total.
 
@@ -882,3 +883,10 @@ Decisions D19 to D21 were taken in Step-4, when the mapping check found three po
 | D19 | The Drone Operator sees the complete live map, alert rail included, and may acknowledge an alert | An operator who knows where an alert fired can reposition a drone toward it, which is the operator's job. FR5.3 puts attribution on the rail card itself, so the card is self-sufficient and the operator needs no navigation away from `S02` to read it. Suggestions and their confirmation stay closed to the role, because choosing a dispersion action is the coordinator's decision, not the pilot's. |
 | D20 | The roles reference is its own screen, `S17`, shared with the accounts screen | FR10.4 gives IT a read-only view of who may do what, but `S13` is Administrator-only, so the reference cannot live there alone. One shared component rendered by both screens means the roles table has a single source and cannot drift from the permission matrix that the navigation is derived from. |
 | D21 | The estimated people count is surfaced, over observed cells only | FR1.1 defines a density map whose values sum to a people count, and until now nothing in the interface showed that sum, leaving the counting requirement evidenced only by shading. Restricting the count to observed cells is what keeps it honest: a figure spanning unobserved cells would be interpolation expressed as a number. Recorded as FR1.5. |
+
+Decisions D22 and D23 were taken in Step-6, when mapping the team's `required-pages.md` against `design.md` found two agreed pages with no screen behind them.
+
+| # | Decision | Reasoning |
+| - | - | - |
+| D22 | A dedicated suggestions screen, `S18`, serving existing requirements | `design.md` had distributed the decision-support tier across the `S02` alert rail, `S04`, the `S08` Suggestions tab and `S09`, so no single surface showed a suggestion's whole life from proposal to outcome. That tier is the part of the pipeline an examiner is least likely to have seen before, so it earns a surface of its own. `S18` renders the same `C05` and `C09` components the other screens use, so the lifecycle gains one home without anything being written twice, and it adds no capability: every requirement it serves is already in FR7 and FR8. |
+| D23 | An analytics screen, `S19`, recorded as new requirement FR11 | `required-pages.md` item 10 asks for session statistics with export, and had no home in this document or in `design.md`. It is recorded as new scope rather than read into an existing requirement, because inventing a requirement and then presenting it as one that was always there is precisely the drift this register exists to prevent. Export is generated in the browser, because every hosted export service requires payment details, which NFR8 forbids. `S19` reports what happened and does not forecast, recommend staffing or plan capacity, all of which stay out of scope under Section 2.6. |

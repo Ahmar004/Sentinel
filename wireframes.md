@@ -157,7 +157,7 @@ coordinates becomes visible (FR6.1).
 ### The open alert
 
 `A-1042`, cell `C-031-022`, zone B North Gate, score 0.78 against a threshold of 0.70,
-`ELEVATED`, `OPEN`, raised 14:02:51, acknowledged by `a.rahman` at 14:03:04.
+`ELEVATED`, `ACKNOWLEDGED`, raised 14:02:51, acknowledged by `a.rahman` at 14:03:04.
 Clears when risk stays below 0.65 for 30 seconds.
 
 | Feature | Contribution | Raw value |

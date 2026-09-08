@@ -447,6 +447,9 @@ interface SentinelClient {
   getSetupProposals(siteId: string): Promise<SetupProposal[]>
   resolveSetupProposal(id: string, decision: ProposalDecision): Promise<SetupProposal>
   patchCellAttributes(siteId: string, cellId: string, attrs: CellAttributes): Promise<Cell>
+  getZones(siteId: string): Promise<Zone[]>
+  getExits(siteId: string): Promise<Exit[]>
+  getThresholds(siteId: string): Promise<ThresholdSet[]>
   putExits(siteId: string, exits: ExitInput[]): Promise<Exit[]>
   saveZone(siteId: string, zone: ZoneInput): Promise<Zone>
   deleteZone(siteId: string, zoneId: string): Promise<void>

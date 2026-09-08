@@ -659,6 +659,18 @@ export class MockSentinelClient implements SentinelClient {
     return updated
   }
 
+  async getZones(_siteId: string): Promise<Zone[]> {
+    return [...this.zones.values()]
+  }
+
+  async getExits(_siteId: string): Promise<Exit[]> {
+    return [...this.exits.values()]
+  }
+
+  async getThresholds(_siteId: string): Promise<ThresholdSet[]> {
+    return [...this.thresholds.values()]
+  }
+
   async putExits(_siteId: string, exitInputs: ExitInput[]): Promise<Exit[]> {
     const previous = [...this.exits.values()]
     this.exits = new Map(exitInputs.map((e) => [e.exitId, { ...e, siteId: this.site.id }]))
@@ -846,14 +858,6 @@ export class MockSentinelClient implements SentinelClient {
   /* ---------------------------------------------------------------- */
   /* Convenience for App.tsx wiring only - not part of SentinelClient    */
   /* ---------------------------------------------------------------- */
-
-  /** The canonical, pre-mutation zones/exits/thresholds - `SiteState` has
-   * no room for full `Zone`/`Exit`/`ThresholdSet` objects (it carries only
-   * live `ZoneUpdate`s), so the composition root hydrates `configStore`
-   * from these directly. */
-  getConfigSeed(): { zones: Zone[]; exits: Exit[]; thresholds: ThresholdSet[] } {
-    return { zones: [...this.zones.values()], exits: [...this.exits.values()], thresholds: [...this.thresholds.values()] }
-  }
 
   getPlaybackController(): PlaybackController {
     return this.playback

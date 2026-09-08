@@ -7,7 +7,7 @@ import S01Login from '@/screens/S01Login'
 import S16NotPermitted from '@/screens/S16NotPermitted'
 import { MockSentinelClient } from '@/mock/MockSentinelClient'
 import { SEED_SITE_ID } from '@/mock/seed'
-import { setSentinelClient } from '@/store/clientRegistry'
+import { getSentinelClient, setSentinelClient } from '@/store/clientRegistry'
 import { connectLiveStore } from '@/store/liveStore'
 import { useConfigStore } from '@/store/configStore'
 
@@ -17,28 +17,24 @@ import { useConfigStore } from '@/store/configStore'
  * src/mock/ directly"). It registers the client the store layer talks to,
  * starts the 1 Hz push feed, and hydrates `configStore`.
  *
- * `getSiteState` returns exactly the `SiteState` shape `SentinelClient`
- * declares - site, grid, live cells, live zones, live drones - which has
- * no room for the full `Zone`/`Exit`/`ThresholdSet` configuration objects
- * `configStore` also needs (that contract carries only per-tick
- * `ZoneUpdate`s, not zone definitions). Those come from the same canonical
- * seed via `getConfigSeed()`, a mock-only convenience method that exists
- * alongside the `SentinelClient` interface rather than inside it, since
- * this file was told not to change that interface's signatures.
+ * Every value used to hydrate `configStore` - site, grid, zones, exits,
+ * thresholds - is fetched through the `SentinelClient` interface
+ * (srs.md 3.5), never through a mock-only method. A real backend swapped
+ * in behind that same interface hydrates this store identically.
  */
 function bootstrapMockBackend(): void {
   const client = new MockSentinelClient()
   setSentinelClient(client)
 
-  const { zones, exits, thresholds } = client.getConfigSeed()
-  useConfigStore.getState().setZones(zones)
-  useConfigStore.getState().setExits(exits)
-  useConfigStore.getState().setThresholds(thresholds)
+  const sentinelClient = getSentinelClient()
 
-  client.getSiteState(SEED_SITE_ID).then((siteState) => {
+  sentinelClient.getSiteState(SEED_SITE_ID).then((siteState) => {
     useConfigStore.getState().setSite(siteState.site)
     useConfigStore.getState().setGrid(siteState.grid)
   })
+  sentinelClient.getZones(SEED_SITE_ID).then((zones) => useConfigStore.getState().setZones(zones))
+  sentinelClient.getExits(SEED_SITE_ID).then((exits) => useConfigStore.getState().setExits(exits))
+  sentinelClient.getThresholds(SEED_SITE_ID).then((thresholds) => useConfigStore.getState().setThresholds(thresholds))
 
   connectLiveStore()
 }

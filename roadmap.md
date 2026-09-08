@@ -17,6 +17,10 @@ Do only one step at a time from this roadmap file for accuracy and focus.
 Follow Claude.md file at all costs
 ### Rule-4:
 Use the word "Stampede" instead of "Crush".
+### Rule-5:
+The design of the front-end suits our fyp and looks well as well. It shall not look extremely modern, nor too old/simple, it should look decent, modern and really good with respect to our fyp, the theme shall be dark blue background by default, also having the option to shift to a lighter theme, where the background color becomes greyish/creamish then
+### Rule-6:
+Use Typescript instead of JavaScript
 
 <hr style="height:4px; background-color:Grey; border:none;">
 
@@ -41,7 +45,7 @@ Re-verify using /brainstorming writing-plans skill that the design.md is correct
 Then, once spec(srs) and design.md are final, use /brainstorming/visual companion mode to create wireframes for showing each screen, pop-up, tab and every view that our system shall have.
 
 ### Step-6:
-Then once, wireframes are built and reviewed/fixed, use subagent-driven-development skill build the whole front-end of the app, on the basis of wireframes, spec (srs), design.md, understanding.md and @docs\Proposal-doc_Version_FINAL docx file
+Then once, wireframes are built and reviewed/fixed, use subagent-driven-development skill build the whole front-end of the app, on the basis of wireframes, spec (srs), design.md, understanding.md and @docs\Proposal-doc_Version_FINAL docx file and required-pages.md
 
 ### Step-7:
 Use systematic-debugging and test-driven-development to review and test the whole front-end rigorously

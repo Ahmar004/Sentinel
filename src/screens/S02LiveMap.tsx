@@ -19,6 +19,8 @@ import DroneMarkers from './live/DroneMarkers'
 import ZoneStrip from './live/ZoneStrip'
 import { summariseZones } from './live/zoneSummary'
 import CellInspector from '@/dialogs/CellInspector'
+import ConfirmSuggestion from '@/dialogs/ConfirmSuggestion'
+import DismissSuggestion from '@/dialogs/DismissSuggestion'
 import { CAPABILITY, hasCapability } from '@/auth/permissions'
 
 /**
@@ -44,6 +46,11 @@ export default function S02LiveMap() {
 
   const [inspectedCellId, setInspectedCellId] = useState<string | null>(null)
   const [sheetOpen, setSheetOpen] = useState(false)
+  // FR7.7: confirming is a deliberate human step, so acting on an option
+  // opens D02 rather than calling the client from the rail card.
+  const [confirming, setConfirming] = useState<string | null>(null)
+  const [dismissing, setDismissing] = useState<string | null>(null)
+  const [toast, setToast] = useState<string | null>(null)
 
   const offline = connectionState === CONNECTION_STATE.DISCONNECTED
 
@@ -83,12 +90,8 @@ export default function S02LiveMap() {
       onAcknowledge={(alertId) => {
         void getSentinelClient().acknowledgeAlert(alertId)
       }}
-      onConfirmSuggestion={(suggestionId) => {
-        void getSentinelClient().confirmSuggestion(suggestionId)
-      }}
-      onDismissSuggestion={(suggestionId) => {
-        void getSentinelClient().dismissSuggestion(suggestionId)
-      }}
+      onConfirmSuggestion={setConfirming}
+      onDismissSuggestion={setDismissing}
     />
   )
 
@@ -152,7 +155,23 @@ export default function S02LiveMap() {
         {sheetOpen ? <div className="max-h-[50vh] overflow-y-auto border-t border-border">{rail}</div> : null}
       </div>
 
+      {toast ? (
+        <p role="status" className="shrink-0 border-t border-border bg-surface-raised px-4 py-2 text-xs">
+          {toast}
+        </p>
+      ) : null}
+
       <CellInspector cellId={inspectedCellId} onClose={() => setInspectedCellId(null)} />
+      <ConfirmSuggestion
+        suggestion={suggestions.find((s) => s.suggestionId === confirming) ?? null}
+        onClose={() => setConfirming(null)}
+        onConfirmed={setToast}
+      />
+      <DismissSuggestion
+        suggestion={suggestions.find((s) => s.suggestionId === dismissing) ?? null}
+        onClose={() => setDismissing(null)}
+        onDismissed={setToast}
+      />
     </div>
   )
 }

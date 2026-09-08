@@ -15,6 +15,8 @@ import {
   useSuggestions,
 } from '@/store'
 import { CAPABILITY, hasCapability } from '@/auth/permissions'
+import ConfirmSuggestion from '@/dialogs/ConfirmSuggestion'
+import DismissSuggestion from '@/dialogs/DismissSuggestion'
 
 /** Cells within this many cells of the alerting cell, the neighbourhood
  * the map crops to. Wide enough to show where a crowd is coming from,
@@ -48,6 +50,10 @@ export default function S04AlertDetail() {
   const zones = useConfigStore((s) => s.zones)
 
   const [loaded, setLoaded] = useState<{ key: string; samples: CellSample[] | null }>({ key: '', samples: null })
+  // FR7.7: acting on an option opens D02, never the client directly.
+  const [confirming, setConfirming] = useState<string | null>(null)
+  const [dismissing, setDismissing] = useState<string | null>(null)
+  const [toast, setToast] = useState<string | null>(null)
 
   const cellId = alert?.cellId ?? ''
 
@@ -216,8 +222,8 @@ export default function S04AlertDetail() {
             mine.length > 0 ? (
               <SuggestionList
                 suggestions={mine}
-                onConfirm={(id) => void getSentinelClient().confirmSuggestion(id)}
-                onDismiss={(id) => void getSentinelClient().dismissSuggestion(id)}
+                onConfirm={setConfirming}
+                onDismiss={setDismissing}
                 disabled={offline || !canAct}
               />
             ) : (
@@ -231,6 +237,23 @@ export default function S04AlertDetail() {
           )}
         </section>
       </div>
+
+      {toast ? (
+        <p role="status" className="sticky bottom-0 border-t border-border bg-surface-raised px-4 py-2 text-xs">
+          {toast}
+        </p>
+      ) : null}
+
+      <ConfirmSuggestion
+        suggestion={mine.find((s) => s.suggestionId === confirming) ?? null}
+        onClose={() => setConfirming(null)}
+        onConfirmed={setToast}
+      />
+      <DismissSuggestion
+        suggestion={mine.find((s) => s.suggestionId === dismissing) ?? null}
+        onClose={() => setDismissing(null)}
+        onDismissed={setToast}
+      />
     </div>
   )
 }

@@ -117,6 +117,7 @@ Four roles, matching the proposal's stakeholder table. Every role-dependent deci
 | View suggestions | Yes | Yes | No | No |
 | Confirm or dismiss a suggestion | Yes | Yes | No | No |
 | View history and replay | Yes | Yes | No | No |
+| View reporting and analytics | Yes | Yes | No | No |
 | View per-drone view and telemetry | Yes | Yes | Yes | No |
 | Assign a drone to an area | No | Yes | Yes | No |
 | Venue setup, grid, zones, exits | No | Yes | No | No |
@@ -347,11 +348,15 @@ Zone risk is never sent without `coverage`. A zone that is mostly unseen must no
     { "check": "EXIT_OVER_CAPACITY",         "passed": true }
   ],
   "confirmedBy": null,
-  "confirmedAt": null
+  "confirmedAt": null,
+  "dismissedBy": null,
+  "dismissedAt": null
 }
 ```
 
 A rejected option carries `status: "REJECTED"`, at least one safeguard with `passed: false` and a `reason` on that safeguard. It is still returned, because showing that a route was rejected because a cell on it is stale demonstrates the safeguards far better than hiding it.
+
+`dismissedBy` and `dismissedAt` mirror `confirmedBy` and `confirmedAt` because FR7.8 requires a dismissal to be audit-logged with its actor exactly as a confirmation is, and `S09` and `S18` both state who dismissed an option. Elements returned by `querySuggestions` additionally carry `outcomeVerdict`, which is the verdict of the option's outcome or `null` while its window is still open, so a list renders its verdict chips without one outcome request per row.
 
 `textSource` is `MODEL` or `TEMPLATE`, so the interface can state which produced the wording. The interface labels this field the phrasing source, and `design.md` uses that term throughout.
 
@@ -383,17 +388,17 @@ A rejected option carries `status: "REJECTED"`, at least one safeguard with `pas
   "from": "2026-08-27T00:00:00.000Z",
   "to": "2026-08-27T23:59:59.999Z",
   "alertsByZone": [
-    { "zoneId": "zone-a", "count": 0 },
-    { "zoneId": "zone-b", "count": 3 },
-    { "zoneId": "zone-c", "count": 0 }
+    { "zoneId": "zone-a", "count": 0, "observedShareOfRange": 0.94 },
+    { "zoneId": "zone-b", "count": 3, "observedShareOfRange": 0.71 },
+    { "zoneId": "zone-c", "count": null, "observedShareOfRange": 0.00 }
   ],
-  "responseTime": { "acknowledged": 3, "medianMs": 13000, "p95Ms": 41000 },
+  "responseTime": { "raised": 4, "acknowledged": 3, "medianMs": 13000, "p95Ms": 41000 },
   "acknowledgementRate": { "issued": 7, "confirmed": 3, "dismissed": 2, "expired": 2 },
   "verdicts": { "IMPROVED": 2, "UNCHANGED": 1, "WORSENED": 0, "PENDING": 0 }
 }
 ```
 
-`responseTime` is `null` when no alert in the range was acknowledged, and `acknowledgementRate` is `null` when no suggestion was issued. A count of zero and an absence of data are different facts, and FR11.3 requires the interface to tell them apart. `alertsByZone` lists every zone in the site including those with a count of zero, because a zone that raised no alert is a measured result rather than missing data. `verdicts` is `null` when no suggestion in the range was confirmed, and its counts otherwise cover confirmed suggestions only, so a zero against `WORSENED` means that no confirmed suggestion worsened the cells it affected, not that nothing was confirmed.
+`responseTime` is `null` only when no alert was raised in the range. When alerts were raised but none acknowledged it carries its `raised` count with `acknowledged` at zero and both percentiles `null`, because an alert nobody answered is a finding about the coordinator and an alert that never fired is not. `acknowledgementRate` is `null` when no suggestion was issued. A count of zero and an absence of data are different facts, and FR11.3 requires the interface to tell them apart. `alertsByZone` lists every zone in the site, and each entry carries `observedShareOfRange`, the fraction of the range during which the zone had any observed cell. A `count` of zero is a measured result only when that share is above zero; a zone nothing watched carries a `count` of `null`, as `zone-c` does above. Without the share, a zone that raised no alert because it was never observed would read exactly like one that raised none because it was calm, which is the coverage gap presented as a calm cell that Section 2.3 exists to prevent. `verdicts` is `null` when no suggestion in the range was confirmed, and its counts otherwise cover confirmed suggestions only, so a zero against `WORSENED` means that no confirmed suggestion worsened the cells it affected, not that nothing was confirmed.
 
 ### 3.4 Error model
 
@@ -697,7 +702,7 @@ Owner: application layer, no model behind it. Visible to: all roles, differently
 *Acceptance:* a coordinator sees no venue setup navigation, and a direct request to a setup endpoint is refused.
 
 **FR10.4** The IT role shall have no access to operational crowd data.
-*Acceptance:* an IT session receives an error from every live state, alert, suggestion and history endpoint, and its navigation contains only the health, roles reference and audit surfaces.
+*Acceptance:* an IT session receives an error from every live state, alert, suggestion, history and analytics endpoint, and its navigation contains only the health, roles reference and audit surfaces.
 
 **FR10.5** Administrators shall create, edit, deactivate and assign roles to accounts.
 *Acceptance:* a deactivated account cannot authenticate, and its historical audit entries remain intact.
@@ -721,8 +726,6 @@ This requirement is new in Step-6 and is not derived from the proposal. It was a
 *Acceptance:* a range containing no issued suggestions reports no acknowledgement rate, and does not report 0 percent.
 
 FR11.3 is the honesty invariant of Section 2.3 applied to reporting. An acknowledgement rate of 0 percent means every suggestion was ignored, which is a finding about the coordinator. No data means none was issued, which is a finding about the crowd. A report that renders the second as the first misleads exactly as badly as a map that renders a coverage gap as a calm cell.
-
-Export is generated in the browser because every hosted export service requires payment details, which NFR8 forbids.
 
 ***
 
@@ -799,7 +802,7 @@ The screens column is filled from `design.md`, which is what makes Step-4's veri
 | FR8 | FR8.1 to FR8.7 | none | Coordinator, Administrator | `S08` history, `S09` event detail and outcome, `S10` replay, `C09` |
 | FR9 | FR9.1 to FR9.9 | none | Administrator, Drone Operator | `S11` setup wizard, `S12` configuration tabs, `S06`, `S14`, `D06`, `D07`, `D11` |
 | FR10 | FR10.1 to FR10.6 | none | all | `S01` login, nav rail, `S13` accounts, `S14` audit log, `S16`, `S17` roles reference, `D08`, `D09`, `D12` |
-| FR11 | FR11.1 to FR11.3 | none | Coordinator, Administrator | `S19` analytics, `S08` history |
+| FR11 | FR11.1 to FR11.3 | none | Coordinator, Administrator | `S19` analytics |
 
 Sixty-four leaf requirements in total.
 

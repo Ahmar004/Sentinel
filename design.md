@@ -120,7 +120,7 @@ Landing route after login, by role: Coordinator and Administrator to `S02`, Dron
 | `S15` | System health | `/health` | Admin, Operator, IT | FR3.2, FR7.6, NFR6 |
 | `S16` | Not permitted | `/403` | any | FR10.3 |
 | `S17` | Roles reference | `/roles` | Admin, IT | FR10.2, FR10.4 |
-| `S18` | Suggestions | `/suggestions` | Coord, Admin | FR7.1 to FR7.8, FR8.6 |
+| `S18` | Suggestions | `/suggestions` | Coord, Admin | FR7.1, FR7.4, FR7.5, FR7.6, FR8.6 |
 | `S19` | Analytics | `/analytics` | Coord, Admin | FR11.1 to FR11.3 |
 
 ***
@@ -397,13 +397,13 @@ Ranked options for a live alert continue to appear in the `S02` alert rail throu
 Coordinator and administrator. Session statistics over a selected range (FR11).
 
 - Range selector, defaulting to the current session.
-- Alerts per zone as a bar chart, with the same figures in a table beneath it, so the numbers are readable without interpreting the chart (NFR5).
+- Alerts per zone as a bar chart, with the same figures in a table beneath it, so the numbers are readable without interpreting the chart (NFR5). Each zone shows the share of the range it was observed for beside its count, and a zone nothing watched reads as no data rather than as zero alerts, for the same reason FR4.6 never shows zone risk without coverage.
 - Coordinator response time from alert raised to acknowledged, as median and 95th percentile.
 - Suggestion acknowledgement rate: issued, confirmed, dismissed and expired.
 - Outcome verdict distribution across improved, unchanged and worsened, with pending counted separately rather than folded into unchanged.
 - Export of the current range, generated in the browser and contacting no service (FR11.2, NFR8).
 
-Every figure states the events it was computed from, and a kind with no events in the range reads as no data rather than as zero (FR11.3). An acknowledgement rate of 0 percent means every suggestion was ignored; no data means none was issued. Rendering the second as the first misleads exactly as badly as rendering a coverage gap as a calm cell.
+Every figure states the events it was computed from, and a kind with no events in the range reads as no data rather than as zero (FR11.3). An acknowledgement rate of 0 percent means every suggestion was ignored; no data means none was issued.
 
 **States:** loading, results, no events in this range.
 
@@ -556,11 +556,11 @@ Proof-of-concept scaffolding, Administrator only, marked as such in the dialog i
 | `C02` | `CellLayer` | `C01` | Renders the eight treatments. The single place cell appearance is decided, so the honesty invariant is enforced in one file. |
 | `C03` | `RiskTimeline` | `S03`, `S04`, `S05`, `S09`, `D01` | Recharts. Draws band boundaries as reference lines. Renders gaps in the series as breaks, never as interpolated segments. |
 | `C04` | `AttributionChart` | `S04`, `S09`, `D05` | Signed horizontal bars, ordered by absolute contribution. |
-| `C05` | `SuggestionList` | `S02` rail, `S04`, `S09` | Ranked cards with rationale, safeguards, phrasing source, confirm and dismiss. Renders rejected options and the no-safe-option state. |
+| `C05` | `SuggestionList` | `S02` rail, `S04`, `S09`, `S18` | Ranked cards with rationale, safeguards, phrasing source, confirm and dismiss. Renders rejected options and the no-safe-option state. |
 | `C06` | `CoverageBar` | `S02` zone strip, `S03`, `S05` | Observed, not-enough-dwell, stale and gap as one stacked bar. Never rendered apart from a risk value. |
 | `C07` | `Legend` | `S02`, `S07`, `S10`, `S11` | All eight treatments with pattern, colour and label. |
 | `C08` | `ConnectionBanner` | shell | Live, degraded, disconnected. Named in Section 10. |
-| `C09` | `FilterBar` | `S08`, `S14` | Chips for active filters, each individually removable. |
+| `C09` | `FilterBar` | `S08`, `S14`, `S18` | Chips for active filters, each individually removable. |
 | `C10` | `StateChip` | everywhere | One component renders every observation state, risk band, drone state, alert status and suggestion status, from the constants module. Nothing else renders these strings. |
 | `C11` | `RolesReference` | `S17`, `S13`, `D08` | The four roles and their capabilities, rendered from the same permission matrix the navigation is derived from. The single source for what a role may do. |
 

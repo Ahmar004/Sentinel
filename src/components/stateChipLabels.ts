@@ -44,7 +44,7 @@ export const OBSERVATION_STATE_LABEL: Record<ObservationState, string> = {
 }
 export const OBSERVATION_STATE_TOKEN: Record<ObservationState, string> = {
   [OBSERVATION_STATE.OBSERVED]: 'var(--color-status-online)',
-  [OBSERVATION_STATE.NOT_ENOUGH_DWELL]: 'var(--color-status-degraded)',
+  [OBSERVATION_STATE.NOT_ENOUGH_DWELL]: 'var(--color-obs-not-enough-dwell-fill)',
   [OBSERVATION_STATE.STALE]: 'var(--color-obs-stale-fill)',
   [OBSERVATION_STATE.GAP]: 'var(--color-obs-gap-fill)',
 }

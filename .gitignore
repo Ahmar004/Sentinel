@@ -7,3 +7,8 @@ coverage
 *.tsbuildinfo
 .vscode/*
 !.vscode/extensions.json
+.claude
+.superpowers
+docs/superpowers
+CLAUDE.md
+roadmap.md

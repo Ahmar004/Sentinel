@@ -88,7 +88,16 @@ The UI must never imply a capability the project has ruled out. DO NOT build, mo
 
 ## Commands
 
-The app is not scaffolded yet; it is created in Step-6 of `roadmap.md`. When it is, replace this section with the real scripts in the same change that adds them. The intended toolchain is Vite, so expect `npm run dev`, `npm run build`, `npm run lint` and `npm test`.
+The app is scaffolded with Vite. From the repository root:
+
+- `npm install` - install dependencies.
+- `npm run dev` - start the Vite dev server.
+- `npm run build` - type-check with `tsc -b` then produce a production build in `dist/`.
+- `npm run preview` - serve the production build locally.
+- `npm run lint` - run ESLint (flat config, `eslint.config.js`) over the whole repo.
+- `npm test` - run the vitest suite once (`vitest run`).
+
+Stack as installed: React 19.2, Vite 8, TypeScript 5.9.3 (strict), Tailwind CSS 4.3 via `@tailwindcss/vite` (CSS-first `@theme`, no `tailwind.config.js`), react-router-dom 7, zustand 5, recharts 3, leaflet 1.9 with react-leaflet 5, lucide-react for icons, vitest 5 with @testing-library/react and jsdom, eslint 10 with typescript-eslint, vite-plugin-pwa. The path alias `@/*` maps to `src/*`. An ESLint rule restricts imports of `src/client/*` to `src/store/*` only.
 
 ## Workflow
 

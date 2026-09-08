@@ -82,7 +82,9 @@ export default function MultiZoneRiskChart({
           data={data}
           margin={{ top: 8, right: 8, bottom: 0, left: 0 }}
           onClick={(state) => {
-            const row = data[state?.activeTooltipIndex ?? -1]
+            const index = state?.activeTooltipIndex
+            if (typeof index !== 'number' || index < 0) return
+            const row = data[index]
             if (row && onSelectPoint) onSelectPoint(String(row.ts))
           }}
         >

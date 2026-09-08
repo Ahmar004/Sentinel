@@ -4,7 +4,7 @@ import { FilterBar, StateChip, type FilterChip } from '@/components'
 import { SUGGESTION_ACTION, SUGGESTION_STATUS, TEXT_SOURCE, type SuggestionAction, type SuggestionStatus, type TextSource } from '@/domain/constants'
 import type { SuggestionListItem, SuggestionQuery } from '@/domain/types'
 import { getSentinelClient, useConfigStore } from '@/store'
-import { ACTION_LABEL, SAFEGUARD_CHECK_LABEL } from '@/components/suggestionLabels'
+import { SAFEGUARD_CHECK_LABEL, SUGGESTION_ACTION_LABEL } from '@/components/suggestionLabels'
 
 interface Filters {
   zoneId?: string
@@ -70,7 +70,7 @@ function OptionRow({ item }: { item: SuggestionListItem }) {
         <div className="min-w-0">
           <p className="text-sm">
             <span className="mr-2 font-mono text-xs text-ink-muted">Rank {item.rank}</span>
-            {ACTION_LABEL[item.action] ?? item.action}
+            {SUGGESTION_ACTION_LABEL[item.action] ?? item.action}
           </p>
           <p className="mt-0.5 text-xs text-ink-muted">{item.text}</p>
         </div>
@@ -158,7 +158,7 @@ export default function S18Suggestions() {
       out.push({ id: 'zoneId', label: `Zone: ${name}` })
     }
     if (status) out.push({ id: 'status', label: `Status: ${status.toLowerCase()}` })
-    if (action) out.push({ id: 'action', label: `Action: ${ACTION_LABEL[action] ?? action}` })
+    if (action) out.push({ id: 'action', label: `Action: ${SUGGESTION_ACTION_LABEL[action] ?? action}` })
     if (textSource) out.push({ id: 'textSource', label: `Source: ${textSource.toLowerCase()}` })
     return out
   }, [zoneId, status, action, textSource, zones])
@@ -204,7 +204,7 @@ export default function S18Suggestions() {
             id="filter-action"
             label="Action"
             value={action}
-            options={Object.values(SUGGESTION_ACTION).map((a) => ({ value: a, label: ACTION_LABEL[a] ?? a }))}
+            options={Object.values(SUGGESTION_ACTION).map((a) => ({ value: a, label: SUGGESTION_ACTION_LABEL[a] ?? a }))}
             onChange={(next) => setFilters((f) => ({ ...f, action: next }))}
           />
           <Select

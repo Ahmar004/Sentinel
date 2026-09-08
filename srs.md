@@ -213,7 +213,7 @@ Versioned under `/api/v1`. All responses are JSON. All timestamps are ISO 8601 w
 | Alerts | `GET /alerts/{alertId}` | One alert with its attribution | Coordinator, Administrator |
 | Alerts | `POST /alerts/{alertId}/acknowledge` | Record acknowledgement | Coordinator, Administrator |
 | Suggestions | `GET /alerts/{alertId}/suggestions` | Ranked options for an alert | Coordinator, Administrator |
-| Suggestions | `GET /suggestions` | Filter across alerts by site, zone, status, action, text source, actor and time range | Coordinator, Administrator |
+| Suggestions | `GET /suggestions` | Filter across alerts by site, zone, status, action, phrasing source, actor and time range | Coordinator, Administrator |
 | Suggestions | `GET /suggestions/{suggestionId}` | One option with safeguards and rationale | Coordinator, Administrator |
 | Suggestions | `POST /suggestions/{suggestionId}/confirm`, `/dismiss` | Human decision | Coordinator, Administrator |
 | Suggestions | `GET /suggestions/{suggestionId}/outcome` | Outcome verdict and trajectory | Coordinator, Administrator |
@@ -353,7 +353,7 @@ Zone risk is never sent without `coverage`. A zone that is mostly unseen must no
 
 A rejected option carries `status: "REJECTED"`, at least one safeguard with `passed: false` and a `reason` on that safeguard. It is still returned, because showing that a route was rejected because a cell on it is stale demonstrates the safeguards far better than hiding it.
 
-`textSource` is `MODEL` or `TEMPLATE`, so the interface can state which produced the wording.
+`textSource` is `MODEL` or `TEMPLATE`, so the interface can state which produced the wording. The interface labels this field the phrasing source, and `design.md` uses that term throughout.
 
 **Outcome:**
 

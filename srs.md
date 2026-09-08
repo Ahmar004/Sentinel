@@ -681,6 +681,25 @@ Owner: application layer, no model behind it. Visible to: all roles, differently
 **FR10.6** Authentication events and every privileged action shall be audit-logged, viewable by administrator and IT.
 *Acceptance:* login, logout, failed login, role change, threshold change, drone assignment, alert acknowledgement, and suggestion confirmation and dismissal all appear in the log.
 
+### FR11 - Reporting and analytics over recorded events
+
+Owner: application layer, no model behind it. Visible to: coordinator and administrator.
+
+This requirement is new in Step-6 and is not derived from the proposal. It was added because the team's `required-pages.md` asks for a reporting surface that neither this document nor `design.md` provided. Appendix C decision D23 records that reasoning, so the addition reads as a decision rather than as scope that appeared unannounced.
+
+**FR11.1** The system shall summarise a selected time range, reporting alerts per zone, coordinator response time from alert raised to acknowledged, suggestion acknowledgement rate, and the distribution of outcome verdicts.
+*Acceptance:* a range containing the closed incident `SG-0771` reports one confirmed suggestion and one verdict of improved.
+
+**FR11.2** The system shall export the current summary as a file generated in the browser.
+*Acceptance:* the export completes with no request to any server, and its figures match those on screen for the same range.
+
+**FR11.3** Every figure shall be computed from recorded events only. A range holding no events of a kind shall report no data for that kind, never zero.
+*Acceptance:* a range containing no issued suggestions reports no acknowledgement rate, and does not report 0 percent.
+
+FR11.3 is the honesty invariant of Section 2.3 applied to reporting. An acknowledgement rate of 0 percent means every suggestion was ignored, which is a finding about the coordinator. No data means none was issued, which is a finding about the crowd. A report that renders the second as the first misleads exactly as badly as a map that renders a coverage gap as a calm cell.
+
+Export is generated in the browser because every hosted export service requires payment details, which NFR8 forbids.
+
 ***
 
 ## 5. Data Model
@@ -742,7 +761,7 @@ The accessibility requirement follows from Section 2.3 rather than from conventi
 
 ## 7. Traceability Matrix
 
-The screens column is filled from `design.md`, which is what makes Step-4's verification mechanical rather than a judgement call. Leaf-level mapping for all sixty requirements is in `design.md` Section 12.
+The screens column is filled from `design.md`, which is what makes Step-4's verification mechanical rather than a judgement call. Leaf-level mapping for all sixty-four requirements is in `design.md` Section 12.
 
 | Proposal FR | SRS leaf requirements | Tier | Primary roles | design.md screens |
 | - | - | - | - | - |
@@ -757,7 +776,7 @@ The screens column is filled from `design.md`, which is what makes Step-4's veri
 | FR9 | FR9.1 to FR9.9 | none | Administrator, Drone Operator | `S11` setup wizard, `S12` configuration tabs, `S06`, `S14`, `D06`, `D07`, `D11` |
 | FR10 | FR10.1 to FR10.6 | none | all | `S01` login, nav rail, `S13` accounts, `S14` audit log, `S16`, `S17` roles reference, `D08`, `D09`, `D12` |
 
-Sixty-one leaf requirements in total.
+Sixty-four leaf requirements in total.
 
 ***
 

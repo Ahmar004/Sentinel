@@ -3,6 +3,7 @@ import { CRS } from 'leaflet'
 import { MapContainer, ImageOverlay } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import { siteBounds, type GroundExtentM } from './siteGrid'
+import type { LatLngBoundsLiteral } from 'leaflet'
 
 export interface SiteMapProps {
   planImageUrl: string
@@ -13,6 +14,13 @@ export interface SiteMapProps {
    * map without forking it (design.md C01). */
   children?: ReactNode
   className?: string
+  /** Opens the map framed on a smaller area than the whole site, for
+   * surfaces that are about one place rather than the site as a whole -
+   * `S04` crops to the alerting cell and its neighbourhood, `S07` to a
+   * drone's footprint. The plan image and the grid are unchanged
+   * underneath; only the initial view differs, and panning out to the rest
+   * of the site still works. */
+  focusBounds?: LatLngBoundsLiteral
 }
 
 type ImageStatus = 'loading' | 'ok' | 'error'
@@ -56,7 +64,7 @@ function usePlanImageStatus(url: string): ImageStatus {
  * missing picture is not a reason to hide real cell data (honesty over
  * completeness).
  */
-export default function SiteMap({ planImageUrl, groundExtentM, children, className }: SiteMapProps) {
+export default function SiteMap({ planImageUrl, groundExtentM, children, className, focusBounds }: SiteMapProps) {
   const imageStatus = usePlanImageStatus(planImageUrl)
   const bounds = siteBounds(groundExtentM)
 
@@ -64,7 +72,7 @@ export default function SiteMap({ planImageUrl, groundExtentM, children, classNa
     <div className={className ?? 'size-full'}>
       <MapContainer
         crs={CRS.Simple}
-        bounds={bounds}
+        bounds={focusBounds ?? bounds}
         maxBounds={bounds}
         maxBoundsViscosity={0.6}
         minZoom={-2}

@@ -2,10 +2,10 @@ import { useCallback, useState, type FormEvent, type KeyboardEvent } from 'react
 import { useNavigate } from 'react-router-dom'
 import { useSessionStore } from '@/store'
 import { landingRouteForRole } from '@/auth/permissions'
+import { DEACTIVATED_ACCOUNT, DEMO_ACCOUNTS, DEMO_PASSWORD } from './demoAccounts'
 
 /**
- * S01 - Login, design.md Section 5, FR10.1. The one real screen built in
- * this step; every other route renders a placeholder for now.
+ * S01 - Login, design.md Section 5, FR10.1.
  *
  * A real `<form onSubmit>` with `event.preventDefault()`: Enter submits
  * natively because the primary action is `type="submit"`, Escape clears
@@ -113,6 +113,43 @@ export default function S01Login() {
         >
           Clear
         </button>
+
+        {/* Proof-of-concept scaffolding, marked as such in the same way the
+            demo harness is. Each role sees a genuinely different screen set
+            (FR10), so being able to switch roles in one click is what makes
+            that visible at the defence rather than merely claimed. Nothing
+            here survives the arrival of a real backend. */}
+        <div className="mt-6 border-t border-border pt-4">
+          <h2 className="text-xs font-semibold tracking-wide uppercase text-ink-muted">
+            Demo accounts
+          </h2>
+          <p className="mt-1 mb-2 text-xs text-ink-muted">
+            Proof of concept only. Every account uses the password{' '}
+            <code className="font-mono">{DEMO_PASSWORD}</code>.
+          </p>
+          <ul className="flex flex-col gap-1">
+            {DEMO_ACCOUNTS.map((account) => (
+              <li key={account.username}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setUsername(account.username)
+                    setPassword(DEMO_PASSWORD)
+                    setFormError(null)
+                  }}
+                  className="flex w-full items-baseline justify-between gap-2 rounded border border-border px-2 py-1 text-left text-xs hover:bg-surface-sunken focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+                >
+                  <span className="font-mono">{account.username}</span>
+                  <span className="text-ink-muted">{account.role}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-2 text-xs text-ink-muted">
+            {DEACTIVATED_ACCOUNT.username} is deactivated and cannot sign in, which is how FR10.5 is
+            demonstrated.
+          </p>
+        </div>
       </form>
     </div>
   )

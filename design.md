@@ -82,6 +82,8 @@ Derived from the permission matrix in SRS 2.4. A role never sees a nav entry it 
 | Timeline (`S05`) | Yes | Yes | No | No |
 | Fleet (`S06`) | Yes | Yes | Yes | No |
 | History (`S08`) | Yes | Yes | No | No |
+| Suggestions (`S18`) | Yes | Yes | No | No |
+| Analytics (`S19`) | Yes | Yes | No | No |
 | Replay (`S10`) | Yes | Yes | No | No |
 | Configuration (`S12`) | No | Yes | No | No |
 | Accounts (`S13`) | No | Yes | No | No |
@@ -118,6 +120,8 @@ Landing route after login, by role: Coordinator and Administrator to `S02`, Dron
 | `S15` | System health | `/health` | Admin, Operator, IT | FR3.2, FR7.6, NFR6 |
 | `S16` | Not permitted | `/403` | any | FR10.3 |
 | `S17` | Roles reference | `/roles` | Admin, IT | FR10.2, FR10.4 |
+| `S18` | Suggestions | `/suggestions` | Coord, Admin | FR7.1 to FR7.8, FR8.6 |
+| `S19` | Analytics | `/analytics` | Coord, Admin | FR11.1 to FR11.3 |
 
 ***
 
@@ -371,6 +375,39 @@ Administrator and IT. Read-only, and the only operational-adjacent screen IT can
 - No editing anywhere on the screen. Assigning a role to a person is account management and happens in `S13`, which IT cannot open.
 
 `S13` renders the same `C11` component as a panel, so the table has one source (decision D20).
+
+### S18 - Suggestions
+
+Coordinator and administrator. The whole life of every suggestion in one place, which no other screen shows (decision D22).
+
+- Filter bar (`C09`): time range, zone, status, action, phrasing source and actor. Active filters show as removable chips.
+- Rows group by their originating alert, so the three ranked options for one alert read as one decision rather than as three unrelated rows.
+- Each row carries rank, action, status, phrasing source, the safeguard result, who confirmed or dismissed it and when, and the outcome verdict as a chip once the follow-up window has closed.
+- Options rejected by a safeguard render with the failing check named and have nothing to confirm (FR7.4).
+- An alert whose every candidate was rejected renders the no safe option state in words (FR7.5).
+- A pending outcome shows its countdown rather than an empty verdict (FR8.6).
+- Row actions: open the alert in `S04`, or the event in `S09`.
+
+**States:** loading, results, no results for these filters with a clear-filters action.
+
+Ranked options for a live alert continue to appear in the `S02` alert rail through `C05`, because a coordinator acting under time pressure must not have to navigate away from the map. `S18` is the review surface and `S02` is the action surface, and both render `C05`, so the two cannot describe the same option differently.
+
+### S19 - Analytics
+
+Coordinator and administrator. Session statistics over a selected range (FR11).
+
+- Range selector, defaulting to the current session.
+- Alerts per zone as a bar chart, with the same figures in a table beneath it, so the numbers are readable without interpreting the chart (NFR5).
+- Coordinator response time from alert raised to acknowledged, as median and 95th percentile.
+- Suggestion acknowledgement rate: issued, confirmed, dismissed and expired.
+- Outcome verdict distribution across improved, unchanged and worsened, with pending counted separately rather than folded into unchanged.
+- Export of the current range, generated in the browser and contacting no service (FR11.2, NFR8).
+
+Every figure states the events it was computed from, and a kind with no events in the range reads as no data rather than as zero (FR11.3). An acknowledgement rate of 0 percent means every suggestion was ignored; no data means none was issued. Rendering the second as the first misleads exactly as badly as rendering a coverage gap as a calm cell.
+
+**States:** loading, results, no events in this range.
+
+This screen reports what happened. It does not forecast, recommend staffing or plan capacity, all of which stay out of scope (SRS 2.6).
 
 ***
 
@@ -708,7 +745,7 @@ The proposal Section 14.7 names eight front-end views. Each is locatable in this
 | Per-drone view | `S07` |
 | Combined feeds | `S06` Combined feeds tab |
 | Risk timeline | `S05`, and `C03` inside `S03`, `S04`, `S09` and `D01` |
-| Suggestions | `C05` in the `S02` alert rail and in `S04` |
+| Suggestions | `S18`, and `C05` in the `S02` alert rail and in `S04` |
 | Event history | `S08`, `S09` |
 | Replay | `S10` |
 | System health | `S15` |

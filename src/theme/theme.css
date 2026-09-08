@@ -1,0 +1,91 @@
+/*
+ * Design tokens - CLAUDE.md "Front-End Architecture Rules" and
+ * wireframes.md Section 2. Tailwind 4 keeps its theme in CSS, so this
+ * @theme block is the only place a colour, spacing or type value is
+ * declared; nothing outside this file may hold a literal hex value.
+ *
+ * Two palettes are required by roadmap.md Rule-5: a dark blue background by
+ * default, and a lighter greyish/cream alternate reachable from the user
+ * menu (App shell, design.md 3.1). The toggle sets `data-theme` on <html>;
+ * it does not depend on the OS colour scheme, because a coordinator on a
+ * bright day and one at night both choose deliberately, not by accident of
+ * their device settings.
+ */
+
+@theme {
+  /* Base surface and text - dark blue theme is the default palette. */
+  --color-surface: #0b1220;
+  --color-surface-raised: #121b2e;
+  --color-surface-sunken: #070c16;
+  --color-ink: #e6ecf5;
+  --color-ink-muted: #93a2ba;
+  --color-border: #24314a;
+  --color-accent: #4da3ff;
+
+  /* Risk bands - srs.md 2.7 and Appendix A. Colour is one of three channels
+   * (wireframes.md Section 2); weight and style carry the same distinction
+   * without hue, per NFR5. */
+  --color-risk-normal: #2f9e5b;
+  --color-risk-watch: #d7a52c;
+  --color-risk-elevated: #e2711d;
+  --color-risk-critical: #d53b3b;
+
+  /* Observation-state fills, used only for the three unobserved states.
+   * OBSERVED cells fill from the density ramp below instead. */
+  --color-obs-not-enough-dwell-fill: #35415c;
+  --color-obs-stale-fill: #4a5064;
+  --color-obs-gap-fill: #2a3040;
+
+  /* Five-step density ramp: lightness only, dark equals dense
+   * (wireframes.md Section 2). Bucket boundaries live in
+   * src/theme/cellTreatment.ts, anchored to the default density threshold
+   * of 4.0 /sqm (srs.md 2.7) rather than an arbitrary scale. */
+  --color-density-1: #8fa3c4;
+  --color-density-2: #6f88b0;
+  --color-density-3: #526a92;
+  --color-density-4: #3a4d70;
+  --color-density-5: #253550;
+
+  /* Drone link and generic status, reused by StateChip (design.md C10). */
+  --color-status-online: #2f9e5b;
+  --color-status-degraded: #d7a52c;
+  --color-status-offline: #6b7688;
+
+  --font-sans:
+    'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+/*
+ * Light theme: greyish/cream background, per roadmap.md Rule-5. Tailwind 4
+ * emits @theme colours as CSS custom properties on :root, so redefining
+ * them under a more specific selector is enough to retheme every utility
+ * built from them, with no per-component change.
+ */
+:root[data-theme='light'] {
+  --color-surface: #f3efe6;
+  --color-surface-raised: #ffffff;
+  --color-surface-sunken: #e7e1d3;
+  --color-ink: #1c2230;
+  --color-ink-muted: #565f70;
+  --color-border: #d9d2bf;
+  --color-accent: #2563eb;
+
+  --color-risk-normal: #227a46;
+  --color-risk-watch: #a3760f;
+  --color-risk-elevated: #b85614;
+  --color-risk-critical: #b02a2a;
+
+  --color-obs-not-enough-dwell-fill: #cfd3de;
+  --color-obs-stale-fill: #c3bfb3;
+  --color-obs-gap-fill: #ded8c9;
+
+  --color-density-1: #d7ccb4;
+  --color-density-2: #c2b295;
+  --color-density-3: #a89577;
+  --color-density-4: #8a795d;
+  --color-density-5: #6b5d46;
+
+  --color-status-online: #227a46;
+  --color-status-degraded: #a3760f;
+  --color-status-offline: #8a8f9a;
+}

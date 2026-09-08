@@ -52,7 +52,7 @@ export default function FootprintMap({
 
   return (
     <SiteMap
-      planImageUrl={site?.planImageUrl ?? '/riverside-arena-plan.svg'}
+      planImageUrl={site?.planImageUrl ?? '/jamarat-plan.svg'}
       groundExtentM={site?.groundExtentM ?? SITE_EXTENT_M}
       focusBounds={footprintBounds(footprintCells, padCells)}
       className={className}

@@ -73,8 +73,8 @@ export const EXIT_E2_ID = 'E2'
 export function buildSite(): Site {
   return {
     id: SEED_SITE_ID,
-    name: 'Riverside Arena',
-    planImageUrl: '/riverside-arena-plan.svg',
+    name: 'Mina - Jamarat Bridge',
+    planImageUrl: '/jamarat-plan.svg',
     groundExtentM: { width: 300, height: 200 },
     createdAt: '2026-08-01T09:00:00.000Z',
   }
@@ -104,7 +104,7 @@ export function buildZones(): Zone[] {
     {
       zoneId: ZONE_A_ID,
       siteId: SEED_SITE_ID,
-      name: 'Concourse',
+      name: 'West Deck Approach',
       cellIds: concourseCellIds(),
       riskThreshold: 0.7,
       densityThreshold: 4.0,
@@ -112,7 +112,7 @@ export function buildZones(): Zone[] {
     {
       zoneId: ZONE_B_ID,
       siteId: SEED_SITE_ID,
-      name: 'North Gate',
+      name: 'Jamrat al-Aqaba',
       cellIds: northGateCellIds(),
       riskThreshold: 0.7,
       densityThreshold: 4.0,
@@ -120,7 +120,7 @@ export function buildZones(): Zone[] {
     {
       zoneId: ZONE_C_ID,
       siteId: SEED_SITE_ID,
-      name: 'Arena Floor',
+      name: 'Jamrat al-Wusta',
       cellIds: arenaFloorCellIds(),
       riskThreshold: 0.7,
       densityThreshold: 4.0,
@@ -131,8 +131,8 @@ export function buildZones(): Zone[] {
 export function buildExits(): Exit[] {
   const { e1, e2 } = exitCellIds()
   return [
-    { exitId: EXIT_E1_ID, siteId: SEED_SITE_ID, cellIds: e1, capacityPerMin: 1200, label: 'South Gate' },
-    { exitId: EXIT_E2_ID, siteId: SEED_SITE_ID, cellIds: e2, capacityPerMin: 900, label: 'North Gate' },
+    { exitId: EXIT_E1_ID, siteId: SEED_SITE_ID, cellIds: e1, capacityPerMin: 1200, label: 'Exit W1 to tunnels' },
+    { exitId: EXIT_E2_ID, siteId: SEED_SITE_ID, cellIds: e2, capacityPerMin: 900, label: 'Exit E2 to camps' },
   ]
 }
 
@@ -452,7 +452,7 @@ export function buildInitialSimCells(): Map<string, SimCell> {
     }
   }
 
-  // Zone A: Concourse. Peak cell forced at 0.31 (below the 0.4 watch band),
+  // Zone A: West Deck Approach. Peak cell forced at 0.31 (below the 0.4 watch band),
   // the three FR6.1 fusion cells forced observed by both D-02 and D-04, and
   // the SAFEGUARD_REJECT demo cell forced stale at 7 s.
   const forcedObservedA = new Map<string, { risk: number; observedBy: string[] }>([
@@ -470,7 +470,7 @@ export function buildInitialSimCells(): Map<string, SimCell> {
     DRONE_D04,
   ])
 
-  // Zone B: North Gate. Peak/alert cell forced at 0.78, the two route cells
+  // Zone B: Jamrat al-Aqaba. Peak/alert cell forced at 0.78, the two route cells
   // and the two SG-0771 cells forced observed, and the HOLD_AND_METER
   // neighbour forced at 0.45 (well under both its own and the alert's band).
   const forcedObservedB = new Map<string, { risk: number; observedBy: string[] }>([
@@ -483,7 +483,7 @@ export function buildInitialSimCells(): Map<string, SimCell> {
   ])
   planZone(ZONE_B_ID, northGateCellIds(), ZONE_COVERAGE[ZONE_B_ID], forcedObservedB, new Map(), [DRONE_D01])
 
-  // Zone C: Arena Floor. No observed cells at all - D-03 is mid-transit,
+  // Zone C: Jamrat al-Wusta. No observed cells at all - D-03 is mid-transit,
   // contributing density-only samples to the cells in its path.
   planZone(ZONE_C_ID, arenaFloorCellIds(), ZONE_COVERAGE[ZONE_C_ID], new Map(), new Map(), [DRONE_D03])
 
@@ -529,7 +529,7 @@ export function buildInitialSimDrones(simCells: Map<string, SimCell>): SimDrone[
   return [
     {
       droneId: DRONE_D01,
-      label: 'North Gate high',
+      label: 'Aqaba basin high',
       assignedAreaId: 'north-gate-high',
       state: DRONE_STATE.OBSERVE,
       link: DRONE_LINK.ONLINE,
@@ -542,7 +542,7 @@ export function buildInitialSimDrones(simCells: Map<string, SimCell>): SimDrone[
     },
     {
       droneId: DRONE_D02,
-      label: 'Concourse west',
+      label: 'West deck',
       assignedAreaId: 'concourse-west',
       state: DRONE_STATE.OBSERVE,
       link: DRONE_LINK.ONLINE,
@@ -568,7 +568,7 @@ export function buildInitialSimDrones(simCells: Map<string, SimCell>): SimDrone[
     },
     {
       droneId: DRONE_D04,
-      label: 'Concourse east',
+      label: 'East deck',
       assignedAreaId: 'concourse-east',
       state: DRONE_STATE.OBSERVE,
       link: DRONE_LINK.DEGRADED,
@@ -660,7 +660,7 @@ export function buildSuggestionsForA1042(): SuggestionOption[] {
       action: SUGGESTION_ACTION.DIVERT,
       targetExitId: EXIT_E2_ID,
       routeCells: DIVERT_ROUTE_CELLS,
-      text: 'Divert the crowd at the North Gate approach toward Exit E2, which has room to take them.',
+      text: 'Divert the crowd at the Jamrat al-Aqaba approach toward Exit E2, which has room to take them.',
       textSource: TEXT_SOURCE.MODEL,
       rationale:
         'Exit E2 is running at about 27 percent of its 900 per minute capacity, and every cell on this route is below the North Gate density threshold.',

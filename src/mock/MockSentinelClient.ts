@@ -100,6 +100,11 @@ interface OutcomeTracker extends Outcome {
  * push model exactly: this client never waits to be polled, it drives its
  * own channel subscribers forward on its own clock.
  */
+/** Upper bound on frames one replay request may build. Ten minutes at
+ * 1 Hz is 600, which is the widest the interface offers; the cap exists so
+ * a hand-written range cannot allocate without limit. */
+const MAX_REPLAY_FRAMES = 900
+
 export class MockSentinelClient implements SentinelClient {
   private readonly seed: SeedBundle
   private readonly cellStore = new CellStore()
@@ -572,22 +577,58 @@ export class MockSentinelClient implements SentinelClient {
     return paginate(items, query.page, query.pageSize)
   }
 
+  /**
+   * Frames for a period, built in one pass over the retained samples.
+   *
+   * Deliberately not one `getRange` call per cell per frame: that is
+   * quadratic and, at ten minutes of 1 Hz history over a full grid, it
+   * locked the browser hard enough to look like a crash. Here every sample
+   * is visited once and dropped into its bucket, so cost scales with how
+   * much history exists rather than with frames multiplied by cells.
+   *
+   * `MAX_REPLAY_FRAMES` is a hard stop rather than a rounding: a request
+   * wide enough to exceed it gets the frames it asked for up to the cap,
+   * because returning a truncated replay a viewer can scrub is better than
+   * returning nothing, and far better than allocating until the tab dies.
+   */
   async getReplayFrames(_siteId: string, range: TimeRange, stepMs: number): Promise<ReplayFrame[]> {
     const fromMs = Date.parse(range.from)
     const toMs = Date.parse(range.to)
+    const step = Math.max(1, stepMs)
+
+    const bucketCount = Math.min(MAX_REPLAY_FRAMES, Math.floor((toMs - fromMs) / step) + 1)
+    if (bucketCount <= 0) return []
+
     const frames: ReplayFrame[] = []
-    for (let t = fromMs; t <= toMs; t += stepMs) {
-      const bucketFrom = t
-      const bucketTo = t + stepMs - 1
-      const cells = this.cellStore
-        .cellIds()
-        .flatMap((cellId) => this.cellStore.getRange(cellId, bucketFrom, bucketTo))
-      const zones = [...this.zoneHistory.values()]
-        .flatMap((series) => series.filter((z) => Date.parse(z.ts) >= bucketFrom && Date.parse(z.ts) <= bucketTo))
-      const drones = [...this.droneHistory.values()]
-        .flatMap((series) => series.filter((d) => Date.parse(d.ts) >= bucketFrom && Date.parse(d.ts) <= bucketTo))
-      frames.push({ ts: new Date(t).toISOString(), cells, zones, drones })
+    for (let i = 0; i < bucketCount; i += 1) {
+      frames.push({ ts: new Date(fromMs + i * step).toISOString(), cells: [], zones: [], drones: [] })
     }
+
+    const bucketOf = (tsMs: number): number => {
+      if (tsMs < fromMs || tsMs > toMs) return -1
+      const index = Math.floor((tsMs - fromMs) / step)
+      return index >= 0 && index < bucketCount ? index : -1
+    }
+
+    this.cellStore.forEachSample((_cellId, sample, tsMs) => {
+      const index = bucketOf(tsMs)
+      if (index !== -1) frames[index].cells.push(sample)
+    })
+
+    for (const series of this.zoneHistory.values()) {
+      for (const zone of series) {
+        const index = bucketOf(Date.parse(zone.ts))
+        if (index !== -1) frames[index].zones.push(zone)
+      }
+    }
+
+    for (const series of this.droneHistory.values()) {
+      for (const drone of series) {
+        const index = bucketOf(Date.parse(drone.ts))
+        if (index !== -1) frames[index].drones.push(drone)
+      }
+    }
+
     return frames
   }
 

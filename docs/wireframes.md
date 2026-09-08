@@ -109,11 +109,11 @@ data layer from this table.
 
 | Field | Value |
 | - | - |
-| Site | Riverside Arena |
+| Site | Mina - Jamarat Bridge, central deck section |
 | Extent | 300 m by 200 m |
 | Cell size | 5 m by 5 m, 25 square metres |
 | Grid | 60 columns by 40 rows, 2400 cells |
-| Plan image | `riverside-arena-plan.png`, 2048 x 1365 px, uploaded by `s.iqbal` |
+| Plan image | `jamarat-plan.svg`, drawn at one unit per ground metre, uploaded by `s.iqbal` |
 | Scale | Set by drawing a known 50 m distance across the south stand |
 | Clock | 14:03:12 |
 | Latency | 1.2 s measured, 1.7 s at the 95th percentile, against a 2000 ms budget |
@@ -122,26 +122,26 @@ data layer from this table.
 
 | Zone | Risk | Band | Observed | Dwell | Stale | Gap | People | Peak cell |
 | - | - | - | - | - | - | - | - | - |
-| A Concourse | 0.31 | `NORMAL` | 656 | 32 | 24 | 88 | ~1,480 | `C-012-034` at 0.31 |
-| B North Gate | 0.78 | `ELEVATED` | 192 | 72 | 56 | 480 | ~410 | `C-031-022` at 0.78 |
-| C Arena Floor | - | `NOT_ENOUGH_DWELL` | 0 | 372 | 0 | 228 | no estimate | none |
+| A West Deck Approach | 0.31 | `NORMAL` | 656 | 32 | 24 | 88 | ~1,480 | `C-012-034` at 0.31 |
+| B Jamrat al-Aqaba | 0.78 | `ELEVATED` | 192 | 72 | 56 | 480 | ~410 | `C-031-022` at 0.78 |
+| C Jamrat al-Wusta | - | `NOT_ENOUGH_DWELL` | 0 | 372 | 0 | 228 | no estimate | none |
 
 Zone C carries a dash and not a zero. Every cell in it is still filling its 30 s dwell window,
-so the zone has no score at all. Rendering it as 0.00 would claim the arena floor is safe.
+so the zone has no score at all. Rendering it as 0.00 would claim the Wusta basin is safe.
 
 ### Exits, drones and users
 
 | Exit | Cells | Capacity | Current |
 | - | - | - | - |
-| E1 South Gate | 8 | 1200 people/min | 780 |
-| E2 North Gate | 6 | 900 people/min | 240 |
+| E1 Exit W1 to tunnels | 8 | 1200 people/min | 780 |
+| E2 Exit E2 to camps | 6 | 900 people/min | 240 |
 
 | Drone | Label | State | Dwell | Link | Battery | Registration |
 | - | - | - | - | - | - | - |
-| D-01 | North Gate high | `OBSERVE` | 4m12s | `ONLINE` | 78% | locked, 412 inliers |
-| D-02 | Concourse west | `OBSERVE` | 9m03s | `ONLINE` | 64% | locked, 380 inliers |
+| D-01 | Aqaba basin high | `OBSERVE` | 4m12s | `ONLINE` | 78% | locked, 412 inliers |
+| D-02 | West deck | `OBSERVE` | 9m03s | `ONLINE` | 64% | locked, 380 inliers |
 | D-03 | Roving | `TRANSIT` | - | `ONLINE` | 91% | searching, 0 inliers |
-| D-04 | Concourse east | `OBSERVE` | 2m41s | `DEGRADED` | 43% | locked, 291 inliers |
+| D-04 | East deck | `OBSERVE` | 2m41s | `DEGRADED` | 43% | locked, 291 inliers |
 
 D-02 and D-04 both observe cells `C-020-030` to `C-022-030`, which is where fusion by
 coordinates becomes visible (FR6.1).
@@ -156,7 +156,7 @@ coordinates becomes visible (FR6.1).
 
 ### The open alert
 
-`A-1042`, cell `C-031-022`, zone B North Gate, score 0.78 against a threshold of 0.70,
+`A-1042`, cell `C-031-022`, zone B Jamrat al-Aqaba, score 0.78 against a threshold of 0.70,
 `ELEVATED`, `ACKNOWLEDGED`, raised 14:02:51, acknowledged by `a.rahman` at 14:03:04.
 Clears when risk stays below 0.65 for 30 seconds.
 

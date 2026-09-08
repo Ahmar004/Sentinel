@@ -3,7 +3,7 @@ import type { Cell, LatLon } from '@/domain/types'
 import { type Rng, shuffle } from './rng'
 
 /**
- * Grid geometry for the canonical Riverside Arena dataset - wireframes.md
+ * Grid geometry for the canonical Mina Jamarat Bridge dataset - wireframes.md
  * Section 5. The site is partitioned into four disjoint rectangular blocks
  * so every zone's cell count matches the canonical table exactly:
  *

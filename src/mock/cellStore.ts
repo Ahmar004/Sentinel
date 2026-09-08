@@ -62,4 +62,20 @@ export class CellStore {
   cellIds(): string[] {
     return [...this.series.keys()]
   }
+
+  /**
+   * Walks every retained sample of every cell once, oldest buffer first.
+   *
+   * Exists because building replay frames by calling `getRange` per cell
+   * per frame is quadratic: a ten minute replay at 1 Hz is 600 frames, and
+   * at 2400 cells that is 1.44 million range scans, each copying both
+   * buffers and parsing every timestamp. One pass with the caller
+   * bucketing as it goes is linear in the number of samples.
+   */
+  forEachSample(visit: (cellId: string, sample: CellSample, tsMs: number) => void): void {
+    for (const [cellId, series] of this.series) {
+      for (const sample of series.downsampled) visit(cellId, sample, Date.parse(sample.ts))
+      for (const sample of series.fullRate) visit(cellId, sample, Date.parse(sample.ts))
+    }
+  }
 }

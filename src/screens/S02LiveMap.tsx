@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { ChevronDown, ChevronUp } from 'lucide-react'
+import { ChevronDown, ChevronUp, Layers } from 'lucide-react'
 import { CellLayer, ConnectionBanner, Legend, SiteMap, type CellGridEntry } from '@/components'
 import { CONNECTION_STATE } from '@/domain/constants'
 import { CELL_SIZE_M, SITE_EXTENT_M, parseCellId } from '@/domain/parameters'
@@ -51,6 +51,12 @@ export default function S02LiveMap() {
   const [confirming, setConfirming] = useState<string | null>(null)
   const [dismissing, setDismissing] = useState<string | null>(null)
   const [toast, setToast] = useState<string | null>(null)
+  // The overlay is what Sentinel adds on top of the venue plan. Being able
+  // to switch it off is how a viewer sees the ground the system is
+  // reasoning about, and how a demo shows plan and reading side by side.
+  const [showOverlay, setShowOverlay] = useState(true)
+  const [showDrones, setShowDrones] = useState(true)
+  const [controlsOpen, setControlsOpen] = useState(false)
 
   const offline = connectionState === CONNECTION_STATE.DISCONNECTED
 
@@ -109,17 +115,60 @@ export default function S02LiveMap() {
         <div className="flex min-w-0 flex-1 flex-col">
           <div className="relative min-h-0 flex-1">
             <SiteMap
-              planImageUrl={site?.planImageUrl ?? '/riverside-arena-plan.svg'}
+              planImageUrl={site?.planImageUrl ?? '/jamarat-plan.svg'}
               groundExtentM={site?.groundExtentM ?? SITE_EXTENT_M}
             >
-              <CellLayer cells={cells} cellSizeM={CELL_SIZE_M} onCellClick={setInspectedCellId} />
-              <DroneMarkers drones={drones} />
+              {showOverlay ? (
+                <CellLayer cells={cells} cellSizeM={CELL_SIZE_M} onCellClick={setInspectedCellId} />
+              ) : null}
+              {showDrones ? <DroneMarkers drones={drones} /> : null}
             </SiteMap>
-            <div className="pointer-events-none absolute bottom-2 left-2 z-[400] max-w-[min(20rem,calc(100%-1rem))]">
-              <div className="pointer-events-auto rounded border border-border bg-surface-raised/95 p-2">
-                <Legend />
-              </div>
+
+            <div className="absolute top-2 right-2 z-[400]">
+              <button
+                type="button"
+                onClick={() => setControlsOpen((v) => !v)}
+                aria-expanded={controlsOpen}
+                aria-label="Map layers"
+                className="flex items-center gap-2 rounded border border-border bg-surface-raised/95 px-2 py-1.5 text-xs hover:bg-surface-sunken focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+              >
+                <Layers className="size-4" aria-hidden="true" />
+                Layers
+              </button>
+              {controlsOpen ? (
+                <div className="mt-1 w-60 rounded border border-border bg-surface-raised/95 p-2 text-xs">
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={showOverlay}
+                      onChange={(event) => setShowOverlay(event.target.checked)}
+                      className="size-3.5"
+                    />
+                    Density and flow overlay
+                  </label>
+                  <label className="mt-1.5 flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={showDrones}
+                      onChange={(event) => setShowDrones(event.target.checked)}
+                      className="size-3.5"
+                    />
+                    Drone footprints
+                  </label>
+                  <p className="mt-2 text-ink-muted">
+                    Turning the overlay off shows the venue plan alone. It does not pause the feed: values keep updating
+                    underneath and reappear unchanged when it is switched back on.
+                  </p>
+                </div>
+              ) : null}
             </div>
+            {showOverlay ? (
+              <div className="pointer-events-none absolute bottom-2 left-2 z-[400] max-w-[min(20rem,calc(100%-1rem))]">
+                <div className="pointer-events-auto rounded border border-border bg-surface-raised/95 p-2">
+                  <Legend />
+                </div>
+              </div>
+            ) : null}
           </div>
 
           <div className="hidden shrink-0 border-t border-border md:block">

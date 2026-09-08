@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Bell, Download, Moon, Sun, LogOut, User as UserIcon } from 'lucide-react'
-import { useConfigStore, useConnectionState, useSessionStore } from '@/store'
+import { getSentinelClient, useConfigStore, useConnectionState, useSessionStore } from '@/store'
+import { LATENCY_BUDGET_MS } from '@/domain/parameters'
 import { useClock } from '@/hooks/useClock'
 import { useTheme } from '@/hooks/useTheme'
 import ConnectionChip from '@/components/ConnectionChip'
@@ -24,6 +25,25 @@ export default function TopBar({ onOpenNotifications, onOpenInstall }: TopBarPro
   const user = useSessionStore((s) => s.user)
   const logout = useSessionStore((s) => s.logout)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [latencyMs, setLatencyMs] = useState<number | null>(null)
+
+  // The measured figure, refreshed on the site clock. CLAUDE.md requires
+  // the coordinator to be able to see whether what they are looking at is
+  // current without asking, so this is never a placeholder.
+  useEffect(() => {
+    let cancelled = false
+    getSentinelClient()
+      .getHealth()
+      .then((health) => {
+        if (!cancelled) setLatencyMs(health.latency.measuredMs)
+      })
+      .catch(() => {
+        if (!cancelled) setLatencyMs(null)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [clock])
 
   return (
     <header className="flex h-14 shrink-0 items-center justify-between border-b border-border bg-surface-raised px-4">
@@ -33,12 +53,31 @@ export default function TopBar({ onOpenNotifications, onOpenInstall }: TopBarPro
 
       <div className="flex items-center gap-4">
         <ConnectionChip state={connectionState} />
-        <span className="text-xs text-ink-muted" title="End-to-end latency">
-          {'—'}
+        <span
+          className={`text-xs tabular-nums ${
+            latencyMs !== null && latencyMs > LATENCY_BUDGET_MS ? 'text-risk-elevated' : 'text-ink-muted'
+          }`}
+          title={`End-to-end latency, against a ${LATENCY_BUDGET_MS} ms budget`}
+        >
+          {latencyMs === null ? 'latency unknown' : `${(latencyMs / 1000).toFixed(1)} s`}
         </span>
         <span className="text-xs text-ink-muted" suppressHydrationWarning>
           {clock.toLocaleTimeString()}
         </span>
+
+        <button
+          type="button"
+          onClick={toggleTheme}
+          aria-label={theme === 'dark' ? 'Switch to the light theme' : 'Switch to the dark theme'}
+          title={theme === 'dark' ? 'Light theme' : 'Dark theme'}
+          className="rounded border border-border p-1.5 hover:bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+        >
+          {theme === 'dark' ? (
+            <Sun className="size-4" aria-hidden="true" />
+          ) : (
+            <Moon className="size-4" aria-hidden="true" />
+          )}
+        </button>
 
         <div className="relative">
           <button
@@ -57,19 +96,6 @@ export default function TopBar({ onOpenNotifications, onOpenInstall }: TopBarPro
               role="menu"
               className="absolute right-0 z-10 mt-1 w-44 rounded border border-border bg-surface-raised p-1 shadow-lg"
             >
-              <button
-                type="button"
-                role="menuitem"
-                onClick={toggleTheme}
-                className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-xs hover:bg-surface"
-              >
-                {theme === 'dark' ? (
-                  <Sun className="size-4" aria-hidden="true" />
-                ) : (
-                  <Moon className="size-4" aria-hidden="true" />
-                )}
-                {theme === 'dark' ? 'Light theme' : 'Dark theme'}
-              </button>
               <button
                 type="button"
                 role="menuitem"

@@ -52,7 +52,7 @@ export function PlanStep() {
 
       <dl className="mt-3">
         <Row label="Plan image">
-          <span className="font-mono text-xs">{site?.planImageUrl ?? '/riverside-arena-plan.svg'}</span>
+          <span className="font-mono text-xs">{site?.planImageUrl ?? '/jamarat-plan.svg'}</span>
         </Row>
         <Row label="Ground extent">
           <span className="font-mono text-xs tabular-nums">
@@ -65,7 +65,7 @@ export function PlanStep() {
       </dl>
 
       <div className="mt-3 h-64 overflow-hidden rounded border border-border">
-        <SiteMap planImageUrl={site?.planImageUrl ?? '/riverside-arena-plan.svg'} groundExtentM={extent} />
+        <SiteMap planImageUrl={site?.planImageUrl ?? '/jamarat-plan.svg'} groundExtentM={extent} />
       </div>
 
       <Note>
@@ -670,7 +670,7 @@ export function ReviewStep({ onSave }: { onSave?: () => void }) {
 
       <div className="mt-3 h-64 overflow-hidden rounded border border-border">
         <SiteMap
-          planImageUrl={site?.planImageUrl ?? '/riverside-arena-plan.svg'}
+          planImageUrl={site?.planImageUrl ?? '/jamarat-plan.svg'}
           groundExtentM={site?.groundExtentM ?? SITE_EXTENT_M}
         >
           <CellLayer cells={preview} cellSizeM={grid?.cellSizeM ?? CELL_SIZE_M} />

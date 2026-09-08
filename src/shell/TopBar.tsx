@@ -3,6 +3,7 @@ import { Bell, Download, Moon, Sun, LogOut, User as UserIcon } from 'lucide-reac
 import { getSentinelClient, useConfigStore, useConnectionState, useSessionStore } from '@/store'
 import { LATENCY_BUDGET_MS } from '@/domain/parameters'
 import { useClock } from '@/hooks/useClock'
+import { HEALTH_POLL_MS, useTicker } from '@/hooks/useTicker'
 import { useTheme } from '@/hooks/useTheme'
 import ConnectionChip from '@/components/ConnectionChip'
 
@@ -26,10 +27,12 @@ export default function TopBar({ onOpenNotifications, onOpenInstall }: TopBarPro
   const logout = useSessionStore((s) => s.logout)
   const [menuOpen, setMenuOpen] = useState(false)
   const [latencyMs, setLatencyMs] = useState<number | null>(null)
+  const healthTick = useTicker(HEALTH_POLL_MS)
 
-  // The measured figure, refreshed on the site clock. CLAUDE.md requires
-  // the coordinator to be able to see whether what they are looking at is
-  // current without asking, so this is never a placeholder.
+  // The measured figure, refreshed at the rate health is actually pushed
+  // rather than on the site clock. CLAUDE.md requires the coordinator to be
+  // able to see whether what they are looking at is current without asking,
+  // so this is never a placeholder.
   useEffect(() => {
     let cancelled = false
     getSentinelClient()
@@ -43,7 +46,7 @@ export default function TopBar({ onOpenNotifications, onOpenInstall }: TopBarPro
     return () => {
       cancelled = true
     }
-  }, [clock])
+  }, [healthTick])
 
   return (
     <header className="flex h-14 shrink-0 items-center justify-between border-b border-border bg-surface-raised px-4">

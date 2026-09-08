@@ -4,7 +4,7 @@ import { ROLE } from '@/domain/constants'
 import { LATENCY_BUDGET_MS } from '@/domain/parameters'
 import type { SystemHealth } from '@/domain/types'
 import { getSentinelClient, useCurrentRole } from '@/store'
-import { useClock } from '@/hooks/useClock'
+import { HEALTH_POLL_MS, useTicker } from '@/hooks/useTicker'
 
 type Tab = 'workers' | 'latency' | 'services'
 
@@ -45,7 +45,7 @@ export default function S15SystemHealth() {
   const [tab, setTab] = useState<Tab>('workers')
   const [load, setLoad] = useState<Load>({ state: 'loading' })
   const [history, setHistory] = useState<{ ts: string; label: string; measuredMs: number }[]>([])
-  const now = useClock()
+  const healthTick = useTicker(HEALTH_POLL_MS)
 
   useEffect(() => {
     let cancelled = false
@@ -71,10 +71,9 @@ export default function S15SystemHealth() {
     return () => {
       cancelled = true
     }
-    // The site clock ticks once a second, which is the cadence health is
-    // pushed at (srs.md 3.2 lists health.update every 5 s; polling the
-    // snapshot on the clock keeps the chart moving without a second timer).
-  }, [now])
+    // Matches the rate srs.md Section 3.2 pushes health.update at, so the
+    // chart gains a point exactly when a new measurement could exist.
+  }, [healthTick])
 
   if (!role) return null
 

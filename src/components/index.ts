@@ -39,3 +39,6 @@ export { default as StateChip } from './StateChip'
 export type { StateChipProps } from './StateChip'
 
 export { default as RolesReference } from './RolesReference'
+
+export { default as Dialog } from './Dialog'
+export type { DialogProps } from './Dialog'

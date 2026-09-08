@@ -39,7 +39,9 @@ export default tseslint.config(
     },
   },
   {
-    files: ['src/store/**/*.{ts,tsx}'],
+    // Tests legitimately construct fakes against the SentinelClient
+    // interface directly, without going through the store.
+    files: ['src/store/**/*.{ts,tsx}', '**/*.test.{ts,tsx}'],
     rules: {
       'no-restricted-imports': 'off',
     },

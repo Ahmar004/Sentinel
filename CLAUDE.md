@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **What this repository is: a proof-of-concept front-end only.** A complete, clickable React UI for Sentinel (Crowd Control and Stampede Early Signs Detection System), driven entirely by mock data, presented at the FYP proposal defence. There is no backend, no WebSocket server, and no ML in this repository. Every screen must behave as if the full pipeline were live.
 
-**Stack: React (PWA) + Vite + Tailwind CSS, Leaflet for the map, Recharts for timelines.**
+**Stack: React (PWA) + TypeScript + Vite + Tailwind CSS, Zustand for live state, Leaflet for the map, Recharts for timelines.**
 
 **Global principle: honesty over completeness.** Sentinel's credibility rests on never showing a number it cannot justify. A prettier map that hides unknown states misrepresents the system and loses the defence.
 
@@ -76,7 +76,7 @@ The UI must never imply a capability the project has ruled out. DO NOT build, mo
 - DO NOT embed data generation, ticking timers, or business logic in UI components. Extract to hooks or controllers, keep components pure (data in via props, actions out via callbacks), and lift shared state to the nearest common parent.
 - DO NOT duplicate JSX blocks, hook logic, or utility patterns - extract to `components/`, `hooks/`, or `utils/` at the second cross-file use or the third repetition within the same file.
 - DO NOT hardcode domain enum literals (cell states, risk bands, roles, drone states, alert severities, suggestion statuses); import them from a constants module.
-- DO NOT hardcode design tokens inline. Colours, spacing and typography live in the Tailwind theme config; the four observation states and the four risk bands are named tokens there, so one edit restyles every surface consistently.
+- DO NOT hardcode design tokens inline. Colours, spacing and typography live in the `@theme` block in CSS, which is where Tailwind 4 keeps the theme; there is no `tailwind.config.js`. The four observation states and the four risk bands are named tokens there, so one edit restyles every surface consistently.
 - Roles gate the interface (FR10): coordinator, administrator, drone operator and IT see different navigation and different screens. Derive every role-dependent decision from one session object passed down through props, never from ad hoc checks scattered through components.
 - FR8 (history and replay), FR9 (venue setup, cell grid, zones, exits and capacities, thresholds, drone assignment) and FR10 (auth and RBAC) have no ML behind them, so they are the parts that can be made to feel genuinely complete. Give them real depth; they carry a large part of the demo.
 

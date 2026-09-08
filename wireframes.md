@@ -122,7 +122,7 @@ data layer from this table.
 
 | Zone | Risk | Band | Observed | Dwell | Stale | Gap | People | Peak cell |
 | - | - | - | - | - | - | - | - | - |
-| A Concourse | 0.31 | `NORMAL` | 656 | 32 | 24 | 88 | ~1,480 | `C-012-034` at 0.44 |
+| A Concourse | 0.31 | `NORMAL` | 656 | 32 | 24 | 88 | ~1,480 | `C-012-034` at 0.31 |
 | B North Gate | 0.78 | `ELEVATED` | 192 | 72 | 56 | 480 | ~410 | `C-031-022` at 0.78 |
 | C Arena Floor | - | `NOT_ENOUGH_DWELL` | 0 | 372 | 0 | 228 | no estimate | none |
 

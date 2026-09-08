@@ -40,7 +40,7 @@ export default function CoverageBar({ coverage, risk }: CoverageBarProps) {
           </span>
         ) : (
           <span className="text-ink-muted" title="Every cell in this zone is not enough dwell or unobserved">
-            {'—'}
+            No score
           </span>
         )}
       </div>

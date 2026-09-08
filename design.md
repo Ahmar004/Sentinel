@@ -316,7 +316,7 @@ Administrator, first run for a site. Eight steps then review. Each step is a com
 | 4. Attributes | Paint cell attributes by hand: walkable, exit, barrier, obstruction | FR9.4 |
 | 5. Exits | Group exit cells into named exits and set capacity in people per minute | FR9.5 |
 | 6. Zones | Select cells into two to four named zones | FR9.6 |
-| 7. Thresholds | Per-zone risk and density thresholds, defaulting to 0.70 | FR9.7 |
+| 7. Thresholds | Per-zone risk and density thresholds, defaulting to a risk threshold of 0.70 and a density threshold of 4.0 people per square metre | FR9.7 |
 | 8. Drones | Register drones and assign each an initial area | FR9.8 |
 | Review | Everything above as a summary, then Save | FR9.9 |
 
@@ -663,7 +663,7 @@ There are two layouts, both designed, neither reflowed from the other. There is 
 
 ## 12. Requirement to screen traceability
 
-All sixty-one leaf requirements from `srs.md` Section 4. The same mapping fills the empty column in the SRS traceability matrix.
+All sixty-four leaf requirements from `srs.md` Section 4. The same mapping fills the empty column in the SRS traceability matrix.
 
 | Requirement | Screens and dialogs |
 | - | - |
@@ -698,12 +698,12 @@ All sixty-one leaf requirements from `srs.md` Section 4. The same mapping fills 
 | FR6.3 | `S02` gap treatment, `D01`, `C07`, `D07` |
 | FR6.4 | `C02`, `C03` series breaks, `C07` |
 | FR6.5 | `S11` step 6, `S12` Zones tab |
-| FR7.1 | `C05` in `S02` rail and `S04` |
+| FR7.1 | `C05` in `S02` rail and `S04`, `S18` |
 | FR7.2 | `C05` rationale |
 | FR7.3 | `C05` safeguard list, `D02` |
-| FR7.4 | `C05` rejected cards |
-| FR7.5 | `C05` no-safe-option state |
-| FR7.6 | `C05` source badge, `S15` Services |
+| FR7.4 | `C05` rejected cards, `S18` |
+| FR7.5 | `C05` no-safe-option state, `S18` |
+| FR7.6 | `C05` source badge, `S15` Services, `S18` |
 | FR7.7 | `D02` |
 | FR7.8 | `D02`, `D03`, `S14` |
 | FR8.1 | `S08`, `S09` |
@@ -711,7 +711,7 @@ All sixty-one leaf requirements from `srs.md` Section 4. The same mapping fills 
 | FR8.3 | `S08` filter bar, `C09` |
 | FR8.4 | `S10` |
 | FR8.5 | `S10` resolution chip and stepped playhead |
-| FR8.6 | `S09` outcome, `C05` countdown |
+| FR8.6 | `S09` outcome, `C05` countdown, `S18` verdict chip |
 | FR8.7 | `S09`, `S04` from history |
 | FR9.1 | `S11` step 1, `S12` Plan tab |
 | FR9.2 | `S11` step 2, `S12` Grid tab, `D11` |
@@ -728,6 +728,9 @@ All sixty-one leaf requirements from `srs.md` Section 4. The same mapping fills 
 | FR10.4 | IT navigation set, IT landing note on `S15`, `S17` |
 | FR10.5 | `S13`, `D08`, `D09` |
 | FR10.6 | `S14` |
+| FR11.1 | `S19` |
+| FR11.2 | `S19` export |
+| FR11.3 | `S19` no-data states |
 
 Non-functional requirements: NFR1 top bar and `S15`; NFR2 Section 11 and `D13`; NFR3 the alert rail design in `S02`; NFR4 `S08`, `S09`, `S14`; NFR5 Section 11 and `C07`; NFR6 Section 10; NFR7 `S01`, `D12`, `S16`; NFR8 `C01` renders an uploaded image with no tile provider; NFR10 `C02` renders 2400 cells with only observed cells re-rendering per tick.
 
@@ -762,3 +765,5 @@ Restated from SRS 2.6, because the fastest way to lose the defence is a screen t
 - No screen offers a fifth zone. `S11` step 6 and `S12` Zones say so in words.
 - No screen loads a map tile or anything needing an API key.
 - No screen plays video.
+- No screen exports through a hosted service. `S19` generates its export in the browser.
+- No screen forecasts. `S19` reports what happened and says so in words.

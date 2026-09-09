@@ -1,6 +1,6 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { Dialog } from '@/components'
-import { DWELL_GATE_MS, GRID_COLUMNS, GRID_ROWS, formatCellId, STALE_MAX_AGE_MS } from '@/domain/parameters'
+import { DWELL_GATE_MS, STALE_MAX_AGE_MS } from '@/domain/parameters'
 import { getSentinelClient, useConfigStore, useDrone } from '@/store'
 
 export interface AssignDroneProps {
@@ -9,72 +9,49 @@ export interface AssignDroneProps {
   onAssigned?: (message: string) => void
 }
 
-/** A target area is a block of cells, sized like a drone's usual footprint
- * so the review list is a realistic count rather than a token one. */
-const AREA_SPAN_CELLS = 3
-
-function areaCells(col: number, row: number): string[] {
-  const cells: string[] = []
-  for (let r = row; r < row + AREA_SPAN_CELLS && r < GRID_ROWS; r += 1) {
-    for (let c = col; c < col + AREA_SPAN_CELLS && c < GRID_COLUMNS; c += 1) {
-      cells.push(formatCellId(c, r))
-    }
-  }
-  return cells
-}
-
 /**
- * design.md D07 - send a drone to a new area (FR9.8).
+ * design.md D07 - send a drone to a zone (FR9.8).
  *
- * The target is an AREA, never a zone: a drone is never bound to a zone,
- * because every measurement belongs to a cell. That is what lets the fleet
- * move without any measurement moving with it.
+ * The target is chosen from the zones actually configured for this
+ * environment, because zones are its named subdivisions and there is
+ * nothing else meaningful to send a drone to. A free-text target would let
+ * an operator name somewhere that does not exist.
  *
- * The dialog states both consequences of moving before it is confirmed:
- * the cells being vacated age into gaps (FR6.3), and the cells being
- * arrived at show not enough dwell for thirty seconds before any score
- * appears (FR4.2). Neither is a fault, and neither should surprise a
- * coordinator watching the map a moment later.
+ * Sending a drone to a zone does not bind it to that zone. It keeps
+ * writing to whatever cells it actually sees, and its zone membership
+ * stays computed from its footprint, which is what lets the fleet move
+ * without any measurement moving with it. The dialog says so, because the
+ * dropdown could easily suggest otherwise.
+ *
+ * It also states both consequences of moving before it is confirmed: the
+ * cells being left age into gaps (FR6.3), and the cells being arrived at
+ * report not enough dwell for thirty seconds before any score appears
+ * (FR4.2). Neither is a fault, and neither should surprise a coordinator
+ * watching the map a moment later.
  */
 export default function AssignDrone({ droneId, onClose, onAssigned }: AssignDroneProps) {
   const drone = useDrone(droneId ?? '')
   const zones = useConfigStore((s) => s.zones)
 
-  const [label, setLabel] = useState('')
-  const [col, setCol] = useState('30')
-  const [row, setRow] = useState('20')
+  const [chosenZoneId, setChosenZoneId] = useState('')
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const colValue = Number(col)
-  const rowValue = Number(row)
-  const valid =
-    label.trim().length > 0 &&
-    Number.isInteger(colValue) &&
-    Number.isInteger(rowValue) &&
-    colValue >= 0 &&
-    colValue < GRID_COLUMNS &&
-    rowValue >= 0 &&
-    rowValue < GRID_ROWS
-
-  const target = useMemo(() => (valid ? areaCells(colValue, rowValue) : []), [valid, colValue, rowValue])
-
-  const vacating = drone?.footprintCells ?? []
-  const zoneNamesTouched = useMemo(() => {
-    const names = new Set<string>()
-    for (const zone of zones) {
-      if (zone.cellIds.some((id) => target.includes(id))) names.add(zone.name)
-    }
-    return [...names]
-  }, [zones, target])
+  // Falls back to the first configured zone rather than defaulting through
+  // an effect: the selection is derivable from what is loaded, so writing
+  // it into state would only add a render nobody needs.
+  const zoneId = chosenZoneId || zones[0]?.zoneId || ''
+  const target = zones.find((z) => z.zoneId === zoneId)
+  const valid = target !== undefined
+  const leaving = drone?.footprintCells ?? []
 
   const submit = async () => {
-    if (!droneId || !valid) return
+    if (!droneId || !target) return
     setSaving(true)
     setError(null)
     try {
-      await getSentinelClient().assignDrone(droneId, { label: label.trim(), cellIds: target })
-      onAssigned?.(`${droneId} sent to ${label.trim()}, ${target.length} cells.`)
+      await getSentinelClient().assignDrone(droneId, { zoneId: target.zoneId })
+      onAssigned?.(`${droneId} sent to ${target.name}.`)
       onClose()
     } catch {
       setError('The assignment could not be sent. The drone has not moved.')
@@ -89,7 +66,7 @@ export default function AssignDrone({ droneId, onClose, onAssigned }: AssignDron
     <Dialog
       open
       title={`Assign ${droneId}`}
-      description="Send this drone to a new area. Areas are groups of cells, not zones."
+      description="Send this drone to one of the zones this environment is divided into."
       confirmLabel={saving ? 'Sending...' : 'Send drone'}
       confirmDisabled={!valid || saving}
       onConfirm={() => void submit()}
@@ -97,77 +74,46 @@ export default function AssignDrone({ droneId, onClose, onAssigned }: AssignDron
       footnote="Assignment is audit-logged."
     >
       <div className="mb-4">
-        <label htmlFor="area-label" className="mb-1 block text-sm font-medium">
-          Area name
+        <label htmlFor="assign-zone" className="mb-1 block text-sm font-medium">
+          Zone
         </label>
-        <input
-          id="area-label"
-          value={label}
-          onChange={(event) => setLabel(event.target.value)}
-          placeholder="North gate approach"
+        <select
+          id="assign-zone"
+          value={zoneId}
+          onChange={(event) => setChosenZoneId(event.target.value)}
           className="w-full rounded border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-accent"
-        />
+        >
+          {zones.length === 0 ? <option value="">No zones are configured</option> : null}
+          {zones.map((zone) => (
+            <option key={zone.zoneId} value={zone.zoneId}>
+              {zone.name}
+            </option>
+          ))}
+        </select>
+        <p className="mt-1 text-xs text-ink-muted">
+          Only zones configured for this environment can be chosen. An administrator defines them in venue setup.
+        </p>
       </div>
 
-      <div className="mb-4 grid grid-cols-2 gap-3">
-        <div>
-          <label htmlFor="area-col" className="mb-1 block text-sm font-medium">
-            Column
-          </label>
-          <input
-            id="area-col"
-            type="number"
-            min={0}
-            max={GRID_COLUMNS - 1}
-            value={col}
-            onChange={(event) => setCol(event.target.value)}
-            className="w-full rounded border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-accent"
-          />
-        </div>
-        <div>
-          <label htmlFor="area-row" className="mb-1 block text-sm font-medium">
-            Row
-          </label>
-          <input
-            id="area-row"
-            type="number"
-            min={0}
-            max={GRID_ROWS - 1}
-            value={row}
-            onChange={(event) => setRow(event.target.value)}
-            className="w-full rounded border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-accent"
-          />
-        </div>
-      </div>
-
-      <section className="mb-4">
-        <h3 className="mb-1 text-sm font-medium">Cells this covers</h3>
-        {target.length === 0 ? (
-          <p className="text-xs text-ink-muted">Enter a valid column and row to see the target cells.</p>
-        ) : (
-          <>
-            <p className="font-mono text-xs text-ink-muted">
-              {target.length} cells, {target[0]} to {target[target.length - 1]}
-            </p>
-            {zoneNamesTouched.length > 0 ? (
-              <p className="mt-1 text-xs text-ink-muted">
-                Overlaps {zoneNamesTouched.join(', ')}. An area may span zones freely; it never becomes one.
-              </p>
-            ) : (
-              <p className="mt-1 text-xs text-ink-muted">This area lies outside every configured zone.</p>
-            )}
-          </>
-        )}
-      </section>
+      {target ? (
+        <p className="mb-4 text-xs text-ink-muted">
+          {target.name} covers <span className="font-mono tabular-nums">{target.cellIds.length}</span> cells. The drone
+          will observe a patch of them at a time, not all of them at once.
+        </p>
+      ) : null}
 
       <div className="rounded border border-border bg-surface-sunken p-2 text-xs">
         <p>
-          On arrival these cells report not enough dwell for {DWELL_GATE_MS / 1000} seconds before any score appears.
+          Sending a drone to a zone does not bind it to that zone. It writes to whichever cells it actually sees, and
+          its zone membership is computed from its footprint moment to moment.
+        </p>
+        <p className="mt-2">
+          On arrival its cells report not enough dwell for {DWELL_GATE_MS / 1000} seconds before any score appears.
           Density is measured immediately; risk waits for a full window.
         </p>
-        {vacating.length > 0 ? (
+        {leaving.length > 0 ? (
           <p className="mt-2">
-            The {vacating.length} cells being vacated stop being observed and become gaps once nothing has seen them for{' '}
+            The {leaving.length} cells it is leaving stop being observed and become gaps once nothing has seen them for{' '}
             {STALE_MAX_AGE_MS / 1000} seconds. They are not left showing their last value.
           </p>
         ) : null}

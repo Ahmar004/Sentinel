@@ -16,13 +16,13 @@ const base: AnalyticsSummary = {
   verdicts: { PENDING: 0, IMPROVED: 2, UNCHANGED: 1, WORSENED: 0 },
 }
 
-const names = { 'zone-a': 'A Concourse', 'zone-b': 'B North Gate', 'zone-c': 'C Arena Floor' }
+const names = { 'zone-a': 'West Deck Approach', 'zone-b': 'Jamrat al-Aqaba', 'zone-c': 'Jamrat al-Wusta' }
 
 describe('analyticsToCsv', () => {
   it('writes a measured zero as zero and an unobserved zone as no data', () => {
     const csv = analyticsToCsv(base, names)
-    expect(csv).toContain('A Concourse,0,94%')
-    expect(csv).toContain(`C Arena Floor,${NO_DATA},0%`)
+    expect(csv).toContain('West Deck Approach,0,94%')
+    expect(csv).toContain(`Jamrat al-Wusta,${NO_DATA},0%`)
   })
 
   it('writes no data rather than zero when no alert was raised', () => {
@@ -52,8 +52,8 @@ describe('analyticsToCsv', () => {
   })
 
   it('escapes a zone name containing a comma', () => {
-    const csv = analyticsToCsv(base, { ...names, 'zone-a': 'A Concourse, west' })
-    expect(csv).toContain('"A Concourse, west",0,94%')
+    const csv = analyticsToCsv(base, { ...names, 'zone-a': 'West Deck, north side' })
+    expect(csv).toContain('"West Deck, north side",0,94%')
   })
 })
 

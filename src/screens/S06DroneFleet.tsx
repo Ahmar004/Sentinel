@@ -21,14 +21,14 @@ type Cells = Readonly<Record<string, CellObservation>>
 function DroneCard({
   drone,
   label,
-  areaId,
+  assignedZoneName,
   cellsById,
   canAssign,
   onAssign,
 }: {
   drone: DroneUpdate
   label: string
-  areaId: string | null
+  assignedZoneName: string | null
   cellsById: Cells
   canAssign: boolean
   onAssign: (droneId: string) => void
@@ -73,8 +73,8 @@ function DroneCard({
           </dd>
         </div>
         <div className="col-span-2 flex justify-between">
-          <dt className="text-ink-muted">Assigned area</dt>
-          <dd className="font-mono">{areaId ?? 'None'}</dd>
+          <dt className="text-ink-muted">Assigned zone</dt>
+          <dd>{assignedZoneName ?? 'None'}</dd>
         </div>
       </dl>
 
@@ -188,7 +188,11 @@ export default function S06DroneFleet() {
                 key={drone.droneId}
                 drone={drone}
                 label={identity?.label ?? 'Drone'}
-                areaId={identity?.assignedAreaId ?? null}
+                assignedZoneName={
+                  identity?.assignedZoneId
+                    ? (zones.find((z) => z.zoneId === identity.assignedZoneId)?.name ?? identity.assignedZoneId)
+                    : null
+                }
                 cellsById={cellsById}
                 canAssign={canAssign}
                 onAssign={setAssigning}

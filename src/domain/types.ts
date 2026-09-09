@@ -150,7 +150,10 @@ export interface DroneUpdate {
  * change tick to tick. */
 export interface Drone extends DroneUpdate {
   label: string
-  assignedAreaId: string | null
+  /** The zone this drone was last sent to, or null if it has never been
+   * given one. Not the zone it is currently over: that is computed from
+   * its footprint and can differ at any moment. */
+  assignedZoneId: string | null
 }
 
 export interface AlertAttribution {
@@ -387,9 +390,18 @@ export interface ProposalDecision {
 
 /** A drone's assignment target. Spans zones freely and never becomes a
  * zone (FR9.8). */
-export interface AreaTarget {
-  label: string
-  cellIds: string[]
+/**
+ * Where a drone is being sent. A zone, because zones are the named
+ * subdivisions of the monitored environment and are the only subdivisions
+ * an operator works in.
+ *
+ * Sending a drone to a zone does not bind it to that zone (FR9.8). It
+ * keeps writing to whatever cells it actually sees, and its zone
+ * membership stays computed from its footprint, which is what lets the
+ * fleet move without any measurement moving with it.
+ */
+export interface ZoneTarget {
+  zoneId: string
 }
 
 export interface User {

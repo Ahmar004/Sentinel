@@ -40,11 +40,11 @@ import type {
   Zone,
 } from '@/domain/types'
 import {
-  arenaFloorCellIds,
+  zoneCCellIds,
   assignCellAttributes,
   cellCentreLatLon,
-  concourseCellIds,
-  northGateCellIds,
+  zoneACellIds,
+  zoneBCellIds,
   rectCellIds,
   toCellRecord,
   unzonedCellIds,
@@ -54,8 +54,34 @@ import { CANONICAL_SEED, clamp, mulberry32, nextFloat, nextInt, pick, round, shu
 import type { SimCell, SimDrone } from './simTypes'
 
 /** The moment the canonical dataset describes - wireframes.md "Clock 14:03:12". */
-export const SEED_NOW_ISO = '2026-09-08T14:03:12.000Z'
-export const SEED_NOW_MS = Date.parse(SEED_NOW_ISO)
+/**
+ * The moment the canonical dataset in docs/wireframes.md describes. Every
+ * seeded timestamp is expressed relative to it.
+ */
+const CANONICAL_NOW_MS = Date.parse('2026-09-08T14:03:12.000Z')
+
+/**
+ * The demo's "now", anchored to the real clock when the module loads.
+ *
+ * The canonical dataset pins a fixed moment so that fifty wireframes agree
+ * with each other, which is exactly right for a frozen picture and exactly
+ * wrong for a running app: every screen asks for "the last hour" measured
+ * from the real clock, so a seed pinned to a past date returns nothing at
+ * all, and returns less every day that passes.
+ *
+ * Anchoring here keeps every relative offset the canonical dataset states -
+ * the alert is still raised 21 seconds before now, still acknowledged 13
+ * seconds after that - while placing the whole story where the screens are
+ * actually looking.
+ */
+export const SEED_NOW_MS = Date.now()
+export const SEED_NOW_ISO = new Date(SEED_NOW_MS).toISOString()
+
+/** Translates a canonical timestamp onto the demo clock, preserving its
+ * distance from the canonical moment exactly. */
+export function seedTime(canonicalIso: string): string {
+  return new Date(SEED_NOW_MS + (Date.parse(canonicalIso) - CANONICAL_NOW_MS)).toISOString()
+}
 
 export const SEED_SITE_ID = 'site-01'
 const GRID_ID = 'grid-01'
@@ -74,9 +100,9 @@ export function buildSite(): Site {
   return {
     id: SEED_SITE_ID,
     name: 'Mina - Jamarat Bridge',
-    planImageUrl: '/jamarat-plan.svg',
+    planImageUrl: '/jamarat-satellite.svg',
     groundExtentM: { width: 300, height: 200 },
-    createdAt: '2026-08-01T09:00:00.000Z',
+    createdAt: seedTime('2026-08-01T09:00:00.000Z'),
   }
 }
 
@@ -105,7 +131,7 @@ export function buildZones(): Zone[] {
       zoneId: ZONE_A_ID,
       siteId: SEED_SITE_ID,
       name: 'West Deck Approach',
-      cellIds: concourseCellIds(),
+      cellIds: zoneACellIds(),
       riskThreshold: 0.7,
       densityThreshold: 4.0,
     },
@@ -113,7 +139,7 @@ export function buildZones(): Zone[] {
       zoneId: ZONE_B_ID,
       siteId: SEED_SITE_ID,
       name: 'Jamrat al-Aqaba',
-      cellIds: northGateCellIds(),
+      cellIds: zoneBCellIds(),
       riskThreshold: 0.7,
       densityThreshold: 4.0,
     },
@@ -121,7 +147,7 @@ export function buildZones(): Zone[] {
       zoneId: ZONE_C_ID,
       siteId: SEED_SITE_ID,
       name: 'Jamrat al-Wusta',
-      cellIds: arenaFloorCellIds(),
+      cellIds: zoneCCellIds(),
       riskThreshold: 0.7,
       densityThreshold: 4.0,
     },
@@ -144,7 +170,7 @@ export function buildThresholds(): ThresholdSet[] {
     densityThreshold: 4.0,
     version: 1,
     changedBy: 's.iqbal',
-    changedAt: '2026-08-02T10:00:00.000Z',
+    changedAt: seedTime('2026-08-02T10:00:00.000Z'),
   }))
 }
 
@@ -157,11 +183,11 @@ export const OBSTRUCTION_COUNT = 164
 
 function zoneIdForCell(
   cellId: string,
-  concourse: Set<string>,
+  zoneA: Set<string>,
   northGate: Set<string>,
   arena: Set<string>,
 ): string | null {
-  if (concourse.has(cellId)) return ZONE_A_ID
+  if (zoneA.has(cellId)) return ZONE_A_ID
   if (northGate.has(cellId)) return ZONE_B_ID
   if (arena.has(cellId)) return ZONE_C_ID
   return null
@@ -171,9 +197,9 @@ export function buildCells(): { cells: Cell[]; attributes: Map<string, CellAttri
   const rng = mulberry32(CANONICAL_SEED + 2)
   const { e1, e2 } = exitCellIds()
   const exitIds = new Set([...e1, ...e2])
-  const concourse = new Set(concourseCellIds())
-  const northGate = new Set(northGateCellIds())
-  const arena = new Set(arenaFloorCellIds())
+  const zoneA = new Set(zoneACellIds())
+  const northGate = new Set(zoneBCellIds())
+  const arena = new Set(zoneCCellIds())
   const unzoned = unzonedCellIds()
 
   const allCellIds: string[] = []
@@ -188,7 +214,7 @@ export function buildCells(): { cells: Cell[]; attributes: Map<string, CellAttri
     if (!match) throw new Error(`Malformed generated cellId ${cellId}`)
     const col = Number(match[1])
     const row = Number(match[2])
-    const zoneId = zoneIdForCell(cellId, concourse, northGate, arena)
+    const zoneId = zoneIdForCell(cellId, zoneA, northGate, arena)
     return toCellRecord(cellId, col, row, GRID_ID, zoneId, attributes.get(cellId), 5, GRID_ORIGIN)
   })
 
@@ -213,40 +239,40 @@ export function buildUsers(): User[] {
       username: 'a.rahman',
       role: ROLE.COORDINATOR,
       active: true,
-      createdAt: '2026-06-01T08:00:00.000Z',
-      lastLoginAt: '2026-09-08T13:55:00.000Z',
+      createdAt: seedTime('2026-06-01T08:00:00.000Z'),
+      lastLoginAt: seedTime('2026-09-08T13:55:00.000Z'),
     },
     {
       userId: 's.iqbal',
       username: 's.iqbal',
       role: ROLE.ADMINISTRATOR,
       active: true,
-      createdAt: '2026-05-15T08:00:00.000Z',
-      lastLoginAt: '2026-09-08T08:30:00.000Z',
+      createdAt: seedTime('2026-05-15T08:00:00.000Z'),
+      lastLoginAt: seedTime('2026-09-08T08:30:00.000Z'),
     },
     {
       userId: 'm.tariq',
       username: 'm.tariq',
       role: ROLE.DRONE_OPERATOR,
       active: true,
-      createdAt: '2026-06-10T08:00:00.000Z',
-      lastLoginAt: '2026-09-08T13:40:00.000Z',
+      createdAt: seedTime('2026-06-10T08:00:00.000Z'),
+      lastLoginAt: seedTime('2026-09-08T13:40:00.000Z'),
     },
     {
       userId: 'n.hassan',
       username: 'n.hassan',
       role: ROLE.IT,
       active: true,
-      createdAt: '2026-06-10T08:00:00.000Z',
-      lastLoginAt: '2026-09-07T17:00:00.000Z',
+      createdAt: seedTime('2026-06-10T08:00:00.000Z'),
+      lastLoginAt: seedTime('2026-09-07T17:00:00.000Z'),
     },
     {
       userId: 'k.javed',
       username: 'k.javed',
       role: ROLE.COORDINATOR,
       active: false,
-      createdAt: '2026-06-01T08:00:00.000Z',
-      lastLoginAt: '2026-07-20T09:00:00.000Z',
+      createdAt: seedTime('2026-06-01T08:00:00.000Z'),
+      lastLoginAt: seedTime('2026-07-20T09:00:00.000Z'),
     },
   ]
 }
@@ -465,7 +491,7 @@ export function buildInitialSimCells(): Map<string, SimCell> {
     ),
   ])
   const forcedStaleA = new Map<string, number>([[STALE_ROUTE_CELL, 7_000]])
-  planZone(ZONE_A_ID, concourseCellIds(), ZONE_COVERAGE[ZONE_A_ID], forcedObservedA, forcedStaleA, [
+  planZone(ZONE_A_ID, zoneACellIds(), ZONE_COVERAGE[ZONE_A_ID], forcedObservedA, forcedStaleA, [
     DRONE_D02,
     DRONE_D04,
   ])
@@ -481,11 +507,11 @@ export function buildInitialSimCells(): Map<string, SimCell> {
     ['C-032-022', { risk: nextFloat(rng, 0.3, 0.5), observedBy: [DRONE_D01] }],
     ['C-033-021', { risk: nextFloat(rng, 0.2, 0.4), observedBy: [DRONE_D01] }],
   ])
-  planZone(ZONE_B_ID, northGateCellIds(), ZONE_COVERAGE[ZONE_B_ID], forcedObservedB, new Map(), [DRONE_D01])
+  planZone(ZONE_B_ID, zoneBCellIds(), ZONE_COVERAGE[ZONE_B_ID], forcedObservedB, new Map(), [DRONE_D01])
 
   // Zone C: Jamrat al-Wusta. No observed cells at all - D-03 is mid-transit,
   // contributing density-only samples to the cells in its path.
-  planZone(ZONE_C_ID, arenaFloorCellIds(), ZONE_COVERAGE[ZONE_C_ID], new Map(), new Map(), [DRONE_D03])
+  planZone(ZONE_C_ID, zoneCCellIds(), ZONE_COVERAGE[ZONE_C_ID], new Map(), new Map(), [DRONE_D03])
 
   // Unzoned strip: never assigned to a drone, so it is always a gap.
   for (const cellId of unzonedCellIds()) {
@@ -530,7 +556,7 @@ export function buildInitialSimDrones(simCells: Map<string, SimCell>): SimDrone[
     {
       droneId: DRONE_D01,
       label: 'Aqaba basin high',
-      assignedAreaId: 'north-gate-high',
+      assignedZoneId: ZONE_B_ID,
       state: DRONE_STATE.OBSERVE,
       link: DRONE_LINK.ONLINE,
       pose: poseFor(ZONE_B_PEAK_CELL, 95, 200),
@@ -543,7 +569,7 @@ export function buildInitialSimDrones(simCells: Map<string, SimCell>): SimDrone[
     {
       droneId: DRONE_D02,
       label: 'West deck',
-      assignedAreaId: 'concourse-west',
+      assignedZoneId: ZONE_A_ID,
       state: DRONE_STATE.OBSERVE,
       link: DRONE_LINK.ONLINE,
       pose: poseFor(ZONE_A_PEAK_CELL, 55, 90),
@@ -556,7 +582,7 @@ export function buildInitialSimDrones(simCells: Map<string, SimCell>): SimDrone[
     {
       droneId: DRONE_D03,
       label: 'Roving',
-      assignedAreaId: 'roving',
+      assignedZoneId: null,
       state: DRONE_STATE.TRANSIT,
       link: DRONE_LINK.ONLINE,
       pose: poseFor(d03Footprint[0] ?? 'C-015-010', 62, 148),
@@ -569,7 +595,7 @@ export function buildInitialSimDrones(simCells: Map<string, SimCell>): SimDrone[
     {
       droneId: DRONE_D04,
       label: 'East deck',
-      assignedAreaId: 'concourse-east',
+      assignedZoneId: ZONE_A_ID,
       state: DRONE_STATE.OBSERVE,
       link: DRONE_LINK.DEGRADED,
       pose: poseFor('C-045-034', 55, 270),
@@ -604,7 +630,7 @@ export function buildAlertA1042(): Alert {
   ]
   return {
     alertId: ALERT_A1042_ID,
-    raisedAt: '2026-09-08T14:02:51.000Z',
+    raisedAt: seedTime('2026-09-08T14:02:51.000Z'),
     siteId: SEED_SITE_ID,
     zoneId: ZONE_B_ID,
     cellId: ZONE_B_PEAK_CELL,
@@ -618,7 +644,7 @@ export function buildAlertA1042(): Alert {
     status: ALERT_STATUS.ACKNOWLEDGED,
     attribution,
     acknowledgedBy: 'a.rahman',
-    acknowledgedAt: '2026-09-08T14:03:04.000Z',
+    acknowledgedAt: seedTime('2026-09-08T14:03:04.000Z'),
   }
 }
 
@@ -636,7 +662,7 @@ export function buildAlertA1039(): Alert {
   ]
   return {
     alertId: ALERT_A1039_ID,
-    raisedAt: '2026-09-07T19:41:50.000Z',
+    raisedAt: seedTime('2026-09-07T19:41:50.000Z'),
     siteId: SEED_SITE_ID,
     zoneId: ZONE_B_ID,
     cellId: ZONE_B_PEAK_CELL,
@@ -646,7 +672,7 @@ export function buildAlertA1039(): Alert {
     status: ALERT_STATUS.CLEARED,
     attribution,
     acknowledgedBy: 'a.rahman',
-    acknowledgedAt: '2026-09-07T19:42:05.000Z',
+    acknowledgedAt: seedTime('2026-09-07T19:42:05.000Z'),
   }
 }
 
@@ -663,7 +689,7 @@ export function buildSuggestionsForA1042(): SuggestionOption[] {
       text: 'Divert the crowd at the Jamrat al-Aqaba approach toward Exit E2, which has room to take them.',
       textSource: TEXT_SOURCE.MODEL,
       rationale:
-        'Exit E2 is running at about 27 percent of its 900 per minute capacity, and every cell on this route is below the North Gate density threshold.',
+        'Exit E2 is running at about 27 percent of its 900 per minute capacity, and every cell on this route is below the Jamrat al-Aqaba density threshold.',
       safeguards: [
         { check: SAFEGUARD_CHECK.OVER_THRESHOLD_CELL, passed: true },
         { check: SAFEGUARD_CHECK.WOULD_PUSH_NEIGHBOUR_OVER, passed: true },
@@ -739,7 +765,7 @@ export function buildSuggestionSG0771(): SuggestionOption {
     action: SUGGESTION_ACTION.DIVERT,
     targetExitId: EXIT_E2_ID,
     routeCells: SG0771_CELLS,
-    text: 'Divert the crowd at the North Gate approach toward Exit E2.',
+    text: 'Divert the crowd at the Jamrat al-Aqaba approach toward Exit E2.',
     textSource: TEXT_SOURCE.MODEL,
     rationale: 'Exit E2 had spare capacity and every cell on the route was below the density threshold.',
     safeguards: [
@@ -750,14 +776,14 @@ export function buildSuggestionSG0771(): SuggestionOption {
       { check: SAFEGUARD_CHECK.EXIT_OVER_CAPACITY, passed: true },
     ],
     confirmedBy: 'a.rahman',
-    confirmedAt: '2026-09-07T19:42:38.000Z',
+    confirmedAt: seedTime('2026-09-07T19:42:38.000Z'),
     dismissedBy: null,
     dismissedAt: null,
   }
 }
 
 export function buildOutcomeSG0771(): Outcome {
-  const confirmedAtMs = Date.parse('2026-09-07T19:42:38.000Z')
+  const confirmedAtMs = Date.parse(seedTime('2026-09-07T19:42:38.000Z'))
   const rng = mulberry32(CANONICAL_SEED + 4)
   const trajectory: OutcomeTrajectoryPoint[] = []
   const start = 0.78
@@ -774,8 +800,8 @@ export function buildOutcomeSG0771(): Outcome {
   }
   return {
     suggestionId: SUGGESTION_SG0771_ID,
-    confirmedAt: '2026-09-07T19:42:38.000Z',
-    windowEndsAt: '2026-09-07T19:52:38.000Z',
+    confirmedAt: seedTime('2026-09-07T19:42:38.000Z'),
+    windowEndsAt: seedTime('2026-09-07T19:52:38.000Z'),
     affectedCells: SG0771_CELLS,
     riskAtConfirm: 0.78,
     peakRiskInWindow: 0.61,
@@ -864,16 +890,16 @@ export function buildHistoryEvents(): HistoryEvent[] {
   const events: HistoryEvent[] = [
     {
       eventId: 'evt-A-1042',
-      ts: '2026-09-08T14:02:51.000Z',
+      ts: seedTime('2026-09-08T14:02:51.000Z'),
       type: 'ALERT',
       siteId: SEED_SITE_ID,
       zoneId: ZONE_B_ID,
-      summary: 'Alert A-1042 raised on C-031-022, North Gate, score 0.78 against a threshold of 0.70.',
+      summary: 'Alert A-1042 raised on C-031-022, Jamrat al-Aqaba, score 0.78 against a threshold of 0.70.',
       refId: ALERT_A1042_ID,
     },
     {
       eventId: 'evt-A-1042-sug',
-      ts: '2026-09-08T14:02:53.000Z',
+      ts: seedTime('2026-09-08T14:02:53.000Z'),
       type: 'SUGGESTION',
       siteId: SEED_SITE_ID,
       zoneId: ZONE_B_ID,
@@ -882,16 +908,16 @@ export function buildHistoryEvents(): HistoryEvent[] {
     },
     {
       eventId: 'evt-A-1039',
-      ts: '2026-09-07T19:41:50.000Z',
+      ts: seedTime('2026-09-07T19:41:50.000Z'),
       type: 'ALERT',
       siteId: SEED_SITE_ID,
       zoneId: ZONE_B_ID,
-      summary: 'Alert A-1039 raised on C-031-022, North Gate, score 0.78 against a threshold of 0.70.',
+      summary: 'Alert A-1039 raised on C-031-022, Jamrat al-Aqaba, score 0.78 against a threshold of 0.70.',
       refId: ALERT_A1039_ID,
     },
     {
       eventId: 'evt-SG-0771-confirm',
-      ts: '2026-09-07T19:42:38.000Z',
+      ts: seedTime('2026-09-07T19:42:38.000Z'),
       type: 'SUGGESTION',
       siteId: SEED_SITE_ID,
       zoneId: ZONE_B_ID,
@@ -900,7 +926,7 @@ export function buildHistoryEvents(): HistoryEvent[] {
     },
     {
       eventId: 'evt-SG-0771-outcome',
-      ts: '2026-09-07T19:52:38.000Z',
+      ts: seedTime('2026-09-07T19:52:38.000Z'),
       type: 'OUTCOME',
       siteId: SEED_SITE_ID,
       zoneId: ZONE_B_ID,
@@ -960,7 +986,7 @@ export function buildAuditLog(): AuditEntry[] {
   const entries: AuditEntry[] = [
     {
       entryId: 'audit-001',
-      ts: '2026-07-20T09:05:00.000Z',
+      ts: seedTime('2026-07-20T09:05:00.000Z'),
       actorId: 'n.hassan',
       action: 'DEACTIVATE_USER',
       targetType: 'User',
@@ -970,7 +996,7 @@ export function buildAuditLog(): AuditEntry[] {
     },
     {
       entryId: 'audit-002',
-      ts: '2026-09-08T14:03:04.000Z',
+      ts: seedTime('2026-09-08T14:03:04.000Z'),
       actorId: 'a.rahman',
       action: 'ACKNOWLEDGE_ALERT',
       targetType: 'Alert',
@@ -980,7 +1006,7 @@ export function buildAuditLog(): AuditEntry[] {
     },
     {
       entryId: 'audit-003',
-      ts: '2026-09-07T19:42:38.000Z',
+      ts: seedTime('2026-09-07T19:42:38.000Z'),
       actorId: 'a.rahman',
       action: 'CONFIRM_SUGGESTION',
       targetType: 'SuggestionOption',

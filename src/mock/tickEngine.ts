@@ -60,8 +60,8 @@ const D03_FOOTPRINTS: string[][] = [
   ['C-010-003', 'C-011-003', 'C-010-004', 'C-011-004'],
 ]
 
-const CONVERGENCE_CELL = 'C-006-028' // a Concourse cell, distinct from the seeded A-1042 cell
-const SAFEGUARD_REJECT_CELL = 'C-041-028' // a Concourse cell used only by this scenario
+const CONVERGENCE_CELL = 'C-006-028' // a West Deck Approach cell, distinct from the seeded A-1042 cell
+const SAFEGUARD_REJECT_CELL = 'C-041-028' // a West Deck Approach cell used only by this scenario
 
 interface ScriptedEvent {
   kind: 'CONVERGENCE' | 'SAFEGUARD_REJECT'

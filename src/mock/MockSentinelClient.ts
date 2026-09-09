@@ -1,12 +1,12 @@
 import type { ConnectionState, SentinelClient } from '@/client/SentinelClient'
-import { CONNECTION_STATE, OUTCOME_VERDICT, ROLE, SUGGESTION_STATUS } from '@/domain/constants'
+import { CONNECTION_STATE, DRONE_STATE, OUTCOME_VERDICT, ROLE, SUGGESTION_STATUS } from '@/domain/constants'
 import { MAX_ZONES, MIN_ZONES, OUTCOME_VERDICT_DELTA, OUTCOME_WINDOW_MS } from '@/domain/parameters'
 import type {
   Alert,
   AlertQuery,
   AnalyticsAlertsByZone,
   AnalyticsSummary,
-  AreaTarget,
+  ZoneTarget,
   AuditEntry,
   AuditQuery,
   Cell,
@@ -52,7 +52,8 @@ import { CellStore } from './cellStore'
 import { GRID_COLUMNS, GRID_ROWS } from '@/domain/parameters'
 import { clamp, round } from './rng'
 import { PlaybackController } from './scenarios'
-import { SEED_NOW_ISO, SEED_PASSWORD, buildSeedBundle, type SeedBundle } from './seed'
+import { SEED_NOW_ISO, SEED_NOW_MS, SEED_PASSWORD, buildSeedBundle, type SeedBundle } from './seed'
+import { backfillCellHistory, backfillZoneHistory } from './backfill'
 import { TickEngine } from './tickEngine'
 
 /** srs.md 3.4 - one error envelope for every failure. */
@@ -166,11 +167,21 @@ export class MockSentinelClient implements SentinelClient {
 
     // Seed the cell store with the canonical snapshot so history and
     // replay have something real before the first live tick lands.
-    for (const cell of this.engine.getCellUpdates(SEED_NOW_ISO)) {
+    const currentCells = this.engine.getCellUpdates(SEED_NOW_ISO)
+
+    // History before the app opened. Without it every chart starts flat at
+    // the moment of the first tick, so "last hour" and "last 15 minutes"
+    // show a single point and the alert appears from nowhere.
+    for (const sample of backfillCellHistory(currentCells, SEED_NOW_MS)) {
+      this.cellStore.push(sample)
+    }
+    for (const cell of currentCells) {
       if (cell.observationState !== 'GAP') this.cellStore.push(cell)
     }
+
+    const zoneBackfill = backfillZoneHistory(SEED_NOW_MS)
     for (const zone of this.engine.getZoneUpdates(SEED_NOW_ISO)) {
-      this.zoneHistory.set(zone.zoneId, [zone])
+      this.zoneHistory.set(zone.zoneId, [...(zoneBackfill.get(zone.zoneId) ?? []), zone])
     }
     for (const drone of this.engine.getDroneUpdates(SEED_NOW_ISO)) {
       this.droneHistory.set(drone.droneId, [drone])
@@ -362,17 +373,31 @@ export class MockSentinelClient implements SentinelClient {
       batteryPct: d.batteryPct,
       registration: d.registration,
       label: d.label,
-      assignedAreaId: d.assignedAreaId,
+      assignedZoneId: d.assignedZoneId,
     }))
   }
 
-  async assignDrone(droneId: string, target: AreaTarget): Promise<Drone> {
+  async assignDrone(droneId: string, target: ZoneTarget): Promise<Drone> {
     const drone = this.engine.getAllDrones().find((d) => d.droneId === droneId)
     if (!drone) this.apiError('NOT_FOUND', `No drone with id ${droneId}.`, 'droneId')
-    const previousAreaId = drone.assignedAreaId
-    drone.assignedAreaId = target.label.toLowerCase().replace(/\s+/g, '-')
-    drone.footprintCells = target.cellIds
-    this.audit('REASSIGN_DRONE', 'Drone', droneId, { assignedAreaId: previousAreaId }, { assignedAreaId: drone.assignedAreaId })
+    const zone = this.seed.zones.find((z) => z.zoneId === target.zoneId)
+    if (!zone) this.apiError('NOT_FOUND', `No zone with id ${target.zoneId}.`, 'zoneId')
+
+    const previousZoneId = drone.assignedZoneId
+    drone.assignedZoneId = zone.zoneId
+
+    // The drone is sent to the middle of the zone's cells, not handed the
+    // whole zone as a footprint: a drone sees one patch of ground at a
+    // time, and claiming otherwise would invent coverage it does not have.
+    // It arrives with an empty footprint and acquires ground as it flies,
+    // which is why its cells report not enough dwell for the first 30 s.
+    const centre = Math.floor(zone.cellIds.length / 2)
+    drone.transitTargetFootprint = zone.cellIds.slice(Math.max(0, centre - 6), centre + 6)
+    drone.transitTicksRemaining = 12
+    drone.state = DRONE_STATE.TRANSIT
+    drone.footprintCells = []
+
+    this.audit('REASSIGN_DRONE', 'Drone', droneId, { assignedZoneId: previousZoneId }, { assignedZoneId: zone.zoneId })
     const ts = this.engine.getCurrentTs()
     return {
       droneId: drone.droneId,
@@ -384,7 +409,7 @@ export class MockSentinelClient implements SentinelClient {
       batteryPct: drone.batteryPct,
       registration: drone.registration,
       label: drone.label,
-      assignedAreaId: drone.assignedAreaId,
+      assignedZoneId: drone.assignedZoneId,
     }
   }
 

@@ -82,6 +82,7 @@ export default function S07PerDroneView() {
   const drone = useDrone(droneId)
   const cellsById = useCellsById()
   const site = useConfigStore((s) => s.site)
+  const zones = useConfigStore((s) => s.zones)
   const [identity, setIdentity] = useState<Drone | null>(null)
   const [assigning, setAssigning] = useState(false)
 
@@ -118,6 +119,9 @@ export default function S07PerDroneView() {
     )
   }
 
+  const assignedZoneName = identity?.assignedZoneId
+    ? (zones.find((z) => z.zoneId === identity.assignedZoneId)?.name ?? identity.assignedZoneId)
+    : null
   const stats = footprintStats(drone, cellsById)
   const transiting = drone.state === DRONE_STATE.TRANSIT
   const canAssign = hasCapability(role, CAPABILITY.ASSIGN_DRONE)
@@ -186,7 +190,7 @@ export default function S07PerDroneView() {
             <Field label="Battery">
               <span className="font-mono tabular-nums">{drone.batteryPct}%</span>
             </Field>
-            <Field label="Assigned area">{identity?.assignedAreaId ?? 'None'}</Field>
+            <Field label="Assigned zone">{assignedZoneName ?? 'None'}</Field>
             <Field label="Footprint">
               <span className="font-mono tabular-nums">
                 {stats.footprintCellCount} cells, {stats.observedCellCount} observed

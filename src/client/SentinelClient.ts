@@ -3,7 +3,7 @@ import type {
   AlertQuery,
   AnalyticsSummary,
   Alert,
-  AreaTarget,
+  ZoneTarget,
   AuditEntry,
   AuditQuery,
   Cell,
@@ -64,7 +64,7 @@ export interface SentinelClient {
   getCellHistory(cellId: string, range: TimeRange): Promise<CellSample[]>
   getZoneHistory(siteId: string, range: TimeRange, stepMs?: number): Promise<ZoneSample[]>
   getDrones(siteId: string): Promise<Drone[]>
-  assignDrone(droneId: string, target: AreaTarget): Promise<Drone>
+  assignDrone(droneId: string, target: ZoneTarget): Promise<Drone>
   queryAlerts(query: AlertQuery): Promise<Page<Alert>>
   acknowledgeAlert(alertId: string): Promise<Alert>
   getSuggestions(alertId: string): Promise<SuggestionOption[]>

@@ -115,7 +115,7 @@ data layer from this table.
 | Grid | 60 columns by 40 rows, 2400 cells |
 | Plan image | `jamarat-plan.svg`, drawn at one unit per ground metre, uploaded by `s.iqbal` |
 | Scale | Set by drawing a known 50 m distance across the south stand |
-| Clock | 14:03:12 |
+| Clock | 14:03:12 in the frames. The running app anchors this moment to the real clock at start-up, so every relative offset below is preserved while "the last hour" always contains data. |
 | Latency | 1.2 s measured, 1.7 s at the 95th percentile, against a 2000 ms budget |
 
 ### Zones

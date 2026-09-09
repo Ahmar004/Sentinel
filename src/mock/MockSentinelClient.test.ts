@@ -1,5 +1,21 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { MockSentinelClient } from './MockSentinelClient'
+import { SEED_NOW_MS } from './seed'
+
+/**
+ * A whole day around a moment on the demo clock.
+ *
+ * The seed anchors itself to the real clock so that "the last hour" always
+ * has data in it, which means a test may not name a calendar date: one
+ * written as 2026-09-08 passes on that day and fails on every other.
+ */
+function rangeAround(ms: number): { from: string; to: string } {
+  return {
+    from: new Date(ms - 12 * 60 * 60 * 1000).toISOString(),
+    to: new Date(ms + 12 * 60 * 60 * 1000).toISOString(),
+  }
+}
+
 
 describe('MockSentinelClient auth (FR10)', () => {
   let client: MockSentinelClient
@@ -73,7 +89,7 @@ describe('MockSentinelClient.getAnalytics - null vs zero (FR11.3)', () => {
   })
 
   it('gives a zone that was observed a numeric count, even when it is zero', async () => {
-    const aroundSeed = { from: '2026-09-08T00:00:00.000Z', to: '2026-09-08T23:59:59.999Z' }
+    const aroundSeed = rangeAround(SEED_NOW_MS)
     const analytics = await client.getAnalytics('site-01', aroundSeed)
     const zoneA = analytics.alertsByZone.find((z) => z.zoneId === 'zone-a')
     expect(zoneA?.observedShareOfRange).toBeGreaterThan(0)
@@ -82,7 +98,7 @@ describe('MockSentinelClient.getAnalytics - null vs zero (FR11.3)', () => {
   })
 
   it('reports a non-null responseTime once an alert has been raised, and null with none in range', async () => {
-    const withAlert = { from: '2026-09-08T00:00:00.000Z', to: '2026-09-08T23:59:59.999Z' }
+    const withAlert = rangeAround(SEED_NOW_MS)
     const withAlertAnalytics = await client.getAnalytics('site-01', withAlert)
     expect(withAlertAnalytics.responseTime).not.toBeNull()
     expect(withAlertAnalytics.responseTime?.raised).toBeGreaterThan(0)
@@ -99,7 +115,7 @@ describe('MockSentinelClient.getAnalytics - null vs zero (FR11.3)', () => {
   })
 
   it('reports the SG-0771 confirmation\'s IMPROVED verdict for a range covering yesterday', async () => {
-    const yesterday = { from: '2026-09-07T00:00:00.000Z', to: '2026-09-07T23:59:59.999Z' }
+    const yesterday = rangeAround(SEED_NOW_MS - 86_400_000)
     const analytics = await client.getAnalytics('site-01', yesterday)
     expect(analytics.verdicts).not.toBeNull()
     expect(analytics.verdicts?.IMPROVED).toBeGreaterThanOrEqual(1)

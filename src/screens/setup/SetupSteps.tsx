@@ -52,7 +52,7 @@ export function PlanStep() {
 
       <dl className="mt-3">
         <Row label="Plan image">
-          <span className="font-mono text-xs">{site?.planImageUrl ?? '/jamarat-plan.svg'}</span>
+          <span className="font-mono text-xs">{site?.planImageUrl ?? '/jamarat-satellite.svg'}</span>
         </Row>
         <Row label="Ground extent">
           <span className="font-mono text-xs tabular-nums">
@@ -65,7 +65,7 @@ export function PlanStep() {
       </dl>
 
       <div className="mt-3 h-64 overflow-hidden rounded border border-border">
-        <SiteMap planImageUrl={site?.planImageUrl ?? '/jamarat-plan.svg'} groundExtentM={extent} />
+        <SiteMap planImageUrl={site?.planImageUrl ?? '/jamarat-satellite.svg'} groundExtentM={extent} />
       </div>
 
       <Note>
@@ -562,6 +562,9 @@ export function ThresholdsStep({ onEdit }: StepProps & { onEdit?: (zoneId: strin
 export function DronesStep({ onAssign }: StepProps & { onAssign?: (droneId: string) => void }) {
   const drones = useDrones()
   const site = useConfigStore((s) => s.site)
+  const zones = useConfigStore((s) => s.zones)
+  const zoneNameFor = (zoneId: string | null) =>
+    zoneId ? (zones.find((z) => z.zoneId === zoneId)?.name ?? zoneId) : 'No zone'
   const [fleet, setFleet] = useState<Drone[]>([])
   const siteId = site?.id ?? ''
 
@@ -585,7 +588,8 @@ export function DronesStep({ onAssign }: StepProps & { onAssign?: (droneId: stri
     <div>
       <h3 className="text-sm font-semibold">Drones</h3>
       <p className="mt-1 text-sm text-ink-muted">
-        Registered drones and the area each is sent to. A drone is assigned to an area, never to a zone.
+        Registered drones and the zone each was last sent to. A drone is sent to a zone but never bound to one: its
+        membership is computed from the cells it actually sees.
       </p>
 
       <ul className="mt-3 flex flex-col gap-2">
@@ -598,7 +602,7 @@ export function DronesStep({ onAssign }: StepProps & { onAssign?: (droneId: stri
                 <span className="text-xs text-ink-muted">{identity?.label ?? ''}</span>
               </span>
               <span className="flex items-center gap-3 text-xs">
-                <span className="font-mono">{identity?.assignedAreaId ?? 'No area'}</span>
+                <span>{zoneNameFor(identity?.assignedZoneId ?? null)}</span>
                 <button
                   type="button"
                   onClick={() => onAssign?.(drone.droneId)}
@@ -670,7 +674,7 @@ export function ReviewStep({ onSave }: { onSave?: () => void }) {
 
       <div className="mt-3 h-64 overflow-hidden rounded border border-border">
         <SiteMap
-          planImageUrl={site?.planImageUrl ?? '/jamarat-plan.svg'}
+          planImageUrl={site?.planImageUrl ?? '/jamarat-satellite.svg'}
           groundExtentM={site?.groundExtentM ?? SITE_EXTENT_M}
         >
           <CellLayer cells={preview} cellSizeM={grid?.cellSizeM ?? CELL_SIZE_M} />

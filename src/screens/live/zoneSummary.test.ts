@@ -6,7 +6,7 @@ import { summariseZone } from './zoneSummary'
 const zone = (cellIds: string[]): Zone => ({
   zoneId: 'zone-c',
   siteId: 'site-01',
-  name: 'C Arena Floor',
+  name: 'Jamrat al-Wusta',
   cellIds,
   riskThreshold: 0.7,
   densityThreshold: 4,

@@ -143,7 +143,7 @@ export default function S10Replay() {
         <>
           <div className="relative min-h-0 flex-1">
             <SiteMap
-              planImageUrl={site?.planImageUrl ?? '/jamarat-plan.svg'}
+              planImageUrl={site?.planImageUrl ?? '/jamarat-satellite.svg'}
               groundExtentM={site?.groundExtentM ?? SITE_EXTENT_M}
             >
               <CellLayer cells={cells} cellSizeM={CELL_SIZE_M} />

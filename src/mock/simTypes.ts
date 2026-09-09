@@ -27,7 +27,7 @@ export interface SimCell {
 export interface SimDrone {
   droneId: string
   label: string
-  assignedAreaId: string | null
+  assignedZoneId: string | null
   state: DroneState
   link: DroneLink
   pose: DronePose

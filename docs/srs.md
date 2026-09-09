@@ -209,7 +209,7 @@ Versioned under `/api/v1`. All responses are JSON. All timestamps are ISO 8601 w
 | Live | `GET /cells/{cellId}/history` | Time series for one cell, `from` and `to` | Coordinator, Administrator |
 | Drones | `GET /sites/{siteId}/drones` | Fleet with state, footprint and link status | Coordinator, Administrator, Drone Operator |
 | Drones | `GET /drones/{droneId}`, `/drones/{droneId}/telemetry` | One drone and its telemetry | Coordinator, Administrator, Drone Operator |
-| Drones | `PATCH /drones/{droneId}/assignment` | Send a drone to a new area | Administrator, Drone Operator |
+| Drones | `PATCH /drones/{droneId}/assignment` | Send a drone to one of the site's zones | Administrator, Drone Operator |
 | Alerts | `GET /alerts` | Filter by site, zone, cell, band, status, actor, time range, free text | Coordinator, Administrator |
 | Alerts | `GET /alerts/{alertId}` | One alert with its attribution | Coordinator, Administrator |
 | Alerts | `POST /alerts/{alertId}/acknowledge` | Record acknowledgement | Coordinator, Administrator |
@@ -429,7 +429,7 @@ interface SentinelClient {
   getCellHistory(cellId: string, range: TimeRange): Promise<CellSample[]>
   getZoneHistory(siteId: string, range: TimeRange, stepMs?: number): Promise<ZoneSample[]>
   getDrones(siteId: string): Promise<Drone[]>
-  assignDrone(droneId: string, target: AreaTarget): Promise<Drone>
+  assignDrone(droneId: string, target: ZoneTarget): Promise<Drone>
   queryAlerts(query: AlertQuery): Promise<Page<Alert>>
   acknowledgeAlert(alertId: string): Promise<Alert>
   getSuggestions(alertId: string): Promise<SuggestionOption[]>
@@ -685,7 +685,7 @@ Manual annotation is the guaranteed path; the setup pass only pre-fills it. The 
 **FR9.7** Per-zone risk and density thresholds shall be editable through the interface with no code change or restart.
 *Acceptance:* changing a zone threshold from 0.70 to 0.65 takes effect on the next tick and is reflected in subsequent alerts.
 
-**FR9.8** Drones shall be registered and assigned to an area. A drone shall not be bound to a zone.
+**FR9.8** Drones shall be registered and sent to one of the site's zones, chosen from those configured. A drone shall not be bound to the zone it was sent to: it writes to whichever cells it actually observes, and its zone membership is computed from its footprint moment to moment. Zones are the named subdivisions of the monitored environment, so they are the only targets an operator has to choose between; a free-form area would let one name ground that does not exist.
 *Acceptance:* a drone can be assigned to an area spanning two zones, and reassigned without any zone changing.
 
 **FR9.9** Every configuration change shall be versioned and audit-logged with actor and timestamp.
@@ -744,8 +744,7 @@ Entities, sized so the mock layer and a future ORM describe the same thing.
 | `CellSample` | cellId, ts, observationState, densityPerSqM, flowDirDeg, flowSpeedMps, riskScore, riskBand, dwellMs, observedBy | the cell store; the single source of truth |
 | `Zone` | zoneId, siteId, name, cellIds, riskThreshold, densityThreshold | groups Cells |
 | `ZoneSample` | zoneId, ts, riskScore, riskBand, coverage counts, peakCellId | derived from CellSample |
-| `Drone` | droneId, siteId, label, state, link, assignedAreaId | writes CellSamples |
-| `Area` | areaId, siteId, label, cellIds | a drone's assignment target; spans zones freely and never becomes a zone |
+| `Drone` | droneId, siteId, label, state, link, assignedZoneId | writes CellSamples |
 | `DroneTelemetry` | droneId, ts, pose, footprintCells, batteryPct, registrationStatus | |
 | `Exit` | exitId, siteId, cellIds, capacityPerMin, label | referenced by SuggestionOption |
 | `ThresholdSet` | siteId, zoneId, riskThreshold, densityThreshold, version, changedBy, changedAt | versioned under FR9.9 |

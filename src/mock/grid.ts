@@ -7,9 +7,9 @@ import { type Rng, shuffle } from './rng'
  * Section 5. The site is partitioned into four disjoint rectangular blocks
  * so every zone's cell count matches the canonical table exactly:
  *
- *   Arena Floor (zone C): 600 cells, top-left quadrant.
- *   North Gate  (zone B): 800 cells, top-right quadrant plus a strip below it.
- *   Concourse   (zone A): 800 cells, bottom-left quadrant plus a strip beside it.
+ *   Zone C, Jamrat al-Wusta:      600 cells, one quadrant.
+ *   Zone B, Jamrat al-Aqaba:      800 cells, one quadrant plus a strip.
+ *   Zone A, West Deck Approach:   800 cells, one quadrant plus a strip.
  *   Unzoned:              200 cells, remaining bottom-right strip.
  *
  * The partition has no bearing on the venue's visual layout (that is the
@@ -39,25 +39,25 @@ export function rectSize(region: RectRegion): number {
   return (region.colMax - region.colMin + 1) * (region.rowMax - region.rowMin + 1)
 }
 
-export const ARENA_FLOOR_REGION: RectRegion = { colMin: 0, colMax: 29, rowMin: 0, rowMax: 19 }
-export const NORTH_GATE_REGIONS: RectRegion[] = [
+export const ZONE_C_REGION: RectRegion = { colMin: 0, colMax: 29, rowMin: 0, rowMax: 19 }
+export const ZONE_B_REGIONS: RectRegion[] = [
   { colMin: 30, colMax: 59, rowMin: 0, rowMax: 19 },
   { colMin: 30, colMax: 39, rowMin: 20, rowMax: 39 },
 ]
-export const CONCOURSE_REGIONS: RectRegion[] = [
+export const ZONE_A_REGIONS: RectRegion[] = [
   { colMin: 0, colMax: 29, rowMin: 20, rowMax: 39 },
   { colMin: 40, colMax: 49, rowMin: 20, rowMax: 39 },
 ]
 export const UNZONED_REGION: RectRegion = { colMin: 50, colMax: 59, rowMin: 20, rowMax: 39 }
 
-export function arenaFloorCellIds(): string[] {
-  return rectCellIds(ARENA_FLOOR_REGION)
+export function zoneCCellIds(): string[] {
+  return rectCellIds(ZONE_C_REGION)
 }
-export function northGateCellIds(): string[] {
-  return NORTH_GATE_REGIONS.flatMap(rectCellIds)
+export function zoneBCellIds(): string[] {
+  return ZONE_B_REGIONS.flatMap(rectCellIds)
 }
-export function concourseCellIds(): string[] {
-  return CONCOURSE_REGIONS.flatMap(rectCellIds)
+export function zoneACellIds(): string[] {
+  return ZONE_A_REGIONS.flatMap(rectCellIds)
 }
 export function unzonedCellIds(): string[] {
   return rectCellIds(UNZONED_REGION)

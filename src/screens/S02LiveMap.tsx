@@ -115,7 +115,7 @@ export default function S02LiveMap() {
         <div className="flex min-w-0 flex-1 flex-col">
           <div className="relative min-h-0 flex-1">
             <SiteMap
-              planImageUrl={site?.planImageUrl ?? '/jamarat-plan.svg'}
+              planImageUrl={site?.planImageUrl ?? '/jamarat-satellite.svg'}
               groundExtentM={site?.groundExtentM ?? SITE_EXTENT_M}
             >
               {showOverlay ? (

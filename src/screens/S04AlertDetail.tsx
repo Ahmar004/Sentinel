@@ -203,7 +203,6 @@ export default function S04AlertDetail() {
           <h2 className="mb-2 text-sm font-semibold">Where</h2>
           <div className="h-80 overflow-hidden rounded border border-border">
             <SiteMap
-              planImageUrl={site?.planImageUrl ?? '/jamarat-satellite.svg'}
               groundExtentM={site?.groundExtentM ?? SITE_EXTENT_M}
               focusBounds={focusBounds}
             >

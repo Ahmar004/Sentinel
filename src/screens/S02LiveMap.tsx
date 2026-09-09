@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { ChevronDown, ChevronUp, Layers } from 'lucide-react'
-import { CellLayer, ConnectionBanner, Legend, SiteMap, type CellGridEntry } from '@/components'
+import { CellLayer, ConnectionBanner, Legend, SiteMap, ZoneOverlay, type CellGridEntry } from '@/components'
 import { CONNECTION_STATE } from '@/domain/constants'
 import { CELL_SIZE_M, SITE_EXTENT_M, parseCellId } from '@/domain/parameters'
 import {
@@ -56,6 +56,7 @@ export default function S02LiveMap() {
   // reasoning about, and how a demo shows plan and reading side by side.
   const [showOverlay, setShowOverlay] = useState(true)
   const [showDrones, setShowDrones] = useState(true)
+  const [showZones, setShowZones] = useState(true)
   const [controlsOpen, setControlsOpen] = useState(false)
 
   const offline = connectionState === CONNECTION_STATE.DISCONNECTED
@@ -70,10 +71,15 @@ export default function S02LiveMap() {
     return entries
   }, [cellsById])
 
-  const zoneSummaries = useMemo(() => {
-    const updatesById = Object.fromEntries(zoneUpdates.map((z) => [z.zoneId, z]))
-    return summariseZones(configuredZones, updatesById, cellsById)
-  }, [configuredZones, zoneUpdates, cellsById])
+  const zoneUpdatesById = useMemo(
+    () => Object.fromEntries(zoneUpdates.map((z) => [z.zoneId, z])),
+    [zoneUpdates],
+  )
+
+  const zoneSummaries = useMemo(
+    () => summariseZones(configuredZones, zoneUpdatesById, cellsById),
+    [configuredZones, zoneUpdatesById, cellsById],
+  )
 
   const zoneNamesById = useMemo(
     () => Object.fromEntries(configuredZones.map((z) => [z.zoneId, z.name])),
@@ -115,13 +121,15 @@ export default function S02LiveMap() {
         <div className="flex min-w-0 flex-1 flex-col">
           <div className="relative min-h-0 flex-1">
             <SiteMap
-              planImageUrl={site?.planImageUrl ?? '/jamarat-satellite.svg'}
               groundExtentM={site?.groundExtentM ?? SITE_EXTENT_M}
             >
               {showOverlay ? (
                 <CellLayer cells={cells} cellSizeM={CELL_SIZE_M} onCellClick={setInspectedCellId} />
               ) : null}
               {showDrones ? <DroneMarkers drones={drones} /> : null}
+              {showZones ? (
+                <ZoneOverlay zones={configuredZones} updatesById={zoneUpdatesById} cellSizeM={CELL_SIZE_M} />
+              ) : null}
             </SiteMap>
 
             <div className="absolute top-2 right-2 z-[400]">
@@ -155,9 +163,19 @@ export default function S02LiveMap() {
                     />
                     Drone footprints
                   </label>
+                  <label className="mt-1.5 flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={showZones}
+                      onChange={(event) => setShowZones(event.target.checked)}
+                      className="size-3.5"
+                    />
+                    Zone boundaries
+                  </label>
                   <p className="mt-2 text-ink-muted">
-                    Turning the overlay off shows the venue plan alone. It does not pause the feed: values keep updating
-                    underneath and reappear unchanged when it is switched back on.
+                    Turning the overlay off shows the satellite imagery alone. It does not pause the feed: values keep
+                    updating underneath and reappear unchanged when it is switched back on. Zone boundaries are the
+                    named parts the environment is divided into.
                   </p>
                 </div>
               ) : null}

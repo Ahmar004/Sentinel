@@ -100,7 +100,7 @@ export function buildSite(): Site {
   return {
     id: SEED_SITE_ID,
     name: 'Mina - Jamarat Bridge',
-    planImageUrl: '/jamarat-satellite.svg',
+    planImageUrl: '',
     groundExtentM: { width: 300, height: 200 },
     createdAt: seedTime('2026-08-01T09:00:00.000Z'),
   }

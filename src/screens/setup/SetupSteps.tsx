@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { CellLayer, SiteMap, type CellGridEntry } from '@/components'
+import { CellLayer, SITE_ORIGIN_LAT_LON, SiteMap, type CellGridEntry } from '@/components'
 import { OBSERVATION_STATE } from '@/domain/constants'
 import {
   CELL_SIZE_M,
@@ -46,13 +46,15 @@ export function PlanStep() {
     <div>
       <h3 className="text-sm font-semibold">Site plan</h3>
       <p className="mt-1 text-sm text-ink-muted">
-        The plan image is the ground everything else is measured against. Its extent sets the scale, drawn once by
-        marking a known distance across the site.
+        The environment is anchored to real ground. Its origin and extent are what every cell identifier is measured
+        from, so a cell means the same square of ground on every screen and in every recorded sample.
       </p>
 
       <dl className="mt-3">
-        <Row label="Plan image">
-          <span className="font-mono text-xs">{site?.planImageUrl ?? '/jamarat-satellite.svg'}</span>
+        <Row label="Origin, south-west corner">
+          <span className="font-mono text-xs tabular-nums">
+            {SITE_ORIGIN_LAT_LON.lat.toFixed(4)} N, {SITE_ORIGIN_LAT_LON.lon.toFixed(4)} E
+          </span>
         </Row>
         <Row label="Ground extent">
           <span className="font-mono text-xs tabular-nums">
@@ -65,12 +67,13 @@ export function PlanStep() {
       </dl>
 
       <div className="mt-3 h-64 overflow-hidden rounded border border-border">
-        <SiteMap planImageUrl={site?.planImageUrl ?? '/jamarat-satellite.svg'} groundExtentM={extent} />
+        <SiteMap groundExtentM={extent} />
       </div>
 
       <Note>
-        The plan is a static image the administrator uploads. No map tile provider is used anywhere in this system, so
-        nothing here needs an API key or a paid account.
+        Imagery comes from Esri World Imagery, which needs no API key and no account, so nothing here asks for payment
+        details. It is fetched at run time: with no connection the imagery does not arrive and the map reads as empty,
+        while the cell grid over it stays live.
       </Note>
     </div>
   )
@@ -674,7 +677,6 @@ export function ReviewStep({ onSave }: { onSave?: () => void }) {
 
       <div className="mt-3 h-64 overflow-hidden rounded border border-border">
         <SiteMap
-          planImageUrl={site?.planImageUrl ?? '/jamarat-satellite.svg'}
           groundExtentM={site?.groundExtentM ?? SITE_EXTENT_M}
         >
           <CellLayer cells={preview} cellSizeM={grid?.cellSizeM ?? CELL_SIZE_M} />

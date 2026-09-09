@@ -11,6 +11,7 @@ export type { CellLayerProps, CellGridEntry } from './CellLayer'
 export type { CellFrame, CellArrow } from './cellFrame'
 export { buildCellFrame, buildCellFrames } from './cellFrame'
 export type { GroundExtentM } from './siteGrid'
+export { groundToLatLon, siteBounds, cellBounds, cellRangeBounds, SITE_ORIGIN_LAT_LON } from './siteGrid'
 
 export { default as RiskTimeline } from './RiskTimeline'
 export type { RiskTimelineProps } from './RiskTimeline'
@@ -24,6 +25,9 @@ export type { SuggestionListProps } from './SuggestionList'
 
 export { default as CoverageBar } from './CoverageBar'
 export type { CoverageBarProps } from './CoverageBar'
+
+export { default as ZoneOverlay } from './ZoneOverlay'
+export type { ZoneOverlayProps } from './ZoneOverlay'
 
 export { default as Legend } from './Legend'
 

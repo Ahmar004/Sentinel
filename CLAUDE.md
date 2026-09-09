@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **What this repository is: a proof-of-concept front-end only.** A complete, clickable React UI for Sentinel (Crowd Control and Stampede Early Signs Detection System), driven entirely by mock data, presented at the FYP proposal defence. There is no backend, no WebSocket server, and no ML in this repository. Every screen must behave as if the full pipeline were live.
 
-**Stack: React (PWA) + TypeScript + Vite + Tailwind CSS, Zustand for live state, Leaflet for the map, Recharts for timelines.**
+**Stack: React (PWA) + TypeScript + Vite + Tailwind CSS, Zustand for live state, Leaflet with Esri World Imagery tiles for the map, Recharts for timelines.**
 
 **Global principle: honesty over completeness.** Sentinel's credibility rests on never showing a number it cannot justify. A prettier map that hides unknown states misrepresents the system and loses the defence.
 
@@ -69,7 +69,7 @@ The UI must never imply a capability the project has ruled out. DO NOT build, mo
 - Ticketing, capacity planning, scheduling, entrance and exit design, or resource allocation.
 - Stitched panoramic video across feeds. Fusion is by coordinates only, for non-overlapping zones.
 - An "add unlimited zones" affordance. Two to four zones is the validated scope, and the UI must reflect that limit.
-- Anything requiring a paid API or a paid cloud service. Every dependency must be open source, openly licensed, or a free tier that needs no payment details. This includes map tiles: Leaflet renders an uploaded site-plan image, so DO NOT add a tile provider or anything needing an API key.
+- Anything requiring a paid API or a paid cloud service. Every dependency must be open source, openly licensed, or a free tier that needs no payment details. Map imagery comes from Esri World Imagery, which serves tiles with no API key and no account; DO NOT swap in a provider that asks for a key or a billing account, which rules out Google Maps on both counts and its terms separately forbid using its tiles outside its own APIs.
 
 ## Front-End Architecture Rules
 

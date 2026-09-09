@@ -1,5 +1,7 @@
+import type { LatLngBoundsLiteral } from 'leaflet'
 import { OBSERVATION_STATE } from '@/domain/constants'
 import { CELL_AREA_SQM, CELL_SIZE_M, parseCellId } from '@/domain/parameters'
+import { cellRangeBounds } from '@/components/siteGrid'
 import type { CellObservation, DroneUpdate } from '@/domain/types'
 
 export interface FootprintStats {
@@ -76,11 +78,11 @@ export function formatDuration(ms: number): string {
   return minutes > 0 ? `${minutes}m ${String(seconds).padStart(2, '0')}s` : `${seconds}s`
 }
 
-/** Bounds covering the footprint plus padding, in the map's metre space. */
+/** Bounds covering the footprint plus padding, as real coordinates. */
 export function footprintBounds(
   footprintCells: string[],
   padCells: number,
-): [[number, number], [number, number]] | undefined {
+): LatLngBoundsLiteral | undefined {
   let minCol = Infinity
   let maxCol = -Infinity
   let minRow = Infinity
@@ -94,8 +96,11 @@ export function footprintBounds(
     maxRow = Math.max(maxRow, parsed.row)
   }
   if (minCol === Infinity) return undefined
-  return [
-    [Math.max(0, (minRow - padCells) * CELL_SIZE_M), Math.max(0, (minCol - padCells) * CELL_SIZE_M)],
-    [(maxRow + padCells + 1) * CELL_SIZE_M, (maxCol + padCells + 1) * CELL_SIZE_M],
-  ]
+  return cellRangeBounds(
+    Math.max(0, minCol - padCells),
+    Math.max(0, minRow - padCells),
+    maxCol + padCells,
+    maxRow + padCells,
+    CELL_SIZE_M,
+  )
 }

@@ -5,3 +5,28 @@ body {
   background-color: var(--color-surface);
   color: var(--color-ink);
 }
+
+/* Zone boundary labels (C11 ZoneOverlay). Leaflet's default tooltip is an
+   opaque white box with an arrow, which over satellite imagery reads as a
+   popup rather than a map label. */
+.leaflet-tooltip.sentinel-zone-label {
+  background: color-mix(in srgb, var(--color-surface-raised) 82%, transparent);
+  border: 1px solid var(--color-border);
+  color: var(--color-ink);
+  box-shadow: none;
+  padding: 2px 6px;
+  white-space: nowrap;
+}
+.leaflet-tooltip.sentinel-zone-label::before {
+  display: none;
+}
+
+/* The imagery attribution has to stay legible in both themes. */
+.leaflet-control-attribution {
+  background: color-mix(in srgb, var(--color-surface-raised) 80%, transparent) !important;
+  color: var(--color-ink-muted) !important;
+  font-size: 10px;
+}
+.leaflet-control-attribution a {
+  color: var(--color-accent) !important;
+}

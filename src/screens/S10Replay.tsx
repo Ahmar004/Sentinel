@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { Pause, Play, SkipForward } from 'lucide-react'
-import { CellLayer, Legend, SiteMap, StateChip, type CellGridEntry } from '@/components'
+import { Layers, Pause, Play, SkipForward } from 'lucide-react'
+import { CellLayer, Legend, SiteMap, StateChip, ZoneOverlay, type CellGridEntry } from '@/components'
 import { CELL_SIZE_M, HISTORY_DOWNSAMPLED_STEP_MS, HISTORY_FULL_RATE_DURATION_MS, SITE_EXTENT_M, parseCellId } from '@/domain/parameters'
 import { toCellObservation } from '@/domain/cellObservation'
 import type { ReplayFrame } from '@/domain/types'
@@ -32,13 +32,16 @@ type Load =
 export default function S10Replay() {
   const [params] = useSearchParams()
   const site = useConfigStore((s) => s.site)
-  const zones = useConfigStore((s) => s.zones)
+  const configuredZones = useConfigStore((s) => s.zones)
 
   const [load, setLoad] = useState<Load>({ state: 'loading' })
   const [index, setIndex] = useState(0)
   const [playing, setPlaying] = useState(false)
   const [speed, setSpeed] = useState(1)
   const timer = useRef<number | null>(null)
+  const [showOverlay, setShowOverlay] = useState(true)
+  const [showZones, setShowZones] = useState(true)
+  const [controlsOpen, setControlsOpen] = useState(false)
 
   const siteId = site?.id ?? ''
   const fromParam = params.get('from')
@@ -109,6 +112,13 @@ export default function S10Replay() {
     return entries
   }, [frame])
 
+  // Zone bands as they were at the replayed moment, so a boundary shown
+  // during replay never carries the band the zone is in right now.
+  const frameZonesById = useMemo(
+    () => Object.fromEntries((frame?.zones ?? []).map((z) => [z.zoneId, z])),
+    [frame],
+  )
+
   const downsampled = load.state === 'ready' && load.stepMs > 1000
 
   return (
@@ -142,12 +152,50 @@ export default function S10Replay() {
       ) : (
         <>
           <div className="relative min-h-0 flex-1">
-            <SiteMap
-              planImageUrl={site?.planImageUrl ?? '/jamarat-satellite.svg'}
-              groundExtentM={site?.groundExtentM ?? SITE_EXTENT_M}
-            >
-              <CellLayer cells={cells} cellSizeM={CELL_SIZE_M} />
+            <SiteMap groundExtentM={site?.groundExtentM ?? SITE_EXTENT_M}>
+              {showOverlay ? <CellLayer cells={cells} cellSizeM={CELL_SIZE_M} /> : null}
+              {showZones ? (
+                <ZoneOverlay zones={configuredZones} updatesById={frameZonesById} cellSizeM={CELL_SIZE_M} />
+              ) : null}
             </SiteMap>
+
+            <div className="absolute top-2 right-2 z-[400]">
+              <button
+                type="button"
+                onClick={() => setControlsOpen((v) => !v)}
+                aria-expanded={controlsOpen}
+                aria-label="Map layers"
+                className="flex items-center gap-2 rounded border border-border bg-surface-raised/95 px-2 py-1.5 text-xs hover:bg-surface-sunken focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+              >
+                <Layers className="size-4" aria-hidden="true" />
+                Layers
+              </button>
+              {controlsOpen ? (
+                <div className="mt-1 w-60 rounded border border-border bg-surface-raised/95 p-2 text-xs">
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={showOverlay}
+                      onChange={(event) => setShowOverlay(event.target.checked)}
+                      className="size-3.5"
+                    />
+                    Density and flow overlay
+                  </label>
+                  <label className="mt-1.5 flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={showZones}
+                      onChange={(event) => setShowZones(event.target.checked)}
+                      className="size-3.5"
+                    />
+                    Zone boundaries
+                  </label>
+                  <p className="mt-2 text-ink-muted">
+                    Zone boundaries carry the band each zone was in at the moment being replayed, not its band now.
+                  </p>
+                </div>
+              ) : null}
+            </div>
             <div className="pointer-events-none absolute bottom-2 left-2 z-[400] max-w-[min(20rem,calc(100%-1rem))]">
               <div className="pointer-events-auto rounded border border-border bg-surface-raised/95 p-2">
                 <Legend />
@@ -215,7 +263,7 @@ export default function S10Replay() {
             {frame ? (
               <div className="mt-3 flex flex-wrap gap-2">
                 {frame.zones.map((zone) => {
-                  const name = zones.find((z) => z.zoneId === zone.zoneId)?.name ?? zone.zoneId
+                  const name = configuredZones.find((z) => z.zoneId === zone.zoneId)?.name ?? zone.zoneId
                   return (
                     <span key={zone.zoneId} className="flex items-center gap-2 rounded border border-border px-2 py-1 text-xs">
                       {name}

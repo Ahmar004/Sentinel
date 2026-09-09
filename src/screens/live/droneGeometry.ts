@@ -1,4 +1,5 @@
 import { CELL_SIZE_M, parseCellId } from '@/domain/parameters'
+import { groundToLatLon } from '@/components/siteGrid'
 
 /**
  * A drone is placed on the map from the cells it is currently observing,
@@ -25,7 +26,7 @@ export function footprintCentroid(footprintCells: string[]): [number, number] | 
     n += 1
   }
   if (n === 0) return null
-  return [sumY / n, sumX / n]
+  return groundToLatLon(sumX / n, sumY / n)
 }
 
 /** The observed cells as map positions, for outlining the footprint. */
@@ -36,7 +37,12 @@ export function footprintOutline(footprintCells: string[]): [number, number][] {
     if (!parsed) continue
     const x0 = parsed.col * CELL_SIZE_M
     const y0 = parsed.row * CELL_SIZE_M
-    points.push([y0, x0], [y0 + CELL_SIZE_M, x0], [y0 + CELL_SIZE_M, x0 + CELL_SIZE_M], [y0, x0 + CELL_SIZE_M])
+    points.push(
+      groundToLatLon(x0, y0),
+      groundToLatLon(x0, y0 + CELL_SIZE_M),
+      groundToLatLon(x0 + CELL_SIZE_M, y0 + CELL_SIZE_M),
+      groundToLatLon(x0 + CELL_SIZE_M, y0),
+    )
   }
   return points
 }

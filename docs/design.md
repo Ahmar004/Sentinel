@@ -552,7 +552,7 @@ Proof-of-concept scaffolding, Administrator only, marked as such in the dialog i
 
 | ID | Component | Used by | Notes |
 | - | - | - | - |
-| `C01` | `SiteMap` | `S02`, `S04`, `S07`, `S10`, `S11`, `S12`, `D07` | Leaflet over the uploaded plan image. Layer set is a prop, so replay and setup reuse it without forking. |
+| `C01` | `SiteMap` | `S02`, `S04`, `S07`, `S10`, `S11`, `S12`, `D07` | Leaflet over Esri World Imagery, in web mercator with real coordinates. Layer set is a prop, so replay and setup reuse it without forking. |
 | `C02` | `CellLayer` | `C01` | Renders the eight treatments. The single place cell appearance is decided, so the honesty invariant is enforced in one file. |
 | `C03` | `RiskTimeline` | `S03`, `S04`, `S05`, `S09`, `D01` | Recharts. Draws band boundaries as reference lines. Renders gaps in the series as breaks, never as interpolated segments. |
 | `C04` | `AttributionChart` | `S04`, `S09`, `D05` | Signed horizontal bars, ordered by absolute contribution. |
@@ -562,6 +562,7 @@ Proof-of-concept scaffolding, Administrator only, marked as such in the dialog i
 | `C08` | `ConnectionBanner` | shell | Live, degraded, disconnected. Named in Section 10. |
 | `C09` | `FilterBar` | `S08`, `S14`, `S18` | Chips for active filters, each individually removable. |
 | `C10` | `StateChip` | everywhere | One component renders every observation state, risk band, drone state, alert status and suggestion status, from the constants module. Nothing else renders these strings. |
+| `C12` | `ZoneOverlay` | `S02`, `S10` | The zones the environment is divided into, as labelled outlines. Never filled: a tint would shift the density ramp underneath, and a filled rectangle would assert that all the ground inside belongs to the zone when a zone is a named set of cells. |
 | `C11` | `RolesReference` | `S17`, `S13`, `D08` | The four roles and their capabilities, rendered from the same permission matrix the navigation is derived from. The single source for what a role may do. |
 
 `C02` and `C10` exist specifically so that no component can invent a cell appearance or a domain string on its own, and `C11` exists so that no screen can describe a permission the navigation does not actually enforce.
@@ -763,7 +764,7 @@ Restated from SRS 2.6, because the fastest way to lose the defence is a screen t
 - No screen offers ticketing, capacity planning, scheduling, entrance design or resource allocation.
 - No screen stitches imagery. `S06` Combined feeds says so in words.
 - No screen offers a fifth zone. `S11` step 6 and `S12` Zones say so in words.
-- No screen loads a map tile or anything needing an API key.
+- No screen loads anything needing an API key, an account or payment details. Satellite imagery comes from Esri World Imagery, which asks for none of them.
 - No screen plays video.
 - No screen exports through a hosted service. `S19` generates its export in the browser.
 - No screen forecasts. `S19` reports what happened and says so in words.

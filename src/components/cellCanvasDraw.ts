@@ -1,3 +1,4 @@
+import { OBSERVATION_STATE } from '@/domain/constants'
 import type { CellFrame } from './cellFrame'
 
 export interface PixelRect {
@@ -115,12 +116,31 @@ function drawArrow(ctx: CanvasRenderingContext2D, rect: PixelRect, arrow: NonNul
   ctx.restore()
 }
 
-/** Draws exactly one cell frame - fill, pattern, risk outline and flow
- * arrow - into an already-positioned pixel rect. `CellLayer` calls this
- * once per visible cell, per tick. */
+/**
+ * How solid a cell's fill is drawn.
+ *
+ * A gap is the one state carrying no measurement at all, and roughly a
+ * third of the site is gap at any moment. Painting that solid hides the
+ * satellite imagery across most of the map, which leaves a viewer unable
+ * to see the ground the system is reasoning about.
+ *
+ * So a gap's fill is drawn faint while its dense crosshatch stays at full
+ * strength. The cell is still unmistakably marked as unobserved - the
+ * pattern carries that, and the pattern is what survives greyscale
+ * anyway - but the ground reads through it. Every other state keeps its
+ * solid fill, because those cells carry a real measurement and the
+ * measurement is the thing worth seeing.
+ */
+const GAP_FILL_ALPHA = 0.28
+
 export function drawCellFrame(ctx: CanvasRenderingContext2D, frame: CellFrame, rect: PixelRect, element: Element) {
+  const isGap = frame.observationState === OBSERVATION_STATE.GAP
+
+  ctx.save()
+  if (isGap) ctx.globalAlpha = GAP_FILL_ALPHA
   ctx.fillStyle = resolveColorToken(frame.treatment.fillToken, element)
   ctx.fillRect(rect.x, rect.y, rect.w, rect.h)
+  ctx.restore()
 
   drawHatch(ctx, rect, frame.treatment.pattern, resolveColorToken('var(--color-ink-muted)', element))
 

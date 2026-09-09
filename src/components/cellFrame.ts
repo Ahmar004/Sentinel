@@ -1,4 +1,4 @@
-import { OBSERVATION_STATE } from '@/domain/constants'
+import { OBSERVATION_STATE, type ObservationState } from '@/domain/constants'
 import type { CellObservation } from '@/domain/types'
 import { DWELL_GATE_MS } from '@/domain/parameters'
 import { getCellTreatment, type CellTreatment } from '@/theme/cellTreatment'
@@ -33,6 +33,10 @@ export interface CellFrame {
   cellId: string
   col: number
   row: number
+  /** Carried explicitly so the renderer can decide on the state itself
+   * rather than inferring it from a treatment field that happens to
+   * correlate with it today. */
+  observationState: ObservationState
   treatment: CellTreatment
   /**
    * Dwell progress ("18 s of 30 s") for `NOT_ENOUGH_DWELL` - never a score.
@@ -67,7 +71,15 @@ export function buildCellFrame(entry: CellGridEntry): CellFrame {
     label = `${formatSeconds(observation.ageMs)} old`
   }
 
-  return { cellId: entry.cellId, col: entry.col, row: entry.row, treatment, label, arrow }
+  return {
+    cellId: entry.cellId,
+    col: entry.col,
+    row: entry.row,
+    observationState: observation.observationState,
+    treatment,
+    label,
+    arrow,
+  }
 }
 
 export function buildCellFrames(entries: CellGridEntry[]): CellFrame[] {

@@ -50,6 +50,8 @@ export type { DialogProps } from './Dialog'
 export { default as InfoPopover } from './InfoPopover'
 export type { InfoPopoverProps } from './InfoPopover'
 
+export * as Diagrams from './diagrams'
+
 export {
   CHART_AXIS_TICK,
   CHART_GRID_STROKE,

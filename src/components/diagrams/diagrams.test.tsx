@@ -5,7 +5,14 @@ import * as diagrams from './index'
 
 afterEach(cleanup)
 
-const BUILT = ['PipelineDiagram', 'PrecursorDiagram', 'FreshnessDiagram'] as const
+const BUILT = [
+  'PipelineDiagram',
+  'PrecursorDiagram',
+  'FreshnessDiagram',
+  'CellZoneDiagram',
+  'DroneStateDiagram',
+  'SafeguardDiagram',
+] as const
 
 describe('diagram components', () => {
   for (const name of BUILT) {

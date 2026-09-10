@@ -45,5 +45,10 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./src/test/setup.ts'],
+    // The screen tests mount whole screens against the ticking mock
+    // backend; several render Recharts surfaces. Under full-suite worker
+    // contention that can pass 5 s, so the ceiling is raised rather than
+    // the coverage cut.
+    testTimeout: 15000,
   },
 })

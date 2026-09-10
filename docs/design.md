@@ -129,7 +129,7 @@ Landing route after login, by role: Coordinator and Administrator to `S02`, Dron
 
 ### S01 - Login
 
-One centred card on the site plan image, dimmed. Username, password, submit.
+A two-pane layout on desktop: a mosaic of openly-licensed photographs of very high crowd density (Hajj tawaf and the Masjid al-Haram, the Kumbh Mela, an aerial concert crowd, a festival) fills the left pane under a dark-blue wash, with a one-line description of the system, the `PipelineDiagram` and an on-screen image credit beneath it; the right pane carries the login card. On mobile the mosaic is dropped and a single banner image sits above the card. The images are bundled in `public/login/` and attributed in full in `CREDITS.md` at the repository root. Card contents: username, password, submit.
 
 - A real `<form onSubmit>` with `event.preventDefault()`, `type="submit"` on the primary button. Enter submits.
 - A failed login states that the credentials were not accepted and does not reveal which field was wrong (FR10.1).

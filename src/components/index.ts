@@ -46,3 +46,6 @@ export { default as RolesReference } from './RolesReference'
 
 export { default as Dialog } from './Dialog'
 export type { DialogProps } from './Dialog'
+
+export { default as InfoPopover } from './InfoPopover'
+export type { InfoPopoverProps } from './InfoPopover'

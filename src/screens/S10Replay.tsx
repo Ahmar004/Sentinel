@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Layers, Pause, Play, SkipForward } from 'lucide-react'
-import { CellLayer, Legend, SiteMap, StateChip, ZoneOverlay, type CellGridEntry } from '@/components'
+import { CellLayer, MapLegend, SiteMap, StateChip, ZoneOverlay, type CellGridEntry } from '@/components'
 import { CELL_SIZE_M, HISTORY_DOWNSAMPLED_STEP_MS, HISTORY_FULL_RATE_DURATION_MS, SITE_EXTENT_M, parseCellId } from '@/domain/parameters'
 import { toCellObservation } from '@/domain/cellObservation'
 import type { ReplayFrame } from '@/domain/types'
@@ -171,7 +171,7 @@ export default function S10Replay() {
                 Layers
               </button>
               {controlsOpen ? (
-                <div className="mt-1 w-60 rounded border border-border bg-surface-raised/95 p-2 text-xs">
+                <div className="mt-1 w-60 max-w-[calc(100vw-1rem)] rounded border border-border bg-surface-raised/95 p-2 text-xs">
                   <label className="flex items-center gap-2">
                     <input
                       type="checkbox"
@@ -196,11 +196,7 @@ export default function S10Replay() {
                 </div>
               ) : null}
             </div>
-            <div className="pointer-events-none absolute bottom-2 left-2 z-[400] max-w-[min(20rem,calc(100%-1rem))]">
-              <div className="pointer-events-auto rounded border border-border bg-surface-raised/95 p-2">
-                <Legend />
-              </div>
-            </div>
+            <MapLegend />
           </div>
 
           <div className="shrink-0 border-t border-border p-3">

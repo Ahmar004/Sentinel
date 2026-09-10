@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { ChevronDown, ChevronUp, Layers } from 'lucide-react'
-import { CellLayer, ConnectionBanner, InfoPopover, Legend, SiteMap, ZoneOverlay, type CellGridEntry } from '@/components'
+import { CellLayer, ConnectionBanner, InfoPopover, MapLegend, SiteMap, ZoneOverlay, type CellGridEntry } from '@/components'
 import { CONNECTION_STATE } from '@/domain/constants'
 import { CELL_SIZE_M, SITE_EXTENT_M, parseCellId } from '@/domain/parameters'
 import {
@@ -45,7 +45,10 @@ export default function S02LiveMap() {
   const configuredZones = useConfigStore((s) => s.zones)
 
   const [inspectedCellId, setInspectedCellId] = useState<string | null>(null)
-  const [sheetOpen, setSheetOpen] = useState(false)
+  // Open by default on mobile: a coordinator on the ground must not have to
+  // open something to find out an alert is live. Desktop shows the rail
+  // regardless, so this state only affects the mobile bottom sheet.
+  const [sheetOpen, setSheetOpen] = useState(true)
   // FR7.7: confirming is a deliberate human step, so acting on an option
   // opens D02 rather than calling the client from the rail card.
   const [confirming, setConfirming] = useState<string | null>(null)
@@ -119,7 +122,11 @@ export default function S02LiveMap() {
 
       <div className="flex min-h-0 flex-1">
         <div className="flex min-w-0 flex-1 flex-col">
-          <div className="relative min-h-0 flex-1">
+          {/* A floor on the map height for mobile: with the zone strip above
+              and the alert sheet open below, an unbounded flex child would
+              shrink to a sliver on a short phone. Below the floor the page
+              scrolls instead. */}
+          <div className="relative min-h-[45vh] flex-1 md:min-h-0">
             <SiteMap
               groundExtentM={site?.groundExtentM ?? SITE_EXTENT_M}
             >
@@ -144,7 +151,7 @@ export default function S02LiveMap() {
                 Layers
               </button>
               {controlsOpen ? (
-                <div className="mt-1 w-60 rounded border border-border bg-surface-raised/95 p-2 text-xs">
+                <div className="mt-1 w-60 max-w-[calc(100vw-1rem)] rounded border border-border bg-surface-raised/95 p-2 text-xs">
                   <div className="mb-1 flex items-center justify-between">
                     <span className="font-semibold text-ink-muted uppercase">Layers</span>
                     <InfoPopover label="What the layer toggles do">
@@ -183,13 +190,7 @@ export default function S02LiveMap() {
                 </div>
               ) : null}
             </div>
-            {showOverlay ? (
-              <div className="pointer-events-none absolute bottom-2 left-2 z-[400] max-w-[min(20rem,calc(100%-1rem))]">
-                <div className="pointer-events-auto rounded border border-border bg-surface-raised/95 p-2">
-                  <Legend />
-                </div>
-              </div>
-            ) : null}
+            {showOverlay ? <MapLegend /> : null}
           </div>
 
           <div className="hidden shrink-0 border-t border-border md:block">
@@ -221,7 +222,7 @@ export default function S02LiveMap() {
             {sheetOpen ? <ChevronDown className="size-4" aria-hidden="true" /> : <ChevronUp className="size-4" aria-hidden="true" />}
           </span>
         </button>
-        {sheetOpen ? <div className="max-h-[50vh] overflow-y-auto border-t border-border">{rail}</div> : null}
+        {sheetOpen ? <div className="max-h-[45vh] overflow-y-auto border-t border-border">{rail}</div> : null}
       </div>
 
       {toast ? (

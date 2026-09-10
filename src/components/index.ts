@@ -31,6 +31,8 @@ export type { ZoneOverlayProps } from './ZoneOverlay'
 
 export { default as Legend } from './Legend'
 
+export { default as MapLegend } from './MapLegend'
+
 export { default as ConnectionBanner } from './ConnectionBanner'
 export type { ConnectionBannerProps } from './ConnectionBanner'
 

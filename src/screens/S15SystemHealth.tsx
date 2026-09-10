@@ -4,6 +4,8 @@ import { ROLE } from '@/domain/constants'
 import { LATENCY_BUDGET_MS } from '@/domain/parameters'
 import type { SystemHealth } from '@/domain/types'
 import { getSentinelClient, useCurrentRole } from '@/store'
+import { InfoPopover, CHART_AXIS_TICK, CHART_GRID_STROKE, CHART_LINE_WIDTH, CHART_TOOLTIP_STYLE } from '@/components'
+import { PipelineDiagram } from '@/components/diagrams'
 import { HEALTH_POLL_MS, useTicker } from '@/hooks/useTicker'
 
 type Tab = 'workers' | 'latency' | 'services'
@@ -79,8 +81,9 @@ export default function S15SystemHealth() {
 
   return (
     <div className="flex h-full min-h-0 flex-col overflow-y-auto">
-      <header className="border-b border-border p-4">
-        <h1 className="text-lg font-semibold">System health</h1>
+      <header className="border-b border-border p-5">
+        <h1 className="text-xl font-semibold">System health</h1>
+        <PipelineDiagram className="mt-3 max-w-2xl" />
 
         {role === ROLE.IT ? (
           <p className="mt-2 rounded border border-border bg-surface-sunken p-2 text-sm">
@@ -156,45 +159,41 @@ export default function S15SystemHealth() {
                 </div>
               </dl>
 
-              <div style={{ height: 200 }}>
+              <div style={{ height: 240 }}>
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={history} margin={{ top: 8, right: 8, bottom: 0, left: 0 }}>
-                    <CartesianGrid stroke="var(--color-border)" strokeDasharray="2 2" vertical={false} />
-                    <XAxis dataKey="label" tick={{ fontSize: 10, fill: 'var(--color-ink-muted)' }} stroke="var(--color-border)" minTickGap={30} />
+                    <CartesianGrid stroke={CHART_GRID_STROKE} strokeDasharray="2 2" vertical={false} />
+                    <XAxis dataKey="label" tick={CHART_AXIS_TICK} stroke={CHART_GRID_STROKE} minTickGap={30} />
                     <YAxis
                       domain={[0, Math.max(LATENCY_BUDGET_MS * 1.2, load.health.latency.p95Ms * 1.2)]}
-                      tick={{ fontSize: 10, fill: 'var(--color-ink-muted)' }}
-                      stroke="var(--color-border)"
-                      width={44}
+                      tick={CHART_AXIS_TICK}
+                      stroke={CHART_GRID_STROKE}
+                      width={46}
                     />
-                    <Tooltip
-                      contentStyle={{
-                        background: 'var(--color-surface-raised)',
-                        border: '1px solid var(--color-border)',
-                        borderRadius: 4,
-                        fontSize: 12,
-                      }}
-                    />
+                    <Tooltip contentStyle={CHART_TOOLTIP_STYLE} />
                     <ReferenceLine
                       y={load.health.latency.budgetMs}
                       stroke="var(--color-risk-elevated)"
                       strokeDasharray="4 4"
-                      label={{ value: 'budget', position: 'right', fontSize: 10, fill: 'var(--color-ink-muted)' }}
+                      label={{ value: 'budget', position: 'right', fontSize: 12, fill: 'var(--color-ink-muted)' }}
                     />
                     <Line
                       type="monotone"
                       dataKey="measuredMs"
                       stroke="var(--color-accent)"
-                      strokeWidth={2}
+                      strokeWidth={CHART_LINE_WIDTH}
                       dot={false}
                       isAnimationActive={false}
                     />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
-              <p className="mt-2 text-xs text-ink-muted">
-                The budget is {LATENCY_BUDGET_MS} ms from capture to display, and it is also the freshness boundary: a
-                cell whose age passes it is downgraded to stale rather than shown as current (NFR1).
+              <p className="mt-2 flex items-center gap-1 text-xs text-ink-muted">
+                The budget is {LATENCY_BUDGET_MS} ms, and it is also the freshness boundary.
+                <InfoPopover label="What the latency budget means">
+                  The budget is {LATENCY_BUDGET_MS} ms from capture to display, and it is also the freshness boundary: a
+                  cell whose age passes it is downgraded to stale rather than shown as current (NFR1).
+                </InfoPopover>
               </p>
             </section>
           ) : null}

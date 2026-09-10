@@ -41,7 +41,7 @@ function NavItem({ entry }: { entry: NavEntry }) {
         [
           'flex flex-col items-center gap-1 rounded px-2 py-1.5 text-xs',
           'md:flex-row md:justify-start md:gap-3 md:px-3 md:py-2 md:text-sm',
-          isActive ? 'bg-surface-raised text-accent' : 'text-ink-muted hover:text-ink',
+          isActive ? 'bg-surface-raised font-medium text-accent' : 'text-ink-muted hover:text-ink',
         ].join(' ')
       }
     >

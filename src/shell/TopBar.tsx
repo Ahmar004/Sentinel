@@ -51,7 +51,7 @@ export default function TopBar({ onOpenNotifications, onOpenInstall }: TopBarPro
   return (
     <header className="flex h-14 shrink-0 items-center justify-between border-b border-border bg-surface-raised px-4">
       <div className="flex items-center gap-3">
-        <span className="text-sm font-semibold">{siteName ?? 'No site selected'}</span>
+        <span className="text-base font-semibold">{siteName ?? 'No site selected'}</span>
       </div>
 
       <div className="flex items-center gap-4">
@@ -106,7 +106,7 @@ export default function TopBar({ onOpenNotifications, onOpenInstall }: TopBarPro
                   setMenuOpen(false)
                   onOpenNotifications?.()
                 }}
-                className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-xs hover:bg-surface"
+                className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-sm hover:bg-surface"
               >
                 <Bell className="size-4" aria-hidden="true" />
                 Alert notifications
@@ -118,7 +118,7 @@ export default function TopBar({ onOpenNotifications, onOpenInstall }: TopBarPro
                   setMenuOpen(false)
                   onOpenInstall?.()
                 }}
-                className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-xs hover:bg-surface"
+                className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-sm hover:bg-surface"
               >
                 <Download className="size-4" aria-hidden="true" />
                 Install Sentinel
@@ -130,7 +130,7 @@ export default function TopBar({ onOpenNotifications, onOpenInstall }: TopBarPro
                   setMenuOpen(false)
                   logout()
                 }}
-                className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-xs hover:bg-surface"
+                className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-sm hover:bg-surface"
               >
                 <LogOut className="size-4" aria-hidden="true" />
                 Sign out

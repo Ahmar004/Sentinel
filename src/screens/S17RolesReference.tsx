@@ -15,8 +15,8 @@ import { RolesReference } from '@/components'
 export default function S17RolesReference() {
   return (
     <div className="flex h-full min-h-0 flex-col overflow-y-auto">
-      <header className="border-b border-border p-4">
-        <h1 className="text-lg font-semibold">Roles reference</h1>
+      <header className="border-b border-border p-5">
+        <h1 className="text-xl font-semibold">Roles reference</h1>
         <p className="mt-1 text-sm text-ink-muted">
           What each role may do. Rendered from the same permission matrix the navigation and the route guards read, so
           this page cannot describe a permission the system does not enforce.
@@ -27,7 +27,7 @@ export default function S17RolesReference() {
         <RolesReference />
 
         <section className="mt-6 flex flex-col gap-3">
-          <h2 className="text-sm font-semibold">What each role exists to do</h2>
+          <h2 className="text-lg font-semibold">What each role exists to do</h2>
           <p className="text-sm">
             <span className="font-medium">Coordinator.</span> Watches the live picture and decides what to do about it.
             Acknowledges alerts, and confirms or dismisses the ranked options the decision-support layer produces.

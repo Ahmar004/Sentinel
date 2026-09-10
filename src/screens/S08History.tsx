@@ -111,8 +111,8 @@ export default function S08History() {
 
   return (
     <div className="flex h-full min-h-0 flex-col overflow-y-auto">
-      <header className="border-b border-border p-4">
-        <h1 className="text-lg font-semibold">History</h1>
+      <header className="border-b border-border p-5">
+        <h1 className="text-xl font-semibold">History</h1>
         <p className="mt-1 text-sm text-ink-muted">
           Alerts, suggestions, outcomes and configuration changes, in one stream.
         </p>

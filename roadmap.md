@@ -47,6 +47,9 @@ Then, once spec(srs) and design.md are final, use /brainstorming/visual companio
 ### Step-6:
 Then once, wireframes are built and reviewed/fixed, use subagent-driven-development skill build the whole front-end of the app, on the basis of wireframes, spec (srs), design.md, understanding.md and @docs\Proposal-doc_Version_FINAL docx file and required-pages.md
 
+### Step-9:
+Visual design and information-density pass. The front-end is functionally complete but reads as text-heavy: type is small and flat, the mandatory "why" explanations sit as always-on paragraphs, and several concepts are carried only in prose. This step raises the type scale (system fonts, tokenised in the `@theme` block), moves the honesty-invariant explanations into accessible info popovers, adds an openly-licensed high-crowd-density imagery treatment to the login screen, and introduces a balanced, fixed set of reusable SVG diagrams and charts (including a per-zone Stampede-risk pie on the live map) where they replace text rather than decorate. No change to data flow, roles, scope boundaries or the honesty invariant. `design.md`, `srs.md` and the affected wireframes are corrected in the same step. Design doc: `docs/superpowers/specs/2026-09-10-visual-polish-design.md`. Invoke `frontend-design` (and `test-driven-development` for every new util, hook or component) before starting. Done in three phases: foundations, then demo-critical screens, then the remaining screens.
+
 ### Step-7:
 Use systematic-debugging and test-driven-development to review and test the whole front-end rigorously
 

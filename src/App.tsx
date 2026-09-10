@@ -62,7 +62,7 @@ bootstrapMockBackend()
  */
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route path="/login" element={<S01Login />} />
         <Route path="/403" element={<S16NotPermitted />} />

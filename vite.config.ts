@@ -7,6 +7,12 @@ import path from 'node:path'
 
 // https://vite.dev/config/
 export default defineConfig({
+  // The app is served from a project GitHub Pages path, not a domain root:
+  // https://ahmar004.github.io/Sentinel/. Vite rewrites every bundled asset
+  // URL and index.html reference against this, and vite-plugin-pwa inherits
+  // it for the manifest and service-worker scope. The dev server also moves
+  // to /Sentinel/ as a result; it redirects / there automatically.
+  base: '/Sentinel/',
   plugins: [
     react(),
     tailwindcss(),

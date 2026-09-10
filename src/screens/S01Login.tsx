@@ -9,17 +9,19 @@ import { DEACTIVATED_ACCOUNT, DEMO_ACCOUNTS, DEMO_PASSWORD } from './demoAccount
  * Two real-world crowd-disaster case studies, shown below the fold on the
  * login screen. Each card - image and caption together - links to news
  * coverage of the event. Files are bundled in `public/login/` and the
- * sources are recorded in CREDITS.md.
+ * sources are recorded in CREDITS.md. Paths are relative so they resolve
+ * against the deployed base path (`import.meta.env.BASE_URL`), which is not
+ * the domain root on GitHub Pages.
  */
 const CASE_STUDIES = [
   {
-    src: '/login/mina-hajj-2015.jpg',
+    src: 'login/mina-hajj-2015.jpg',
     alt: 'Aerial view of dense pilgrim crowds moving through the Mina valley during Hajj',
     caption: 'Stampede at Mina during Hajj in 2015',
     href: 'https://www.nytimes.com/interactive/2015/09/24/world/middleeast/mecca-mina-stampede-hajj-maps.html',
   },
   {
-    src: '/login/kumbh-mela.avif',
+    src: 'login/kumbh-mela.avif',
     alt: 'Dense crowds of devotees at the Maha Kumbh Mela',
     caption: 'Stampede at the Maha Kumbh Mela in 2025',
     href: 'https://www.business-standard.com/india-news/mahakumbh-stampede-india-deadliest-incidents-religious-festival-tragedy-125012900819_1.html',
@@ -189,7 +191,12 @@ export default function S01Login() {
               rel="noopener noreferrer"
               className="group block overflow-hidden rounded-lg border border-border bg-surface-raised transition-colors hover:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent md:min-w-[320px] md:flex-1"
             >
-              <img src={study.src} alt={study.alt} className="h-56 w-full object-cover" loading="lazy" />
+              <img
+                src={`${import.meta.env.BASE_URL}${study.src}`}
+                alt={study.alt}
+                className="h-56 w-full object-cover"
+                loading="lazy"
+              />
               <p className="p-3 text-sm font-medium group-hover:underline">{study.caption}</p>
             </a>
           ))}

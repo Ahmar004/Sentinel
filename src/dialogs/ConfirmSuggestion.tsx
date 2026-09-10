@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Check, X } from 'lucide-react'
 import { Dialog, StateChip } from '@/components'
+import { SafeguardDiagram } from '@/components/diagrams'
 import { OUTCOME_WINDOW_MS } from '@/domain/parameters'
 import type { SuggestionOption } from '@/domain/types'
 import { getSentinelClient } from '@/store'
@@ -82,6 +83,7 @@ export default function ConfirmSuggestion({ suggestion, onClose, onConfirmed }: 
       </dl>
 
       <h3 className="mt-3 mb-1 text-sm font-medium">Safeguards</h3>
+      <SafeguardDiagram className="mb-2 max-w-md" />
       <ul className="flex flex-col gap-1">
         {suggestion.safeguards.map((safeguard) => (
           <li key={safeguard.check} className="flex items-start gap-2 text-xs">

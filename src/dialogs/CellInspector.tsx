@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Dialog, RiskTimeline, StateChip } from '@/components'
+import { FreshnessDiagram } from '@/components/diagrams'
 import { OBSERVATION_STATE } from '@/domain/constants'
 import { CELL_AREA_SQM, DWELL_GATE_MS, STALE_MAX_AGE_MS } from '@/domain/parameters'
 import type { CellObservation, CellSample } from '@/domain/types'
@@ -93,6 +94,9 @@ function CurrentTab({ cell }: { cell: CellObservation }) {
       </Row>
       {reason ? (
         <p className="mt-3 rounded border border-border bg-surface-sunken p-2 text-ink-muted">{reason}</p>
+      ) : null}
+      {cell.observationState === OBSERVATION_STATE.STALE || cell.observationState === OBSERVATION_STATE.GAP ? (
+        <FreshnessDiagram className="mt-3 max-w-[260px]" />
       ) : null}
     </dl>
   )

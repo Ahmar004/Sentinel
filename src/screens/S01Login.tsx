@@ -1,22 +1,29 @@
 import { useCallback, useState, type FormEvent, type KeyboardEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { ChevronDown } from 'lucide-react'
 import { useSessionStore } from '@/store'
 import { landingRouteForRole } from '@/auth/permissions'
-import { PipelineDiagram } from '@/components/diagrams'
 import { DEACTIVATED_ACCOUNT, DEMO_ACCOUNTS, DEMO_PASSWORD } from './demoAccounts'
 
 /**
- * Openly-licensed photographs of very high crowd density, bundled in the
- * repo (not hotlinked) and credited on screen and in CREDITS.md. They
- * establish what Sentinel is for before any live data is shown. Desktop
- * gets the mosaic; mobile gets the first image alone.
+ * Two real-world crowd-disaster case studies, shown below the fold on the
+ * login screen. Each card - image and caption together - links to news
+ * coverage of the event. Files are bundled in `public/login/` and the
+ * sources are recorded in CREDITS.md.
  */
-const LOGIN_IMAGES = [
-  { src: '/login/01-hajj-tawaf.jpg', alt: 'Pilgrims performing tawaf around the Kaaba during Hajj' },
-  { src: '/login/02-hajj-mecca.jpg', alt: 'Crowds of pilgrims at the Masjid al-Haram in Mecca' },
-  { src: '/login/03-kumbh-mela.jpg', alt: 'Crowds near Shastri Bridge at the Kumbh Mela, Prayagraj' },
-  { src: '/login/04-concert-aerial.jpg', alt: 'Aerial view of a stadium concert crowd at Modena Park' },
-  { src: '/login/05-festival.jpg', alt: 'Festival crowd at the Donauinselfest in Vienna' },
+const CASE_STUDIES = [
+  {
+    src: '/login/mina-hajj-2015.jpg',
+    alt: 'Aerial view of dense pilgrim crowds moving through the Mina valley during Hajj',
+    caption: 'Stampede at Mina during Hajj in 2015',
+    href: 'https://www.nytimes.com/interactive/2015/09/24/world/middleeast/mecca-mina-stampede-hajj-maps.html',
+  },
+  {
+    src: '/login/kumbh-mela.avif',
+    alt: 'Dense crowds of devotees at the Maha Kumbh Mela',
+    caption: 'Stampede at the Maha Kumbh Mela in 2025',
+    href: 'https://www.business-standard.com/india-news/mahakumbh-stampede-india-deadliest-incidents-religious-festival-tragedy-125012900819_1.html',
+  },
 ] as const
 
 /**
@@ -65,35 +72,8 @@ export default function S01Login() {
   }
 
   return (
-    <div className="min-h-dvh bg-surface text-ink md:grid md:grid-cols-[3fr_2fr]">
-      {/* Image pane - desktop only. Mobile gets a single banner above the card. */}
-      <aside className="relative hidden overflow-hidden md:block">
-        <div className="grid h-full grid-cols-2 grid-rows-[2fr_1fr_1fr] gap-0.5">
-          <img src={LOGIN_IMAGES[0].src} alt="" className="col-span-2 size-full object-cover" />
-          <img src={LOGIN_IMAGES[1].src} alt="" className="size-full object-cover" loading="lazy" />
-          <img src={LOGIN_IMAGES[2].src} alt="" className="size-full object-cover" loading="lazy" />
-          <img src={LOGIN_IMAGES[3].src} alt="" className="size-full object-cover" loading="lazy" />
-          <img src={LOGIN_IMAGES[4].src} alt="" className="size-full object-cover" loading="lazy" />
-        </div>
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-surface via-surface/50 to-surface/20" />
-        <div className="absolute inset-x-0 bottom-0 p-6">
-          <p className="mb-2 max-w-xl text-sm text-ink">
-            Sentinel watches crowd density and movement across a venue, fuses every drone&apos;s reading onto one map,
-            and warns coordinators of Stampede precursors before a crush begins.
-          </p>
-          <PipelineDiagram className="max-w-xl opacity-90" />
-          <p className="mt-2 text-xs text-ink-muted">
-            Images: Wikimedia Commons, Creative Commons and public domain. Full credits in CREDITS.md.
-          </p>
-        </div>
-      </aside>
-
-      <div className="flex min-h-dvh flex-col items-center justify-center p-4">
-        <img
-          src={LOGIN_IMAGES[0].src}
-          alt={LOGIN_IMAGES[0].alt}
-          className="mb-4 h-40 w-full max-w-sm rounded-lg object-cover md:hidden"
-        />
+    <div className="min-h-dvh bg-surface text-ink">
+      <section className="flex min-h-dvh flex-col items-center justify-center gap-4 p-4">
         <form
           onSubmit={(event) => {
             void handleSubmit(event)
@@ -186,10 +166,35 @@ export default function S01Login() {
           </div>
         </form>
 
-        <p className="mt-4 max-w-sm text-xs text-ink-muted md:hidden">
-          Image: Wikimedia Commons, Creative Commons and public domain. Full credits in CREDITS.md.
+        <a
+          href="#case-studies"
+          className="flex items-center gap-2 rounded-lg border border-border bg-surface-raised px-4 py-3 text-sm text-ink-muted shadow-sm hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+        >
+          <ChevronDown className="size-4" aria-hidden="true" />
+          Slide below to see Sentinel&apos;s case studies
+        </a>
+      </section>
+
+      <section id="case-studies" className="mx-auto max-w-5xl scroll-mt-4 px-4 pb-12">
+        <h2 className="mb-1 text-lg font-semibold">Case studies</h2>
+        <p className="mb-4 text-sm text-ink-muted">
+          Crowd disasters Sentinel is built to give warning of. Each links to news coverage of the event.
         </p>
-      </div>
+        <div className="flex flex-col gap-6 md:flex-row md:flex-wrap">
+          {CASE_STUDIES.map((study) => (
+            <a
+              key={study.href}
+              href={study.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block overflow-hidden rounded-lg border border-border bg-surface-raised transition-colors hover:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent md:min-w-[320px] md:flex-1"
+            >
+              <img src={study.src} alt={study.alt} className="h-56 w-full object-cover" loading="lazy" />
+              <p className="p-3 text-sm font-medium group-hover:underline">{study.caption}</p>
+            </a>
+          ))}
+        </div>
+      </section>
     </div>
   )
 }

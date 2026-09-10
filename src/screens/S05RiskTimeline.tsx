@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { HISTORY_FULL_RATE_DURATION_MS, HISTORY_DOWNSAMPLED_STEP_MS } from '@/domain/parameters'
 import type { ZoneSample } from '@/domain/types'
 import { getSentinelClient, useAlerts, useConfigStore } from '@/store'
+import { InfoPopover } from '@/components'
 import CoverageTimeline from './live/CoverageTimeline'
 import MultiZoneRiskChart, { type ZoneSeries } from './timeline/MultiZoneRiskChart'
 
@@ -78,12 +79,9 @@ export default function S05RiskTimeline() {
 
   return (
     <div className="flex h-full min-h-0 flex-col overflow-y-auto">
-      <header className="border-b border-border p-4">
-        <h1 className="text-lg font-semibold">Risk timeline</h1>
-        <p className="mt-1 text-sm text-ink-muted">
-          Every zone on one pair of axes, with coverage underneath so a dip in risk can be told apart from a loss of
-          sight.
-        </p>
+      <header className="border-b border-border p-5">
+        <h1 className="text-xl font-semibold">Risk timeline</h1>
+        <p className="mt-1 text-sm text-ink-muted">Every zone on one pair of axes, with coverage charted underneath.</p>
 
         <div className="mt-3 flex flex-wrap gap-1">
           {PERIODS.map((p) => (
@@ -120,7 +118,7 @@ export default function S05RiskTimeline() {
         ) : (
           <>
             <section>
-              <h2 className="mb-2 text-sm font-semibold">Risk by zone</h2>
+              <h2 className="mb-2 text-lg font-semibold">Risk by zone</h2>
               <MultiZoneRiskChart
                 series={series}
                 alertTimestamps={alertTimestamps}
@@ -138,7 +136,14 @@ export default function S05RiskTimeline() {
             </section>
 
             <section>
-              <h2 className="mb-2 text-sm font-semibold">Coverage by zone</h2>
+              <div className="mb-2 flex items-center gap-1">
+                <h2 className="text-lg font-semibold">Coverage by zone</h2>
+                <InfoPopover label="Why coverage is charted here">
+                  A zone risk line means little without knowing how much of the zone was observed at the time. With
+                  coverage beside it, a dip in risk caused by the crowd thinning can be told apart from a dip caused by
+                  losing sight of the zone (FR4.6).
+                </InfoPopover>
+              </div>
               <div className="flex flex-col gap-4">
                 {series.map((zone) => (
                   <div key={zone.zoneId}>

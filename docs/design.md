@@ -28,6 +28,7 @@ Copied from `srs.md`. These bind every screen in this document.
 - **No paid service.** Leaflet renders an uploaded site plan image. There is no tile provider and no API key anywhere.
 - **No video on the live path.** Per-drone and combined views render the wind-map overlay over the drone's footprint cells. They are not video players.
 - **Vocabulary.** Cell, zone, dwell, footprint, freshness, gap, observe, transit, convergence, counter-flow, risk score, exit occupancy. Imported from the constants module in SRS Appendix A, never hardcoded and never given synonyms.
+- **Explanatory text.** A mandated explanation may be presented in an on-demand `InfoPopover` (`C14`) rather than as always-on prose, except the load-bearing honesty statements enumerated in the front-end honesty test, which stay visible. Where a small diagram (`C15`) carries the same point it replaces the paragraph.
 
 ***
 
@@ -129,7 +130,7 @@ Landing route after login, by role: Coordinator and Administrator to `S02`, Dron
 
 ### S01 - Login
 
-One centred card on the site plan image, dimmed. Username, password, submit.
+A two-pane layout on desktop: a mosaic of openly-licensed photographs of very high crowd density (Hajj tawaf and the Masjid al-Haram, the Kumbh Mela, an aerial concert crowd, a festival) fills the left pane under a dark-blue wash, with a one-line description of the system, the `PipelineDiagram` and an on-screen image credit beneath it; the right pane carries the login card. On mobile the mosaic is dropped and a single banner image sits above the card. The images are bundled in `public/login/` and attributed in full in `CREDITS.md` at the repository root. Card contents: username, password, submit.
 
 - A real `<form onSubmit>` with `event.preventDefault()`, `type="submit"` on the primary button. Enter submits.
 - A failed login states that the credentials were not accepted and does not reveal which field was wrong (FR10.1).
@@ -201,7 +202,7 @@ Mobile 390 x 844
 - `GAP` renders grey with a distinct hatch and no numbers at all (FR6.3).
 - Where `flow` is `null`, no arrow is drawn. A zero-length or default-direction arrow is never drawn (FR3.5).
 
-**Zone strip**, across the top of the map. One tile per zone showing its name, risk score, band, an estimated people count over its observed cells with that observed count beside it (FR1.5), and a coverage bar broken into observed, not-enough-dwell, stale and gap. Risk and coverage always appear together, never risk alone (FR4.5, FR4.6). The tile names the peak cell. Tapping a tile opens `S03`.
+**Zone strip**, across the top of the map. It leads with `ZoneRiskPie` (`C13`): a pie of the configured zones, each slice angled by that zone's aggregate risk score and filled with its risk-band colour, an unobserved zone drawn as a distinct grey no-reading slice and never dropped, captioned as a share of current site risk with an `InfoPopover` explaining that the whole is the sum of the zone scores rather than a probability. Then one tile per zone showing its name, risk score, band, an estimated people count over its observed cells with that observed count beside it (FR1.5), and a coverage bar broken into observed, not-enough-dwell, stale and gap. Risk and coverage always appear together, never risk alone (FR4.5, FR4.6). The tile names the peak cell. Tapping a tile opens `S03`.
 
 **Alert rail**, on the right. One card per open alert, newest first, each carrying zone, cell, score against threshold, time, band, and **the top three contributing features with their signed contributions**, readable without navigation (FR5.3). Actions per card: Acknowledge, and Suggestions which expands the ranked options inline (see `C05`). Watch-band zones appear in the rail as a trend line with no alert, which is what the watch band exists for.
 
@@ -564,6 +565,9 @@ Proof-of-concept scaffolding, Administrator only, marked as such in the dialog i
 | `C10` | `StateChip` | everywhere | One component renders every observation state, risk band, drone state, alert status and suggestion status, from the constants module. Nothing else renders these strings. |
 | `C12` | `ZoneOverlay` | `S02`, `S10` | The zones the environment is divided into, as labelled outlines. Never filled: a tint would shift the density ramp underneath, and a filled rectangle would assert that all the ground inside belongs to the zone when a zone is a named set of cells. |
 | `C11` | `RolesReference` | `S17`, `S13`, `D08` | The four roles and their capabilities, rendered from the same permission matrix the navigation is derived from. The single source for what a role may do. |
+| `C13` | `ZoneRiskPie` | `S02` zone strip | A pie of the configured zones, each slice angled by the zone's aggregate risk score and coloured by its band. An unobserved zone is a grey no-reading slice, never omitted; when no zone is observed the pie carries no numbers. Every legend row pairs the score with the zone's observed percentage. |
+| `C14` | `InfoPopover` | many | An Info trigger and a dismissable panel (Esc, outside click, focus-out) whose content mounts only while open. Where a mandated explanation is secondary it moves in here; the load-bearing honesty statements asserted in the front-end honesty test stay visible. |
+| `C15` | `Diagrams` | see Section 5.x | Six themed inline-SVG figures - pipeline, precursors, cell-and-zone, drone state, safeguards, freshness - placed where they replace prose rather than decorate. |
 
 `C02` and `C10` exist specifically so that no component can invent a cell appearance or a domain string on its own, and `C11` exists so that no screen can describe a permission the navigation does not actually enforce.
 

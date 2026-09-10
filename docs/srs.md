@@ -553,6 +553,8 @@ Owner: Tier 2. Visible to: Coordinator, Administrator.
 
 Maximum rather than mean, because a zone is only as safe as its worst cell, and averaging a single dangerous cell against a hundred calm ones is exactly how a real warning gets hidden.
 
+The live map additionally carries a per-zone risk pie (design `C13`): one slice per zone, angled by that zone's score and coloured by its band, an unobserved zone shown grey because it has no score. It adds no requirement; it is a second reading of the same zone risk and coverage FR4.5 and FR4.6 already mandate.
+
 **FR4.6** Zone risk shall never be presented without zone coverage: the counts of observed, not-enough-dwell, stale and gap cells within it.
 *Acceptance:* a zone with 96 of 400 cells observed displays both its risk and that coverage; no surface shows the zone risk alone.
 
@@ -772,7 +774,7 @@ Two properties carry weight beyond their field lists. `CellSample` is the single
 
 **NFR4 Auditability.** Every alert, suggestion, confirmation, dismissal, outcome and configuration change shall be reconstructable for 30 days, including who acted and when.
 
-**NFR5 Accessibility.** Every observation state and every risk band shall be distinguishable without relying on hue alone, using fill pattern and an explicit label in addition to colour. Contrast meets WCAG 2.1 AA. Interaction is designed keyboard-first, then touch, then mouse; in every form and dialog Enter submits and Esc cancels.
+**NFR5 Accessibility.** Every observation state and every risk band shall be distinguishable without relying on hue alone, using fill pattern and an explicit label in addition to colour. Contrast meets WCAG 2.1 AA. Interaction is designed keyboard-first, then touch, then mouse; in every form and dialog Enter submits and Esc cancels. Mandated explanatory text may be surfaced through an on-demand popover (design `C14`) to keep screens legible; the honesty statements enumerated in the front-end honesty test stay visible.
 
 The accessibility requirement follows from Section 2.3 rather than from convention. If a colour-blind operator cannot tell a gap from a normal cell, the system is misrepresenting itself to that operator exactly as badly as if it had interpolated the value.
 

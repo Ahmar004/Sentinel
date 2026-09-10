@@ -46,3 +46,16 @@ export { default as RolesReference } from './RolesReference'
 
 export { default as Dialog } from './Dialog'
 export type { DialogProps } from './Dialog'
+
+export { default as InfoPopover } from './InfoPopover'
+export type { InfoPopoverProps } from './InfoPopover'
+
+export * as Diagrams from './diagrams'
+
+export {
+  CHART_AXIS_TICK,
+  CHART_GRID_STROKE,
+  CHART_LINE_WIDTH,
+  CHART_BAR_RADIUS,
+  CHART_TOOLTIP_STYLE,
+} from './chartTheme'

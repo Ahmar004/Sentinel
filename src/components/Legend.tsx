@@ -3,6 +3,7 @@ import type { CellObservation } from '@/domain/types'
 import { getCellTreatment } from '@/theme/cellTreatment'
 import { OBSERVATION_STATE_LABEL, RISK_BAND_LABEL } from './stateChipLabels'
 import { patternSwatchStyle } from './cellPatternPreview'
+import { FreshnessDiagram } from './diagrams'
 
 const SAMPLE_DENSITY = 2.5
 
@@ -86,7 +87,7 @@ export default function Legend() {
 
       <section>
         <h3 className="mb-1.5 font-semibold text-ink-muted uppercase tracking-wide">Risk band</h3>
-        <p className="mb-1.5 text-[11px] text-ink-muted">Drawn only when a cell is observed.</p>
+        <p className="mb-1.5 text-xs text-ink-muted">Drawn only when a cell is observed.</p>
         <ul className="flex flex-col gap-1.5">
           {RISK_BANDS.map((band) => (
             <li key={band} className="flex items-center gap-2">
@@ -96,6 +97,15 @@ export default function Legend() {
           ))}
         </ul>
       </section>
+
+      <section>
+        <h3 className="mb-1.5 font-semibold text-ink-muted uppercase tracking-wide">Freshness</h3>
+        <FreshnessDiagram className="max-w-[240px]" />
+      </section>
+
+      <p className="text-ink-muted">
+        Gaps are never guessed, and a stale value is never shown as current.
+      </p>
     </div>
   )
 }

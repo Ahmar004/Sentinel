@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { AttributionChart, CellLayer, RiskTimeline, SiteMap, StateChip, SuggestionList, type CellGridEntry } from '@/components'
+import { AttributionChart, CellLayer, InfoPopover, RiskTimeline, SiteMap, StateChip, SuggestionList, type CellGridEntry } from '@/components'
+import { PrecursorDiagram } from '@/components/diagrams'
 import type { RiskTimelinePoint } from '@/components/riskTimelineData'
 import { CONNECTION_STATE } from '@/domain/constants'
 import { ALERT_CLEAR_HOLD_MS, ALERT_CLEAR_HYSTERESIS, CELL_SIZE_M, SITE_EXTENT_M, parseCellId } from '@/domain/parameters'
@@ -99,7 +100,7 @@ export default function S04AlertDetail() {
   if (!alert) {
     return (
       <div className="p-6">
-        <h1 className="text-lg font-semibold">Alert not found</h1>
+        <h1 className="text-xl font-semibold">Alert not found</h1>
         <p className="mt-2 text-sm text-ink-muted">
           No alert with the identifier {alertId} is currently active. It may have cleared, in which case it is in the
           history.
@@ -138,10 +139,10 @@ export default function S04AlertDetail() {
 
   return (
     <div className="flex h-full min-h-0 flex-col overflow-y-auto">
-      <header className="border-b border-border p-4">
+      <header className="border-b border-border p-5">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h1 className="text-lg font-semibold">{zoneName}</h1>
+            <h1 className="text-xl font-semibold">{zoneName}</h1>
             <p className="font-mono text-xs text-ink-muted">
               {alert.cellId} - {alert.alertId}
             </p>
@@ -182,16 +183,20 @@ export default function S04AlertDetail() {
 
       <div className="grid gap-4 p-4 lg:grid-cols-2">
         <section>
-          <h2 className="mb-2 text-sm font-semibold">Why this fired</h2>
+          <div className="mb-2 flex items-center gap-1">
+            <h2 className="text-lg font-semibold">Why this fired</h2>
+            <InfoPopover label="How this attribution was recorded">
+              These contributions were recorded at the moment the alert fired and are never recomputed, so this reads
+              the same today as it will in the audit trail (FR8.7).
+            </InfoPopover>
+          </div>
           <AttributionChart attribution={alert.attribution} />
-          <p className="mt-2 text-xs text-ink-muted">
-            These contributions were recorded at the moment the alert fired and are never recomputed, so this reads the
-            same today as it will in the audit trail (FR8.7).
-          </p>
+          <p className="mt-3 text-xs text-ink-muted">The three precursors the risk model weighs most heavily:</p>
+          <PrecursorDiagram className="mt-1 max-w-md" />
         </section>
 
         <section>
-          <h2 className="mb-2 text-sm font-semibold">Risk at {alert.cellId}</h2>
+          <h2 className="mb-2 text-lg font-semibold">Risk at {alert.cellId}</h2>
           {points.length > 0 ? (
             <RiskTimeline points={points} />
           ) : (
@@ -200,7 +205,13 @@ export default function S04AlertDetail() {
         </section>
 
         <section className="lg:col-span-2">
-          <h2 className="mb-2 text-sm font-semibold">Where</h2>
+          <div className="mb-2 flex items-center gap-1">
+            <h2 className="text-lg font-semibold">Where</h2>
+            <InfoPopover label="What this map shows">
+              The alerting cell and the {NEIGHBOURHOOD_RADIUS_CELLS} cells around it, with the same treatments as the
+              live map. Pan out to see the rest of the site.
+            </InfoPopover>
+          </div>
           <div className="h-80 overflow-hidden rounded border border-border">
             <SiteMap
               groundExtentM={site?.groundExtentM ?? SITE_EXTENT_M}
@@ -209,14 +220,10 @@ export default function S04AlertDetail() {
               <CellLayer cells={neighbourhood} cellSizeM={CELL_SIZE_M} />
             </SiteMap>
           </div>
-          <p className="mt-2 text-xs text-ink-muted">
-            The alerting cell and the {NEIGHBOURHOOD_RADIUS_CELLS} cells around it, with the same treatments as the live
-            map. Pan out to see the rest of the site.
-          </p>
         </section>
 
         <section className="lg:col-span-2">
-          <h2 className="mb-2 text-sm font-semibold">Suggestions</h2>
+          <h2 className="mb-2 text-lg font-semibold">Suggestions</h2>
           {canSeeSuggestions ? (
             mine.length > 0 ? (
               <SuggestionList

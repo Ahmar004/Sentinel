@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { CoverageBar, RiskTimeline, StateChip } from '@/components'
+import { CoverageBar, InfoPopover, RiskTimeline, StateChip } from '@/components'
 import type { RiskTimelinePoint } from '@/components/riskTimelineData'
 import { OBSERVATION_STATE, type ObservationState } from '@/domain/constants'
 import { DWELL_GATE_MS } from '@/domain/parameters'
@@ -136,7 +136,7 @@ export default function S03ZoneDetail() {
   if (!zone) {
     return (
       <div className="p-6">
-        <h1 className="text-lg font-semibold">Zone not found</h1>
+        <h1 className="text-xl font-semibold">Zone not found</h1>
         <p className="mt-2 text-sm text-ink-muted">No zone with the identifier {zoneId} is configured for this site.</p>
         <Link to="/live" className="mt-3 inline-block text-sm underline">
           Back to the live map
@@ -156,10 +156,10 @@ export default function S03ZoneDetail() {
 
   return (
     <div className="flex h-full min-h-0 flex-col overflow-y-auto">
-      <header className="border-b border-border p-4">
+      <header className="border-b border-border p-5">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h1 className="text-lg font-semibold">{zone.name}</h1>
+            <h1 className="text-xl font-semibold">{zone.name}</h1>
             <p className="text-xs text-ink-muted">
               {zone.cellIds.length} cells - <Link to="/live" className="underline">back to the live map</Link>
             </p>
@@ -208,7 +208,7 @@ export default function S03ZoneDetail() {
 
       <div className="grid gap-4 p-4 lg:grid-cols-2">
         <section>
-          <h2 className="mb-2 text-sm font-semibold">Risk, last hour</h2>
+          <h2 className="mb-2 text-lg font-semibold">Risk, last hour</h2>
           {riskPoints.length > 0 ? (
             <RiskTimeline points={riskPoints} />
           ) : (
@@ -217,17 +217,18 @@ export default function S03ZoneDetail() {
         </section>
 
         <section>
-          <h2 className="mb-2 text-sm font-semibold">Coverage, last hour</h2>
+          <div className="mb-2 flex items-center gap-1">
+            <h2 className="text-lg font-semibold">Coverage, last hour</h2>
+            <InfoPopover label="How to read this beside the risk chart">
+              A dip in risk whose observed band collapses at the same moment is a loss of coverage, not a calmer crowd.
+            </InfoPopover>
+          </div>
           <CoverageTimeline samples={historyReady ? loaded.samples : []} />
-          <p className="mt-2 text-xs text-ink-muted">
-            Read beside the risk chart: a dip in risk whose observed band collapses at the same moment is a loss of
-            coverage, not a calmer crowd.
-          </p>
         </section>
 
         <section className="lg:col-span-2">
           <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-            <h2 className="text-sm font-semibold">Cells</h2>
+            <h2 className="text-lg font-semibold">Cells</h2>
             <div className="flex flex-wrap gap-1">
               {FILTERS.map((f) => (
                 <button
@@ -274,7 +275,7 @@ export default function S03ZoneDetail() {
         </section>
 
         <section>
-          <h2 className="mb-2 text-sm font-semibold">Alerts in this zone</h2>
+          <h2 className="mb-2 text-lg font-semibold">Alerts in this zone</h2>
           {zoneAlerts.length === 0 ? (
             <p className="text-xs text-ink-muted">No active alerts in this zone.</p>
           ) : (
@@ -293,7 +294,7 @@ export default function S03ZoneDetail() {
         </section>
 
         <section>
-          <h2 className="mb-2 text-sm font-semibold">Thresholds</h2>
+          <h2 className="mb-2 text-lg font-semibold">Thresholds</h2>
           <dl className="text-sm">
             <div className="flex justify-between border-b border-border py-1.5">
               <dt className="text-ink-muted">Risk</dt>

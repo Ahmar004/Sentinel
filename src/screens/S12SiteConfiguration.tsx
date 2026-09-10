@@ -53,8 +53,8 @@ export default function S12SiteConfiguration() {
 
   return (
     <div className="flex h-full min-h-0 flex-col overflow-y-auto">
-      <header className="border-b border-border p-4">
-        <h1 className="text-lg font-semibold">Site configuration</h1>
+      <header className="border-b border-border p-5">
+        <h1 className="text-xl font-semibold">Site configuration</h1>
         <p className="mt-1 text-sm text-ink-muted">
           The same controls venue setup used, available individually after the venue is running.
         </p>
@@ -94,7 +94,7 @@ export default function S12SiteConfiguration() {
         {tab === 'drones' ? <DronesStep onAssign={setAssigning} /> : null}
         {tab === 'demo' ? (
           <div>
-            <h3 className="text-sm font-semibold">Demo harness</h3>
+            <h3 className="text-base font-semibold">Demo harness</h3>
             <p className="mt-1 text-sm text-ink-muted">
               Scaffolding for the proposal defence, not a product feature. It drives the mock feed so a coverage gap or
               a rejected safeguard can be shown on demand rather than waited for.

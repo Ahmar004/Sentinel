@@ -122,7 +122,7 @@ export default function Dialog({
         >
           <div className="flex items-start gap-3 border-b border-border px-4 py-3">
             <div className="min-w-0 flex-1">
-              <h2 id={titleId} className="text-sm font-semibold">
+              <h2 id={titleId} className="text-base font-semibold">
                 {title}
               </h2>
               {description ? (

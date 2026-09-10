@@ -4,6 +4,8 @@
 body {
   background-color: var(--color-surface);
   color: var(--color-ink);
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 /* Zone boundary labels (C11 ZoneOverlay). Leaflet's default tooltip is an

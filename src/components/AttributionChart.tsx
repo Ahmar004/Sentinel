@@ -32,7 +32,7 @@ export default function AttributionChart({ attribution }: AttributionChartProps)
             <span className="truncate text-ink-muted" title={RISK_FEATURE_LABEL[row.feature]}>
               {RISK_FEATURE_LABEL[row.feature]}
             </span>
-            <span className="relative h-3 w-full">
+            <span className="relative h-3.5 w-full">
               <span className="absolute inset-y-0 left-1/2 w-px bg-border" aria-hidden="true" />
               <span
                 className="absolute inset-y-0 rounded-sm"

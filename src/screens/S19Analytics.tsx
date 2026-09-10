@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Bar, BarChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { Download } from 'lucide-react'
 import { OUTCOME_VERDICT } from '@/domain/constants'
 import type { AnalyticsSummary } from '@/domain/types'
 import { getSentinelClient, useConfigStore } from '@/store'
+import { InfoPopover, CHART_AXIS_TICK, CHART_BAR_RADIUS, CHART_GRID_STROKE, CHART_TOOLTIP_STYLE } from '@/components'
+import { OUTCOME_VERDICT_LABEL, OUTCOME_VERDICT_TOKEN } from '@/components/stateChipLabels'
 import { acknowledgementPercent, analyticsToCsv } from './analytics/analyticsCsv'
 
 const RANGES = [
@@ -24,12 +26,38 @@ function NoData({ because }: { because: string }) {
   )
 }
 
+/** A pie over the confirmed suggestions whose follow-up window has closed -
+ * a genuine part-to-whole. A verdict with a count of zero contributes no
+ * slice; the counts stay readable in the list beside it (NFR5). */
+function OutcomeVerdictPie({ verdicts }: { verdicts: Record<string, number> }) {
+  const slices = Object.values(OUTCOME_VERDICT)
+    .map((verdict) => ({ verdict, value: verdicts[verdict] ?? 0 }))
+    .filter((slice) => slice.value > 0)
+
+  if (slices.length === 0) {
+    return <p className="text-xs text-ink-muted">No window has closed yet.</p>
+  }
+
+  return (
+    <PieChart width={150} height={150} aria-label="Outcome verdict distribution">
+      <Pie data={slices} dataKey="value" nameKey="verdict" cx="50%" cy="50%" outerRadius={70} isAnimationActive={false}>
+        {slices.map((slice) => (
+          <Cell key={slice.verdict} fill={OUTCOME_VERDICT_TOKEN[slice.verdict]} />
+        ))}
+      </Pie>
+      <Tooltip contentStyle={CHART_TOOLTIP_STYLE} />
+    </PieChart>
+  )
+}
+
 function Panel({ title, computedFrom, children }: { title: string; computedFrom: string; children: React.ReactNode }) {
   return (
-    <section className="rounded border border-border p-3">
-      <h2 className="text-sm font-semibold">{title}</h2>
+    <section className="rounded border border-border p-4">
+      <div className="flex items-center gap-1">
+        <h2 className="text-lg font-semibold">{title}</h2>
+        <InfoPopover label={`How "${title}" is computed`}>Computed from {computedFrom}.</InfoPopover>
+      </div>
       <div className="mt-2">{children}</div>
-      <p className="mt-2 text-xs text-ink-muted">Computed from {computedFrom}.</p>
     </section>
   )
 }
@@ -91,10 +119,10 @@ export default function S19Analytics() {
 
   return (
     <div className="flex h-full min-h-0 flex-col overflow-y-auto">
-      <header className="border-b border-border p-4">
+      <header className="border-b border-border p-5">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h1 className="text-lg font-semibold">Analytics</h1>
+            <h1 className="text-xl font-semibold">Analytics</h1>
             <p className="mt-1 text-sm text-ink-muted">
               What happened over the selected range. This screen reports; it does not forecast, recommend staffing or
               plan capacity.
@@ -162,21 +190,14 @@ function AnalyticsBody({
   return (
     <div className="grid gap-4 p-4 lg:grid-cols-2">
       <Panel title="Alerts by zone" computedFrom="alerts raised in this range">
-        <div style={{ height: 180 }}>
+        <div style={{ height: 220 }}>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={chartData} margin={{ top: 4, right: 8, bottom: 0, left: 0 }}>
-              <CartesianGrid stroke="var(--color-border)" strokeDasharray="2 2" vertical={false} />
-              <XAxis dataKey="zone" tick={{ fontSize: 10, fill: 'var(--color-ink-muted)' }} stroke="var(--color-border)" />
-              <YAxis allowDecimals={false} tick={{ fontSize: 10, fill: 'var(--color-ink-muted)' }} stroke="var(--color-border)" width={30} />
-              <Tooltip
-                contentStyle={{
-                  background: 'var(--color-surface-raised)',
-                  border: '1px solid var(--color-border)',
-                  borderRadius: 4,
-                  fontSize: 12,
-                }}
-              />
-              <Bar dataKey="alerts" fill="var(--color-accent)" isAnimationActive={false} />
+              <CartesianGrid stroke={CHART_GRID_STROKE} strokeDasharray="2 2" vertical={false} />
+              <XAxis dataKey="zone" tick={CHART_AXIS_TICK} stroke={CHART_GRID_STROKE} />
+              <YAxis allowDecimals={false} tick={CHART_AXIS_TICK} stroke={CHART_GRID_STROKE} width={32} />
+              <Tooltip contentStyle={CHART_TOOLTIP_STYLE} cursor={{ fill: 'var(--color-surface-sunken)' }} />
+              <Bar dataKey="alerts" fill="var(--color-accent)" radius={CHART_BAR_RADIUS} isAnimationActive={false} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -206,9 +227,12 @@ function AnalyticsBody({
             ))}
           </tbody>
         </table>
-        <p className="mt-2 text-xs text-ink-muted">
-          A zero is a measured result only where the observed share is above zero. A zone nothing watched reports no
-          data, because it raised no alert for want of a drone, not for want of a crowd.
+        <p className="mt-2 flex items-center gap-1 text-xs text-ink-muted">
+          A zone nothing watched reads as no data, not zero.
+          <InfoPopover label="Why an unwatched zone is not zero">
+            A zero is a measured result only where the observed share is above zero. A zone nothing watched reports no
+            data, because it raised no alert for want of a drone, not for want of a crowd.
+          </InfoPopover>
         </p>
       </Panel>
 
@@ -283,18 +307,31 @@ function AnalyticsBody({
         {summary.verdicts === null ? (
           <NoData because="No suggestion in this range was confirmed, so no outcome was tracked." />
         ) : (
-          <dl className="text-sm">
-            {Object.values(OUTCOME_VERDICT).map((verdict) => (
-              <div key={verdict} className="flex justify-between border-b border-border py-1 last:border-b-0">
-                <dt className="text-ink-muted">{verdict.charAt(0) + verdict.slice(1).toLowerCase()}</dt>
-                <dd className="font-mono tabular-nums">{summary.verdicts?.[verdict] ?? 0}</dd>
-              </div>
-            ))}
-          </dl>
+          <div className="flex flex-wrap items-center gap-4">
+            <OutcomeVerdictPie verdicts={summary.verdicts} />
+            <dl className="min-w-[10rem] flex-1 text-sm">
+              {Object.values(OUTCOME_VERDICT).map((verdict) => (
+                <div key={verdict} className="flex items-center justify-between border-b border-border py-1 last:border-b-0">
+                  <dt className="flex items-center gap-1.5 text-ink-muted">
+                    <span
+                      aria-hidden="true"
+                      className="size-2.5 rounded-sm"
+                      style={{ backgroundColor: OUTCOME_VERDICT_TOKEN[verdict] }}
+                    />
+                    {OUTCOME_VERDICT_LABEL[verdict]}
+                  </dt>
+                  <dd className="font-mono tabular-nums">{summary.verdicts?.[verdict] ?? 0}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         )}
-        <p className="mt-2 text-xs text-ink-muted">
-          Pending is counted separately rather than folded into unchanged, because a window that has not closed is not
-          the same as one that closed with no change.
+        <p className="mt-2 flex items-center gap-1 text-xs text-ink-muted">
+          Pending is counted on its own.
+          <InfoPopover label="Why pending is separate">
+            Pending is counted separately rather than folded into unchanged, because a window that has not closed is
+            not the same as one that closed with no change.
+          </InfoPopover>
         </p>
       </Panel>
     </div>

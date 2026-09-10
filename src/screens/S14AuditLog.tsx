@@ -77,8 +77,8 @@ export default function S14AuditLog() {
 
   return (
     <div className="flex h-full min-h-0 flex-col overflow-y-auto">
-      <header className="border-b border-border p-4">
-        <h1 className="text-lg font-semibold">Audit log</h1>
+      <header className="border-b border-border p-5">
+        <h1 className="text-xl font-semibold">Audit log</h1>
         <p className="mt-1 text-sm text-ink-muted">
           Every privileged action, with its actor, its timestamp and what it changed.
         </p>

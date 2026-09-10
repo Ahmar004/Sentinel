@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { CellLayer, SITE_ORIGIN_LAT_LON, SiteMap, type CellGridEntry } from '@/components'
+import { CellZoneDiagram } from '@/components/diagrams'
 import { OBSERVATION_STATE } from '@/domain/constants'
 import {
   CELL_SIZE_M,
@@ -44,7 +45,7 @@ export function PlanStep() {
 
   return (
     <div>
-      <h3 className="text-sm font-semibold">Site plan</h3>
+      <h3 className="text-base font-semibold">Site plan</h3>
       <p className="mt-1 text-sm text-ink-muted">
         The environment is anchored to real ground. Its origin and extent are what every cell identifier is measured
         from, so a cell means the same square of ground on every screen and in every recorded sample.
@@ -97,7 +98,7 @@ export function GridStep({ onRequestRegenerate }: StepProps & { onRequestRegener
 
   return (
     <div>
-      <h3 className="text-sm font-semibold">Grid</h3>
+      <h3 className="text-base font-semibold">Grid</h3>
       <p className="mt-1 text-sm text-ink-muted">
         Cell size decides the resolution of every measurement in the system. Every density, flow and risk value belongs
         to one of these cells.
@@ -192,7 +193,7 @@ export function ProposalsStep({ onSaved }: StepProps) {
 
   return (
     <div>
-      <h3 className="text-sm font-semibold">Setup pass proposals</h3>
+      <h3 className="text-base font-semibold">Setup pass proposals</h3>
       <p className="mt-1 text-sm text-ink-muted">
         A one-off pass over the plan suggests where exits, barriers and obstructions are. Each suggestion is reviewed
         individually.
@@ -279,7 +280,7 @@ export function AttributesStep({ onSaved }: StepProps) {
 
   return (
     <div>
-      <h3 className="text-sm font-semibold">Cell attributes</h3>
+      <h3 className="text-base font-semibold">Cell attributes</h3>
       <p className="mt-1 text-sm text-ink-muted">
         Static facts about the ground that never change tick to tick: whether a cell can be walked on, whether it is an
         exit, a barrier or an obstruction.
@@ -368,7 +369,7 @@ export function ExitsStep({ onSaved }: StepProps) {
 
   return (
     <div>
-      <h3 className="text-sm font-semibold">Exits</h3>
+      <h3 className="text-base font-semibold">Exits</h3>
       <p className="mt-1 text-sm text-ink-muted">
         Exit cells grouped into named exits, each with a capacity in people per minute. The ranker measures throughput
         against these figures, so a route is never suggested through an exit already at capacity.
@@ -440,11 +441,11 @@ export function ZonesStep({ onSaved }: StepProps) {
 
   return (
     <div>
-      <h3 className="text-sm font-semibold">Zones</h3>
+      <h3 className="text-base font-semibold">Zones</h3>
       <p className="mt-1 text-sm text-ink-muted">
-        A zone is a named group of cells, used for display, alerting and reporting. It is a presentation layer over the
-        grid, never a place a measurement is stored.
+        A zone is a named group of cells, used for display, alerting and reporting - a presentation layer over the grid.
       </p>
+      <CellZoneDiagram className="mt-2 max-w-sm" />
 
       <ul className="mt-3 flex flex-col gap-2">
         {zones.map((zone: Zone) => (
@@ -518,7 +519,7 @@ export function ThresholdsStep({ onEdit }: StepProps & { onEdit?: (zoneId: strin
 
   return (
     <div>
-      <h3 className="text-sm font-semibold">Thresholds</h3>
+      <h3 className="text-base font-semibold">Thresholds</h3>
       <p className="mt-1 text-sm text-ink-muted">
         Per-zone risk and density thresholds, editable here with no code change and no restart.
       </p>
@@ -589,7 +590,7 @@ export function DronesStep({ onAssign }: StepProps & { onAssign?: (droneId: stri
 
   return (
     <div>
-      <h3 className="text-sm font-semibold">Drones</h3>
+      <h3 className="text-base font-semibold">Drones</h3>
       <p className="mt-1 text-sm text-ink-muted">
         Registered drones and the zone each was last sent to. A drone is sent to a zone but never bound to one: its
         membership is computed from the cells it actually sees.
@@ -651,7 +652,7 @@ export function ReviewStep({ onSave }: { onSave?: () => void }) {
 
   return (
     <div>
-      <h3 className="text-sm font-semibold">Review</h3>
+      <h3 className="text-base font-semibold">Review</h3>
       <p className="mt-1 text-sm text-ink-muted">Everything configured above, before it is saved.</p>
 
       <dl className="mt-3">

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { CoverageBar, StateChip } from '@/components'
 import type { ZoneSummary } from './zoneSummary'
+import ZoneRiskPie from './ZoneRiskPie'
 
 export interface ZoneStripProps {
   zones: ZoneSummary[]
@@ -103,6 +104,9 @@ export default function ZoneStrip({ zones, linkToDetail }: ZoneStripProps) {
       role="list"
       aria-label="Zone summaries"
     >
+      <div role="listitem" className="shrink-0">
+        <ZoneRiskPie zones={zones} />
+      </div>
       {zones.map((summary) => (
         <div role="listitem" key={summary.zoneId}>
           <ZoneCard summary={summary} linkToDetail={linkToDetail} />

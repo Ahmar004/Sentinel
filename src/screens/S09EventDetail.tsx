@@ -46,7 +46,7 @@ function OutcomePanel({ outcome }: { outcome: Outcome }) {
 
   return (
     <section>
-      <h2 className="mb-2 text-sm font-semibold">Outcome</h2>
+      <h2 className="mb-2 text-lg font-semibold">Outcome</h2>
       <dl>
         <Field label="Risk at confirm">
           <span className="font-mono tabular-nums">{outcome.riskAtConfirm.toFixed(2)}</span>
@@ -94,7 +94,7 @@ function OutcomePanel({ outcome }: { outcome: Outcome }) {
 function SuggestionPanel({ suggestions }: { suggestions: SuggestionOption[] }) {
   return (
     <section>
-      <h2 className="mb-2 text-sm font-semibold">The option set as issued</h2>
+      <h2 className="mb-2 text-lg font-semibold">The option set as issued</h2>
       <ul className="flex flex-col gap-2">
         {[...suggestions]
           .sort((a, b) => a.rank - b.rank)
@@ -206,7 +206,7 @@ export default function S09EventDetail() {
   if (load.state === 'missing') {
     return (
       <div className="p-6">
-        <h1 className="text-lg font-semibold">Event not found</h1>
+        <h1 className="text-xl font-semibold">Event not found</h1>
         <p className="mt-2 text-sm text-ink-muted">
           No event with the identifier {eventId} exists in the retained history.
         </p>
@@ -222,8 +222,8 @@ export default function S09EventDetail() {
 
   return (
     <div className="flex h-full min-h-0 flex-col overflow-y-auto">
-      <header className="border-b border-border p-4">
-        <h1 className="text-lg font-semibold">{event.summary}</h1>
+      <header className="border-b border-border p-5">
+        <h1 className="text-xl font-semibold">{event.summary}</h1>
         <p className="mt-1 text-xs text-ink-muted">
           {new Date(event.ts).toLocaleString()}
           {zoneName ? ` - ${zoneName}` : ''} - <Link to="/history" className="underline">back to history</Link>
@@ -233,7 +233,7 @@ export default function S09EventDetail() {
       <div className="grid gap-6 p-4 lg:grid-cols-2">
         {alert ? (
           <section>
-            <h2 className="mb-2 text-sm font-semibold">Alert as recorded</h2>
+            <h2 className="mb-2 text-lg font-semibold">Alert as recorded</h2>
             <dl>
               <Field label="Cell">
                 <span className="font-mono">{alert.cellId}</span>
@@ -275,7 +275,7 @@ export default function S09EventDetail() {
 
         {event.type === 'CONFIG_CHANGE' ? (
           <section className="lg:col-span-2">
-            <h2 className="mb-2 text-sm font-semibold">Configuration change</h2>
+            <h2 className="mb-2 text-lg font-semibold">Configuration change</h2>
             <p className="text-sm">{event.summary}</p>
             <p className="mt-2 text-xs text-ink-muted">
               Recorded {new Date(event.ts).toLocaleString()}. Configuration changes are versioned with their previous

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { StateChip } from '@/components'
+import { CellZoneDiagram } from '@/components/diagrams'
 import { DRONE_STATE } from '@/domain/constants'
 import type { CellObservation, Drone, DroneUpdate } from '@/domain/types'
 import { getSentinelClient, useCellsById, useConfigStore, useCurrentRole, useDrones } from '@/store'
@@ -146,18 +147,15 @@ export default function S06DroneFleet() {
 
   return (
     <div className="flex h-full min-h-0 flex-col overflow-y-auto">
-      <header className="border-b border-border p-4">
-        <h1 className="text-lg font-semibold">Drone fleet</h1>
+      <header className="border-b border-border p-5">
+        <h1 className="text-xl font-semibold">Drone fleet</h1>
         <p className="mt-1 text-sm">
           <span className="font-mono tabular-nums">{drones.length}</span> drones over{' '}
-          <span className="font-mono tabular-nums">{zones.length}</span> zones.
+          <span className="font-mono tabular-nums">{zones.length}</span> zones - the counts differ on purpose.
         </p>
-        {/* FR9.8 stated rather than left to be inferred from the mismatched
-            counts sitting next to each other. */}
-        <p className="mt-1 text-xs text-ink-muted">
-          Drones are not assigned to zones. Every measurement belongs to a cell, which is what lets a drone move without
-          any measurement moving with it. The counts differ on purpose.
-        </p>
+        {/* FR9.8, shown rather than spelled out: readings belong to cells,
+            zones group cells, and a drone crosses between them. */}
+        <CellZoneDiagram className="mt-2 max-w-sm" />
 
         <div role="tablist" aria-label="Fleet views" className="mt-3 flex gap-1 border-b border-border">
           {TABS.map((t) => (

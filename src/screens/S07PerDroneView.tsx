@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { StateChip } from '@/components'
+import { InfoPopover, StateChip } from '@/components'
+import { DroneStateDiagram } from '@/components/diagrams'
 import { DRONE_STATE, OBSERVATION_STATE } from '@/domain/constants'
 import { DWELL_GATE_MS } from '@/domain/parameters'
 import type { CellObservation, Drone } from '@/domain/types'
@@ -110,7 +111,7 @@ export default function S07PerDroneView() {
   if (!drone) {
     return (
       <div className="p-6">
-        <h1 className="text-lg font-semibold">Drone not found</h1>
+        <h1 className="text-xl font-semibold">Drone not found</h1>
         <p className="mt-2 text-sm text-ink-muted">No drone with the identifier {droneId} is reporting.</p>
         <Link to="/fleet" className="mt-3 inline-block text-sm underline">
           Back to the fleet
@@ -131,10 +132,10 @@ export default function S07PerDroneView() {
 
   return (
     <div className="flex h-full min-h-0 flex-col overflow-y-auto">
-      <header className="border-b border-border p-4">
+      <header className="border-b border-border p-5">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h1 className="text-lg font-semibold">{drone.droneId}</h1>
+            <h1 className="text-xl font-semibold">{drone.droneId}</h1>
             <p className="text-xs text-ink-muted">
               {identity?.label ?? 'Drone'} - <Link to="/fleet" className="underline">back to the fleet</Link>
             </p>
@@ -159,11 +160,13 @@ export default function S07PerDroneView() {
             In transit. Density only. Flow and risk are not produced from a moving camera.
           </p>
         ) : null}
+
+        <DroneStateDiagram className="mt-3 max-w-md" />
       </header>
 
       <div className="grid gap-4 p-4 lg:grid-cols-2">
         <section>
-          <h2 className="mb-2 text-sm font-semibold">Footprint</h2>
+          <h2 className="mb-2 text-lg font-semibold">Footprint</h2>
           <div className="h-72 overflow-hidden rounded border border-border">
             <FootprintMap footprintCells={drone.footprintCells} cellsById={cellsById} className="size-full" />
           </div>
@@ -174,7 +177,7 @@ export default function S07PerDroneView() {
         </section>
 
         <section>
-          <h2 className="mb-2 text-sm font-semibold">Telemetry</h2>
+          <h2 className="mb-2 text-lg font-semibold">Telemetry</h2>
           <dl>
             <Field label="Position">
               <span className="font-mono tabular-nums">
@@ -209,12 +212,21 @@ export default function S07PerDroneView() {
               )}
             </Field>
           </dl>
-          <p className="mt-2 text-xs text-ink-muted">
-            The people figure is summed over this drone's observed cells only. Cells still filling their window are not
-            counted, so the figure never spans ground that has not been measured.
+          <p className="mt-2 flex items-center gap-1 text-xs text-ink-muted">
+            Estimated people is summed over observed cells only.
+            <InfoPopover label="How the people figure is bounded">
+              The people figure is summed over this drone&apos;s observed cells only. Cells still filling their window
+              are not counted, so the figure never spans ground that has not been measured.
+            </InfoPopover>
           </p>
 
-          <h2 className="mt-4 mb-2 text-sm font-semibold">Registration</h2>
+          <div className="mt-4 mb-2 flex items-center gap-1">
+            <h2 className="text-lg font-semibold">Registration</h2>
+            <InfoPopover label="Why registration matters">
+              Each frame is matched against a saved reference frame of this ground, so movement of the aircraft is
+              subtracted before flow is measured. Without it, a drifting drone would read as a moving crowd.
+            </InfoPopover>
+          </div>
           <dl>
             <Field label="Reference frame">
               {drone.registration.referenceFrameLocked ? 'Locked' : 'Searching'}
@@ -223,14 +235,16 @@ export default function S07PerDroneView() {
               <span className="font-mono tabular-nums">{drone.registration.inliers}</span>
             </Field>
           </dl>
-          <p className="mt-2 text-xs text-ink-muted">
-            Each frame is matched against a saved reference frame of this ground, so movement of the aircraft is
-            subtracted before flow is measured. Without it, a drifting drone would read as a moving crowd.
-          </p>
         </section>
 
         <section className="lg:col-span-2">
-          <h2 className="mb-2 text-sm font-semibold">Cells in this footprint</h2>
+          <div className="mb-2 flex items-center gap-1">
+            <h2 className="text-lg font-semibold">Cells in this footprint</h2>
+            <InfoPopover label="Why some cells carry no score">
+              Cells that have just come under this drone show their progress toward the {DWELL_GATE_MS / 1000} second
+              gate and carry no score until it is met.
+            </InfoPopover>
+          </div>
           <div className="max-h-80 overflow-y-auto rounded border border-border">
             <table className="w-full text-left">
               <thead className="sticky top-0 bg-surface-raised text-xs text-ink-muted">
@@ -255,10 +269,6 @@ export default function S07PerDroneView() {
               </tbody>
             </table>
           </div>
-          <p className="mt-2 text-xs text-ink-muted">
-            Cells that have just come under this drone show their progress toward the {DWELL_GATE_MS / 1000} second gate
-            and carry no score until it is met.
-          </p>
         </section>
       </div>
 

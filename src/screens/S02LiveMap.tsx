@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { ChevronDown, ChevronUp, Layers } from 'lucide-react'
-import { CellLayer, ConnectionBanner, Legend, SiteMap, ZoneOverlay, type CellGridEntry } from '@/components'
+import { CellLayer, ConnectionBanner, InfoPopover, Legend, SiteMap, ZoneOverlay, type CellGridEntry } from '@/components'
 import { CONNECTION_STATE } from '@/domain/constants'
 import { CELL_SIZE_M, SITE_EXTENT_M, parseCellId } from '@/domain/parameters'
 import {
@@ -145,6 +145,14 @@ export default function S02LiveMap() {
               </button>
               {controlsOpen ? (
                 <div className="mt-1 w-60 rounded border border-border bg-surface-raised/95 p-2 text-xs">
+                  <div className="mb-1 flex items-center justify-between">
+                    <span className="font-semibold text-ink-muted uppercase">Layers</span>
+                    <InfoPopover label="What the layer toggles do">
+                      Turning the overlay off shows the satellite imagery alone. It does not pause the feed: values keep
+                      updating underneath and reappear unchanged when it is switched back on. Zone boundaries are the
+                      named parts the environment is divided into.
+                    </InfoPopover>
+                  </div>
                   <label className="flex items-center gap-2">
                     <input
                       type="checkbox"
@@ -172,11 +180,6 @@ export default function S02LiveMap() {
                     />
                     Zone boundaries
                   </label>
-                  <p className="mt-2 text-ink-muted">
-                    Turning the overlay off shows the satellite imagery alone. It does not pause the feed: values keep
-                    updating underneath and reappear unchanged when it is switched back on. Zone boundaries are the
-                    named parts the environment is divided into.
-                  </p>
                 </div>
               ) : null}
             </div>

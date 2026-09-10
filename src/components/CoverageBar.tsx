@@ -51,7 +51,7 @@ export default function CoverageBar({ coverage, risk }: CoverageBarProps) {
         <div
           role="img"
           aria-label={SEGMENTS.map((s) => `${s.label} ${coverage[s.key]} of ${total}`).join(', ')}
-          className="flex h-2.5 w-full overflow-hidden rounded-full border border-border"
+          className="flex h-3 w-full overflow-hidden rounded-full border border-border"
         >
           {SEGMENTS.map((segment) => {
             const count = coverage[segment.key]
@@ -70,7 +70,7 @@ export default function CoverageBar({ coverage, risk }: CoverageBarProps) {
       <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-ink-muted">
         {SEGMENTS.map((segment) => (
           <span key={segment.key} className="inline-flex items-center gap-1">
-            <span aria-hidden="true" className="size-1.5 rounded-full" style={{ backgroundColor: segment.token }} />
+            <span aria-hidden="true" className="size-2 rounded-full" style={{ backgroundColor: segment.token }} />
             {segment.label} {coverage[segment.key]}
           </span>
         ))}

@@ -1,6 +1,7 @@
 import { Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { RISK_BAND } from '@/domain/constants'
 import { RISK_BAND_TOKEN } from './stateChipLabels'
+import { CHART_AXIS_TICK, CHART_LINE_WIDTH, CHART_TOOLTIP_STYLE } from './chartTheme'
 import { toChartData, RISK_TIMELINE_REFERENCE_LINES, type RiskTimelinePoint } from './riskTimelineData'
 
 export type { RiskTimelinePoint } from './riskTimelineData'
@@ -39,14 +40,10 @@ export default function RiskTimeline({ points, height = 220 }: RiskTimelineProps
     <div style={{ height }} data-testid="risk-timeline">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data} margin={{ top: 8, right: 12, bottom: 0, left: -12 }}>
-          <XAxis dataKey="label" tick={{ fontSize: 10 }} stroke="var(--color-border)" />
-          <YAxis domain={[0, 1]} tick={{ fontSize: 10 }} stroke="var(--color-border)" width={32} />
+          <XAxis dataKey="label" tick={CHART_AXIS_TICK} stroke="var(--color-border)" />
+          <YAxis domain={[0, 1]} tick={CHART_AXIS_TICK} stroke="var(--color-border)" width={34} />
           <Tooltip
-            contentStyle={{
-              background: 'var(--color-surface-raised)',
-              border: '1px solid var(--color-border)',
-              fontSize: 12,
-            }}
+            contentStyle={CHART_TOOLTIP_STYLE}
             formatter={(value) => (value === null || value === undefined ? 'No risk value' : value)}
           />
           {RISK_TIMELINE_REFERENCE_LINES.map((boundary) => (
@@ -62,7 +59,7 @@ export default function RiskTimeline({ points, height = 220 }: RiskTimelineProps
             type="monotone"
             dataKey="risk"
             stroke="var(--color-accent)"
-            strokeWidth={2}
+            strokeWidth={CHART_LINE_WIDTH}
             dot={false}
             isAnimationActive={false}
             connectNulls={false}

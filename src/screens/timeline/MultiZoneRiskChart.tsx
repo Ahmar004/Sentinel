@@ -9,6 +9,7 @@ import {
   YAxis,
 } from 'recharts'
 import { RISK_TIMELINE_REFERENCE_LINES } from '@/components/riskTimelineData'
+import { CHART_AXIS_TICK, CHART_GRID_STROKE, CHART_LINE_WIDTH, CHART_TOOLTIP_STYLE } from '@/components/chartTheme'
 import type { ZoneSample } from '@/domain/types'
 
 export interface ZoneSeries {
@@ -88,23 +89,16 @@ export default function MultiZoneRiskChart({
             if (row && onSelectPoint) onSelectPoint(String(row.ts))
           }}
         >
-          <CartesianGrid stroke="var(--color-border)" strokeDasharray="2 2" vertical={false} />
-          <XAxis dataKey="label" tick={{ fontSize: 10, fill: 'var(--color-ink-muted)' }} stroke="var(--color-border)" minTickGap={28} />
+          <CartesianGrid stroke={CHART_GRID_STROKE} strokeDasharray="2 2" vertical={false} />
+          <XAxis dataKey="label" tick={CHART_AXIS_TICK} stroke={CHART_GRID_STROKE} minTickGap={28} />
           <YAxis
             domain={[0, 1]}
             ticks={[0, 0.4, 0.7, 0.85, 1]}
-            tick={{ fontSize: 10, fill: 'var(--color-ink-muted)' }}
-            stroke="var(--color-border)"
-            width={36}
+            tick={CHART_AXIS_TICK}
+            stroke={CHART_GRID_STROKE}
+            width={38}
           />
-          <Tooltip
-            contentStyle={{
-              background: 'var(--color-surface-raised)',
-              border: '1px solid var(--color-border)',
-              borderRadius: 4,
-              fontSize: 12,
-            }}
-          />
+          <Tooltip contentStyle={CHART_TOOLTIP_STYLE} />
           {RISK_TIMELINE_REFERENCE_LINES.map((value, index) => (
             <ReferenceLine key={value} y={value} stroke={BAND_TOKENS[index]} strokeDasharray="4 4" />
           ))}
@@ -129,7 +123,7 @@ export default function MultiZoneRiskChart({
                 name={zone.name}
                 stroke={style.stroke}
                 strokeDasharray={style.dash}
-                strokeWidth={2}
+                strokeWidth={CHART_LINE_WIDTH}
                 dot={false}
                 connectNulls={false}
                 isAnimationActive={false}

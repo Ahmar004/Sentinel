@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FilterBar, StateChip, type FilterChip } from '@/components'
+import { FilterBar, InfoPopover, StateChip, type FilterChip } from '@/components'
+import { SafeguardDiagram } from '@/components/diagrams'
 import { SUGGESTION_ACTION, SUGGESTION_STATUS, TEXT_SOURCE, type SuggestionAction, type SuggestionStatus, type TextSource } from '@/domain/constants'
 import type { SuggestionListItem, SuggestionQuery } from '@/domain/types'
 import { getSentinelClient, useConfigStore } from '@/store'
@@ -178,12 +179,14 @@ export default function S18Suggestions() {
 
   return (
     <div className="flex h-full min-h-0 flex-col overflow-y-auto">
-      <header className="border-b border-border p-4">
-        <h1 className="text-lg font-semibold">Suggestions</h1>
-        <p className="mt-1 text-sm text-ink-muted">
-          Every option the decision-support layer has issued, with what happened to it. Acting on a live alert happens
-          on the live map; this screen is for review.
-        </p>
+      <header className="border-b border-border p-5">
+        <div className="flex items-center gap-1">
+          <h1 className="text-xl font-semibold">Suggestions</h1>
+          <InfoPopover label="What this screen is for">
+            Every option the decision-support layer has issued, with what happened to it. Acting on a live alert
+            happens on the live map; this screen is for review.
+          </InfoPopover>
+        </div>
 
         <div className="mt-3 flex flex-wrap gap-3">
           <Select
@@ -226,6 +229,13 @@ export default function S18Suggestions() {
       </header>
 
       <div className="p-4">
+        <figure className="mb-4 rounded border border-border p-3">
+          <figcaption className="mb-1 text-xs font-semibold tracking-wide text-ink-muted uppercase">
+            How a route is rejected
+          </figcaption>
+          <SafeguardDiagram className="max-w-lg" />
+        </figure>
+
         {load.state === 'loading' ? (
           <p className="text-sm text-ink-muted">Loading suggestions.</p>
         ) : load.state === 'error' ? (

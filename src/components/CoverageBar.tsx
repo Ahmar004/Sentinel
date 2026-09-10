@@ -67,7 +67,7 @@ export default function CoverageBar({ coverage, risk }: CoverageBarProps) {
         </div>
       )}
 
-      <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-[11px] text-ink-muted">
+      <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-ink-muted">
         {SEGMENTS.map((segment) => (
           <span key={segment.key} className="inline-flex items-center gap-1">
             <span aria-hidden="true" className="size-1.5 rounded-full" style={{ backgroundColor: segment.token }} />

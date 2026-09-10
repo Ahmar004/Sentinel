@@ -38,7 +38,7 @@ function SuggestionCard({
     <li className="flex flex-col gap-2 rounded-lg border border-border bg-surface-raised p-3">
       <div className="flex items-start justify-between gap-2">
         <div className="flex items-center gap-2">
-          <span className="flex size-5 shrink-0 items-center justify-center rounded-full border border-border text-[11px] font-semibold">
+          <span className="flex size-5 shrink-0 items-center justify-center rounded-full border border-border text-xs font-semibold">
             {suggestion.rank}
           </span>
           <span className="text-sm font-semibold">{SUGGESTION_ACTION_LABEL[suggestion.action]}</span>
@@ -47,7 +47,7 @@ function SuggestionCard({
       </div>
 
       <p className="text-sm">{suggestion.text}</p>
-      <span className="text-[11px] text-ink-muted">{TEXT_SOURCE_LABEL[suggestion.textSource]}</span>
+      <span className="text-xs text-ink-muted">{TEXT_SOURCE_LABEL[suggestion.textSource]}</span>
 
       <p className="text-xs text-ink-muted">{suggestion.rationale}</p>
 

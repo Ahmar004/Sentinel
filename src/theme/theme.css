@@ -53,6 +53,28 @@
 
   --font-sans:
     'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Type scale - Step-9 visual pass, design doc Section 2. Tailwind 4
+   * derives every text-* utility from these tokens, so one edit lifts the
+   * whole app. Sizes raised from Tailwind's defaults after the
+   * proposal-session feedback that the interface read too small. */
+  --text-xs: 0.8125rem;   /* 13px - dense tables, chips, captions */
+  --text-xs--line-height: 1.4;
+  --text-sm: 0.9375rem;   /* 15px - body text, form labels, most UI copy */
+  --text-sm--line-height: 1.5;
+  --text-base: 1rem;      /* 16px - prose blocks, dialog body */
+  --text-base--line-height: 1.6;
+  --text-lg: 1.25rem;     /* 20px - section headings */
+  --text-lg--line-height: 1.4;
+  --text-xl: 1.5rem;      /* 24px - screen titles */
+  --text-xl--line-height: 1.3;
+  --text-2xl: 1.875rem;   /* 30px - login wordmark, hero figures */
+  --text-2xl--line-height: 1.2;
+
+  /* One big-figure token, tabular by construction, for single metrics
+   * (acknowledgement rate, latency, people count). Use as text-metric. */
+  --text-metric: 2rem;
+  --text-metric--line-height: 1;
 }
 
 /*

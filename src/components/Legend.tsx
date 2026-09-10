@@ -86,7 +86,7 @@ export default function Legend() {
 
       <section>
         <h3 className="mb-1.5 font-semibold text-ink-muted uppercase tracking-wide">Risk band</h3>
-        <p className="mb-1.5 text-[11px] text-ink-muted">Drawn only when a cell is observed.</p>
+        <p className="mb-1.5 text-xs text-ink-muted">Drawn only when a cell is observed.</p>
         <ul className="flex flex-col gap-1.5">
           {RISK_BANDS.map((band) => (
             <li key={band} className="flex items-center gap-2">
